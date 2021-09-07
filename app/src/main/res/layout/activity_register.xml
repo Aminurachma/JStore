@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".RegisterActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/register"
+        android:layout_width="@dimen/_270sdp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:fontFamily="@font/rubikmedium"
+        android:text="Register Here"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_28ssp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/register2"
+        android:layout_width="@dimen/_270sdp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/rubik_light"
+        android:text="Create your new account"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_18ssp" />
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register2"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:hint="Nama "
+            android:textColorHint="@color/Primarypink"
+            app:boxBackgroundColor="@color/white"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubikregular"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:textColor="@color/softblack"
+                android:textSize="@dimen/_14ssp"
+                tools:text="Aminurachma Aisyah" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_alamat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="Alamat "
+            android:textColorHint="@color/Primarypink"
+            app:boxBackgroundColor="@color/white"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubikregular"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:textColor="@color/softblack"
+                android:textSize="@dimen/_14ssp"
+                tools:text="Jl.Raya Pondok Randu" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_nohp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="Nomor Telepon "
+            android:textColorHint="@color/Primarypink"
+            app:boxBackgroundColor="@color/white"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nohp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubikregular"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:textColor="@color/softblack"
+                android:textSize="@dimen/_14ssp"
+                tools:text="08229938374" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="Email"
+            android:textColorHint="@color/Primarypink"
+            app:boxBackgroundColor="@color/white"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubikregular"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:textColor="@color/softblack"
+                android:textSize="@dimen/_14ssp"
+                tools:text="aminurachma@gmail.com" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="Password"
+            android:textColorHint="@color/Primarypink"
+            app:boxBackgroundColor="@color/white"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/Primarypink">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubikregular"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:textColor="@color/softblack"
+                android:textSize="@dimen/_14ssp"
+                tools:text="Rekjdksj" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_below="@id/linear1"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="REGISTER"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            app:cornerRadius="@dimen/_12sdp" />
+
+    </LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/login_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_19sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Do you have an account? Login Here"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_11ssp" />
+
+
+</RelativeLayout>

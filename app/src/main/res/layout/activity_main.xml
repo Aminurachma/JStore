@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Primarypink">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/vector"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-241dp"
+            android:src="@drawable/vektor" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logo"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_32sdp"
+            android:src="@drawable/logo"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sipekan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_100sdp"
+            android:fontFamily="@font/rubik_bold"
+            android:text="WELCOME"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/black2"
+            android:textSize="@dimen/_24ssp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sipekan"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/rubik_light"
+            android:gravity="center"
+            android:text="Login for buying something"
+            android:textAllCaps="true"
+            android:textColor="@color/softblack"
+            android:textSize="@dimen/_14ssp"/>
+
+
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_below="@id/tv_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_32sdp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:hint="Username"
+                android:textColorHint="@color/black"
+                app:boxBackgroundColor="@color/white"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubikregular"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColor="@color/Primarypink"
+                    android:textSize="@dimen/_14ssp"
+                    tools:text="18.0202.010101.0202" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:hint="Password"
+                android:textColorHint="@color/black"
+                app:boxBackgroundColor="@color/white"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubikregular"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColor="@color/Primarypink"
+                    android:textSize="@dimen/_14ssp"
+                    tools:text="18.0202.010101.0202" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_below="@id/linear1"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="LOGIN"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                app:cornerRadius="@dimen/_12sdp" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear1"
+            android:layout_marginBottom="@dimen/_32sdp"
+            android:layout_marginEnd="@dimen/_32sdp"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/rubikregular"
+            android:text="Don't have an account? Sign Up here."
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/login_admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/rubik_light"
+            android:text="Admin Login Here"
+            android:textColor="@color/Primarypink"
+            android:textSize="@dimen/_11ssp" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
