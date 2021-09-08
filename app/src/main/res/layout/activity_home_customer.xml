@@ -116,7 +116,7 @@
                     android:layout_height="@dimen/_100sdp"
                     android:layout_gravity="center"
                     android:padding="@dimen/_5sdp"
-                    tools:src="@drawable/jam" />
+                    android:src="@drawable/jam" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_harga"
@@ -139,7 +139,7 @@
                     android:fontFamily="@font/rubik_light"
                     android:gravity="center"
                     android:text="Watch"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_11ssp" />
 
             </LinearLayout>

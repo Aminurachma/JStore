@@ -10,15 +10,14 @@
         android:id="@+id/img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/celana"
-        />
+        android:layout_alignParentTop="true"
+        android:src="@drawable/celana" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="-74dp"
         android:src="@drawable/rectangle" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -26,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_240sdp"
+        android:layout_marginTop="@dimen/_270sdp"
         android:fontFamily="@font/rubik_bold"
         android:text="Celana Biru Asik"
         android:textColor="@color/black"

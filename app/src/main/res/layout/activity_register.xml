@@ -29,7 +29,7 @@
         android:text="Create your new account"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/_18ssp" />
+        android:textSize="@dimen/_12ssp" />
 
     <LinearLayout
         android:id="@+id/linear1"
@@ -161,7 +161,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_60sdp"
             android:layout_below="@id/linear1"
             android:layout_marginTop="@dimen/_4sdp"
             android:fontFamily="@font/poppins_bold"

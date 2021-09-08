@@ -23,6 +23,7 @@
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_80sdp"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_32sdp"
             android:src="@drawable/logo"/>
 
@@ -32,13 +33,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/logo"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_100sdp"
+            android:layout_marginTop="@dimen/_110sdp"
             android:fontFamily="@font/rubik_bold"
             android:text="WELCOME"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/black2"
-            android:textSize="@dimen/_24ssp" />
+            android:textSize="@dimen/_22ssp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_subtitle"
@@ -51,7 +52,7 @@
             android:text="Login for buying something"
             android:textAllCaps="true"
             android:textColor="@color/softblack"
-            android:textSize="@dimen/_14ssp"/>
+            android:textSize="@dimen/_12ssp"/>
 
 
         <LinearLayout

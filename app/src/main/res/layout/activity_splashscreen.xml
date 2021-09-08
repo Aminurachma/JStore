@@ -28,7 +28,7 @@
             android:gravity="center"
             android:text="@string/aplikasi_jual_beli_online"
             android:textColor="@color/white"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_14ssp"
             android:textStyle="bold" />
 
 
