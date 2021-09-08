@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.jstore"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -48,5 +48,5 @@ dependencies {
     implementation "com.intuit.ssp:ssp-android:$sspVersion"
     implementation "com.intuit.sdp:sdp-android:$sdpVersion"
 
-    implementation "de.hdodenhof:circleimageview:$circleimageviewVersion"
+    implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
 }

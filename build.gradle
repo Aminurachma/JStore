@@ -4,7 +4,7 @@ buildscript {
     ext {
         sspVersion = "1.0.6"
         sdpVersion = "1.0.6"
-        circleimageviewVersion = "3.0.1"
+        circleImageViewVersion = "3.1.0"
     }
     repositories {
         google()
