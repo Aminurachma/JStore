@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Jstore</string>
     <string name="aplikasi_jual_beli_online">Aplikasi Jual Beli Online</string>
+	<string name="welcome">WELCOME</string>
+	<string name="login_to_start_with_jstore">Login to start with JStore</string>
+	<string name="admin_login_here">Admin Login Here</string>
+	<string name="enter_your_email_here">Enter your email here</string>
+	<string name="email">Email</string>
+	<string name="password">Password</string>
+	<string name="login">Login</string>
+	<string name="don_t_have_an_account">Don’t have an account ?</string>
+	<string name="sign_up_here">Sign Up here.</string>
+	<string name="start_looking_for_yout_outfit">Start looking for yout outfit!</string>
+	<string name="what_are_you_looking_for">What are you looking for?</string>
 </resources>

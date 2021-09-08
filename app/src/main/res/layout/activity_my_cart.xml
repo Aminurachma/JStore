@@ -83,7 +83,7 @@
                                 android:layout_marginStart="@dimen/_20sdp"
                                 android:gravity="center"
                                 android:text="Rp 170.000,00"
-                                android:textColor="@color/Primarypink"
+                                android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/_11ssp" />
 
                             <LinearLayout
@@ -201,7 +201,7 @@
                             android:layout_marginStart="@dimen/_20sdp"
                             android:gravity="center"
                             android:text="Rp 170.000,00"
-                            android:textColor="@color/Primarypink"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_11ssp" />
 
                         <LinearLayout
