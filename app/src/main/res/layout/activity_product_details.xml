@@ -38,7 +38,7 @@
         android:layout_below="@id/tv_namaproduk"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:fontFamily="@font/rubikregular"
+        android:fontFamily="@font/rubik_regular"
         android:text="Deskripsi"
         android:textColor="@color/black"
         android:textSize="@dimen/_20ssp" />
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:fontFamily="@font/rubikmedium"
+            android:fontFamily="@font/rubik_medium"
             android:text="Rp. 120.000,00"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp" />
