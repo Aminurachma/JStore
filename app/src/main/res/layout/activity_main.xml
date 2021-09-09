@@ -10,7 +10,9 @@
 		android:id="@+id/vector"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_below="@id/logo"
 		android:layout_alignParentBottom="true"
+		android:layout_marginTop="@dimen/_32sdp"
 		android:layout_marginBottom="-10dp"
 		android:scaleType="fitXY"
 		android:src="@drawable/vektor" />
@@ -29,7 +31,7 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/logo"
 		android:layout_centerHorizontal="true"
-		android:layout_marginTop="@dimen/_140sdp"
+		android:layout_marginTop="@dimen/_110sdp"
 		android:fontFamily="@font/rubik_bold"
 		android:text="@string/welcome"
 		android:textColor="@color/dark"
@@ -60,7 +62,7 @@
 		android:textSize="@dimen/_12ssp" />
 
 	<com.google.android.material.textfield.TextInputLayout
-		android:id="@+id/til_username"
+		android:id="@+id/til_email"
 		style="@style/App.TextInputLayout.OutlinedBox"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -71,7 +73,7 @@
 		app:endIconDrawable="@drawable/ic_subtract">
 
 		<com.google.android.material.textfield.TextInputEditText
-			android:id="@+id/edt_username"
+			android:id="@+id/edt_email"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:fontFamily="@font/rubik_light"
@@ -87,7 +89,7 @@
 		android:id="@+id/tv_password"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@id/til_username"
+		android:layout_below="@id/til_email"
 		android:layout_marginHorizontal="@dimen/_20sdp"
 		android:layout_marginTop="@dimen/_8sdp"
 		android:fontFamily="@font/rubik_regular"
@@ -101,21 +103,19 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/tv_password"
-		app:passwordToggleEnabled="true"
-		app:passwordToggleTint="@color/gray4"
 		android:layout_marginHorizontal="@dimen/_20sdp"
 		android:layout_marginTop="@dimen/_2sdp"
 		android:elevation="@dimen/_2sdp"
-		app:endIconDrawable="@drawable/ic_subtract">
+		app:passwordToggleEnabled="true"
+		app:passwordToggleTint="@color/gray4">
 
 		<com.google.android.material.textfield.TextInputEditText
 			android:id="@+id/edt_password"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:fontFamily="@font/rubik_light"
-			android:hint="@string/enter_your_email_here"
+			android:hint="@string/enter_your_password_here"
 			android:inputType="textPassword"
-			tools:text="1234"
 			android:textColor="@color/dark"
 			android:textColorHint="@color/gray3"
 			android:textSize="@dimen/_12ssp" />
@@ -130,8 +130,9 @@
 		android:layout_below="@id/til_password"
 		android:layout_marginHorizontal="@dimen/_20sdp"
 		android:layout_marginTop="@dimen/_16sdp"
-		android:fontFamily="@font/rubik_medium"
+		android:fontFamily="@font/poppins_bold"
 		android:text="@string/login"
+		android:textAllCaps="false"
 		android:textColor="@color/white"
 		android:textSize="@dimen/_12ssp"
 		app:cornerRadius="@dimen/_8sdp" />

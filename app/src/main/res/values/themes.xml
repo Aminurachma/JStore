@@ -14,10 +14,10 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="App.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxCornerRadiusTopStart">@dimen/_4sdp</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/_4sdp</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/_4sdp</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/_4sdp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_6sdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_6sdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_6sdp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_6sdp</item>
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxStrokeWidthFocused">0dp</item>
         <item name="hintEnabled">false</item>
