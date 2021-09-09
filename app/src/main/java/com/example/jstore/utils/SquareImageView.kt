@@ -2,9 +2,9 @@ package com.example.jstore.utils
 
 import android.content.Context
 import android.util.AttributeSet
-import com.google.android.material.card.MaterialCardView
+import androidx.appcompat.widget.AppCompatImageView
 
-class SquareCardView : MaterialCardView {
+class SquareImageView : AppCompatImageView {
 
     constructor(context: Context) : super(context)
 
