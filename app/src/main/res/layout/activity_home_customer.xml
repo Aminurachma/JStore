@@ -4,14 +4,12 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/light"
-	android:clipToPadding="false"
-	android:fillViewport="true"
-	android:padding="@dimen/_20sdp">
+	android:background="@color/light">
 
 	<RelativeLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		android:padding="@dimen/_20sdp">
 
 		<de.hdodenhof.circleimageview.CircleImageView
 			android:id="@+id/img_avatar"
@@ -63,6 +61,7 @@
 				android:layout_height="wrap_content"
 				app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
 				app:spanCount="2"
+				tools:itemCount="5"
 				tools:listitem="@layout/item_product"
 				android:layout_marginTop="@dimen/_20sdp"/>
 
