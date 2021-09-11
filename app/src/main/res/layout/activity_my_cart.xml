@@ -17,242 +17,67 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_27ssp" />
 
-    <RelativeLayout
-        android:id="@+id/satu"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_judul"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_40sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_12sdp">
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="1"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_cart"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"/>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_brg"
-            android:layout_width="@dimen/_300sdp"
-            android:layout_height="@dimen/_120sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:cardElevation="@dimen/_6sdp">
-
-            <RelativeLayout
-                android:id="@+id/brg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/img_prduk"
-                        android:layout_width="@dimen/_90sdp"
-                        android:layout_height="@dimen/_100sdp"
-                        android:layout_gravity="center"
-                        android:padding="@dimen/_5sdp"
-                        tools:src="@drawable/jam" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_namaproduk"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_40sdp"
-                                android:layout_marginStart="@dimen/_20sdp"
-                                android:fontFamily="@font/rubik_light"
-                                android:gravity="center"
-                                android:text="Watch"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_11ssp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_harga"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_4sdp"
-                                android:fontFamily="@font/rubik_regular"
-                                android:layout_marginStart="@dimen/_20sdp"
-                                android:gravity="center"
-                                android:text="Rp 170.000,00"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="@dimen/_11ssp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_20sdp"
-                                android:orientation="horizontal">
-
-                                <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/btn_cartminus"
-                                    android:layout_width="@dimen/_40sdp"
-                                    android:layout_height="@dimen/_30sdp"
-                                    android:layout_marginTop="@dimen/_4sdp"
-                                    android:text="+"
-                                    android:background="@drawable/cartminus"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/_12ssp"
-                                    app:cornerRadius="@dimen/_12sdp" />
-
-
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/tv_angka"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_4sdp"
-                                    android:fontFamily="@font/rubik_light"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    android:text="12"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/_12ssp" />
-
-                                <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/btn_cartplus"
-                                    android:layout_width="@dimen/_40sdp"
-                                    android:layout_height="@dimen/_30sdp"
-                                    android:layout_marginTop="@dimen/_4sdp"
-                                    android:layout_marginStart="@dimen/_8sdp"
-                                    android:text="+"
-                                    android:background="@drawable/cartplus"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_12ssp"
-                                    app:cornerRadius="@dimen/_12sdp" />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-    </RelativeLayout>
-
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/subtotal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/satu"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_12sdp">
+        android:layout_below="@id/rv_cart"
+        android:orientation="horizontal">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_brg2"
-            android:layout_width="@dimen/_300sdp"
-            android:layout_height="@dimen/_120sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:cardElevation="@dimen/_6sdp">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_subtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_cart"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/rubik_bold"
+            android:text="Subtotal"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/_18ssp" />
 
-            <RelativeLayout
-                android:id="@+id/brg2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/edt_subtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_cart"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/rubik_bold"
+            tools:text="@string/subtotal"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_70sdp"
+            android:textColor="@color/pink2"
+            android:textSize="@dimen/_18ssp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:orientation="horizontal">
+    </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/img_prduk2"
-                        android:layout_width="@dimen/_90sdp"
-                        android:layout_height="@dimen/_100sdp"
-                        android:layout_gravity="center"
-                        android:padding="@dimen/_5sdp"
-                        tools:src="@drawable/jam" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_namaproduk2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_40sdp"
-                            android:layout_marginStart="@dimen/_20sdp"
-                            android:fontFamily="@font/rubik_light"
-                            android:gravity="center"
-                            android:text="Watch"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_11ssp" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_harga2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:fontFamily="@font/rubik_regular"
-                            android:layout_marginStart="@dimen/_20sdp"
-                            android:gravity="center"
-                            android:text="Rp 170.000,00"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/_11ssp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_20sdp"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btn_cartminus2"
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_marginTop="@dimen/_4sdp"
-                                android:text="+"
-                                android:background="@drawable/cartminus"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_12ssp"
-                                app:cornerRadius="@dimen/_12sdp" />
-
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_angka2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_4sdp"
-                                android:fontFamily="@font/rubik_light"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:text="12"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_12ssp" />
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btn_cartplus2"
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_marginTop="@dimen/_4sdp"
-                                android:layout_marginStart="@dimen/_8sdp"
-                                android:text="+"
-                                android:background="@drawable/cartplus"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12ssp"
-                                app:cornerRadius="@dimen/_12sdp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-    </RelativeLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_below="@id/subtotal"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:fontFamily="@font/rubik_bold"
+        android:text="Checkout"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        app:cornerRadius="@dimen/_8sdp" />
 
 </RelativeLayout>

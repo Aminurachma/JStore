@@ -130,7 +130,7 @@
 		android:layout_below="@id/til_password"
 		android:layout_marginHorizontal="@dimen/_20sdp"
 		android:layout_marginTop="@dimen/_16sdp"
-		android:fontFamily="@font/poppins_bold"
+		android:fontFamily="@font/rubik_bold"
 		android:text="@string/login"
 		android:textAllCaps="false"
 		android:textColor="@color/white"

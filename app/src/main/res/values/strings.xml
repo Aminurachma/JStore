@@ -24,4 +24,8 @@
 	<string name="enter_your_phone_number_here">Enter your phone number here</string>
 	<string name="enter_your_password_here">Enter your password here</string>
 	<string name="do_you_have_an_account_login_here">Do you have an account? Login here.</string>
+	<string name="admin_login_page">Admin Login Page</string>
+	<string name="user_login_here">User Login Here</string>
+	<string name="subtotal">Rp. 100.000,-</string>
+	<string name="do_you_have_an_account">Do you have an account ?</string>
 </resources>

@@ -121,7 +121,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_2sdp"
         android:layout_below="@id/bawah"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/rubik_bold"
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/_40sdp"

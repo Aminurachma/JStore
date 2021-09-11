@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_margin="@dimen/_8sdp"
+	app:cardElevation="0dp">
+
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerInParent="true"
+					android:orientation="horizontal">
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/img_prduk"
+						android:layout_width="@dimen/_90sdp"
+						android:layout_height="@dimen/_100sdp"
+						android:layout_gravity="center"
+						android:padding="@dimen/_5sdp"
+						tools:src="@drawable/jam" />
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:orientation="vertical">
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:id="@+id/tv_namaproduk"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="@dimen/_20sdp"
+							android:layout_marginStart="@dimen/_20sdp"
+							android:fontFamily="@font/rubik_light"
+							android:gravity="center"
+							android:text="Watch"
+							android:textColor="@color/black"
+							android:textSize="@dimen/_11ssp" />
+
+						<androidx.appcompat.widget.AppCompatTextView
+							android:id="@+id/tv_harga"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="@dimen/_4sdp"
+							android:fontFamily="@font/rubik_regular"
+							android:layout_marginStart="@dimen/_20sdp"
+							android:gravity="center"
+							android:text="Rp 170.000,00"
+							android:textColor="@color/colorPrimary"
+							android:textSize="@dimen/_11ssp" />
+
+						<LinearLayout
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:layout_marginStart="@dimen/_20sdp"
+							android:orientation="horizontal">
+
+							<com.google.android.material.button.MaterialButton
+								android:id="@+id/btn_cartminus"
+								android:layout_width="@dimen/_40sdp"
+								android:layout_height="@dimen/_30sdp"
+								android:layout_marginTop="@dimen/_4sdp"
+								android:text="-"
+								android:background="@drawable/cartminus"
+								android:textColor="@color/black"
+								android:textSize="@dimen/_12ssp"
+								app:cornerRadius="@dimen/_12sdp" />
+
+
+							<androidx.appcompat.widget.AppCompatTextView
+								android:id="@+id/tv_angka"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="@dimen/_4sdp"
+								android:fontFamily="@font/rubik_light"
+								android:layout_marginStart="@dimen/_10sdp"
+								android:text="12"
+								android:textColor="@color/black"
+								android:textSize="@dimen/_12ssp" />
+
+							<com.google.android.material.button.MaterialButton
+								android:id="@+id/btn_cartplus"
+								android:layout_width="@dimen/_40sdp"
+								android:layout_height="@dimen/_30sdp"
+								android:layout_marginTop="@dimen/_4sdp"
+								android:layout_marginStart="@dimen/_8sdp"
+								android:text="+"
+								android:background="@drawable/cartplus"
+								android:textColor="@color/black"
+								android:textSize="@dimen/_12ssp"
+								app:cornerRadius="@dimen/_12sdp" />
+						</LinearLayout>
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
