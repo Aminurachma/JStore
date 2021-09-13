@@ -13,7 +13,7 @@
         <activity android:name=".MyCartActivity" />
         <activity android:name=".HomeAdminActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".HomeCustomerActivity" />
+        <activity android:name=".ui.home.customer.HomeCustomerActivity" />
         <activity android:name=".SplashscreenActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ProductDetailsActivity">

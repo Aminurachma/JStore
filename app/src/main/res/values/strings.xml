@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Jstore</string>
-    <string name="aplikasi_jual_beli_online">Aplikasi Jual Beli Online</string>
+	<string name="app_name">Jstore</string>
+	<string name="aplikasi_jual_beli_online">Aplikasi Jual Beli Online</string>
 	<string name="welcome">WELCOME</string>
 	<string name="login_to_start_with_jstore">Login to start with JStore</string>
 	<string name="admin_login_here">Admin Login Here</string>
@@ -28,4 +28,13 @@
 	<string name="user_login_here">User Login Here</string>
 	<string name="subtotal">Rp. 100.000,-</string>
 	<string name="do_you_have_an_account">Do you have an account ?</string>
+	<!-- TODO: Remove or change this placeholder text -->
+	<string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="sku">SKU</string>
+	<string name="rincian_produk">Rincian Produk</string>
+	<string name="stok">Stok</string>
+	<string name="dikirim_dari">Dikirim Dari</string>
+	<string name="add_to_cart">Add to cart</string>
+	<string name="minus">-</string>
+	<string name="plus">+</string>
 </resources>
