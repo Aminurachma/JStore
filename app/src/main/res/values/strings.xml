@@ -37,4 +37,6 @@
 	<string name="add_to_cart">Add to cart</string>
 	<string name="minus">-</string>
 	<string name="plus">+</string>
+	<string name="order_history">Order History</string>
+	<string name="home">Home</string>
 </resources>

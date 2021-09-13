@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/dashboard_nav"
+	app:startDestination="@id/customerDashboardFragment">
+
+	<fragment
+		android:id="@+id/customerDashboardFragment"
+		android:name="com.example.jstore.ui.home.customer.CustomerDashboardFragment"
+		android:label="CustomerDashboardFragment"
+		tools:layout="@layout/fragment_customer_dashboard" />
+	<fragment
+		android:id="@+id/orderHistoryFragment"
+		android:name="com.example.jstore.OrderHistoryFragment"
+		android:label="fragment_order_history"
+		tools:layout="@layout/fragment_order_history" />
+
+</navigation>
