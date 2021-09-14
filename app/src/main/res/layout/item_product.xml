@@ -23,7 +23,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:scaleType="centerCrop"
-				app:srcCompat="@drawable/jam" />
+				tools:srcCompat="@drawable/jam" />
 
 		</com.google.android.material.card.MaterialCardView>
 
@@ -31,25 +31,28 @@
 			android:id="@+id/tv_product_name"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Jam Tangan Unisex Untuk Pesta"
+			android:layout_marginHorizontal="@dimen/_8sdp"
+			android:layout_marginTop="@dimen/_8sdp"
+			android:ellipsize="end"
+			android:fontFamily="@font/rubik_medium"
+			android:maxLines="2"
 			android:textColor="@color/dark"
 			android:textSize="@dimen/_12ssp"
-			android:maxLines="2"
-			android:ellipsize="end"
-			android:layout_marginTop="@dimen/_8sdp"
-			android:fontFamily="@font/rubik_medium"/>
+			tools:text="Jam Tangan Unisex Untuk Pesta" />
 
 		<TextView
 			android:id="@+id/tv_product_price"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Rp. 100.000,-"
-			android:textColor="@color/colorPrimary"
-			android:textSize="@dimen/_12ssp"
-			android:maxLines="2"
-			android:ellipsize="end"
+			android:layout_marginHorizontal="@dimen/_8sdp"
 			android:layout_marginTop="@dimen/_2sdp"
-			android:fontFamily="@font/rubik_medium"/>
+			android:layout_marginBottom="@dimen/_8sdp"
+			android:ellipsize="end"
+			android:fontFamily="@font/rubik_regular"
+			android:maxLines="2"
+			android:textColor="@color/colorPrimary"
+			android:textSize="@dimen/_10ssp"
+			tools:text="Rp. 100.000,-" />
 
 	</LinearLayout>
 

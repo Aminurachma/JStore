@@ -4,12 +4,14 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/light">
+	android:background="@color/light"
+	android:focusable="true"
+	android:focusableInTouchMode="true">
 
 	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:padding="@dimen/_20sdp">
+		android:padding="@dimen/_16sdp">
 
 		<de.hdodenhof.circleimageview.CircleImageView
 			android:id="@+id/img_avatar"
@@ -19,13 +21,13 @@
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/img_cart"
-			android:layout_width="@dimen/_19sdp"
-			android:layout_height="@dimen/_19sdp"
-			android:padding="@dimen/_2sdp"
+			android:layout_width="@dimen/_24sdp"
+			android:layout_height="@dimen/_24sdp"
 			android:layout_alignBottom="@+id/img_avatar"
 			android:layout_alignParentTop="true"
 			android:layout_alignParentEnd="true"
 			android:background="?attr/selectableItemBackgroundBorderless"
+			android:padding="@dimen/_4sdp"
 			android:src="@drawable/ic_shopping_cart" />
 
 		<LinearLayout
@@ -39,32 +41,34 @@
 				android:id="@+id/tv_welcoming_text"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textColor="@color/gray4"
-				android:textSize="@dimen/_14ssp"
 				android:fontFamily="@font/rubik_light"
-				android:text="Hello Gon!"/>
+				android:text="Hello Gon!"
+				android:textColor="@color/gray4"
+				android:textSize="@dimen/_14ssp" />
 
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textColor="@color/dark"
-				android:textSize="@dimen/_14ssp"
 				android:layout_marginBottom="@dimen/_20sdp"
 				android:fontFamily="@font/rubik_regular"
-				android:text="@string/start_looking_for_yout_outfit"/>
+				android:text="@string/start_looking_for_yout_outfit"
+				android:textColor="@color/dark"
+				android:textSize="@dimen/_14ssp" />
 
-			<include layout="@layout/search_layout"/>
+			<include
+				android:id="@+id/search_view"
+				layout="@layout/search_layout" />
 
 			<androidx.recyclerview.widget.RecyclerView
 				android:id="@+id/rv_product"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_20sdp"
+				android:overScrollMode="never"
 				app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
 				app:spanCount="2"
-				android:overScrollMode="never"
 				tools:itemCount="5"
-				tools:listitem="@layout/item_product"
-				android:layout_marginTop="@dimen/_20sdp"/>
+				tools:listitem="@layout/item_product" />
 
 		</LinearLayout>
 

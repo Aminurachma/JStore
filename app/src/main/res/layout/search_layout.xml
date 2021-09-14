@@ -1,35 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:id="@+id/layout_search_bar"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/til_search"
+	style="@style/App.TextInputLayout.OutlinedBox"
 	android:layout_width="match_parent"
-	android:layout_height="@dimen/_40sdp"
-	app:cardBackgroundColor="@color/white"
-	app:cardCornerRadius="@dimen/_6sdp"
-	app:cardElevation="0dp">
+	android:layout_height="wrap_content"
+	app:endIconDrawable="@drawable/ic_filter"
+	app:endIconMode="custom"
+	app:startIconDrawable="@drawable/ic_search">
 
-	<com.google.android.material.textfield.TextInputLayout
-		android:id="@+id/til_search"
-		style="@style/App.TextInputLayout.OutlinedBox"
+	<com.google.android.material.textfield.TextInputEditText
+		android:id="@+id/search_bar"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		app:endIconDrawable="@drawable/ic_filter"
-		app:endIconMode="custom"
-		app:startIconDrawable="@drawable/ic_search">
+		android:fontFamily="@font/rubik_regular"
+		android:hint="@string/what_are_you_looking_for"
+		android:imeOptions="actionDone"
+		android:maxLines="1"
+		android:padding="0dp"
+		android:singleLine="true"
+		android:textColor="@color/dark"
+		android:textColorHint="@color/gray4"
+		android:textSize="@dimen/_12ssp"
+		tools:text="Baju cewek bagus" />
 
-		<com.google.android.material.textfield.TextInputEditText
-			android:id="@+id/search_bar"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:fontFamily="@font/rubik_regular"
-			android:hint="@string/what_are_you_looking_for"
-			android:imeOptions="actionDone"
-			android:maxLines="1"
-			android:singleLine="true"
-			android:textColor="@color/dark"
-			android:textColorHint="@color/gray4"
-			android:textSize="@dimen/_12ssp" />
-
-	</com.google.android.material.textfield.TextInputLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</com.google.android.material.textfield.TextInputLayout>
