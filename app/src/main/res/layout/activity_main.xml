@@ -4,183 +4,178 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/colorPrimary"
+	android:background="@color/light"
 	android:fillViewport="true">
 
-	<RelativeLayout
+	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/vector"
+		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/logo"
-			android:layout_alignParentBottom="true"
-			android:layout_marginTop="@dimen/_32sdp"
-			android:layout_marginBottom="-10dp"
-			android:scaleType="fitXY"
-			android:src="@drawable/vektor" />
-
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/logo"
-			android:layout_width="@dimen/_80sdp"
-			android:layout_height="@dimen/_80sdp"
-			android:layout_centerHorizontal="true"
-			android:layout_marginTop="@dimen/_32sdp"
-			android:src="@drawable/logo" />
-
-		<androidx.appcompat.widget.AppCompatTextView
-			android:id="@+id/tv_welcome"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/logo"
-			android:layout_centerHorizontal="true"
-			android:layout_marginTop="@dimen/_110sdp"
-			android:fontFamily="@font/rubik_bold"
-			android:text="@string/welcome"
-			android:textColor="@color/dark"
-			android:textSize="@dimen/_24ssp" />
-
-		<androidx.appcompat.widget.AppCompatTextView
-			android:id="@+id/tv_subtitle"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/tv_welcome"
-			android:layout_centerHorizontal="true"
-			android:fontFamily="@font/rubik_light"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:background="@drawable/login_shape"
 			android:gravity="center"
-			android:text="@string/login_to_start_with_jstore"
-			android:textColor="@color/gray3"
-			android:textSize="@dimen/_14ssp" />
+			android:orientation="vertical"
+			android:paddingVertical="@dimen/_24sdp">
 
-		<TextView
-			android:id="@+id/tv_email"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/tv_subtitle"
-			android:layout_marginHorizontal="@dimen/_20sdp"
-			android:layout_marginTop="@dimen/_40sdp"
-			android:fontFamily="@font/rubik_regular"
-			android:text="@string/email"
-			android:textColor="@color/dark"
-			android:textSize="@dimen/_12ssp" />
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/logo"
+				android:layout_width="@dimen/_80sdp"
+				android:layout_height="@dimen/_80sdp"
+				android:src="@drawable/logo" />
 
-		<com.google.android.material.textfield.TextInputLayout
-			android:id="@+id/til_email"
-			style="@style/App.TextInputLayout.OutlinedBox"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/tv_email"
-			android:layout_marginHorizontal="@dimen/_20sdp"
-			android:layout_marginTop="@dimen/_2sdp"
-			android:elevation="@dimen/_2sdp"
-			app:endIconDrawable="@drawable/ic_subtract">
-
-			<com.google.android.material.textfield.TextInputEditText
-				android:id="@+id/edt_email"
-				android:layout_width="match_parent"
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/tv_welcome"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:fontFamily="@font/rubik_light"
-				android:hint="@string/enter_your_email_here"
-				android:inputType="textEmailAddress"
+				android:layout_marginTop="@dimen/_40sdp"
+				android:fontFamily="@font/rubik_bold"
+				android:text="@string/welcome"
 				android:textColor="@color/dark"
-				android:textColorHint="@color/gray3"
+				android:textSize="@dimen/_24ssp" />
+
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/tv_subtitle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_2sdp"
+				android:fontFamily="@font/rubik_light"
+				android:gravity="center"
+				android:text="@string/login_to_start_with_jstore"
+				android:textColor="@color/white"
+				android:textSize="@dimen/_14ssp" />
+
+		</LinearLayout>
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:padding="@dimen/_20sdp"
+			android:layout_weight="1">
+
+			<TextView
+				android:id="@+id/tv_email"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/rubik_regular"
+				android:text="@string/email"
+				android:textColor="@color/dark"
 				android:textSize="@dimen/_12ssp" />
 
-		</com.google.android.material.textfield.TextInputLayout>
-
-		<TextView
-			android:id="@+id/tv_password"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/til_email"
-			android:layout_marginHorizontal="@dimen/_20sdp"
-			android:layout_marginTop="@dimen/_8sdp"
-			android:fontFamily="@font/rubik_regular"
-			android:text="@string/password"
-			android:textColor="@color/dark"
-			android:textSize="@dimen/_12ssp" />
-
-		<com.google.android.material.textfield.TextInputLayout
-			android:id="@+id/til_password"
-			style="@style/App.TextInputLayout.OutlinedBox"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/tv_password"
-			android:layout_marginHorizontal="@dimen/_20sdp"
-			android:layout_marginTop="@dimen/_2sdp"
-			android:elevation="@dimen/_2sdp"
-			app:passwordToggleEnabled="true"
-			app:passwordToggleTint="@color/gray4">
-
-			<com.google.android.material.textfield.TextInputEditText
-				android:id="@+id/edt_password"
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/til_email"
+				style="@style/App.TextInputLayout.OutlinedBox"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:fontFamily="@font/rubik_light"
-				android:hint="@string/enter_your_password_here"
-				android:inputType="textPassword"
+				android:layout_below="@id/tv_email"
+				android:layout_marginTop="@dimen/_2sdp"
+				android:elevation="@dimen/_2sdp"
+				app:endIconDrawable="@drawable/ic_subtract">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/edt_email"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/rubik_light"
+					android:hint="@string/enter_your_email_here"
+					android:inputType="textEmailAddress"
+					android:textColor="@color/dark"
+					android:textColorHint="@color/gray3"
+					android:textSize="@dimen/_12ssp" />
+
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<TextView
+				android:id="@+id/tv_password"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/til_email"
+				android:layout_marginTop="@dimen/_8sdp"
+				android:fontFamily="@font/rubik_regular"
+				android:text="@string/password"
 				android:textColor="@color/dark"
-				android:textColorHint="@color/gray3"
 				android:textSize="@dimen/_12ssp" />
 
-		</com.google.android.material.textfield.TextInputLayout>
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/til_password"
+				style="@style/App.TextInputLayout.OutlinedBox"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/tv_password"
+				android:layout_marginTop="@dimen/_2sdp"
+				android:elevation="@dimen/_2sdp"
+				app:passwordToggleEnabled="true"
+				app:passwordToggleTint="@color/gray4">
 
-		<com.google.android.material.button.MaterialButton
-			android:id="@+id/btn_login"
-			style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/_45sdp"
-			android:layout_below="@id/til_password"
-			android:layout_marginHorizontal="@dimen/_20sdp"
-			android:layout_marginTop="@dimen/_16sdp"
-			android:fontFamily="@font/rubik_bold"
-			android:text="@string/login"
-			android:textAllCaps="false"
-			android:textColor="@color/white"
-			android:textSize="@dimen/_12ssp"
-			app:cornerRadius="@dimen/_8sdp" />
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/edt_password"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/rubik_light"
+					android:hint="@string/enter_your_password_here"
+					android:inputType="textPassword"
+					android:textColor="@color/dark"
+					android:textColorHint="@color/gray3"
+					android:textSize="@dimen/_12ssp" />
 
-		<TextView
-			android:id="@+id/tv_do_not_have_account"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/btn_login"
-			android:layout_marginTop="@dimen/_4sdp"
-			android:layout_marginEnd="@dimen/_4sdp"
-			android:layout_toStartOf="@id/btn_sign_up"
-			android:fontFamily="@font/rubik_light"
-			android:text="@string/don_t_have_an_account"
-			android:textColor="@color/dark"
-			android:textSize="@dimen/_12ssp" />
+			</com.google.android.material.textfield.TextInputLayout>
 
-		<TextView
-			android:id="@+id/btn_sign_up"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/btn_login"
-			android:layout_alignParentEnd="true"
-			android:layout_marginTop="@dimen/_4sdp"
-			android:layout_marginEnd="@dimen/_20sdp"
-			android:fontFamily="@font/rubik_medium"
-			android:text="@string/sign_up_here"
-			android:textColor="@color/dark"
-			android:textSize="@dimen/_12ssp" />
+			<com.google.android.material.button.MaterialButton
+				android:id="@+id/btn_login"
+				style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/_45sdp"
+				android:layout_below="@id/til_password"
+				android:layout_marginTop="@dimen/_16sdp"
+				android:fontFamily="@font/rubik_bold"
+				android:text="@string/login"
+				android:textAllCaps="false"
+				android:textColor="@color/white"
+				android:textSize="@dimen/_12ssp"
+				app:cornerRadius="@dimen/_8sdp" />
 
-		<androidx.appcompat.widget.AppCompatTextView
-			android:id="@+id/btn_login_admin"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentBottom="true"
-			android:layout_centerHorizontal="true"
-			android:layout_marginBottom="@dimen/_20sdp"
-			android:background="?attr/selectableItemBackground"
-			android:fontFamily="@font/rubik_light"
-			android:text="@string/admin_login_here"
-			android:textColor="@color/colorPrimary"
-			android:textSize="@dimen/_12ssp" />
+			<TextView
+				android:id="@+id/tv_do_not_have_account"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/btn_login"
+				android:layout_marginTop="@dimen/_8sdp"
+				android:layout_marginEnd="@dimen/_4sdp"
+				android:layout_toStartOf="@id/btn_sign_up"
+				android:fontFamily="@font/rubik_light"
+				android:text="@string/don_t_have_an_account"
+				android:textColor="@color/dark"
+				android:textSize="@dimen/_12ssp" />
 
-	</RelativeLayout>
+			<TextView
+				android:id="@+id/btn_sign_up"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/btn_login"
+				android:layout_alignParentEnd="true"
+				android:layout_marginTop="@dimen/_8sdp"
+				android:fontFamily="@font/rubik_medium"
+				android:text="@string/sign_up_here"
+				android:textColor="@color/dark"
+				android:textSize="@dimen/_12ssp" />
+
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/btn_login_admin"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentBottom="true"
+				android:layout_centerHorizontal="true"
+				android:background="?attr/selectableItemBackground"
+				android:fontFamily="@font/rubik_light"
+				android:text="@string/admin_login_here"
+				android:textColor="@color/colorPrimary"
+				android:textSize="@dimen/_12ssp" />
+
+		</RelativeLayout>
+
+	</LinearLayout>
 
 </ScrollView>
