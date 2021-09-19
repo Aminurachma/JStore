@@ -11,13 +11,15 @@ import com.example.jstore.ui.home.customer.HomeCustomerActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
-    //ViewBinding
     private var _binding: ActivityRegisterBinding? = null
     private val binding get() = _binding!!
-    //
+
     private lateinit var firebaseAuth: FirebaseAuth
     private var email =""
     private var password = ""
+    private var address = ""
+    private var phone = ""
+    private var fullName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +38,26 @@ class RegisterActivity : AppCompatActivity() {
 
         email = binding.edtEmail.text.toString().trim()
         password = binding.edtPassword.text.toString().trim()
+        address = binding.edtAddress.text.toString().trim()
+        fullName = binding.edtName.text.toString().trim()
+        phone = binding.edtPhoneNumber.text.toString().trim()
 
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            binding.edtEmail.error = "Invalid Email Format!"
+            binding.edtEmail.error = "Invalid Email Format !"
         }
         else if(TextUtils.isEmpty(password)){
-            binding.edtPassword.error = "Jangan kosong y"
+            binding.edtPassword.error = "Please enter your password !"
         }
+        else if(TextUtils.isEmpty(address)){
+            binding.edtPassword.error = "Please enter your address !"
+        }
+        else if(TextUtils.isEmpty(fullName)){
+            binding.edtPassword.error = "Please enter your full name !"
+        }
+        else if(TextUtils.isEmpty(phone)){
+            binding.edtPassword.error = "Please enter your phone number !"
+        }
+
         else{
             firebaseRegister()
         }
