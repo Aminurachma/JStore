@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:scrollbars="none"
+    android:background="@color/light">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,12 +15,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:background="@drawable/login_shape"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingVertical="@dimen/_24sdp">
+            android:paddingVertical="@dimen/_32sdp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/logo"
@@ -52,9 +52,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:padding="@dimen/_20sdp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_20sdp">
 
             <TextView
                 android:id="@+id/tv_email"
@@ -71,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_email"
-                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_4sdp"
                 android:elevation="@dimen/_2sdp"
                 app:endIconDrawable="@drawable/ic_subtract">
 
@@ -105,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_password"
-                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_4sdp"
                 android:elevation="@dimen/_2sdp"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/gray4">
@@ -127,22 +126,23 @@
                 android:id="@+id/btn_login"
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_below="@id/til_password"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:fontFamily="@font/rubik_bold"
                 android:text="@string/login"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_14ssp"
                 app:cornerRadius="@dimen/_8sdp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/btn_login_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_below="@id/btn_login"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:background="?attr/selectableItemBackground"
                 android:fontFamily="@font/rubik_light"
                 android:text="@string/user_login_here"
