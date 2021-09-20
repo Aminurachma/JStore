@@ -182,7 +182,7 @@
 				android:layout_height="wrap_content"
 				android:fontFamily="@font/rubik_light"
 				android:hint="@string/enter_your_password_here"
-				android:inputType="textEmailAddress"
+				android:inputType="text"
 				android:textColor="@color/dark"
 				android:textColorHint="@color/gray3"
 				android:textSize="@dimen/_12ssp" />

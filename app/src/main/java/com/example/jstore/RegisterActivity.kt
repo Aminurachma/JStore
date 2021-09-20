@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Toast
+import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityRegisterBinding
-import com.example.jstore.ui.home.customer.HomeCustomerActivity
+import com.example.jstore.firestore.FirestoreClass
+import com.example.jstore.models.User
 import com.google.firebase.auth.FirebaseAuth
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
     private var _binding: ActivityRegisterBinding? = null
     private val binding get() = _binding!!
 
@@ -28,13 +30,16 @@ class RegisterActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        binding.btnSignUp.setOnClickListener {
+            onBackPressed()
+        }
 
         binding.btnRegister.setOnClickListener {
             validateData()
         }
     }
 
-        private fun validateData() {
+    private fun validateData() {
 
         email = binding.edtEmail.text.toString().trim()
         password = binding.edtPassword.text.toString().trim()
@@ -68,15 +73,36 @@ class RegisterActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
-                Toast.makeText(this, "Register berhasil $email", Toast.LENGTH_SHORT).show()
+                //             Toast.makeText(this, "Register berhasil $email", Toast.LENGTH_SHORT).show()
 
-                startActivity(Intent(this, HomeCustomerActivity::class.java))
-                finish()
-                //
+                val user = User(
+                    firebaseUser.uid,
+                    binding.edtName.text.toString().trim{ it <= ' '},
+                    binding.edtAddress.text.toString().trim{ it <= ' '},
+                    binding.edtPhoneNumber.text.toString().toLong(),
+                    binding.edtEmail.text.toString().trim{ it <= ' '}
+                )
+
+                FirestoreClass().registUser(this@RegisterActivity, user)
+
+//                startActivity(Intent(this, HomeCustomerActivity::class.java))
+//                finish()
             }
             .addOnFailureListener{e ->
-                //failed
+                hideProgressDialog()
+                //failed register
                 Toast.makeText(this, "Register gagal ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
+    fun userRegisterSuccess() {
+        hideProgressDialog()
+
+        Toast.makeText(
+            this,
+            resources.getString(R.string.register_success),
+            Toast.LENGTH_SHORT
+        ).show()
+    }
 }
+
