@@ -191,59 +191,69 @@
 
 		<com.google.android.material.card.MaterialCardView
 			android:layout_width="0dp"
-			android:layout_height="@dimen/_32sdp"
-			android:layout_weight="1"
-			app:cardElevation="0dp"
+			android:layout_height="@dimen/_40sdp"
 			android:layout_marginEnd="@dimen/_4sdp"
+			android:layout_weight="1"
 			app:cardBackgroundColor="@color/gray5"
-			app:cardCornerRadius="@dimen/_6sdp">
+			app:cardCornerRadius="@dimen/_6sdp"
+			app:cardElevation="0dp">
 
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:orientation="horizontal">
 
-				<com.google.android.material.button.MaterialButton
+				<com.google.android.material.card.MaterialCardView
 					android:id="@+id/btn_decrement"
-					style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
-					android:insetTop="0dp"
-					android:backgroundTint="@color/gray5"
-					android:text="@string/minus"
+					app:cardBackgroundColor="@color/gray5"
 					app:cornerRadius="0dp"
-					android:textColor="@color/dark"
-					android:textSize="@dimen/_12ssp"
-					android:fontFamily="@font/rubik_bold"
-					android:insetBottom="0dp"
-					android:layout_weight="1"/>
+					app:cardElevation="0dp"
+					android:layout_weight="1">
+
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:gravity="center"
+						android:fontFamily="@font/rubik_bold"
+						android:textSize="@dimen/_12ssp"
+						android:textColor="@color/dark"
+						android:text="@string/minus"/>
+
+				</com.google.android.material.card.MaterialCardView>
 
 				<TextView
 					android:id="@+id/tv_quantity"
 					android:layout_width="0dp"
+					android:layout_height="match_parent"
 					android:layout_weight="1"
-					android:gravity="center"
-					android:textSize="@dimen/_10ssp"
-					android:textColor="@color/dark"
 					android:background="@color/white"
 					android:fontFamily="@font/rubik_medium"
-					android:layout_height="match_parent"
-					tools:text="1"/>
+					android:gravity="center"
+					android:text="@string/_1"
+					android:textColor="@color/dark"
+					android:textSize="@dimen/_11ssp" />
 
-				<com.google.android.material.button.MaterialButton
+				<com.google.android.material.card.MaterialCardView
 					android:id="@+id/btn_increment"
 					android:layout_width="0dp"
-					style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
 					android:layout_height="match_parent"
-					android:insetTop="0dp"
-					android:backgroundTint="@color/gray5"
-					android:text="@string/plus"
+					app:cardBackgroundColor="@color/gray5"
 					app:cornerRadius="0dp"
-					android:textColor="@color/dark"
-					android:textSize="@dimen/_12ssp"
-					android:fontFamily="@font/rubik_bold"
-					android:insetBottom="0dp"
-					android:layout_weight="1"/>
+					app:cardElevation="0dp"
+					android:layout_weight="1">
+
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:gravity="center"
+						android:fontFamily="@font/rubik_bold"
+						android:textSize="@dimen/_12ssp"
+						android:textColor="@color/dark"
+						android:text="@string/plus"/>
+
+				</com.google.android.material.card.MaterialCardView>
 
 			</LinearLayout>
 
@@ -253,7 +263,7 @@
 			android:id="@+id/btn_add_to_cart"
 			style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
 			android:layout_width="0dp"
-			android:layout_height="@dimen/_32sdp"
+			android:layout_height="@dimen/_40sdp"
 			android:layout_marginStart="@dimen/_4sdp"
 			android:layout_weight="2"
 			android:fontFamily="@font/rubik_medium"
@@ -262,11 +272,11 @@
 			android:text="@string/add_to_cart"
 			android:textAllCaps="false"
 			android:textColor="@color/white"
-			app:iconTint="@color/white"
 			android:textSize="@dimen/_12ssp"
 			app:cornerRadius="@dimen/_6sdp"
 			app:icon="@drawable/ic_shopping_cart"
-			app:iconGravity="textStart" />
+			app:iconGravity="textStart"
+			app:iconTint="@color/white" />
 
 	</LinearLayout>
 

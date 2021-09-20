@@ -15,15 +15,21 @@
 		<activity android:name=".MyCartActivity" />
 		<activity android:name=".HomeAdminActivity" />
 		<activity android:name=".RegisterActivity" />
-		<activity android:name=".ui.home.customer.HomeCustomerActivity" />
-		<activity android:name=".MainActivity" />
-		<activity android:name=".ProductDetailsActivity" />
-		<activity android:name=".SplashscreenActivity">
+		<activity android:name=".ui.home.customer.HomeCustomerActivity" >
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
+		</activity>
+		<activity android:name=".MainActivity" />
+		<activity android:name=".ProductDetailsActivity" />
+		<activity android:name=".SplashscreenActivity">
+<!--			<intent-filter>-->
+<!--				<action android:name="android.intent.action.MAIN" />-->
+
+<!--				<category android:name="android.intent.category.LAUNCHER" />-->
+<!--			</intent-filter>-->
 		</activity>
 	</application>
 

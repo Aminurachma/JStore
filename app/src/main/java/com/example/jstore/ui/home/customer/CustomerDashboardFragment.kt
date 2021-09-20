@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.jstore.ProductDetailsActivity
 import com.example.jstore.R
 import com.example.jstore.data.source.remote.response.Category
 import com.example.jstore.data.source.remote.response.Product
 import com.example.jstore.databinding.FragmentCustomerDashboardBinding
 import com.example.jstore.ui.product.ProductAdapter
+import com.example.jstore.utils.pushActivity
 
 class CustomerDashboardFragment : Fragment() {
 
@@ -40,6 +42,7 @@ class CustomerDashboardFragment : Fragment() {
 
         setupAdapter()
         setupUI()
+        setupClickListeners()
 
     }
 
@@ -47,9 +50,13 @@ class CustomerDashboardFragment : Fragment() {
         binding.rvProduct.adapter = adapter
     }
 
+    private fun setupClickListeners() {
+
+    }
+
     private fun setupAdapter() {
         adapter = ProductAdapter(onClickListener = {
-
+            pushActivity(ProductDetailsActivity::class.java)
         })
         adapter.submitList(dummyProducts)
     }
