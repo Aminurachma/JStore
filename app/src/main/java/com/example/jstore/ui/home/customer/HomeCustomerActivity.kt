@@ -14,7 +14,6 @@ class HomeCustomerActivity : AppCompatActivity() {
 
     private var _binding: ActivityHomeCustomerBinding? = null
     private val binding get() = _binding!!
-    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +22,6 @@ class HomeCustomerActivity : AppCompatActivity() {
 
         setupUI()
 
-
-        firebaseAuth = FirebaseAuth.getInstance()
 
     }
 

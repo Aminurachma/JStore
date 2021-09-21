@@ -45,4 +45,5 @@
 	<string name="invalid_email">Invalid email format!</string>
 	<string name="empty_field">Please enter your %s</string>
 	<string name="register_failed">Failed to register! %s</string>
+    <string name="bukanadmin">Maaf, Anda bukan Admin</string>
 </resources>
