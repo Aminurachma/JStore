@@ -37,26 +37,12 @@ class RegisterActivity : BaseActivity() {
     private fun validateData() {
         binding.apply {
             when {
-                edtName.text.toString().trim().isEmpty() -> {
-                    tilName.error = getString(R.string.empty_field, getString(R.string.fullname))
-                }
-                edtAddress.text.toString().trim().isEmpty() -> {
-                    tilAddress.error = getString(R.string.empty_field, getString(R.string.address))
-                }
-                edtPhoneNumber.text.toString().trim().isEmpty() -> {
-                    tilPhoneNumber.error =
-                        getString(R.string.empty_field, getString(R.string.phone_number))
-                }
-                !Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString().trim()).matches() -> {
-                    tilEmail.error = getString(R.string.invalid_email)
-                }
-                edtPassword.text.toString().trim().isEmpty() -> {
-                    tilPassword.error =
-                        getString(R.string.empty_field, getString(R.string.password))
-                }
-                else -> {
-                    firebaseRegister()
-                }
+                edtName.text.toString().trim().isEmpty() -> tilName.error = getString(R.string.empty_field, getString(R.string.fullname))
+                edtAddress.text.toString().trim().isEmpty() -> tilAddress.error = getString(R.string.empty_field, getString(R.string.address))
+                edtPhoneNumber.text.toString().trim().isEmpty() -> tilPhoneNumber.error = getString(R.string.empty_field, getString(R.string.phone_number))
+                !Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString().trim()).matches() -> tilEmail.error = getString(R.string.invalid_email)
+                edtPassword.text.toString().trim().isEmpty() -> tilPassword.error = getString(R.string.empty_field, getString(R.string.password))
+                else -> firebaseRegister()
             }
         }
     }
@@ -67,26 +53,29 @@ class RegisterActivity : BaseActivity() {
             binding.edtEmail.text.toString(),
             binding.edtPassword.text.toString()
         ).addOnSuccessListener {
-            progress.dismiss()
-            val firebaseUser = firebaseAuth.currentUser
-            val user = User(
-                firebaseUser?.uid ?: "",
-                binding.edtName.text.toString().trim(),
-                binding.edtAddress.text.toString().trim(),
-                binding.edtPhoneNumber.text.toString().trim().toLong(),
-                binding.edtEmail.text.toString().trim()
-            )
-            FirestoreClass().registerUser(this@RegisterActivity, user)
+            registerToFirestore()
         }.addOnFailureListener { e ->
             progress.dismiss()
-            //failed register
             showToast(getString(R.string.register_failed, e.message.toString()))
         }
     }
 
-    fun userRegisterSuccess() {
-        progress.dismiss()
-        showToast(getString(R.string.register_success))
+    private fun registerToFirestore() {
+        val firebaseUser = firebaseAuth.currentUser
+        val user = User(
+            id = firebaseUser?.uid ?: "",
+            fullName = binding.edtName.text.toString().trim(),
+            address = binding.edtAddress.text.toString().trim(),
+            mobile = binding.edtPhoneNumber.text.toString().trim().toLong(),
+            email = binding.edtEmail.text.toString().trim()
+        )
+        FirestoreClass().registerUser(user, onSuccessListener = {
+            progress.dismiss()
+            showToast(getString(R.string.register_success))
+        }, onFailureListener = {
+            progress.dismiss()
+            showToast(getString(R.string.register_failed, it.message.toString()))
+        })
     }
 
     override fun onDestroy() {
