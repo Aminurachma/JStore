@@ -1,25 +1,22 @@
 package com.example.jstore.base
 
-import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.jstore.R
+import androidx.appcompat.app.AppCompatActivity
+import com.example.jstore.utils.AppProgressDialog
 
 open class BaseActivity : AppCompatActivity() {
-    private lateinit var mProgressDialog: Dialog
 
-    fun showProgressDialog(text: String){
-        mProgressDialog = Dialog(this)
-        mProgressDialog.setContentView(R.layout.dialog_progress)
+    lateinit var progress : AppProgressDialog
 
-        mProgressDialog.setCancelable(false)
-        mProgressDialog.setCanceledOnTouchOutside(false)
-
-        mProgressDialog.show()
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupProgress()
     }
 
-    fun hideProgressDialog() {
-        mProgressDialog.dismiss()
+    private fun setupProgress() {
+        progress = AppProgressDialog(this)
+        progress.setCancelable(false)
+        progress.setCanceledOnTouchOutside(false)
     }
+
 }

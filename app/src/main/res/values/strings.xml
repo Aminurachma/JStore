@@ -41,4 +41,8 @@
 	<string name="home">Home</string>
 	<string name="_1">1</string>
     <string name="register_success">You are registered successfully</string>
+	<string name="tunggu_sebentar_ya">Tunggu Sebentar ya</string>
+	<string name="invalid_email">Invalid email format!</string>
+	<string name="empty_field">Please enter your %s</string>
+	<string name="register_failed">Failed to register! %s</string>
 </resources>

@@ -8,12 +8,14 @@ import android.content.res.Resources
 import android.graphics.Rect
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.jstore.R
 import com.google.android.material.textfield.TextInputEditText
 
 fun <T> AppCompatActivity.pushActivity(targetClass: Class<T>) {
@@ -42,6 +44,14 @@ fun View.visible(status: Boolean) {
 
 fun View.rotateAnimation(startRadius: Float, endRadius: Float) {
     ObjectAnimator.ofFloat(this, View.ROTATION, startRadius, endRadius).setDuration(300).start()
+}
+
+fun Context.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.showToast(message: String) {
+    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 }
 
 internal fun Context.getDrawableCompat(@DrawableRes drawable: Int) = ContextCompat.getDrawable(this, drawable)
