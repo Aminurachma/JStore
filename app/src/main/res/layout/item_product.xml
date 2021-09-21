@@ -14,16 +14,16 @@
 
 		<com.google.android.material.card.MaterialCardView
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/_100sdp"
+			android:layout_height="wrap_content"
 			app:cardCornerRadius="@dimen/_8sdp"
 			app:cardElevation="0dp">
 
-			<androidx.appcompat.widget.AppCompatImageView
+			<com.example.jstore.utils.SquareImageView
 				android:id="@+id/img_product"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:scaleType="centerCrop"
-				tools:srcCompat="@drawable/jam" />
+				tools:srcCompat="@tools:sample/avatars" />
 
 		</com.google.android.material.card.MaterialCardView>
 

@@ -47,4 +47,7 @@
 	<string name="register_failed">Failed to register! %s</string>
 	<string name="profile">Profile</string>
 	<string name="logout">Logout</string>
+	<string name="my_cart">My Cart</string>
+	<string name="total">Total</string>
+	<string name="checkout">Checkout</string>
 </resources>

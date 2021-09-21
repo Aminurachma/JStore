@@ -7,94 +7,128 @@
 	android:layout_margin="@dimen/_8sdp"
 	app:cardElevation="0dp">
 
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 
-				<LinearLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_centerInParent="true"
-					android:orientation="horizontal">
+		<com.google.android.material.card.MaterialCardView
+			android:id="@+id/materialCardView"
+			android:layout_width="@dimen/_60sdp"
+			android:layout_height="wrap_content"
+			app:cardCornerRadius="@dimen/_8sdp"
+			app:cardElevation="0dp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent">
 
-					<androidx.appcompat.widget.AppCompatImageView
-						android:id="@+id/img_prduk"
-						android:layout_width="@dimen/_90sdp"
-						android:layout_height="@dimen/_100sdp"
-						android:layout_gravity="center"
-						android:padding="@dimen/_5sdp"
-						tools:src="@drawable/jam" />
+			<com.example.jstore.utils.SquareImageView
+				android:id="@+id/img_product"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:scaleType="centerCrop"
+				tools:src="@tools:sample/avatars" />
 
-					<LinearLayout
+		</com.google.android.material.card.MaterialCardView>
+
+		<TextView
+			android:id="@+id/tv_product_name"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/_16sdp"
+			android:fontFamily="@font/rubik_regular"
+			android:textColor="@color/dark"
+			android:textSize="@dimen/_12ssp"
+			android:maxLines="2"
+			android:ellipsize="end"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/materialCardView"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:text="@tools:sample/lorem/random" />
+
+		<TextView
+			android:id="@+id/tv_product_price"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/_4sdp"
+			android:fontFamily="@font/rubik_medium"
+			android:textColor="@color/colorPrimary"
+			android:textSize="@dimen/_11ssp"
+			app:layout_constraintEnd_toEndOf="@+id/tv_product_name"
+			app:layout_constraintStart_toStartOf="@+id/tv_product_name"
+			app:layout_constraintTop_toBottomOf="@+id/tv_product_name"
+			tools:text="Rp. 55,000" />
+
+		<com.google.android.material.card.MaterialCardView
+			android:layout_width="0dp"
+			android:layout_height="@dimen/_30sdp"
+			android:layout_marginTop="@dimen/_12sdp"
+			app:cardBackgroundColor="@color/gray5"
+			app:cardCornerRadius="@dimen/_6sdp"
+			app:layout_constraintWidth_percent="0.5"
+			app:cardElevation="0dp"
+			app:layout_constraintStart_toStartOf="@+id/tv_product_name"
+			app:layout_constraintTop_toBottomOf="@+id/tv_product_price">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="horizontal">
+
+				<com.google.android.material.card.MaterialCardView
+					android:id="@+id/btn_decrement"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					app:cardBackgroundColor="@color/gray5"
+					app:cardElevation="0dp"
+					app:cornerRadius="0dp">
+
+					<TextView
 						android:layout_width="match_parent"
 						android:layout_height="match_parent"
-						android:orientation="vertical">
+						android:fontFamily="@font/rubik_bold"
+						android:gravity="center"
+						android:text="@string/minus"
+						android:textColor="@color/dark"
+						android:textSize="@dimen/_12ssp" />
 
-						<androidx.appcompat.widget.AppCompatTextView
-							android:id="@+id/tv_namaproduk"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginTop="@dimen/_20sdp"
-							android:layout_marginStart="@dimen/_20sdp"
-							android:fontFamily="@font/rubik_light"
-							android:gravity="center"
-							android:text="Watch"
-							android:textColor="@color/black"
-							android:textSize="@dimen/_11ssp" />
+				</com.google.android.material.card.MaterialCardView>
 
-						<androidx.appcompat.widget.AppCompatTextView
-							android:id="@+id/tv_harga"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginTop="@dimen/_4sdp"
-							android:fontFamily="@font/rubik_regular"
-							android:layout_marginStart="@dimen/_20sdp"
-							android:gravity="center"
-							android:text="Rp 170.000,00"
-							android:textColor="@color/colorPrimary"
-							android:textSize="@dimen/_11ssp" />
+				<TextView
+					android:id="@+id/tv_quantity"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:background="@color/white"
+					android:fontFamily="@font/rubik_medium"
+					android:gravity="center"
+					android:text="@string/_1"
+					android:textColor="@color/dark"
+					android:textSize="@dimen/_11ssp" />
 
-						<LinearLayout
-							android:layout_width="match_parent"
-							android:layout_height="match_parent"
-							android:layout_marginStart="@dimen/_20sdp"
-							android:orientation="horizontal">
+				<com.google.android.material.card.MaterialCardView
+					android:id="@+id/btn_increment"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					app:cardBackgroundColor="@color/gray5"
+					app:cardElevation="0dp"
+					app:cornerRadius="0dp">
 
-							<com.google.android.material.button.MaterialButton
-								android:id="@+id/btn_cartminus"
-								android:layout_width="@dimen/_40sdp"
-								android:layout_height="@dimen/_30sdp"
-								android:layout_marginTop="@dimen/_4sdp"
-								android:text="-"
-								android:background="@drawable/cartminus"
-								android:textColor="@color/black"
-								android:textSize="@dimen/_12ssp"
-								app:cornerRadius="@dimen/_12sdp" />
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:fontFamily="@font/rubik_bold"
+						android:gravity="center"
+						android:text="@string/plus"
+						android:textColor="@color/dark"
+						android:textSize="@dimen/_12ssp" />
 
+				</com.google.android.material.card.MaterialCardView>
 
-							<androidx.appcompat.widget.AppCompatTextView
-								android:id="@+id/tv_angka"
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginTop="@dimen/_4sdp"
-								android:fontFamily="@font/rubik_light"
-								android:layout_marginStart="@dimen/_10sdp"
-								android:text="12"
-								android:textColor="@color/black"
-								android:textSize="@dimen/_12ssp" />
+			</LinearLayout>
 
-							<com.google.android.material.button.MaterialButton
-								android:id="@+id/btn_cartplus"
-								android:layout_width="@dimen/_40sdp"
-								android:layout_height="@dimen/_30sdp"
-								android:layout_marginTop="@dimen/_4sdp"
-								android:layout_marginStart="@dimen/_8sdp"
-								android:text="+"
-								android:background="@drawable/cartplus"
-								android:textColor="@color/black"
-								android:textSize="@dimen/_12ssp"
-								app:cornerRadius="@dimen/_12sdp" />
-						</LinearLayout>
+		</com.google.android.material.card.MaterialCardView>
 
-					</LinearLayout>
-
-				</LinearLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

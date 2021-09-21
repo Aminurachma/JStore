@@ -1,83 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyCartActivity">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_judul"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_48sdp"
-        android:layout_marginTop="@dimen/_40sdp"
-        android:fontFamily="@font/rubik_bold"
-        android:text="My Cart"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_27ssp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingHorizontal="@dimen/_6sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:background="@drawable/oval"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/_4sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_left_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_bold"
+            android:text="@string/my_cart"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_back" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_cart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_judul"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="1"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_cart"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"/>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingVertical="@dimen/_20sdp"
+        android:paddingHorizontal="@dimen/_12sdp"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:listitem="@layout/item_cart" />
 
-    <LinearLayout
-        android:id="@+id/subtotal"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rv_cart"
-        android:orientation="horizontal">
+        android:elevation="@dimen/_4sdp"
+        android:paddingVertical="@dimen/_8sdp"
+        android:paddingHorizontal="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_subtotal"
+        <TextView
+            android:id="@+id/tv_total_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rv_cart"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/rubik_light"
+            android:text="@string/total"
+            android:textColor="@color/gray3"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_total"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
             android:fontFamily="@font/rubik_bold"
-            android:text="Subtotal"
-            android:layout_marginStart="@dimen/_20sdp"
             android:textColor="@color/dark"
-            android:textSize="@dimen/_18ssp" />
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_checkout"
+            app:layout_constraintStart_toStartOf="@+id/tv_total_label"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_label"
+            tools:text="Rp. 520,000" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/edt_subtotal"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_checkout"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rv_cart"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:fontFamily="@font/rubik_bold"
-            tools:text="@string/subtotal"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_70sdp"
-            android:textColor="@color/pink2"
-            android:textSize="@dimen/_18ssp" />
+            android:layout_height="@dimen/_40sdp"
+            android:fontFamily="@font/rubik_medium"
+            android:text="@string/checkout"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_login"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_below="@id/subtotal"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:fontFamily="@font/rubik_bold"
-        android:text="Checkout"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"
-        app:cornerRadius="@dimen/_8sdp" />
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
