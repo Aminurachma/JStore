@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Toast
+import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityMainBinding
+import com.example.jstore.models.User
 import com.example.jstore.ui.home.customer.HomeCustomerActivity
+import com.example.jstore.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
@@ -25,6 +28,10 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         checkUser()
+
+        binding.btnLoginAdmin.setOnClickListener{
+            startActivity(Intent(this, LoginAdminActivity::class.java))
+        }
 
         binding.btnLogin.setOnClickListener{
             validateData()
@@ -72,5 +79,27 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, HomeCustomerActivity::class.java))
             finish()
         }
+    }
+
+    fun userLoggedInSuccess(user : User){
+        hideProgressDialog()
+        if(user.profileCompleted == 0){
+            val intent = Intent(this@MainActivity, HomeCustomerActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            intent.putExtra(Constants.EXTRA_USER_DETAILS,user)
+            startActivity(intent)
+        }else{
+            val intent = Intent(this@MainActivity, HomeCustomerActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

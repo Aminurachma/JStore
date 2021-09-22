@@ -8,15 +8,17 @@ open class BaseActivity : AppCompatActivity() {
 
     lateinit var progress : AppProgressDialog
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setupProgress()
-    }
-
-    private fun setupProgress() {
+     fun setupProgress() {
         progress = AppProgressDialog(this)
         progress.setCancelable(false)
         progress.setCanceledOnTouchOutside(false)
     }
 
+    fun hideProgressDialog() {
+        progress.dismiss()
+    }
+
+    fun dismissProgressDialog(){
+        progress?.dismiss()
+    }
 }
