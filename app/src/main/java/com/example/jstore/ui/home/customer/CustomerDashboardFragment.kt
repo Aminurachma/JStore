@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.example.jstore.R
+import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.FragmentCustomerDashboardBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.User
@@ -63,6 +64,7 @@ class CustomerDashboardFragment : Fragment() {
     private fun logoutUser() {
         FirebaseAuth.getInstance().signOut()
         pushActivity(MainActivity::class.java)
+        Prefs.clear()
         requireActivity().finish()
     }
 

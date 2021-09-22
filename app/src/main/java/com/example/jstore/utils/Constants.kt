@@ -26,5 +26,7 @@ object Constants {
     const val EXTRA_PRODUCT_OWNER_ID = "extra_product_owner_id"
     const val DEFAULT_CARD_QUANTITY = "1"
 
+    const val EMAIL_ADMIN = "emailAdmin"
+    const val PASSWORD_ADMIN = "passwordAdmin"
 
 }

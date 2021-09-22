@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.example.jstore.R
+import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ActivitySplashscreenBinding
+import com.example.jstore.ui.home.admin.HomeAdminActivity
 import com.example.jstore.ui.login.customer.MainActivity
 
 class SplashscreenActivity : AppCompatActivity() {
@@ -20,8 +22,11 @@ class SplashscreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            //getCurrentLocation()
-            startActivity(Intent(this, MainActivity::class.java))
+            if (Prefs.adminId.isEmpty()) {
+                startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                startActivity(Intent(this, HomeAdminActivity::class.java))
+            }
             finish()
         }, 2000)
     }

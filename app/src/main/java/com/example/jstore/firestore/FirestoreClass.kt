@@ -5,6 +5,8 @@ import com.example.jstore.models.Admin
 import com.example.jstore.models.Product
 import com.example.jstore.models.User
 import com.example.jstore.utils.Constants.ADMIN
+import com.example.jstore.utils.Constants.EMAIL_ADMIN
+import com.example.jstore.utils.Constants.PASSWORD_ADMIN
 import com.example.jstore.utils.Constants.PRODUCTS
 import com.example.jstore.utils.Constants.USERS
 import com.example.jstore.utils.logDebug
@@ -33,30 +35,39 @@ class FirestoreClass {
             }
     }
 
-    //    fun loginAdmin(activity: LoginAdminActivity, adminInfo: Admin) {
-//        mFirestore.collection(Constants.USER)
-//            .document(adminInfo.idAdmin)
-//            .set(adminInfo, SetOptions.merge())
-//            .addOnSuccessListener {
-//                activity.adminLoginSuccess()
-//            }
-//            .addOnFailureListener { e ->
-//                activity.hideProgressDialog()
-//                Log.e(
-//                    activity.javaClass.simpleName,
-//                    "Error while loggining the admin",
-//                    e
-//                )
-//
-//            }
-//    }
+    fun loginAdmin(email: String, password: String, onLoginSuccess: (admin: Admin) -> Unit, onLoginFailed: (e: String) -> Unit) {
+        mFirestore.collection(ADMIN)
+            .whereEqualTo(EMAIL_ADMIN, email)
+            .whereEqualTo(PASSWORD_ADMIN, password)
+            .get()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val result = it.result
+                    if (result?.isEmpty == true) {
+                        onLoginFailed("Email atau password salah!")
+                    } else {
+                        onLoginSuccess(result?.first()?.toObject(Admin::class.java) ?: Admin())
+                    }
+                } else {
+                    onLoginFailed(it.exception?.message.toString())
+                    logError(it.exception?.message.toString())
+                }
+            }
+            .addOnFailureListener {
+                onLoginFailed(it.message.toString())
+                logError(it.message.toString())
+            }
+    }
 
     private fun getCurrentUserId(): String {
         val currentUser = FirebaseAuth.getInstance().currentUser
         return currentUser?.uid ?: ""
     }
 
-    fun getUserDetails(onSuccessListener: (user: User) -> Unit, onFailureListener: (e: Exception) -> Unit) {
+    fun getUserDetails(
+        onSuccessListener: (user: User) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(USERS)
             .document(getCurrentUserId())
             .get()
@@ -73,14 +84,12 @@ class FirestoreClass {
             }
     }
 
-    private fun getCurrentAdminId(): String {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        return currentUser?.uid ?: ""
-    }
-
-    fun getAdminDetails(onSuccessListener: (admin: Admin) -> Unit, onFailureListener: (e: Exception) -> Unit) {
+    fun getAdminDetails(
+        onSuccessListener: (admin: Admin) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(ADMIN)
-            .document(getCurrentAdminId())
+            .document(Prefs.adminId)
             .get()
             .addOnSuccessListener { document ->
                 logDebug("getAdminDetails: $document")
@@ -95,7 +104,10 @@ class FirestoreClass {
             }
     }
 
-    fun getProductList(onSuccessListener: (products: List<Product>) -> Unit, onFailureListener: (e: Exception) -> Unit) {
+    fun getProductList(
+        onSuccessListener: (products: List<Product>) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(PRODUCTS)
             .get()
             .addOnSuccessListener { document ->

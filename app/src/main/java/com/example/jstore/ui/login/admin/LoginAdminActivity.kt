@@ -6,9 +6,11 @@ import android.util.Patterns
 import com.example.jstore.ui.home.admin.HomeAdminActivity
 import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
+import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ActivityLoginAdminBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.ui.login.customer.MainActivity
+import com.example.jstore.utils.pushActivity
 import com.example.jstore.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 
@@ -39,44 +41,32 @@ class LoginAdminActivity : BaseActivity() {
     private fun validateData() {
         binding.apply {
             when {
-                !Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString())
-                    .matches() -> tilEmail.error = getString(R.string.invalid_email)
-                edtPassword.text.toString().isEmpty() -> tilPassword.error =
-                    getString(R.string.empty_field, getString(R.string.password))
-                else -> firebaseLogin(edtEmail.text.toString(), edtPassword.text.toString())
+                !Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString()).matches() -> tilEmail.error = getString(R.string.invalid_email)
+                edtPassword.text.toString().isEmpty() -> tilPassword.error = getString(R.string.empty_field, getString(R.string.password))
+                else -> proceedLogin(edtEmail.text.toString(), edtPassword.text.toString())
             }
         }
     }
 
-    private fun firebaseLogin(email: String, password: String) {
+    private fun proceedLogin(email: String, password: String) {
         progress.show()
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    getDetailAdmin()
-                } else {
-                    progress.dismiss()
-                    showToast(task.exception?.message.toString())
-                }
-            }.addOnFailureListener { exception ->
+        FirestoreClass().loginAdmin(
+            email = email,
+            password = password,
+            onLoginSuccess = { admin ->
                 progress.dismiss()
-                showToast(exception.message.toString())
-            }
-    }
-
-    private fun getDetailAdmin() {
-        FirestoreClass().getAdminDetails(
-            onSuccessListener = { admin ->
-                progress.dismiss()
+                Prefs.adminId = admin.idAdmin
+                Prefs.adminFullName = admin.fullNameAdmin
+                showToast(getString(R.string.login_success))
                 startActivity(Intent(this, HomeAdminActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    putExtra(HomeAdminActivity.EXTRA_ADMIN_DETAIL, admin)
                 })
                 finish()
-            }, onFailureListener = {
+            },
+            onLoginFailed = {
                 progress.dismiss()
-                showToast(it.message.toString())
+                showToast(it)
             })
     }
 
