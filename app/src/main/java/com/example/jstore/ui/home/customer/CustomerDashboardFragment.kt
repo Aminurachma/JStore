@@ -11,6 +11,7 @@ import com.example.jstore.R
 import com.example.jstore.databinding.FragmentCustomerDashboardBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.User
+import com.example.jstore.ui.cart.MyCartActivity
 import com.example.jstore.ui.login.customer.MainActivity
 import com.example.jstore.ui.product.ProductAdapter
 import com.example.jstore.ui.product.ProductDetailsActivity
@@ -68,6 +69,10 @@ class CustomerDashboardFragment : Fragment() {
     private fun setupClickListeners() {
         binding.imgAvatar.setOnClickListener{
             logoutUser()
+        }
+
+        binding.imgCart.setOnClickListener {
+            pushActivity(MyCartActivity::class.java)
         }
     }
 
