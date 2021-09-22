@@ -58,14 +58,17 @@ class MainActivity : BaseActivity() {
     }
 
     private fun firebaseLogin(email: String, password: String) {
+        progress.show()
         firebaseAuth.signInWithEmailAndPassword(email,password)
             .addOnSuccessListener {
+                progress.dismiss()
                 //login sukses
                 showToast(getString(R.string.login_success))
                 startActivity(Intent(this, HomeCustomerActivity::class.java))
                 finish()
             }
             .addOnFailureListener{ e ->
+                progress.dismiss()
                 logError("loginUser: ${e.message}")
                 showToast(getString(R.string.login_failed))
             }

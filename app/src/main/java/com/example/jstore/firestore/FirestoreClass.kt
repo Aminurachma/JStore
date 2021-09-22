@@ -4,7 +4,6 @@ import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.models.Admin
 import com.example.jstore.models.Product
 import com.example.jstore.models.User
-import com.example.jstore.utils.Constants
 import com.example.jstore.utils.Constants.ADMIN
 import com.example.jstore.utils.Constants.PRODUCTS
 import com.example.jstore.utils.Constants.USERS
