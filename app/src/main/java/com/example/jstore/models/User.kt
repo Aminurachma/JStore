@@ -8,9 +8,9 @@ data class User(
     val id: String = "",
     val fullName: String = "",
     val address: String = "",
-    val mobile: Long = 0,
+    val mobile: String = "",
     val email: String = "",
-    val image: String = "",
+    val image: String? = null,
     val gender: String = "",
     val profileCompleted: Int = 0
 ) : Parcelable

@@ -9,6 +9,7 @@ import android.graphics.Rect
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.jstore.R
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputEditText
 import timber.log.Timber
 import java.text.DecimalFormat
@@ -103,4 +105,22 @@ fun logError(message: String, throwable: Throwable? = null) {
 fun Int.formatPrice(): String {
     val formatter = DecimalFormat("#,###")
     return "Rp. ${formatter.format(this)}"
+}
+
+fun Activity.imagePicker(launcher: ActivityResultLauncher<Intent>) {
+    ImagePicker.with(this)
+        .crop()
+        .compress(1024)
+        .createIntent { intent ->
+            launcher.launch(intent)
+        }
+}
+
+fun Fragment.imagePicker(launcher: ActivityResultLauncher<Intent>) {
+    ImagePicker.with(this)
+        .crop()
+        .compress(1024)
+        .createIntent { intent ->
+            launcher.launch(intent)
+        }
 }

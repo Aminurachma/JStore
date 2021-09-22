@@ -15,6 +15,7 @@ import com.example.jstore.ui.cart.MyCartActivity
 import com.example.jstore.ui.login.customer.MainActivity
 import com.example.jstore.ui.product.ProductAdapter
 import com.example.jstore.ui.product.ProductDetailsActivity
+import com.example.jstore.ui.profile.ProfileActivity
 import com.example.jstore.utils.*
 import com.google.firebase.auth.FirebaseAuth
 
@@ -68,7 +69,7 @@ class CustomerDashboardFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.imgAvatar.setOnClickListener{
-            logoutUser()
+            pushActivity(ProfileActivity::class.java)
         }
 
         binding.imgCart.setOnClickListener {

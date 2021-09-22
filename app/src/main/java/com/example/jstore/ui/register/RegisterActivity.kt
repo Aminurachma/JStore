@@ -79,7 +79,7 @@ class RegisterActivity : BaseActivity() {
             id = firebaseUser?.uid ?: "",
             fullName = binding.edtName.text.toString().trim(),
             address = binding.edtAddress.text.toString().trim(),
-            mobile = binding.edtPhoneNumber.text.toString().trim().toLong(),
+            mobile = binding.edtPhoneNumber.text.toString().trim(),
             email = binding.edtEmail.text.toString().trim()
         )
         FirestoreClass().registerUser(user, onSuccessListener = {
