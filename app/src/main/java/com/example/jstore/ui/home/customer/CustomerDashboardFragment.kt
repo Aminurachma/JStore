@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.example.jstore.R
+import com.example.jstore.base.BaseFragment
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.FragmentCustomerDashboardBinding
 import com.example.jstore.firestore.FirestoreClass
@@ -20,7 +21,7 @@ import com.example.jstore.ui.product.ProductDetailsActivity
 import com.example.jstore.utils.*
 import com.google.firebase.auth.FirebaseAuth
 
-class CustomerDashboardFragment : Fragment() {
+class CustomerDashboardFragment : BaseFragment() {
 
     private var _binding: FragmentCustomerDashboardBinding? = null
     private val binding get() = _binding!!
@@ -42,14 +43,19 @@ class CustomerDashboardFragment : Fragment() {
         setupAdapter()
         setupUI()
         setupClickListeners()
+        getUserProfile()
         getProductList()
 
     }
 
     private fun setupUI() {
         binding.rvProduct.adapter = adapter
+    }
 
+    private fun getUserProfile() {
+        progress.show()
         FirestoreClass().getUserDetails(onSuccessListener = {
+            progress.dismiss()
             mUserDetails = it
             binding.tvWelcomingText.text = getString(R.string.hello_user, it.fullName)
             Glide.with(this)
@@ -57,6 +63,7 @@ class CustomerDashboardFragment : Fragment() {
                 .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                 .into(binding.imgAvatar)
         }, onFailureListener = {
+            progress.dismiss()
             logoutUser()
             logError("getUserDetails: ${it.message}")
         })
@@ -80,7 +87,9 @@ class CustomerDashboardFragment : Fragment() {
     }
 
     private fun getProductList() {
+        progress.show()
         FirestoreClass().getProductList(onSuccessListener = {
+            progress.dismiss()
             if (it.isNotEmpty()) {
                 binding.rvProduct.toVisible()
                 adapter.submitList(it)
@@ -88,6 +97,7 @@ class CustomerDashboardFragment : Fragment() {
                 binding.rvProduct.toGone()
             }
         }, onFailureListener = {
+            progress.dismiss()
             showToast(it.message.toString())
         })
     }

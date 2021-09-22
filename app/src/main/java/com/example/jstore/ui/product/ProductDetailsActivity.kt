@@ -34,6 +34,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         binding.tvProductName.text = product.title
         binding.tvProductPrice.text = product.price.toInt().formatPrice()
         binding.tvStock.text = product.stockQuantity.toString()
+        binding.tvCategory.text = product.category
         binding.tvDetailProduct.text = product.description
     }
 

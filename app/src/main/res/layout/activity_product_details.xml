@@ -9,8 +9,8 @@
 	<ScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:fillViewport="true"
-		android:layout_above="@+id/bottom_layout">
+		android:layout_above="@+id/bottom_layout"
+		android:fillViewport="true">
 
 		<androidx.constraintlayout.widget.ConstraintLayout
 			android:layout_width="match_parent"
@@ -26,24 +26,24 @@
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toTopOf="parent"
-				tools:src="@tools:sample/backgrounds/scenic"/>
+				tools:src="@tools:sample/backgrounds/scenic" />
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/btn_back"
-				android:layout_width="@dimen/_24sdp"
-				android:layout_height="@dimen/_24sdp"
-				android:foreground="?attr/selectableItemBackgroundBorderless"
-				app:srcCompat="@drawable/ic_left_arrow"
+				android:layout_width="@dimen/_26sdp"
+				android:layout_height="@dimen/_26sdp"
 				android:layout_margin="@dimen/_12sdp"
-				android:padding="@dimen/_4sdp"
 				android:background="@drawable/oval"
+				android:foreground="?attr/selectableItemBackgroundBorderless"
+				android:padding="@dimen/_4sdp"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toTopOf="parent" />
+				app:layout_constraintTop_toTopOf="parent"
+				app:srcCompat="@drawable/ic_left_arrow" />
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/btn_cart"
-				android:layout_width="@dimen/_24sdp"
-				android:layout_height="@dimen/_24sdp"
+				android:layout_width="@dimen/_26sdp"
+				android:layout_height="@dimen/_26sdp"
 				android:layout_margin="@dimen/_12sdp"
 				android:background="@drawable/oval"
 				android:foreground="?attr/selectableItemBackgroundBorderless"
@@ -98,10 +98,12 @@
 
 				<com.google.android.material.card.MaterialCardView
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
+					android:layout_height="match_parent"
 					android:layout_marginTop="@dimen/_8sdp"
+					android:layout_marginBottom="@dimen/_8sdp"
 					app:cardBackgroundColor="@color/light"
-					app:cardCornerRadius="0dp">
+					app:cardCornerRadius="0dp"
+					app:cardElevation="0dp">
 
 					<androidx.constraintlayout.widget.ConstraintLayout
 						android:layout_width="match_parent"
@@ -157,19 +159,19 @@
 							tools:text="152" />
 
 						<TextView
-							android:id="@+id/tv_shipment_from_label"
+							android:id="@+id/tv_category_label"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:fontFamily="@font/rubik_light"
-							android:text="@string/dikirim_dari"
+							android:text="@string/kategori"
 							android:textColor="@color/gray3"
 							android:textSize="@dimen/_12ssp"
-							app:layout_constraintBottom_toBottomOf="@+id/tv_shipment_from"
+							app:layout_constraintBottom_toBottomOf="@+id/tv_category"
 							app:layout_constraintStart_toStartOf="@+id/tv_detail_product_label"
-							app:layout_constraintTop_toTopOf="@+id/tv_shipment_from" />
+							app:layout_constraintTop_toTopOf="@+id/tv_category" />
 
 						<TextView
-							android:id="@+id/tv_shipment_from"
+							android:id="@+id/tv_category"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="@dimen/_12sdp"
@@ -179,7 +181,7 @@
 							app:layout_constraintEnd_toEndOf="@+id/tv_stock"
 							app:layout_constraintStart_toStartOf="@+id/tv_stock"
 							app:layout_constraintTop_toBottomOf="@+id/tv_stock"
-							tools:text="KOTA MEDAN - MEDAN SUNGGAL, SUMATERA UTARA, ID" />
+							tools:text="Sepatu" />
 
 						<include
 							android:id="@+id/include2"
@@ -189,7 +191,7 @@
 							android:layout_marginTop="@dimen/_12sdp"
 							app:layout_constraintEnd_toEndOf="parent"
 							app:layout_constraintStart_toStartOf="parent"
-							app:layout_constraintTop_toBottomOf="@+id/tv_shipment_from" />
+							app:layout_constraintTop_toBottomOf="@+id/tv_category" />
 
 						<TextView
 							android:id="@+id/tv_detail_product"
@@ -225,34 +227,32 @@
 			android:layout_height="@dimen/_40sdp"
 			android:layout_marginEnd="@dimen/_4sdp"
 			android:layout_weight="1"
-			app:cardBackgroundColor="@color/gray5"
 			app:cardCornerRadius="@dimen/_6sdp"
-			app:cardElevation="0dp">
+			app:cardElevation="0dp"
+			app:strokeColor="@color/colorPrimary"
+			app:strokeWidth="1dp">
 
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:orientation="horizontal">
 
-				<com.google.android.material.card.MaterialCardView
+				<TextView
 					android:id="@+id/btn_decrement"
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
 					android:layout_weight="1"
-					app:cardBackgroundColor="@color/gray5"
-					app:cardElevation="0dp"
-					app:cornerRadius="0dp">
+					android:background="?attr/selectableItemBackground"
+					android:fontFamily="@font/rubik_bold"
+					android:gravity="center"
+					android:text="@string/minus"
+					android:textColor="@color/dark"
+					android:textSize="@dimen/_12ssp" />
 
-					<TextView
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:fontFamily="@font/rubik_bold"
-						android:gravity="center"
-						android:text="@string/minus"
-						android:textColor="@color/dark"
-						android:textSize="@dimen/_12ssp" />
-
-				</com.google.android.material.card.MaterialCardView>
+				<View
+					android:layout_width="@dimen/_1sdp"
+					android:layout_height="match_parent"
+					android:background="@color/colorPrimary" />
 
 				<TextView
 					android:id="@+id/tv_quantity"
@@ -266,25 +266,22 @@
 					android:textColor="@color/dark"
 					android:textSize="@dimen/_11ssp" />
 
-				<com.google.android.material.card.MaterialCardView
+				<View
+					android:layout_width="@dimen/_1sdp"
+					android:layout_height="match_parent"
+					android:background="@color/colorPrimary" />
+
+				<TextView
 					android:id="@+id/btn_increment"
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
 					android:layout_weight="1"
-					app:cardBackgroundColor="@color/gray5"
-					app:cardElevation="0dp"
-					app:cornerRadius="0dp">
-
-					<TextView
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:fontFamily="@font/rubik_bold"
-						android:gravity="center"
-						android:text="@string/plus"
-						android:textColor="@color/dark"
-						android:textSize="@dimen/_12ssp" />
-
-				</com.google.android.material.card.MaterialCardView>
+					android:background="?attr/selectableItemBackground"
+					android:fontFamily="@font/rubik_bold"
+					android:gravity="center"
+					android:text="@string/plus"
+					android:textColor="@color/dark"
+					android:textSize="@dimen/_12ssp" />
 
 			</LinearLayout>
 
