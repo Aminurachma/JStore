@@ -11,7 +11,7 @@ import com.example.jstore.databinding.ItemProductBinding
 import com.example.jstore.models.Product
 import com.example.jstore.utils.formatPrice
 
-class ProductAdapter(private val onClickListener: () -> Unit,
+class ProductAdapter(private val onClickListener: (product: Product) -> Unit,
 ) : ListAdapter<Product, ProductAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,7 +40,7 @@ class ProductAdapter(private val onClickListener: () -> Unit,
                     .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                     .into(imgProduct)
 
-                root.setOnClickListener { onClickListener() }
+                root.setOnClickListener { onClickListener(product) }
             }
         }
     }

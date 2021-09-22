@@ -4,16 +4,17 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/gray5">
+	android:background="@color/white">
 
-	<androidx.core.widget.NestedScrollView
+	<ScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:fillViewport="true"
 		android:layout_above="@+id/bottom_layout">
 
 		<androidx.constraintlayout.widget.ConstraintLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:orientation="vertical">
 
 			<androidx.appcompat.widget.AppCompatImageView
@@ -25,7 +26,7 @@
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toTopOf="parent"
-				app:srcCompat="@drawable/jam" />
+				tools:src="@tools:sample/backgrounds/scenic"/>
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/btn_back"
@@ -38,6 +39,18 @@
 				android:background="@drawable/oval"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toTopOf="parent" />
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/btn_cart"
+				android:layout_width="@dimen/_24sdp"
+				android:layout_height="@dimen/_24sdp"
+				android:layout_margin="@dimen/_12sdp"
+				android:background="@drawable/oval"
+				android:foreground="?attr/selectableItemBackgroundBorderless"
+				android:padding="@dimen/_6sdp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:srcCompat="@drawable/ic_shopping_cart" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -73,9 +86,9 @@
 							android:id="@+id/tv_product_price"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_marginTop="@dimen/_8sdp"
-							android:fontFamily="@font/rubik_regular"
-							android:textColor="@color/gray3"
+							android:layout_marginTop="@dimen/_4sdp"
+							android:fontFamily="@font/rubik_medium"
+							android:textColor="@color/colorPrimary"
 							android:textSize="@dimen/_14ssp"
 							tools:text="Rp. 120.000" />
 
@@ -97,7 +110,7 @@
 						android:paddingVertical="@dimen/_12sdp">
 
 						<TextView
-							android:id="@+id/tv_detail_product"
+							android:id="@+id/tv_detail_product_label"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_marginHorizontal="@dimen/_12sdp"
@@ -115,7 +128,7 @@
 							android:layout_width="0dp"
 							android:layout_height="1dp"
 							android:layout_marginTop="@dimen/_12sdp"
-							app:layout_constraintTop_toBottomOf="@id/tv_detail_product" />
+							app:layout_constraintTop_toBottomOf="@id/tv_detail_product_label" />
 
 						<TextView
 							android:id="@+id/tv_stock_label"
@@ -126,7 +139,7 @@
 							android:text="@string/stok"
 							android:textColor="@color/gray3"
 							android:textSize="@dimen/_12ssp"
-							app:layout_constraintStart_toStartOf="@+id/tv_detail_product"
+							app:layout_constraintStart_toStartOf="@+id/tv_detail_product_label"
 							app:layout_constraintTop_toBottomOf="@+id/include" />
 
 						<TextView
@@ -138,7 +151,7 @@
 							android:textColor="@color/dark"
 							android:textSize="@dimen/_12ssp"
 							app:layout_constraintBottom_toBottomOf="@+id/tv_stock_label"
-							app:layout_constraintEnd_toEndOf="@+id/tv_detail_product"
+							app:layout_constraintEnd_toEndOf="@+id/tv_detail_product_label"
 							app:layout_constraintStart_toEndOf="@+id/tv_stock_label"
 							app:layout_constraintTop_toTopOf="@+id/tv_stock_label"
 							tools:text="152" />
@@ -152,7 +165,7 @@
 							android:textColor="@color/gray3"
 							android:textSize="@dimen/_12ssp"
 							app:layout_constraintBottom_toBottomOf="@+id/tv_shipment_from"
-							app:layout_constraintStart_toStartOf="@+id/tv_detail_product"
+							app:layout_constraintStart_toStartOf="@+id/tv_detail_product_label"
 							app:layout_constraintTop_toTopOf="@+id/tv_shipment_from" />
 
 						<TextView
@@ -179,11 +192,12 @@
 							app:layout_constraintTop_toBottomOf="@+id/tv_shipment_from" />
 
 						<TextView
+							android:id="@+id/tv_detail_product"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="@dimen/_12sdp"
-							app:layout_constraintEnd_toEndOf="@+id/tv_detail_product"
-							app:layout_constraintStart_toStartOf="@+id/tv_detail_product"
+							app:layout_constraintEnd_toEndOf="@+id/tv_detail_product_label"
+							app:layout_constraintStart_toStartOf="@+id/tv_detail_product_label"
 							app:layout_constraintTop_toBottomOf="@+id/include2"
 							tools:text="@tools:sample/lorem/random" />
 
@@ -195,14 +209,14 @@
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
-	</androidx.core.widget.NestedScrollView>
+	</ScrollView>
 
 	<LinearLayout
 		android:id="@+id/bottom_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
-		android:background="@color/white"
+		android:background="@color/light"
 		android:orientation="horizontal"
 		android:padding="@dimen/_12sdp">
 
@@ -224,19 +238,19 @@
 					android:id="@+id/btn_decrement"
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
+					android:layout_weight="1"
 					app:cardBackgroundColor="@color/gray5"
-					app:cornerRadius="0dp"
 					app:cardElevation="0dp"
-					android:layout_weight="1">
+					app:cornerRadius="0dp">
 
 					<TextView
 						android:layout_width="match_parent"
 						android:layout_height="match_parent"
-						android:gravity="center"
 						android:fontFamily="@font/rubik_bold"
-						android:textSize="@dimen/_12ssp"
+						android:gravity="center"
+						android:text="@string/minus"
 						android:textColor="@color/dark"
-						android:text="@string/minus"/>
+						android:textSize="@dimen/_12ssp" />
 
 				</com.google.android.material.card.MaterialCardView>
 
@@ -256,19 +270,19 @@
 					android:id="@+id/btn_increment"
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
+					android:layout_weight="1"
 					app:cardBackgroundColor="@color/gray5"
-					app:cornerRadius="0dp"
 					app:cardElevation="0dp"
-					android:layout_weight="1">
+					app:cornerRadius="0dp">
 
 					<TextView
 						android:layout_width="match_parent"
 						android:layout_height="match_parent"
-						android:gravity="center"
 						android:fontFamily="@font/rubik_bold"
-						android:textSize="@dimen/_12ssp"
+						android:gravity="center"
+						android:text="@string/plus"
 						android:textColor="@color/dark"
-						android:text="@string/plus"/>
+						android:textSize="@dimen/_12ssp" />
 
 				</com.google.android.material.card.MaterialCardView>
 

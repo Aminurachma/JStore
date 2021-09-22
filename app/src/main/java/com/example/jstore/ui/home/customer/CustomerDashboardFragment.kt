@@ -1,5 +1,6 @@
 package com.example.jstore.ui.home.customer
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -92,8 +93,10 @@ class CustomerDashboardFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        adapter = ProductAdapter(onClickListener = {
-            pushActivity(ProductDetailsActivity::class.java)
+        adapter = ProductAdapter(onClickListener = { product ->
+            startActivity(Intent(requireContext(), ProductDetailsActivity::class.java).apply {
+                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, product)
+            })
         })
     }
 
