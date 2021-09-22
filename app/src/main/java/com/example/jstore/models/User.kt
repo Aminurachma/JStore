@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class User (
+data class User(
     val id: String = "",
     val fullName: String = "",
     val address: String = "",
@@ -12,4 +12,5 @@ data class User (
     val email: String = "",
     val image: String = "",
     val gender: String = "",
-    val profileCompleted: Int = 0):Parcelable
+    val profileCompleted: Int = 0
+) : Parcelable

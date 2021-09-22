@@ -1,13 +1,13 @@
 package com.example.jstore
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Patterns
-import android.widget.Toast
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityRegisterBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.User
+import com.example.jstore.ui.login.customer.MainActivity
+import com.example.jstore.utils.pushActivity
 import com.example.jstore.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 
@@ -72,6 +72,7 @@ class RegisterActivity : BaseActivity() {
         FirestoreClass().registerUser(user, onSuccessListener = {
             progress.dismiss()
             showToast(getString(R.string.register_success))
+            pushActivity(MainActivity::class.java)
         }, onFailureListener = {
             progress.dismiss()
             showToast(getString(R.string.register_failed, it.message.toString()))

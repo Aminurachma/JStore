@@ -15,12 +15,12 @@
             android:name=".ui.profile.ProfileActivity"
             android:exported="true" />
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".LoginAdminActivity" />
-        <activity android:name=".MyCartActivity" />
-        <activity android:name=".HomeAdminActivity" />
+        <activity android:name=".ui.login.admin.LoginAdminActivity" />
+        <activity android:name=".ui.cart.MyCartActivity" />
+        <activity android:name=".ui.home.admin.HomeAdminActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ui.home.customer.HomeCustomerActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.login.customer.MainActivity" />
         <activity android:name=".ProductDetailsActivity" />
         <activity android:name=".SplashscreenActivity" >
             <intent-filter>

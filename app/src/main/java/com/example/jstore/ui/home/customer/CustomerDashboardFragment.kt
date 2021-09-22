@@ -1,26 +1,20 @@
 package com.example.jstore.ui.home.customer
 
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
-import com.example.jstore.MainActivity
-import com.example.jstore.ProductDetailsActivity
+import com.example.jstore.ui.login.customer.MainActivity
 import com.example.jstore.databinding.FragmentCustomerDashboardBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Product
 import com.example.jstore.models.User
 import com.example.jstore.ui.product.ProductAdapter
-import com.example.jstore.utils.Constants
-import com.example.jstore.utils.GlideLoader
 import com.example.jstore.utils.pushActivity
+import com.example.jstore.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
-import timber.log.Timber
 
 class CustomerDashboardFragment : Fragment() {
 
@@ -29,14 +23,7 @@ class CustomerDashboardFragment : Fragment() {
     private lateinit var adapter: ProductAdapter
     private lateinit var mUserDetails: User
 
-//    private val dummyProducts =
-//        listOf(
-//            Product("1", "Jam tangan mewah", Category("id", "Jam"), "https://www.jakartanotebook.com/images/products/77/63/28045/2/jam-tangan-wanita-unique-dial-black-13.jpg", "Rp. 50.000"),
-//            Product("1", "Jam tangan mewah", Category("id", "Jam"), "https://www.jakartanotebook.com/images/products/77/63/28045/2/jam-tangan-wanita-unique-dial-black-13.jpg", "Rp. 50.000"),
-//            Product("1", "Jam tangan mewah", Category("id", "Jam"), "https://www.jakartanotebook.com/images/products/77/63/28045/2/jam-tangan-wanita-unique-dial-black-13.jpg", "Rp. 50.000"),
-//            Product("1", "Jam tangan mewah", Category("id", "Jam"), "https://www.jakartanotebook.com/images/products/77/63/28045/2/jam-tangan-wanita-unique-dial-black-13.jpg", "Rp. 50.000"),
-//            Product("1", "Jam tangan mewah", Category("id", "Jam"), "https://www.jakartanotebook.com/images/products/77/63/28045/2/jam-tangan-wanita-unique-dial-black-13.jpg", "Rp. 50.000")
-//        )
+    private lateinit var productList: List<Product>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +40,6 @@ class CustomerDashboardFragment : Fragment() {
 //        setupAdapter()
 //        setupUI()
 //        setupClickListeners()
-        setHasOptionsMenu(true)
 
    //     mUserDetails = User("","","",0,"","","",1)
  //       Timber.d("checkProfileImage: ${mUserDetails.image}")
@@ -65,12 +51,9 @@ class CustomerDashboardFragment : Fragment() {
         binding.imgAvatar.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
             pushActivity(MainActivity::class.java)
-
         }
 
     }
-
-
 
     private fun setupUI() {
         binding.rvProduct.adapter = adapter
@@ -89,15 +72,15 @@ class CustomerDashboardFragment : Fragment() {
             binding.rvProduct.setHasFixedSize(true)
             binding.rvProduct.adapter = adapter
 
-            adapter.setOnClickListener(object : ProductAdapter.OnClickListener{
-                override fun onClick(position: Int, product: Product) {
-                    val intent = Intent(requireActivity(),ProductDetailsActivity::class.java)
-                    intent.putExtra(Constants.EXTRA_PRODUCT_ID,product.product_id)
-                    intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID,product.user_id)
-                    startActivity(intent)
-                }
-
-            })
+//            adapter.setOnClickListener(object : ProductAdapter.OnClickListener{
+//                override fun onClick(position: Int, product: Product) {
+//                    val intent = Intent(requireActivity(),ProductDetailsActivity::class.java)
+//                    intent.putExtra(Constants.EXTRA_PRODUCT_ID,product.product_id)
+//                    intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID,product.user_id)
+//                    startActivity(intent)
+//                }
+//
+//            })
 
         }else{
             binding.rvProduct.visibility = View.GONE
@@ -105,14 +88,17 @@ class CustomerDashboardFragment : Fragment() {
 
     }
 
+    private fun getDashboardItemsList() {
+        FirestoreClass().getDashboardItemsList(onSuccessListener = {
+            productList = it
+        }, onFailureListener = {
+            showToast(it.message.toString())
+        })
+    }
+
     override fun onResume() {
         super.onResume()
         getDashboardItemsList()
-    }
-
-    private fun getDashboardItemsList() {
-
-        FirestoreClass().getDashboardItemsList(this)
     }
 
 //    private fun setupAdapter() {

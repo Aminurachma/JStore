@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.jstore.R
 import com.google.android.material.textfield.TextInputEditText
+import timber.log.Timber
 
 fun <T> AppCompatActivity.pushActivity(targetClass: Class<T>) {
     startActivity(Intent(this, targetClass))
@@ -88,4 +89,12 @@ fun TextInputEditText.clearText() {
 
 fun AppCompatEditText.addMoneyWatcher() {
     addTextChangedListener(MoneyTextWatcher(this))
+}
+
+fun logDebug(message: String, throwable: Throwable? = null) {
+    Timber.d(throwable, message)
+}
+
+fun logError(message: String, throwable: Throwable? = null) {
+    Timber.e(throwable, message)
 }

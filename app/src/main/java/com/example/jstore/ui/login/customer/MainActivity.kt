@@ -1,11 +1,12 @@
-package com.example.jstore
+package com.example.jstore.ui.login.customer
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Toast
+import com.example.jstore.ui.login.admin.LoginAdminActivity
+import com.example.jstore.RegisterActivity
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityMainBinding
 import com.example.jstore.models.User
@@ -82,7 +83,7 @@ class MainActivity : BaseActivity() {
     }
 
     fun userLoggedInSuccess(user : User){
-        hideProgressDialog()
+        progress.dismiss()
         if(user.profileCompleted == 0){
             val intent = Intent(this@MainActivity, HomeCustomerActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
