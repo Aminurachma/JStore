@@ -51,4 +51,7 @@
 	<string name="total">Total</string>
 	<string name="checkout">Checkout</string>
     <string name="bukanadmin">Maaf, Anda bukan Admin</string>
+	<string name="login_success">Login berhasil!</string>
+	<string name="login_failed">Login gagal!</string>
+	<string name="hello_user">Hello, %s</string>
 </resources>

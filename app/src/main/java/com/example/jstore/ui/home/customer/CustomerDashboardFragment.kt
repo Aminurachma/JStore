@@ -5,18 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import com.example.jstore.ui.login.customer.MainActivity
+import com.bumptech.glide.GenericTransitionOptions
+import com.bumptech.glide.Glide
+import com.example.jstore.R
 import com.example.jstore.databinding.FragmentCustomerDashboardBinding
 import com.example.jstore.firestore.FirestoreClass
-import com.example.jstore.models.Product
 import com.example.jstore.models.User
+import com.example.jstore.ui.login.customer.MainActivity
 import com.example.jstore.ui.product.ProductAdapter
 import com.example.jstore.ui.product.ProductDetailsActivity
-import com.example.jstore.utils.pushActivity
-import com.example.jstore.utils.showToast
-import com.example.jstore.utils.toGone
-import com.example.jstore.utils.toVisible
+import com.example.jstore.utils.*
 import com.google.firebase.auth.FirebaseAuth
 
 class CustomerDashboardFragment : Fragment() {
@@ -47,13 +45,29 @@ class CustomerDashboardFragment : Fragment() {
 
     private fun setupUI() {
         binding.rvProduct.adapter = adapter
+
+        FirestoreClass().getUserDetails(onSuccessListener = {
+            mUserDetails = it
+            binding.tvWelcomingText.text = getString(R.string.hello_user, it.fullName)
+            Glide.with(this)
+                .load(it.image)
+                .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
+                .into(binding.imgAvatar)
+        }, onFailureListener = {
+            logoutUser()
+            logError("getUserDetails: ${it.message}")
+        })
+    }
+
+    private fun logoutUser() {
+        FirebaseAuth.getInstance().signOut()
+        pushActivity(MainActivity::class.java)
+        requireActivity().finish()
     }
 
     private fun setupClickListeners() {
         binding.imgAvatar.setOnClickListener{
-            FirebaseAuth.getInstance().signOut()
-            pushActivity(MainActivity::class.java)
-            requireActivity().finish()
+            logoutUser()
         }
     }
 

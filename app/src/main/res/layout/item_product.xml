@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:layout_margin="@dimen/_8sdp"
+	android:layout_margin="@dimen/_4sdp"
 	app:cardElevation="0dp">
 
 	<LinearLayout
@@ -12,41 +12,33 @@
 		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
-		<com.google.android.material.card.MaterialCardView
+		<com.example.jstore.utils.SquareImageView
+			android:id="@+id/img_product"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			app:cardCornerRadius="@dimen/_8sdp"
-			app:cardElevation="0dp">
-
-			<com.example.jstore.utils.SquareImageView
-				android:id="@+id/img_product"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:scaleType="centerCrop"
-				tools:srcCompat="@tools:sample/avatars" />
-
-		</com.google.android.material.card.MaterialCardView>
+			android:layout_height="match_parent"
+			android:scaleType="centerCrop"
+			tools:srcCompat="@tools:sample/avatars" />
 
 		<TextView
 			android:id="@+id/tv_product_name"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginHorizontal="@dimen/_8sdp"
-			android:layout_marginTop="@dimen/_8sdp"
+			android:layout_marginHorizontal="@dimen/_12sdp"
+			android:layout_marginTop="@dimen/_12sdp"
 			android:ellipsize="end"
 			android:fontFamily="@font/rubik_medium"
 			android:maxLines="2"
 			android:textColor="@color/dark"
-			android:textSize="@dimen/_12ssp"
+			android:textSize="@dimen/_11ssp"
 			tools:text="Jam Tangan Unisex Untuk Pesta" />
 
 		<TextView
 			android:id="@+id/tv_product_price"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginHorizontal="@dimen/_8sdp"
-			android:layout_marginTop="@dimen/_2sdp"
-			android:layout_marginBottom="@dimen/_8sdp"
+			android:layout_marginHorizontal="@dimen/_12sdp"
+			android:layout_marginTop="@dimen/_4sdp"
+			android:layout_marginBottom="@dimen/_12sdp"
 			android:ellipsize="end"
 			android:fontFamily="@font/rubik_regular"
 			android:maxLines="2"

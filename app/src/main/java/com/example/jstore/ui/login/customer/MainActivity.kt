@@ -2,16 +2,16 @@ package com.example.jstore.ui.login.customer
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Patterns
-import android.widget.Toast
-import com.example.jstore.ui.login.admin.LoginAdminActivity
-import com.example.jstore.ui.register.RegisterActivity
+import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityMainBinding
-import com.example.jstore.models.User
 import com.example.jstore.ui.home.customer.HomeCustomerActivity
-import com.example.jstore.utils.Constants
+import com.example.jstore.ui.login.admin.LoginAdminActivity
+import com.example.jstore.ui.register.RegisterActivity
+import com.example.jstore.utils.logError
+import com.example.jstore.utils.pushActivity
+import com.example.jstore.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : BaseActivity() {
@@ -19,8 +19,6 @@ class MainActivity : BaseActivity() {
     private val binding get() = _binding!!
 
     private lateinit var firebaseAuth: FirebaseAuth
-    private var email =""
-    private var password = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +28,10 @@ class MainActivity : BaseActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         checkUser()
 
+        setupClickListeners()
+    }
+
+    private fun setupClickListeners() {
         binding.btnLoginAdmin.setOnClickListener{
             startActivity(Intent(this, LoginAdminActivity::class.java))
         }
@@ -39,37 +41,33 @@ class MainActivity : BaseActivity() {
         }
 
         binding.btnSignUp.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            pushActivity(RegisterActivity::class.java)
         }
     }
 
     private fun validateData() {
-        email = binding.edtEmail.text.toString().trim()
-        password = binding.edtPassword.text.toString().trim()
-
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            binding.edtEmail.error = "Invalid Email Format"
-        }
-        else if(TextUtils.isEmpty(password)){
-            binding.edtPassword.error = "Please enter your password"
-        }
-        else{
-            firebaseLogin()
+        binding.apply {
+            when {
+                !Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString())
+                    .matches() -> tilEmail.error = getString(R.string.invalid_email)
+                edtPassword.text.toString().isEmpty() -> tilPassword.error =
+                    getString(R.string.empty_field, getString(R.string.password))
+                else -> firebaseLogin(edtEmail.text.toString(), edtPassword.text.toString())
+            }
         }
     }
 
-    private fun firebaseLogin() {
+    private fun firebaseLogin(email: String, password: String) {
         firebaseAuth.signInWithEmailAndPassword(email,password)
             .addOnSuccessListener {
                 //login sukses
-                val firebaseUser = firebaseAuth.currentUser
-                val email = firebaseUser!!.email
-                Toast.makeText(this, "Login berhasil $email", Toast.LENGTH_SHORT).show()
+                showToast(getString(R.string.login_success))
                 startActivity(Intent(this, HomeCustomerActivity::class.java))
                 finish()
             }
             .addOnFailureListener{ e ->
-                Toast.makeText(this, "Login gagal ${e.message}", Toast.LENGTH_SHORT).show()
+                logError("loginUser: ${e.message}")
+                showToast(getString(R.string.login_failed))
             }
     }
 
@@ -77,26 +75,9 @@ class MainActivity : BaseActivity() {
         val firebaseUser = firebaseAuth.currentUser
         if (firebaseUser != null){
             //user sudah login
-            startActivity(Intent(this, HomeCustomerActivity::class.java))
+            pushActivity(HomeCustomerActivity::class.java)
             finish()
         }
-    }
-
-    fun userLoggedInSuccess(user : User){
-        progress.dismiss()
-        if(user.profileCompleted == 0){
-            val intent = Intent(this@MainActivity, HomeCustomerActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-            intent.putExtra(Constants.EXTRA_USER_DETAILS,user)
-            startActivity(intent)
-        }else{
-            val intent = Intent(this@MainActivity, HomeCustomerActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-        }
-        finish()
     }
 
     override fun onDestroy() {
