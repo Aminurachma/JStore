@@ -18,11 +18,11 @@
         <activity android:name=".ui.login.admin.LoginAdminActivity" />
         <activity android:name=".ui.cart.MyCartActivity" />
         <activity android:name=".ui.home.admin.HomeAdminActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ui.register.RegisterActivity" />
         <activity android:name=".ui.home.customer.HomeCustomerActivity" />
         <activity android:name=".ui.login.customer.MainActivity" />
-        <activity android:name=".ProductDetailsActivity" />
-        <activity android:name=".SplashscreenActivity" >
+        <activity android:name=".ui.product.ProductDetailsActivity" />
+        <activity android:name=".ui.splash.SplashscreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

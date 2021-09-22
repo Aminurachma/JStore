@@ -1,7 +1,8 @@
-package com.example.jstore
+package com.example.jstore.ui.register
 
 import android.os.Bundle
 import android.util.Patterns
+import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityRegisterBinding
 import com.example.jstore.firestore.FirestoreClass
@@ -37,11 +38,23 @@ class RegisterActivity : BaseActivity() {
     private fun validateData() {
         binding.apply {
             when {
-                edtName.text.toString().trim().isEmpty() -> tilName.error = getString(R.string.empty_field, getString(R.string.fullname))
-                edtAddress.text.toString().trim().isEmpty() -> tilAddress.error = getString(R.string.empty_field, getString(R.string.address))
-                edtPhoneNumber.text.toString().trim().isEmpty() -> tilPhoneNumber.error = getString(R.string.empty_field, getString(R.string.phone_number))
-                !Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString().trim()).matches() -> tilEmail.error = getString(R.string.invalid_email)
-                edtPassword.text.toString().trim().isEmpty() -> tilPassword.error = getString(R.string.empty_field, getString(R.string.password))
+                edtName.text.toString().trim().isEmpty() -> tilName.error = getString(
+                    R.string.empty_field, getString(
+                        R.string.fullname
+                    ))
+                edtAddress.text.toString().trim().isEmpty() -> tilAddress.error = getString(
+                    R.string.empty_field, getString(
+                        R.string.address
+                    ))
+                edtPhoneNumber.text.toString().trim().isEmpty() -> tilPhoneNumber.error = getString(
+                    R.string.empty_field, getString(R.string.phone_number))
+                !Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString().trim()).matches() -> tilEmail.error = getString(
+                    R.string.invalid_email
+                )
+                edtPassword.text.toString().trim().isEmpty() -> tilPassword.error = getString(
+                    R.string.empty_field, getString(
+                        R.string.password
+                    ))
                 else -> firebaseRegister()
             }
         }

@@ -6,7 +6,7 @@ import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Toast
 import com.example.jstore.ui.login.admin.LoginAdminActivity
-import com.example.jstore.RegisterActivity
+import com.example.jstore.ui.register.RegisterActivity
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityMainBinding
 import com.example.jstore.models.User

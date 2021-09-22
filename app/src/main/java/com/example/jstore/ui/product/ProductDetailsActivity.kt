@@ -1,4 +1,4 @@
-package com.example.jstore
+package com.example.jstore.ui.product
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
