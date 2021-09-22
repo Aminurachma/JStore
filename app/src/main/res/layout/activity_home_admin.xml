@@ -104,9 +104,11 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/btn_orders"
             app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_chainStyle="spread"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_customers"
             app:layout_constraintWidth_percent="0.45">
 
             <LinearLayout
@@ -147,7 +149,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_products"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_products"
             app:layout_constraintWidth_percent="0.45">
 
             <LinearLayout
