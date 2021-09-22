@@ -96,7 +96,7 @@ class FirestoreClass {
             }
     }
 
-    fun getDashboardItemsList(onSuccessListener: (products: List<Product>) -> Unit, onFailureListener: (e: Exception) -> Unit) {
+    fun getProductList(onSuccessListener: (products: List<Product>) -> Unit, onFailureListener: (e: Exception) -> Unit) {
         mFirestore.collection(PRODUCTS)
             .get()
             .addOnSuccessListener { document ->

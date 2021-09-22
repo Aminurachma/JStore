@@ -12,7 +12,7 @@
 		tools:layout="@layout/fragment_customer_dashboard" />
 	<fragment
 		android:id="@+id/orderHistoryFragment"
-		android:name="com.example.jstore.OrderHistoryFragment"
+		android:name="com.example.jstore.ui.home.customer.OrderHistoryFragment"
 		android:label="fragment_order_history"
 		tools:layout="@layout/fragment_order_history" />
 

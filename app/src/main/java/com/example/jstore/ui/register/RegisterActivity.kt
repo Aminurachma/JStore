@@ -86,6 +86,7 @@ class RegisterActivity : BaseActivity() {
             progress.dismiss()
             showToast(getString(R.string.register_success))
             pushActivity(MainActivity::class.java)
+            finish()
         }, onFailureListener = {
             progress.dismiss()
             showToast(getString(R.string.register_failed, it.message.toString()))

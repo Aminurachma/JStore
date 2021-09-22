@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import com.example.jstore.R
 import com.google.android.material.textfield.TextInputEditText
 import timber.log.Timber
+import java.text.DecimalFormat
 
 fun <T> AppCompatActivity.pushActivity(targetClass: Class<T>) {
     startActivity(Intent(this, targetClass))
@@ -97,4 +98,9 @@ fun logDebug(message: String, throwable: Throwable? = null) {
 
 fun logError(message: String, throwable: Throwable? = null) {
     Timber.e(throwable, message)
+}
+
+fun Int.formatPrice(): String {
+    val formatter = DecimalFormat("#,###")
+    return "Rp. ${formatter.format(this)}"
 }

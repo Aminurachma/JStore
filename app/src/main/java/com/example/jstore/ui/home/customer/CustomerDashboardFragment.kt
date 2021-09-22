@@ -12,8 +12,11 @@ import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Product
 import com.example.jstore.models.User
 import com.example.jstore.ui.product.ProductAdapter
+import com.example.jstore.ui.product.ProductDetailsActivity
 import com.example.jstore.utils.pushActivity
 import com.example.jstore.utils.showToast
+import com.example.jstore.utils.toGone
+import com.example.jstore.utils.toVisible
 import com.google.firebase.auth.FirebaseAuth
 
 class CustomerDashboardFragment : Fragment() {
@@ -22,8 +25,6 @@ class CustomerDashboardFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: ProductAdapter
     private lateinit var mUserDetails: User
-
-    private lateinit var productList: List<Product>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,21 +38,10 @@ class CustomerDashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        setupAdapter()
-//        setupUI()
-//        setupClickListeners()
-
-   //     mUserDetails = User("","","",0,"","","",1)
- //       Timber.d("checkProfileImage: ${mUserDetails.image}")
-//        Glide.with(requireContext())
-//            .load(mUserDetails.image)
-//            .into(binding.imgAvatar)
-       // GlideLoader(requireContext()).loadUserProfile(mUserDetails.image, binding.imgAvatar)
-
-        binding.imgAvatar.setOnClickListener{
-            FirebaseAuth.getInstance().signOut()
-            pushActivity(MainActivity::class.java)
-        }
+        setupAdapter()
+        setupUI()
+        setupClickListeners()
+        getProductList()
 
     }
 
@@ -60,53 +50,31 @@ class CustomerDashboardFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
-
-    }
-
-    fun successDashboardItemList(productItemList : ArrayList<Product>){
-        if (productItemList.size > 0 ){
-            binding.rvProduct.visibility = View.VISIBLE
-
-            val adapter = ProductAdapter(requireActivity(),productItemList)
-            binding.rvProduct.layoutManager = GridLayoutManager(activity,2)
-            binding.rvProduct.setHasFixedSize(true)
-            binding.rvProduct.adapter = adapter
-
-//            adapter.setOnClickListener(object : ProductAdapter.OnClickListener{
-//                override fun onClick(position: Int, product: Product) {
-//                    val intent = Intent(requireActivity(),ProductDetailsActivity::class.java)
-//                    intent.putExtra(Constants.EXTRA_PRODUCT_ID,product.product_id)
-//                    intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID,product.user_id)
-//                    startActivity(intent)
-//                }
-//
-//            })
-
-        }else{
-            binding.rvProduct.visibility = View.GONE
+        binding.imgAvatar.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+            pushActivity(MainActivity::class.java)
+            requireActivity().finish()
         }
-
     }
 
-    private fun getDashboardItemsList() {
-        FirestoreClass().getDashboardItemsList(onSuccessListener = {
-            productList = it
+    private fun getProductList() {
+        FirestoreClass().getProductList(onSuccessListener = {
+            if (it.isNotEmpty()) {
+                binding.rvProduct.toVisible()
+                adapter.submitList(it)
+            } else {
+                binding.rvProduct.toGone()
+            }
         }, onFailureListener = {
             showToast(it.message.toString())
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-        getDashboardItemsList()
+    private fun setupAdapter() {
+        adapter = ProductAdapter(onClickListener = {
+            pushActivity(ProductDetailsActivity::class.java)
+        })
     }
-
-//    private fun setupAdapter() {
-//        adapter = ProductAdapter(onClickListener = {
-//            pushActivity(ProductDetailsActivity::class.java)
-//        })
-//        adapter.submitList(dummyProducts)
-//    }
 
     override fun onDestroy() {
         super.onDestroy()

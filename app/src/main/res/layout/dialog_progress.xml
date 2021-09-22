@@ -16,9 +16,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:fontFamily="@font/rubik_light"
+        android:fontFamily="@font/rubik_medium"
         android:text="@string/tunggu_sebentar_ya"
-        android:textSize="@dimen/_10ssp"
+        android:textSize="@dimen/_11ssp"
         android:textColor="@color/colorPrimary"/>
 
 </LinearLayout>

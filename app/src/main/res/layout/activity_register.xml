@@ -4,6 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:fillViewport="true"
 	tools:context=".ui.register.RegisterActivity">
 
 	<LinearLayout
@@ -89,8 +90,8 @@
 				android:fontFamily="@font/rubik_light"
 				android:gravity="top"
 				android:hint="@string/enter_your_address_here"
-				android:inputType="textMultiLine"
-				android:minHeight="@dimen/_44sdp"
+				android:inputType="textMultiLine|textCapWords"
+				android:minHeight="@dimen/_60sdp"
 				android:textColor="@color/dark"
 				android:textColorHint="@color/gray3"
 				android:textSize="@dimen/_12ssp" />
@@ -182,7 +183,7 @@
 				android:layout_height="wrap_content"
 				android:fontFamily="@font/rubik_light"
 				android:hint="@string/enter_your_password_here"
-				android:inputType="text"
+				android:inputType="textPassword"
 				android:textColor="@color/dark"
 				android:textColorHint="@color/gray3"
 				android:textSize="@dimen/_12ssp" />
