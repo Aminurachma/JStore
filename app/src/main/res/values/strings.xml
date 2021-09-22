@@ -55,4 +55,10 @@
 	<string name="login_failed">Login gagal!</string>
 	<string name="hello_user">Hello, %s</string>
 	<string name="kategori">Kategori</string>
+	<string name="selamat_ndatang">Selamat\nDatang,</string>
+	<string name="penghasilan">Penghasilan</string>
+	<string name="products">Products</string>
+	<string name="orders">Orders</string>
+	<string name="customers">Customers</string>
+	<string name="settings">Settings</string>
 </resources>
