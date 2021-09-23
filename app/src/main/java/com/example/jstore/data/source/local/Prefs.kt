@@ -8,4 +8,6 @@ object Prefs : KotprefModel() {
 
     var adminId by stringPref()
     var adminFullName by stringPref()
+
+    var activeCartId by stringPref()
 }

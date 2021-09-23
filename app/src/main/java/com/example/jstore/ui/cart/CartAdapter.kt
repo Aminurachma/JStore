@@ -53,10 +53,12 @@ class CartAdapter(
                 }
 
                 btnIncrement.setOnClickListener {
-                    product.quantity = tvQuantity.text.toString().toInt() + 1
-                    notifyItemChanged(absoluteAdapterPosition)
-                    tvQuantity.text = (tvQuantity.text.toString().toInt() + 1).toString()
-                    onAddQuantity(product)
+                    if (tvQuantity.text.toString().toInt() < product.stockQuantity) {
+                        product.quantity = tvQuantity.text.toString().toInt() + 1
+                        notifyItemChanged(absoluteAdapterPosition)
+                        tvQuantity.text = (tvQuantity.text.toString().toInt() + 1).toString()
+                        onAddQuantity(product)
+                    }
                 }
             }
         }

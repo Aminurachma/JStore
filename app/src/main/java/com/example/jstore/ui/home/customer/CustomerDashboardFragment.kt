@@ -46,11 +46,30 @@ class CustomerDashboardFragment : BaseFragment() {
         setupClickListeners()
         getUserProfile()
         getProductList()
+        subscribeCart()
 
     }
 
     private fun setupUI() {
         binding.rvProduct.adapter = adapter
+    }
+
+    private fun setupClickListeners() {
+        binding.imgAvatar.setOnClickListener{
+            pushActivity(ProfileActivity::class.java)
+        }
+
+        binding.imgCart.setOnClickListener {
+            pushActivity(MyCartActivity::class.java)
+        }
+    }
+
+    private fun setupAdapter() {
+        adapter = ProductAdapter(onClickListener = { product ->
+            startActivity(Intent(requireContext(), ProductDetailsActivity::class.java).apply {
+                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, product)
+            })
+        })
     }
 
     private fun getUserProfile() {
@@ -77,16 +96,6 @@ class CustomerDashboardFragment : BaseFragment() {
         requireActivity().finish()
     }
 
-    private fun setupClickListeners() {
-        binding.imgAvatar.setOnClickListener{
-            pushActivity(ProfileActivity::class.java)
-        }
-
-        binding.imgCart.setOnClickListener {
-            pushActivity(MyCartActivity::class.java)
-        }
-    }
-
     private fun getProductList() {
         progress.show()
         FirestoreClass().getProductList(onSuccessListener = {
@@ -103,11 +112,14 @@ class CustomerDashboardFragment : BaseFragment() {
         })
     }
 
-    private fun setupAdapter() {
-        adapter = ProductAdapter(onClickListener = { product ->
-            startActivity(Intent(requireContext(), ProductDetailsActivity::class.java).apply {
-                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, product)
-            })
+    private fun subscribeCart() {
+        progress.show()
+        FirestoreClass().subscribeToCart(onSuccessListener = {
+            progress.dismiss()
+            Prefs.activeCartId = it.cartId
+        }, onFailureListener = {
+            progress.dismiss()
+            logError("subscribeCart: $it")
         })
     }
 

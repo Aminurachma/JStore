@@ -62,8 +62,12 @@ class FirestoreClass {
 
     }
 
-    fun uploadImageToFirestore(fileUri: Uri, onSuccessListener: (imageUrl: String) -> Unit, onFailureListener: (e: Exception) -> Unit) {
-        val fileName = UUID.randomUUID().toString() +".jpg"
+    fun uploadImageToFirestore(
+        fileUri: Uri,
+        onSuccessListener: (imageUrl: String) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        val fileName = UUID.randomUUID().toString() + ".jpg"
         val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
         refStorage.putFile(fileUri)
             .addOnSuccessListener {
@@ -192,14 +196,18 @@ class FirestoreClass {
             }
     }
 
-    fun updateProfileAdmin(fullnameAdmin: String, emailAdmin: String,mobileAdmin: String,
-                           onSuccessListener: () -> Unit,
-                           onFailureListener: (e: Exception) -> Unit){
+    fun updateProfileAdmin(
+        fullnameAdmin: String, emailAdmin: String, mobileAdmin: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(ADMIN)
             .document(Prefs.adminId)
-            .update("fullNameAdmin",fullnameAdmin,
+            .update(
+                "fullNameAdmin", fullnameAdmin,
                 "emailAdmin", emailAdmin,
-                "mobileAdmin", mobileAdmin)
+                "mobileAdmin", mobileAdmin
+            )
             .addOnSuccessListener {
                 onSuccessListener()
             }
@@ -229,8 +237,12 @@ class FirestoreClass {
             }
     }
 
-    fun uploadImageAdminToFirestore(fileUri: Uri, onSuccessListener: (imageUrl: String) -> Unit, onFailureListener: (e: Exception) -> Unit) {
-        val fileName = UUID.randomUUID().toString() +".jpg"
+    fun uploadImageAdminToFirestore(
+        fileUri: Uri,
+        onSuccessListener: (imageUrl: String) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        val fileName = UUID.randomUUID().toString() + ".jpg"
         val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
         refStorage.putFile(fileUri)
             .addOnSuccessListener {
@@ -248,7 +260,11 @@ class FirestoreClass {
             }
     }
 
-    private fun updateProfileAdminImageUrl(imageUrl: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+    private fun updateProfileAdminImageUrl(
+        imageUrl: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(ADMIN)
             .document(Prefs.adminId)
             .update("imageAdmin", imageUrl)
@@ -301,8 +317,6 @@ class FirestoreClass {
             }
     }
 
-
-
     fun subscribeToCart(
         onSuccessListener: (cart: Cart) -> Unit,
         onFailureListener: (e: String) -> Unit
@@ -320,6 +334,23 @@ class FirestoreClass {
                     }
                     onSuccessListener(cart.first())
                 }
+            }
+    }
+
+    fun addProductToCart(
+        product: Product,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(CARTS)
+            .document(Prefs.activeCartId)
+            .update(PRODUCTS, FieldValue.arrayUnion(product))
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+                logError("addProductToCart: ${it.message}")
             }
     }
 
