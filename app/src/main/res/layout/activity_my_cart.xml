@@ -33,7 +33,7 @@
             android:fontFamily="@font/rubik_bold"
             android:text="@string/my_cart"
             android:textColor="@color/dark"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_19ssp"
             app:layout_constraintBottom_toBottomOf="@+id/btn_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -55,7 +55,7 @@ class CustomerDashboardFragment : BaseFragment() {
 
     private fun getUserProfile() {
         progress.show()
-        FirestoreClass().getUserDetails(onSuccessListener = {
+        FirestoreClass().subscribeUserProfile(onSuccessListener = {
             progress.dismiss()
             mUserDetails = it
             binding.tvWelcomingText.text = getString(R.string.hello_user, it.fullName)
@@ -66,7 +66,7 @@ class CustomerDashboardFragment : BaseFragment() {
         }, onFailureListener = {
             progress.dismiss()
             logoutUser()
-            logError("getUserDetails: ${it.message}")
+            logError("getUserDetails: $it")
         })
     }
 

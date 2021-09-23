@@ -224,7 +224,7 @@
 
 		<com.google.android.material.card.MaterialCardView
 			android:layout_width="0dp"
-			android:layout_height="@dimen/_40sdp"
+			android:layout_height="@dimen/_35sdp"
 			android:layout_marginEnd="@dimen/_4sdp"
 			android:layout_weight="1"
 			app:cardCornerRadius="@dimen/_6sdp"
@@ -291,7 +291,7 @@
 			android:id="@+id/btn_add_to_cart"
 			style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
 			android:layout_width="0dp"
-			android:layout_height="@dimen/_40sdp"
+			android:layout_height="@dimen/_35sdp"
 			android:layout_marginStart="@dimen/_4sdp"
 			android:layout_weight="2"
 			android:fontFamily="@font/rubik_medium"

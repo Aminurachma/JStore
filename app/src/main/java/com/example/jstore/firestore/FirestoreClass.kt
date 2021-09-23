@@ -16,6 +16,7 @@ import com.example.jstore.utils.logError
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.util.*
@@ -60,12 +61,12 @@ class FirestoreClass {
         val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
         refStorage.putFile(fileUri)
             .addOnSuccessListener {
-                it.storage.downloadUrl.addOnSuccessListener {
-                    val imageUrl = it.toString()
+                it.storage.downloadUrl.addOnSuccessListener { uri ->
+                    val imageUrl = uri.toString()
                     updateProfileImageUrl(imageUrl = imageUrl, onSuccessListener = {
                         onSuccessListener(imageUrl)
-                    }, onFailureListener = {
-                        onFailureListener(it)
+                    }, onFailureListener = { e ->
+                        onFailureListener(e)
                     })
                 }
             }
@@ -74,7 +75,7 @@ class FirestoreClass {
             }
     }
 
-    fun updateProfileImageUrl(imageUrl: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+    private fun updateProfileImageUrl(imageUrl: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
         mFirestore.collection(USERS)
             .document(Prefs.userId)
             .update("image", imageUrl)
@@ -132,6 +133,27 @@ class FirestoreClass {
 
             }.addOnFailureListener { exception ->
                 onFailureListener(exception)
+            }
+    }
+
+    fun subscribeUserProfile(
+        onSuccessListener: (user: User) -> Unit,
+        onFailureListener: (e: String) -> Unit
+    ) {
+        mFirestore.collection(USERS)
+            .document(getCurrentUserId())
+            .addSnapshotListener { value, error ->
+                error?.let { e ->
+                    onFailureListener(e.message.toString())
+                }
+                value?.let { documentSnapshot ->
+                    val user = documentSnapshot.toObject<User>()
+                    if (user != null) {
+                        Prefs.userId = user.id
+                        Prefs.userFullName = user.fullName
+                        onSuccessListener(user)
+                    }
+                }
             }
     }
 

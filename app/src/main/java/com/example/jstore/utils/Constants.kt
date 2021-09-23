@@ -5,6 +5,7 @@ object Constants {
     const val USERS = "users"
     const val ADMIN = "admin"
     const val PRODUCTS = "products"
+    const val CARTS = "carts"
 
     const val IMAGE = "image"
 

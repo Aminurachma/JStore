@@ -34,11 +34,11 @@
 			android:fontFamily="@font/rubik_bold"
 			android:text="@string/profile"
 			android:textColor="@color/dark"
-			android:textSize="@dimen/_14ssp"
-			app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+			android:textSize="@dimen/_19ssp"
+			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="@+id/btn_back" />
+			app:layout_constraintTop_toTopOf="parent" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -86,8 +86,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/_4sdp"
-				app:boxStrokeColor="@color/gray3"
-				app:boxStrokeWidth="1dp"
 				app:layout_constraintEnd_toEndOf="@+id/name_label"
 				app:layout_constraintStart_toStartOf="@+id/name_label"
 				app:layout_constraintTop_toBottomOf="@+id/name_label">
@@ -125,8 +123,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/_4sdp"
-				app:boxStrokeColor="@color/gray3"
-				app:boxStrokeWidth="1dp"
 				app:layout_constraintEnd_toEndOf="@+id/name_label"
 				app:layout_constraintStart_toStartOf="@+id/name_label"
 				app:layout_constraintTop_toBottomOf="@+id/email_label">
@@ -163,8 +159,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/_4sdp"
-				app:boxStrokeColor="@color/gray3"
-				app:boxStrokeWidth="1dp"
 				app:layout_constraintEnd_toEndOf="@+id/phone_number_label"
 				app:layout_constraintStart_toStartOf="@+id/phone_number_label"
 				app:layout_constraintTop_toBottomOf="@+id/phone_number_label">
@@ -200,9 +194,7 @@
 				style="@style/App.TextInputLayout.OutlinedBox"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				app:boxStrokeColor="@color/gray3"
 				android:layout_marginTop="@dimen/_4sdp"
-				app:boxStrokeWidth="1dp"
 				app:layout_constraintEnd_toEndOf="@+id/phone_number_label"
 				app:layout_constraintStart_toStartOf="@+id/phone_number_label"
 				app:layout_constraintTop_toBottomOf="@+id/address_label">
@@ -224,16 +216,13 @@
 
 			<com.google.android.material.button.MaterialButton
 				android:id="@+id/btn_update_profile"
-				style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+				style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/_45sdp"
-				android:fontFamily="@font/rubik_medium"
 				android:layout_marginTop="@dimen/_32sdp"
+				android:fontFamily="@font/rubik_medium"
 				android:text="@string/update"
 				android:textAllCaps="false"
-				app:strokeWidth="1dp"
-				app:strokeColor="@color/colorPrimary"
-				android:textColor="@color/colorPrimary"
 				android:textSize="@dimen/_12ssp"
 				app:cornerRadius="@dimen/_8sdp"
 				app:layout_constraintTop_toBottomOf="@+id/til_address" />
@@ -244,7 +233,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/_45sdp"
 				android:fontFamily="@font/rubik_medium"
-				android:layout_marginTop="@dimen/_32sdp"
 				android:text="@string/logout"
 				android:textAllCaps="false"
 				app:strokeWidth="1dp"

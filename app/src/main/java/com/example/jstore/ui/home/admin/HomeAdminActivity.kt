@@ -30,7 +30,6 @@ class HomeAdminActivity : BaseActivity() {
         FirestoreClass().getAdminDetails(onSuccessListener = {
             progress.dismiss()
             admin = it
-            binding.tvName.text = admin.fullNameAdmin
         }, onFailureListener = {
             progress.dismiss()
             showToast(it.message.toString())
