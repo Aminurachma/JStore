@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import java.util.*
 
 class FirestoreClass {
@@ -61,12 +62,8 @@ class FirestoreClass {
 
     }
 
-    fun uploadImageToFirestore(
-        fileUri: Uri,
-        onSuccessListener: (imageUrl: String) -> Unit,
-        onFailureListener: (e: Exception) -> Unit
-    ) {
-        val fileName = UUID.randomUUID().toString() + ".jpg"
+    fun uploadImageToFirestore(fileUri: Uri, onSuccessListener: (imageUrl: String) -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        val fileName = UUID.randomUUID().toString() +".jpg"
         val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
         refStorage.putFile(fileUri)
             .addOnSuccessListener {
@@ -195,6 +192,75 @@ class FirestoreClass {
             }
     }
 
+    fun updateProfileAdmin(fullnameAdmin: String, emailAdmin: String,mobileAdmin: String,
+                           onSuccessListener: () -> Unit,
+                           onFailureListener: (e: Exception) -> Unit){
+        mFirestore.collection(ADMIN)
+            .document(Prefs.adminId)
+            .update("fullNameAdmin",fullnameAdmin,
+                "emailAdmin", emailAdmin,
+                "mobileAdmin", mobileAdmin)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+
+    fun subscribeAdminProfile(
+        onSuccessListener: (admin: Admin) -> Unit,
+        onFailureListener: (e: String) -> Unit
+    ) {
+        mFirestore.collection(ADMIN)
+            .document(Prefs.adminId)
+            .addSnapshotListener { value, error ->
+                error?.let { e ->
+                    onFailureListener(e.message.toString())
+                }
+                value?.let { documentSnapshot ->
+                    val admin = documentSnapshot.toObject<Admin>()
+                    if (admin != null) {
+                        Prefs.adminId = admin.idAdmin
+                        Prefs.adminFullName = admin.fullNameAdmin
+                        onSuccessListener(admin)
+                    }
+                }
+            }
+    }
+
+    fun uploadImageAdminToFirestore(fileUri: Uri, onSuccessListener: (imageUrl: String) -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        val fileName = UUID.randomUUID().toString() +".jpg"
+        val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
+        refStorage.putFile(fileUri)
+            .addOnSuccessListener {
+                it.storage.downloadUrl.addOnSuccessListener { uri ->
+                    val imageUrl = uri.toString()
+                    updateProfileAdminImageUrl(imageUrl = imageUrl, onSuccessListener = {
+                        onSuccessListener(imageUrl)
+                    }, onFailureListener = { e ->
+                        onFailureListener(e)
+                    })
+                }
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+            }
+    }
+
+    private fun updateProfileAdminImageUrl(imageUrl: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        mFirestore.collection(ADMIN)
+            .document(Prefs.adminId)
+            .update("imageAdmin", imageUrl)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+
+
     fun getProductList(
         onSuccessListener: (products: List<Product>) -> Unit,
         onFailureListener: (e: Exception) -> Unit
@@ -214,6 +280,28 @@ class FirestoreClass {
                 logError("getDashboardItemsList: ${e.message}")
             }
     }
+
+    fun getCustomerList(
+        onSuccessListener: (customers: List<User>) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(USERS)
+            .get()
+            .addOnSuccessListener { document ->
+                logDebug("getCustomerItemsList: ${document.documents}")
+
+                val customerList = document.documents.map {
+                    it.toObject(User::class.java) ?: User()
+                }
+                onSuccessListener(customerList)
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+                logError("getCustomerItemsList: ${e.message}")
+            }
+    }
+
+
 
     fun subscribeToCart(
         onSuccessListener: (cart: Cart) -> Unit,
