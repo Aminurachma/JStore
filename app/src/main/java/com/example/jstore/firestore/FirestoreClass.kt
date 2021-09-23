@@ -1,24 +1,27 @@
 package com.example.jstore.firestore
 
 import android.net.Uri
-import android.widget.Toast
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.models.Admin
+import com.example.jstore.models.Cart
 import com.example.jstore.models.Product
 import com.example.jstore.models.User
 import com.example.jstore.utils.Constants.ADMIN
+import com.example.jstore.utils.Constants.CARTS
 import com.example.jstore.utils.Constants.EMAIL_ADMIN
+import com.example.jstore.utils.Constants.IS_CHECKED_OUT
 import com.example.jstore.utils.Constants.PASSWORD_ADMIN
 import com.example.jstore.utils.Constants.PRODUCTS
 import com.example.jstore.utils.Constants.USERS
+import com.example.jstore.utils.Constants.USER_ID
 import com.example.jstore.utils.logDebug
 import com.example.jstore.utils.logError
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import java.util.*
 
 class FirestoreClass {
@@ -41,9 +44,11 @@ class FirestoreClass {
             }
     }
 
-    fun updateProfileUser(user: User,
-                          onSuccessListener: () -> Unit,
-                          onFailureListener: (e: Exception) -> Unit){
+    fun updateProfileUser(
+        user: User,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(USERS)
             .document(Prefs.userId)
             .set(user)
@@ -56,8 +61,12 @@ class FirestoreClass {
 
     }
 
-    fun uploadImageToFirestore(fileUri: Uri, onSuccessListener: (imageUrl: String) -> Unit, onFailureListener: (e: Exception) -> Unit) {
-        val fileName = UUID.randomUUID().toString() +".jpg"
+    fun uploadImageToFirestore(
+        fileUri: Uri,
+        onSuccessListener: (imageUrl: String) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        val fileName = UUID.randomUUID().toString() + ".jpg"
         val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
         refStorage.putFile(fileUri)
             .addOnSuccessListener {
@@ -75,7 +84,11 @@ class FirestoreClass {
             }
     }
 
-    private fun updateProfileImageUrl(imageUrl: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+    private fun updateProfileImageUrl(
+        imageUrl: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(USERS)
             .document(Prefs.userId)
             .update("image", imageUrl)
@@ -87,7 +100,12 @@ class FirestoreClass {
             }
     }
 
-    fun loginAdmin(email: String, password: String, onLoginSuccess: (admin: Admin) -> Unit, onLoginFailed: (e: String) -> Unit) {
+    fun loginAdmin(
+        email: String,
+        password: String,
+        onLoginSuccess: (admin: Admin) -> Unit,
+        onLoginFailed: (e: String) -> Unit
+    ) {
         mFirestore.collection(ADMIN)
             .whereEqualTo(EMAIL_ADMIN, email)
             .whereEqualTo(PASSWORD_ADMIN, password)
@@ -194,6 +212,26 @@ class FirestoreClass {
             .addOnFailureListener { e ->
                 onFailureListener(e)
                 logError("getDashboardItemsList: ${e.message}")
+            }
+    }
+
+    fun subscribeToCart(
+        onSuccessListener: (cart: Cart) -> Unit,
+        onFailureListener: (e: String) -> Unit
+    ) {
+        mFirestore.collection(CARTS)
+            .whereEqualTo(USER_ID, Prefs.userId)
+            .whereEqualTo(IS_CHECKED_OUT, false)
+            .addSnapshotListener { value, error ->
+                error?.let {
+                    onFailureListener(it.message.toString())
+                }
+                value?.let { document ->
+                    val cart = document.documents.map {
+                        it.toObject<Cart>() ?: Cart()
+                    }
+                    onSuccessListener(cart.first())
+                }
             }
     }
 

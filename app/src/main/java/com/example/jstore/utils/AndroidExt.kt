@@ -110,7 +110,7 @@ fun Int.formatPrice(): String {
 fun Activity.imagePicker(launcher: ActivityResultLauncher<Intent>) {
     ImagePicker.with(this)
         .crop()
-        .compress(1024)
+        .compress(512)
         .createIntent { intent ->
             launcher.launch(intent)
         }
@@ -119,7 +119,7 @@ fun Activity.imagePicker(launcher: ActivityResultLauncher<Intent>) {
 fun Fragment.imagePicker(launcher: ActivityResultLauncher<Intent>) {
     ImagePicker.with(this)
         .crop()
-        .compress(1024)
+        .compress(512)
         .createIntent { intent ->
             launcher.launch(intent)
         }
