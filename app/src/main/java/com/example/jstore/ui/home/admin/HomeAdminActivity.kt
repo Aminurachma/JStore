@@ -14,6 +14,7 @@ import com.example.jstore.models.Admin
 import com.example.jstore.ui.customer.CustomerActivity
 import com.example.jstore.ui.login.customer.MainActivity
 import com.example.jstore.ui.product.ProductActivity
+import com.example.jstore.ui.setting.SettingActivity
 import com.example.jstore.utils.logError
 import com.example.jstore.utils.pushActivity
 import com.example.jstore.utils.showToast
@@ -66,6 +67,9 @@ class HomeAdminActivity : BaseActivity() {
         }
         binding.btnProducts.setOnClickListener {
             startActivity(Intent(this, ProductActivity::class.java))
+        }
+        binding.btnSettings.setOnClickListener {
+            startActivity(Intent(this, SettingActivity::class.java))
         }
     }
 

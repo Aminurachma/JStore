@@ -50,6 +50,11 @@
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
     <string name="update">Update</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="lokasi_pengiriman">Lokasi Pengiriman</string>
+    <string name="jasa_pengiriman">Jasa Pengiriman</string>
+    <string name="metode_pembayaran">Metode Pembayaran</string>
+    <string name="nomor_rekening">Nomor Rekening</string>
     <string name="my_cart">My Cart</string>
     <string name="total">Total</string>
     <string name="checkout">Checkout</string>

@@ -56,6 +56,7 @@ class FirestoreClass {
 
     }
 
+
     fun uploadImageToFirestore(fileUri: Uri, onSuccessListener: (imageUrl: String) -> Unit, onFailureListener: (e: Exception) -> Unit) {
         val fileName = UUID.randomUUID().toString() +".jpg"
         val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
@@ -177,6 +178,22 @@ class FirestoreClass {
             }
     }
 
+    fun updateProfileAdmin(fullnameAdmin: String, emailAdmin: String,mobileAdmin: String,
+                           onSuccessListener: () -> Unit,
+                           onFailureListener: (e: Exception) -> Unit){
+        mFirestore.collection(ADMIN)
+            .document(Prefs.adminId)
+            .update("fullNameAdmin",fullnameAdmin,
+                "emailAdmin", emailAdmin,
+                "mobileAdmin", mobileAdmin)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+
     fun subscribeAdminProfile(
         onSuccessListener: (admin: Admin) -> Unit,
         onFailureListener: (e: String) -> Unit
@@ -195,6 +212,37 @@ class FirestoreClass {
                         onSuccessListener(admin)
                     }
                 }
+            }
+    }
+
+    fun uploadImageAdminToFirestore(fileUri: Uri, onSuccessListener: (imageUrl: String) -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        val fileName = UUID.randomUUID().toString() +".jpg"
+        val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
+        refStorage.putFile(fileUri)
+            .addOnSuccessListener {
+                it.storage.downloadUrl.addOnSuccessListener { uri ->
+                    val imageUrl = uri.toString()
+                    updateProfileAdminImageUrl(imageUrl = imageUrl, onSuccessListener = {
+                        onSuccessListener(imageUrl)
+                    }, onFailureListener = { e ->
+                        onFailureListener(e)
+                    })
+                }
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+            }
+    }
+
+    private fun updateProfileAdminImageUrl(imageUrl: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        mFirestore.collection(ADMIN)
+            .document(Prefs.adminId)
+            .update("imageAdmin", imageUrl)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
             }
     }
 
@@ -238,5 +286,7 @@ class FirestoreClass {
                 logError("getCustomerItemsList: ${e.message}")
             }
     }
+
+
 
 }
