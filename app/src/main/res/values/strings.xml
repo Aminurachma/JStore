@@ -41,12 +41,15 @@
 	<string name="home">Home</string>
 	<string name="_1">1</string>
     <string name="register_success">You are registered successfully</string>
+    <string name="update_profile_success">Update profile successfully</string>
 	<string name="tunggu_sebentar_ya">Tunggu Sebentar ya</string>
 	<string name="invalid_email">Invalid email format!</string>
 	<string name="empty_field">Please enter your %s</string>
 	<string name="register_failed">Failed to register! %s</string>
+	<string name="update_profile_failed">Failed to update your profile! %s</string>
 	<string name="profile">Profile</string>
 	<string name="logout">Logout</string>
+	<string name="update">Update</string>
 	<string name="my_cart">My Cart</string>
 	<string name="total">Total</string>
 	<string name="checkout">Checkout</string>
@@ -54,6 +57,8 @@
 	<string name="login_success">Login berhasil!</string>
 	<string name="login_failed">Login gagal!</string>
 	<string name="hello_user">Hello, %s</string>
+    <string name="image_selection_failed">Something went wrong during image selection</string>
+    <string name="read_storage_permission_denied">Oops! It seems like you just denied the permission needed. You can also allow it from settings.</string>
 	<string name="kategori">Kategori</string>
 	<string name="selamat_ndatang">Selamat\nDatang,</string>
 	<string name="penghasilan">Penghasilan</string>

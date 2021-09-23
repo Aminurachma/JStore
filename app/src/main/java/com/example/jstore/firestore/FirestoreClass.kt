@@ -1,5 +1,7 @@
 package com.example.jstore.firestore
 
+import android.net.Uri
+import android.widget.Toast
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.models.Admin
 import com.example.jstore.models.Product
@@ -14,6 +16,9 @@ import com.example.jstore.utils.logError
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.util.*
 
 class FirestoreClass {
 
@@ -27,6 +32,52 @@ class FirestoreClass {
         mFirestore.collection(USERS)
             .document(userInfo.id)
             .set(userInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+
+    fun updateProfileUser(user: User,
+                          onSuccessListener: () -> Unit,
+                          onFailureListener: (e: Exception) -> Unit){
+        mFirestore.collection(USERS)
+            .document(Prefs.userId)
+            .set(user)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+
+    }
+
+    fun uploadImageToFirestore(fileUri: Uri, onSuccessListener: (imageUrl: String) -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        val fileName = UUID.randomUUID().toString() +".jpg"
+        val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
+        refStorage.putFile(fileUri)
+            .addOnSuccessListener {
+                it.storage.downloadUrl.addOnSuccessListener {
+                    val imageUrl = it.toString()
+                    updateProfileImageUrl(imageUrl = imageUrl, onSuccessListener = {
+                        onSuccessListener(imageUrl)
+                    }, onFailureListener = {
+                        onFailureListener(it)
+                    })
+                }
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+            }
+    }
+
+    fun updateProfileImageUrl(imageUrl: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        mFirestore.collection(USERS)
+            .document(Prefs.userId)
+            .update("image", imageUrl)
             .addOnSuccessListener {
                 onSuccessListener()
             }
