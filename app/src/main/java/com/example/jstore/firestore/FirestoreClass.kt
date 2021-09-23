@@ -197,4 +197,24 @@ class FirestoreClass {
             }
     }
 
+    fun getCustomerList(
+        onSuccessListener: (customers: List<User>) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(USERS)
+            .get()
+            .addOnSuccessListener { document ->
+                logDebug("getCustomerItemsList: ${document.documents}")
+
+                val customerList = document.documents.map {
+                    it.toObject(User::class.java) ?: User()
+                }
+                onSuccessListener(customerList)
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+                logError("getCustomerItemsList: ${e.message}")
+            }
+    }
+
 }
