@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jstore">
-        <activity android:name=".ui.customer.CustomerActivity"></activity>
+        <activity android:name=".ui.product.ProductActivity"></activity>
+        <activity android:name=".ui.customer.CustomerActivity" />
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:exported="true" />

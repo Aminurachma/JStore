@@ -177,6 +177,28 @@ class FirestoreClass {
             }
     }
 
+    fun subscribeAdminProfile(
+        onSuccessListener: (admin: Admin) -> Unit,
+        onFailureListener: (e: String) -> Unit
+    ) {
+        mFirestore.collection(ADMIN)
+            .document(Prefs.adminId)
+            .addSnapshotListener { value, error ->
+                error?.let { e ->
+                    onFailureListener(e.message.toString())
+                }
+                value?.let { documentSnapshot ->
+                    val admin = documentSnapshot.toObject<Admin>()
+                    if (admin != null) {
+                        Prefs.adminId = admin.idAdmin
+                        Prefs.adminFullName = admin.fullNameAdmin
+                        onSuccessListener(admin)
+                    }
+                }
+            }
+    }
+
+
     fun getProductList(
         onSuccessListener: (products: List<Product>) -> Unit,
         onFailureListener: (e: Exception) -> Unit
