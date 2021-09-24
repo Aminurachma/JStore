@@ -9,8 +9,12 @@ import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ActivitySettingBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Admin
+import com.example.jstore.ui.jasapengiriman.JasaPengirimanActivity
 import com.example.jstore.ui.login.customer.MainActivity
+import com.example.jstore.ui.lokasipengiriman.LokasiPengirimanActivity
+import com.example.jstore.ui.metodepembayaran.MetodePembayaranActivity
 import com.example.jstore.ui.profile.ProfileAdminActivity
+import com.example.jstore.ui.rekening.RekeningActivity
 import com.example.jstore.utils.logError
 import com.google.firebase.auth.FirebaseAuth
 import timber.log.Timber
@@ -36,6 +40,18 @@ class SettingActivity : BaseActivity() {
         }
         binding.btnUpdateProfile.setOnClickListener {
             startActivity(Intent(this, ProfileAdminActivity::class.java))
+        }
+        binding.btnJasaPengiriman.setOnClickListener {
+            startActivity(Intent(this, JasaPengirimanActivity::class.java))
+        }
+        binding.btnLokasiPengiriman.setOnClickListener {
+            startActivity(Intent(this, LokasiPengirimanActivity::class.java))
+        }
+        binding.btnMetodePembayaran.setOnClickListener {
+            startActivity(Intent(this, MetodePembayaranActivity::class.java))
+        }
+        binding.btnNomorRekening.setOnClickListener {
+            startActivity(Intent(this, RekeningActivity::class.java))
         }
         binding.btnLogout.setOnClickListener {
             logoutUser()

@@ -5,6 +5,9 @@ object Constants {
     const val USERS = "users"
     const val ADMIN = "admin"
     const val PRODUCTS = "products"
+    const val REKENING = "rekening"
+    const val JASA_PENGIRIMAN = "jasa_pengiriman"
+    const val LOKASI_PENGIRIMAN = "lokasi_pengiriman"
     const val CARTS = "carts"
 
     const val IMAGE = "image"

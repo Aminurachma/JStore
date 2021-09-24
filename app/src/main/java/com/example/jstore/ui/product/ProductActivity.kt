@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityProductBinding
 import com.example.jstore.firestore.FirestoreClass
+import com.example.jstore.ui.profile.ProfileAdminActivity
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
@@ -23,7 +24,17 @@ class ProductActivity : BaseActivity() {
         setupAdapter()
         setupUI()
         getProductList()
+        setupClickListener()
 
+    }
+
+    private fun setupClickListener() {
+        binding.btnAddProduct.setOnClickListener {
+            startActivity(Intent(this, AddProductActivity::class.java))
+        }
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun setupUI() {
@@ -52,5 +63,10 @@ class ProductActivity : BaseActivity() {
             progress.dismiss()
             showToast(it.message.toString())
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

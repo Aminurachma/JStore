@@ -1,23 +1,19 @@
 package com.example.jstore.firestore
 
 import android.net.Uri
+import android.widget.Toast
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.models.Admin
-import com.example.jstore.models.Cart
 import com.example.jstore.models.Product
 import com.example.jstore.models.User
 import com.example.jstore.utils.Constants.ADMIN
-import com.example.jstore.utils.Constants.CARTS
 import com.example.jstore.utils.Constants.EMAIL_ADMIN
-import com.example.jstore.utils.Constants.IS_CHECKED_OUT
 import com.example.jstore.utils.Constants.PASSWORD_ADMIN
 import com.example.jstore.utils.Constants.PRODUCTS
 import com.example.jstore.utils.Constants.USERS
-import com.example.jstore.utils.Constants.USER_ID
 import com.example.jstore.utils.logDebug
 import com.example.jstore.utils.logError
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.toObject
@@ -317,23 +313,155 @@ class FirestoreClass {
             }
     }
 
-    fun subscribeToCart(
-        onSuccessListener: (cart: Cart) -> Unit,
-        onFailureListener: (e: String) -> Unit
+    fun uploadImageProductToFirestore(fileUri: Uri, onSuccessListener: (imageUrl: String) -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        val fileName = UUID.randomUUID().toString() +".jpg"
+        val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
+        refStorage.putFile(fileUri)
+            .addOnSuccessListener {
+                it.storage.downloadUrl.addOnSuccessListener { uri ->
+                    val imageUrl = uri.toString()
+                    onSuccessListener(imageUrl)
+                }
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+            }
+    }
+    fun updateProductImageUrl(imageUrl: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        val data = HashMap<String, Any>()
+        data["image"] = imageUrl
+
+        mFirestore.collection(PRODUCTS)
+            .add(data)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+
+    }
+
+    fun addProduct(product: Product, setOptions: SetOptions,
+                   onSuccessListener: () -> Unit,
+                   onFailureListener: (e: Exception) -> Unit){
+
+        mFirestore.collection(PRODUCTS)
+            .document()
+            .set(product, setOptions)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+
+    }
+
+    fun addRekening(rekening: Rekening,
+                   onSuccessListener: () -> Unit,
+                   onFailureListener: (e: Exception) -> Unit){
+
+        mFirestore.collection(REKENING)
+            .document()
+            .set(rekening)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+
+    }
+
+    fun getRekeningList(
+        onSuccessListener: (rekening: List<Rekening>) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
     ) {
-        mFirestore.collection(CARTS)
-            .whereEqualTo(USER_ID, Prefs.userId)
-            .whereEqualTo(IS_CHECKED_OUT, false)
-            .addSnapshotListener { value, error ->
-                error?.let {
-                    onFailureListener(it.message.toString())
+        mFirestore.collection(REKENING)
+            .get()
+            .addOnSuccessListener { document ->
+                logDebug("getRekeningItemsList: ${document.documents}")
+
+                val rekeningList = document.documents.map {
+                    it.toObject(Rekening::class.java) ?: Rekening()
                 }
-                value?.let { document ->
-                    val cart = document.documents.map {
-                        it.toObject<Cart>() ?: Cart()
-                    }
-                    onSuccessListener(cart.first())
+                onSuccessListener(rekeningList)
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+                logError("getRekeningItemsList: ${e.message}")
+            }
+    }
+
+    fun addJasaPengiriman(jasaPengiriman: JasaPengiriman,
+                    onSuccessListener: () -> Unit,
+                    onFailureListener: (e: Exception) -> Unit){
+
+        mFirestore.collection(JASA_PENGIRIMAN)
+            .document()
+            .set(jasaPengiriman)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+
+    }
+    fun getJasaPengirimanList(
+        onSuccessListener: (jasaPengiriman: List<JasaPengiriman>) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(JASA_PENGIRIMAN)
+            .get()
+            .addOnSuccessListener { document ->
+                logDebug("getJasaPengirimanItemsList: ${document.documents}")
+
+                val jasaPengirimanList = document.documents.map {
+                    it.toObject(JasaPengiriman::class.java) ?: JasaPengiriman()
                 }
+                onSuccessListener(jasaPengirimanList)
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+                logError("getRekeningItemsList: ${e.message}")
+            }
+    }
+
+    fun addLokasiPengiriman(lokasiPengiriman: LokasiPengiriman,
+                    onSuccessListener: () -> Unit,
+                    onFailureListener: (e: Exception) -> Unit){
+
+        mFirestore.collection(LOKASI_PENGIRIMAN)
+            .document()
+            .set(lokasiPengiriman)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+
+    }
+
+    fun getLokasiPengirimanList(
+        onSuccessListener: (lokasiPengiriman: List<LokasiPengiriman>) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(LOKASI_PENGIRIMAN)
+            .get()
+            .addOnSuccessListener { document ->
+                logDebug("getLokasiPengirimanItemsList: ${document.documents}")
+
+                val lokasiPengirimanList = document.documents.map {
+                    it.toObject(LokasiPengiriman::class.java) ?: LokasiPengiriman()
+                }
+                onSuccessListener(lokasiPengirimanList)
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+                logError("getRekeningItemsList: ${e.message}")
             }
     }
 
