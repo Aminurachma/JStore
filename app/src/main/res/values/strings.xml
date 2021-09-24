@@ -71,5 +71,11 @@
     <string name="orders">Orders</string>
     <string name="customers">Customers</string>
     <string name="settings">Settings</string>
-    <string name="add_product">Add New Product</string>
+    <string name="add_product">Tambah Produk Baru</string>
+    <string name="name_product">Nama Produk</string>
+    <string name="stock_product">Stok Produk</string>
+    <string name="price_product">Harga Produk</string>
+    <string name="desc_product">Deskripsi Produk</string>
+    <string name="img_product">Gambar Produk</string>
+    <string name="category_product">Kategori Produk</string>
 </resources>

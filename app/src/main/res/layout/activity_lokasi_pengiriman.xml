@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light"
-    tools:context=".ui.product.ProductActivity">
+    tools:context=".ui.lokasipengiriman.LokasiPengirimanActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_bold"
-            android:text="@string/products"
+            android:text="@string/lokasi_pengiriman"
             android:textColor="@color/dark"
             android:textSize="@dimen/_19ssp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,34 +58,26 @@
             android:padding="@dimen/_20sdp"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/search_view"
-                layout="@layout/search_layout" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_add_product"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:fontFamily="@font/rubik_medium"
-                android:text="@string/add_product"
-                android:textAllCaps="false"
-                android:textSize="@dimen/_12ssp"
-                app:cornerRadius="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@+id/til_address" />
-
+            <!--        <com.google.android.material.button.MaterialButton-->
+            <!--            android:id="@+id/btn_add_product"-->
+            <!--            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="@dimen/_45sdp"-->
+            <!--            android:layout_marginTop="@dimen/_20sdp"-->
+            <!--            android:fontFamily="@font/rubik_medium"-->
+            <!--            android:text="@string/add_product"-->
+            <!--            android:textAllCaps="false"-->
+            <!--            android:textSize="@dimen/_12ssp"-->
+            <!--            app:cornerRadius="@dimen/_8sdp" />-->
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_product"
+                android:id="@+id/rv_lokasi_pengiriman"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
                 android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
                 tools:itemCount="5"
-                tools:listitem="@layout/item_product" />
+                tools:listitem="@layout/item_lokasi_pengiriman" />
 
         </LinearLayout>
 

@@ -6,6 +6,8 @@ object Prefs : KotprefModel() {
     var userId by stringPref()
     var userFullName by stringPref()
 
+    var productId by stringPref()
+
     var adminId by stringPref()
     var adminFullName by stringPref()
 }
