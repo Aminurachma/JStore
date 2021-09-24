@@ -504,7 +504,9 @@ class FirestoreClass {
                     val cart = document.documents.map {
                         it.toObject<Cart>() ?: Cart()
                     }
-                    onSuccessListener(cart.first())
+                    if (cart.isNotEmpty()) {
+                        onSuccessListener(cart.first())
+                    }
                 }
             }
     }
