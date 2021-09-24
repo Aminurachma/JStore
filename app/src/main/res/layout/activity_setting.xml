@@ -1,318 +1,292 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/light"
-    android:orientation="vertical"
-    tools:context=".ui.setting.SettingActivity">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/light"
+	android:orientation="vertical"
+	tools:context=".ui.setting.SettingActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:paddingHorizontal="@dimen/_6sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="?attr/actionBarSize"
+		android:paddingHorizontal="@dimen/_6sdp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btn_back"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:background="@drawable/oval"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:padding="@dimen/_4sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_left_arrow" />
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/btn_back"
+			android:layout_width="@dimen/_24sdp"
+			android:layout_height="@dimen/_24sdp"
+			android:background="@drawable/oval"
+			android:foreground="?attr/selectableItemBackgroundBorderless"
+			android:padding="@dimen/_4sdp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:srcCompat="@drawable/ic_left_arrow" />
 
-        <TextView
-            android:layout_width="wrap_content"
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:fontFamily="@font/rubik_bold"
+			android:text="@string/settings"
+			android:textColor="@color/dark"
+			android:textSize="@dimen/_19ssp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/_10sdp"
+		android:layout_marginTop="@dimen/_20sdp"
+		android:orientation="horizontal"
+		android:padding="@dimen/_10sdp">
+
+		<de.hdodenhof.circleimageview.CircleImageView
+			android:id="@+id/img_admin_avatar"
+			android:layout_width="@dimen/_80sdp"
+			android:layout_height="@dimen/_80sdp"
+			android:scaleType="centerCrop"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:src="@tools:sample/avatars" />
+
+		<androidx.appcompat.widget.LinearLayoutCompat
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_marginStart="@dimen/_12sdp"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/tv_admin_name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:fontFamily="@font/rubik_medium"
+				android:maxLines="2"
+				android:textColor="@color/dark"
+				android:textSize="@dimen/_11ssp"
+				tools:text="Welly si Welly" />
+
+			<TextView
+				android:id="@+id/tv_admin_email"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_4sdp"
+				android:ellipsize="end"
+				android:fontFamily="@font/rubik_regular"
+				android:maxLines="2"
+				android:textColor="@color/colorPrimary"
+				android:textSize="@dimen/_10ssp"
+				tools:text="siapa@siapa.com " />
+
+		</androidx.appcompat.widget.LinearLayoutCompat>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:paddingStart="@dimen/_14sdp"
+		android:paddingEnd="@dimen/_14sdp">
+
+		<LinearLayout
+			android:id="@+id/btn_update_profile"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginTop="@dimen/_20sdp"
+			android:layout_marginBottom="@dimen/_20sdp"
+			android:orientation="horizontal"
+			android:padding="@dimen/_10sdp">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/_20sdp"
+				android:layout_height="@dimen/_20sdp"
+				app:srcCompat="@drawable/ic_update_user"
+				app:tint="@color/black" />
+
+			<TextView
+				android:id="@+id/tv_update_profile"
+				android:layout_width="0dp"
+                android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/_10sdp"
+				android:fontFamily="@font/rubik_medium"
+				android:text="@string/update_profile"
+				android:textColor="@color/dark"
+				android:textSize="@dimen/_12ssp" />
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/_14sdp"
+				android:layout_height="@dimen/_14sdp"
+				app:srcCompat="@drawable/ic_arrow"
+				app:tint="@color/black" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/btn_jasa_pengiriman"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginBottom="@dimen/_20sdp"
+			android:orientation="horizontal"
+			android:padding="@dimen/_10sdp">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/_20sdp"
+				android:layout_height="@dimen/_20sdp"
+				app:srcCompat="@drawable/ic_baseline_local_shipping"
+				app:tint="@color/black" />
+
+			<TextView
+				android:id="@+id/tv_jasa_pengiriman"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/_10sdp"
+				android:fontFamily="@font/rubik_medium"
+				android:text="@string/jasa_pengiriman"
+				android:textColor="@color/dark"
+				android:textSize="@dimen/_12ssp" />
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/_14sdp"
+				android:layout_height="@dimen/_14sdp"
+				app:srcCompat="@drawable/ic_arrow"
+				app:tint="@color/black" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/btn_lokasi_pengiriman"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginBottom="@dimen/_20sdp"
+			android:orientation="horizontal"
+			android:padding="@dimen/_10sdp">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/_20sdp"
+				android:layout_height="@dimen/_20sdp"
+				app:srcCompat="@drawable/ic_baseline_location"
+				app:tint="@color/black" />
+
+			<TextView
+				android:id="@+id/tv_lokasi_pengiriman"
+				android:layout_width="0dp"
+                android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/_10sdp"
+				android:fontFamily="@font/rubik_medium"
+				android:text="@string/lokasi_pengiriman"
+				android:textColor="@color/dark"
+				android:textSize="@dimen/_12ssp" />
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/_14sdp"
+				android:layout_height="@dimen/_14sdp"
+				app:srcCompat="@drawable/ic_arrow"
+				app:tint="@color/black" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/btn_nomor_rekening"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+            android:gravity="center"
+			android:layout_marginBottom="@dimen/_20sdp"
+			android:orientation="horizontal"
+			android:padding="@dimen/_10sdp">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/_20sdp"
+				android:layout_height="@dimen/_20sdp"
+				app:srcCompat="@drawable/ic_baseline_credit_card"
+				app:tint="@color/black" />
+
+			<TextView
+				android:id="@+id/tv_nomor_rekening"
+				android:layout_width="0dp"
+                android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/_10sdp"
+				android:fontFamily="@font/rubik_medium"
+				android:text="@string/nomor_rekening"
+				android:textColor="@color/dark"
+				android:textSize="@dimen/_12ssp" />
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/_14sdp"
+				android:layout_height="@dimen/_14sdp"
+				app:srcCompat="@drawable/ic_arrow"
+				app:tint="@color/black" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/btn_metode_pembayaran"
+			android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/rubik_bold"
-            android:text="@string/settings"
-            android:textColor="@color/dark"
-            android:textSize="@dimen/_19ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:padding="@dimen/_10sdp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_admin_avatar"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_80sdp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_admin_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:ellipsize="end"
-                android:fontFamily="@font/rubik_medium"
-                android:maxLines="2"
-                android:textColor="@color/dark"
-                android:textSize="@dimen/_11ssp"
-                tools:text="Welly si Welly" />
-
-            <TextView
-                android:id="@+id/tv_admin_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:ellipsize="end"
-                android:fontFamily="@font/rubik_regular"
-                android:maxLines="2"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_10ssp"
-                tools:text="siapa@siapa.com " />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:paddingStart="@dimen/_14sdp"
-        android:paddingEnd="@dimen/_14sdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/btn_update_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:layout_gravity="center"
+			android:padding="@dimen/_10sdp">
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/_20sdp"
+				android:layout_height="@dimen/_20sdp"
+				app:srcCompat="@drawable/ic_metode_pembayaran"
+				app:tint="@color/black" />
+
+			<TextView
+				android:id="@+id/tv_metode_pembayaran"
+				android:layout_width="0dp"
+                android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/_10sdp"
+				android:fontFamily="@font/rubik_medium"
+				android:text="@string/metode_pembayaran"
+				android:textColor="@color/dark"
+				android:textSize="@dimen/_12ssp" />
+
+			<androidx.appcompat.widget.AppCompatImageView
+				android:layout_width="@dimen/_14sdp"
+				android:layout_height="@dimen/_14sdp"
+				app:srcCompat="@drawable/ic_arrow"
+				app:tint="@color/black" />
+
+		</LinearLayout>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btn_logout"
+			style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:padding="@dimen/_10sdp">
+			android:fontFamily="@font/rubik_medium"
+			android:text="@string/logout"
+			android:textAllCaps="false"
+			android:textColor="@color/white"
+			android:textSize="@dimen/_12ssp"
+			app:cornerRadius="@dimen/_8sdp"
+			app:strokeColor="@color/white"
+			app:strokeWidth="1dp" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_gravity="bottom"
-                app:srcCompat="@drawable/ic_update_user"
-                app:tint="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_update_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:ellipsize="end"
-                android:fontFamily="@font/rubik_medium"
-                android:maxLines="2"
-                android:textColor="@color/dark"
-                android:textSize="@dimen/_12ssp"
-                android:text="@string/update_profile"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_14sdp"
-                android:layout_height="@dimen/_14sdp"
-                android:layout_marginStart="@dimen/_123sdp"
-                android:layout_gravity="bottom"
-                app:srcCompat="@drawable/ic_arrow"
-                app:tint="@color/black" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btn_jasa_pengiriman"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:layout_gravity="center"
-            android:padding="@dimen/_10sdp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_gravity="bottom"
-                app:srcCompat="@drawable/ic_baseline_local_shipping"
-                app:tint="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_jasa_pengiriman"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:ellipsize="end"
-                android:fontFamily="@font/rubik_medium"
-                android:maxLines="2"
-                android:textColor="@color/dark"
-                android:textSize="@dimen/_12ssp"
-                android:text="@string/jasa_pengiriman"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_14sdp"
-                android:layout_height="@dimen/_14sdp"
-                android:layout_marginStart="@dimen/_112sdp"
-                android:layout_gravity="bottom"
-                app:srcCompat="@drawable/ic_arrow"
-                app:tint="@color/black" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btn_lokasi_pengiriman"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:padding="@dimen/_10sdp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_gravity="bottom"
-                app:srcCompat="@drawable/ic_baseline_location"
-                app:tint="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_lokasi_pengiriman"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:ellipsize="end"
-                android:fontFamily="@font/rubik_medium"
-                android:maxLines="2"
-                android:textColor="@color/dark"
-                android:textSize="@dimen/_12ssp"
-                android:text="@string/lokasi_pengiriman"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_14sdp"
-                android:layout_height="@dimen/_14sdp"
-                android:layout_marginStart="@dimen/_100sdp"
-                android:layout_gravity="bottom"
-                app:srcCompat="@drawable/ic_arrow"
-                app:tint="@color/black" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btn_nomor_rekening"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:padding="@dimen/_10sdp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_gravity="bottom"
-                app:srcCompat="@drawable/ic_baseline_credit_card"
-                app:tint="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_nomor_rekening"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:ellipsize="end"
-                android:fontFamily="@font/rubik_medium"
-                android:maxLines="2"
-                android:textColor="@color/dark"
-                android:textSize="@dimen/_12ssp"
-                android:text="@string/nomor_rekening"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_14sdp"
-                android:layout_height="@dimen/_14sdp"
-                android:layout_marginStart="@dimen/_112sdp"
-                android:layout_gravity="bottom"
-                app:srcCompat="@drawable/ic_arrow"
-                app:tint="@color/black" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btn_metode_pembayaran"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:padding="@dimen/_10sdp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_gravity="bottom"
-                app:srcCompat="@drawable/ic_metode_pembayaran"
-                app:tint="@color/black" />
-
-            <TextView
-                android:id="@+id/tv_metode_pembayaran"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:ellipsize="end"
-                android:fontFamily="@font/rubik_medium"
-                android:maxLines="2"
-                android:textColor="@color/dark"
-                android:textSize="@dimen/_12ssp"
-                android:text="@string/metode_pembayaran"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/_14sdp"
-                android:layout_height="@dimen/_14sdp"
-                android:layout_marginStart="@dimen/_86sdp"
-                android:layout_gravity="bottom"
-                app:srcCompat="@drawable/ic_arrow"
-                app:tint="@color/black" />
-
-        </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_logout"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:fontFamily="@font/rubik_medium"
-            android:text="@string/logout"
-            android:textAllCaps="false"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/white"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12ssp"
-            app:cornerRadius="@dimen/_8sdp"/>
-
-    </LinearLayout>
+	</LinearLayout>
 
 </LinearLayout>
