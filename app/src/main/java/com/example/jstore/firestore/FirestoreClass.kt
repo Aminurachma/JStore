@@ -491,21 +491,43 @@ class FirestoreClass {
             }
     }
 
+    fun getMyCart(
+        onSuccessListener: (cart: Cart) -> Unit
+    ) {
+        mFirestore.collection(CARTS)
+            .whereEqualTo(Constants.USER_ID, Prefs.userId)
+            .whereEqualTo(Constants.IS_CHECKED_OUT, false)
+            .get()
+            .addOnSuccessListener { document ->
+                val cart = document.documents.map {
+                    it.toObject<Cart>() ?: Cart()
+                }
+                if (cart.isNotEmpty()) onSuccessListener(cart.first())
+            }
+    }
+
     fun addProductToCart(
         product: Product,
         onSuccessListener: () -> Unit,
         onFailureListener: (e: Exception) -> Unit
     ) {
-        mFirestore.collection(CARTS)
-            .document(Prefs.activeCartId)
-            .update(PRODUCTS, FieldValue.arrayUnion(product))
-            .addOnSuccessListener {
-                onSuccessListener()
+        getMyCart { cart ->
+            if (cart.products.any { it.productId == product.productId }) {
+                updateMyCart(cartId = cart.cartId, products = cart.products.toMutableList(), product = product,
+                    onSuccessListener = { onSuccessListener() }, onFailureListener = { onFailureListener(it) })
+            } else {
+                mFirestore.collection(CARTS)
+                    .document(Prefs.activeCartId)
+                    .update(PRODUCTS, FieldValue.arrayUnion(product))
+                    .addOnSuccessListener {
+                        onSuccessListener()
+                    }
+                    .addOnFailureListener {
+                        onFailureListener(it)
+                        logError("addProductToCart: ${it.message}")
+                    }
             }
-            .addOnFailureListener {
-                onFailureListener(it)
-                logError("addProductToCart: ${it.message}")
-            }
+        }
     }
 
     fun updateMyCart(
