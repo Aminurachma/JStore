@@ -43,7 +43,7 @@ class ProfileActivity : BaseActivity() {
 
     private fun getUserProfile() {
         progress.show()
-        FirestoreClass().getUserDetails(onSuccessListener = {
+        FirestoreClass().subscribeUserProfile(onSuccessListener = {
             progress.dismiss()
             mUserDetails = it
             Glide.with(this)
@@ -57,7 +57,7 @@ class ProfileActivity : BaseActivity() {
         }, onFailureListener = {
             progress.dismiss()
             logoutUser()
-            logError("getUserDetails: ${it.message}")
+            logError("getUserDetails: $it")
         })
     }
 
@@ -97,7 +97,7 @@ class ProfileActivity : BaseActivity() {
         progress.show()
         FirestoreClass().uploadImageToFirestore(mSelectedProfileImageFileUri!!, onSuccessListener = {
             progress.dismiss()
-            binding.imgAvatar.setImageURI(mSelectedProfileImageFileUri)
+//            binding.imgAvatar.setImageURI(mSelectedProfileImageFileUri)
         }, onFailureListener = {
             progress.dismiss()
             showToast(getString(R.string.update_profile_failed, it.message.toString()))

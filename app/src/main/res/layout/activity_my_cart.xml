@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".ui.cart.MyCartActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,11 +18,11 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_back"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:background="@drawable/oval"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="@dimen/_4sdp"
+            app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +33,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_bold"
             android:text="@string/my_cart"
-            android:textColor="@color/dark"
+            android:textColor="@color/white"
             android:textSize="@dimen/_19ssp"
             app:layout_constraintBottom_toBottomOf="@+id/btn_back"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingVertical="@dimen/_20sdp"
-        android:paddingHorizontal="@dimen/_12sdp"
+        android:paddingHorizontal="@dimen/_8sdp"
         android:clipToPadding="false"
         tools:itemCount="4"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -62,6 +63,7 @@
         android:layout_height="wrap_content"
         android:elevation="@dimen/_4sdp"
         android:paddingVertical="@dimen/_8sdp"
+        android:background="@color/white"
         android:paddingHorizontal="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,16 +86,16 @@
             android:id="@+id/tv_total"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_2sdp"
             android:fontFamily="@font/rubik_bold"
             android:textColor="@color/dark"
             android:layout_marginEnd="@dimen/_8sdp"
             android:textSize="@dimen/_14ssp"
+            android:text="@string/rp_0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_checkout"
             app:layout_constraintStart_toStartOf="@+id/tv_total_label"
-            app:layout_constraintTop_toBottomOf="@+id/tv_total_label"
-            tools:text="Rp. 520,000" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_label" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_checkout"
@@ -103,6 +105,9 @@
             android:fontFamily="@font/rubik_medium"
             android:text="@string/checkout"
             android:textAllCaps="false"
+            app:cornerRadius="@dimen/_6sdp"
+            app:icon="@drawable/ic_arrow_right_alt"
+            app:iconGravity="end"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintBottom_toBottomOf="parent"

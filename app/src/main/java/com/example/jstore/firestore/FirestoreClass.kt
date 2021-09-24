@@ -1,11 +1,12 @@
 package com.example.jstore.firestore
 
 import android.net.Uri
-import android.util.Log
 import android.widget.Toast
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.models.*
+import com.example.jstore.utils.Constants
 import com.example.jstore.utils.Constants.ADMIN
+import com.example.jstore.utils.Constants.CARTS
 import com.example.jstore.utils.Constants.EMAIL_ADMIN
 import com.example.jstore.utils.Constants.JASA_PENGIRIMAN
 import com.example.jstore.utils.Constants.LOKASI_PENGIRIMAN
@@ -16,13 +17,14 @@ import com.example.jstore.utils.Constants.USERS
 import com.example.jstore.utils.logDebug
 import com.example.jstore.utils.logError
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import timber.log.Timber
 import java.util.*
+import kotlin.collections.HashMap
 
 class FirestoreClass {
 
@@ -44,9 +46,11 @@ class FirestoreClass {
             }
     }
 
-    fun updateProfileUser(user: User,
-                          onSuccessListener: () -> Unit,
-                          onFailureListener: (e: Exception) -> Unit){
+    fun updateProfileUser(
+        user: User,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(USERS)
             .document(Prefs.userId)
             .set(user)
@@ -59,9 +63,12 @@ class FirestoreClass {
 
     }
 
-
-    fun uploadImageToFirestore(fileUri: Uri, onSuccessListener: (imageUrl: String) -> Unit, onFailureListener: (e: Exception) -> Unit) {
-        val fileName = UUID.randomUUID().toString() +".jpg"
+    fun uploadImageToFirestore(
+        fileUri: Uri,
+        onSuccessListener: (imageUrl: String) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        val fileName = UUID.randomUUID().toString() + ".jpg"
         val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
         refStorage.putFile(fileUri)
             .addOnSuccessListener {
@@ -79,7 +86,11 @@ class FirestoreClass {
             }
     }
 
-    private fun updateProfileImageUrl(imageUrl: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+    private fun updateProfileImageUrl(
+        imageUrl: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(USERS)
             .document(Prefs.userId)
             .update("image", imageUrl)
@@ -91,7 +102,12 @@ class FirestoreClass {
             }
     }
 
-    fun loginAdmin(email: String, password: String, onLoginSuccess: (admin: Admin) -> Unit, onLoginFailed: (e: String) -> Unit) {
+    fun loginAdmin(
+        email: String,
+        password: String,
+        onLoginSuccess: (admin: Admin) -> Unit,
+        onLoginFailed: (e: String) -> Unit
+    ) {
         mFirestore.collection(ADMIN)
             .whereEqualTo(EMAIL_ADMIN, email)
             .whereEqualTo(PASSWORD_ADMIN, password)
@@ -181,14 +197,18 @@ class FirestoreClass {
             }
     }
 
-    fun updateProfileAdmin(fullnameAdmin: String, emailAdmin: String,mobileAdmin: String,
-                           onSuccessListener: () -> Unit,
-                           onFailureListener: (e: Exception) -> Unit){
+    fun updateProfileAdmin(
+        fullnameAdmin: String, emailAdmin: String, mobileAdmin: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(ADMIN)
             .document(Prefs.adminId)
-            .update("fullNameAdmin",fullnameAdmin,
+            .update(
+                "fullNameAdmin", fullnameAdmin,
                 "emailAdmin", emailAdmin,
-                "mobileAdmin", mobileAdmin)
+                "mobileAdmin", mobileAdmin
+            )
             .addOnSuccessListener {
                 onSuccessListener()
             }
@@ -218,8 +238,12 @@ class FirestoreClass {
             }
     }
 
-    fun uploadImageAdminToFirestore(fileUri: Uri, onSuccessListener: (imageUrl: String) -> Unit, onFailureListener: (e: Exception) -> Unit) {
-        val fileName = UUID.randomUUID().toString() +".jpg"
+    fun uploadImageAdminToFirestore(
+        fileUri: Uri,
+        onSuccessListener: (imageUrl: String) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        val fileName = UUID.randomUUID().toString() + ".jpg"
         val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
         refStorage.putFile(fileUri)
             .addOnSuccessListener {
@@ -237,7 +261,11 @@ class FirestoreClass {
             }
     }
 
-    private fun updateProfileAdminImageUrl(imageUrl: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+    private fun updateProfileAdminImageUrl(
+        imageUrl: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(ADMIN)
             .document(Prefs.adminId)
             .update("imageAdmin", imageUrl)
@@ -304,6 +332,7 @@ class FirestoreClass {
                 onFailureListener(it)
             }
     }
+
     fun updateProductImageUrl(imageUrl: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
         val data = HashMap<String, Any>()
         data["image"] = imageUrl
@@ -442,5 +471,83 @@ class FirestoreClass {
             }
     }
 
+    fun subscribeToCart(
+        onSuccessListener: (cart: Cart) -> Unit,
+        onFailureListener: (e: String) -> Unit
+    ) {
+        mFirestore.collection(CARTS)
+            .whereEqualTo(Constants.USER_ID, Prefs.userId)
+            .whereEqualTo(Constants.IS_CHECKED_OUT, false)
+            .addSnapshotListener { value, error ->
+                error?.let {
+                    onFailureListener(it.message.toString())
+                }
+                value?.let { document ->
+                    val cart = document.documents.map {
+                        it.toObject<Cart>() ?: Cart()
+                    }
+                    if (cart.isNotEmpty()) {
+                        onSuccessListener(cart.first())
+                    }
+                }
+            }
+    }
+
+    fun addProductToCart(
+        product: Product,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(CARTS)
+            .document(Prefs.activeCartId)
+            .update(PRODUCTS, FieldValue.arrayUnion(product))
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+                logError("addProductToCart: ${it.message}")
+            }
+    }
+
+    fun updateMyCart(
+        cartId: String,
+        product: Product,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+//        removeProductFromCart(product = product, onSuccessListener = {
+//
+//        }, onFailureListener = {
+//
+//        })
+        mFirestore.collection(CARTS)
+            .document(cartId)
+            .update("product[0].quantity", product.quantity)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+                logError("addProductToCart: ${it.message}")
+            }
+    }
+
+    fun removeProductFromCart(
+        product: Product,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(CARTS)
+            .document(Prefs.activeCartId)
+            .update(PRODUCTS, FieldValue.arrayRemove(product))
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+                logError("removeProductFromCart: ${it.message}")
+            }
+    }
 
 }

@@ -4,9 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
+import com.example.jstore.R
 import com.example.jstore.databinding.ActivityProductDetailsBinding
+import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Product
+import com.example.jstore.ui.cart.MyCartActivity
 import com.example.jstore.utils.formatPrice
+import com.example.jstore.utils.logDebug
+import com.example.jstore.utils.pushActivity
+import com.example.jstore.utils.showToast
 
 class ProductDetailsActivity : AppCompatActivity() {
 
@@ -43,6 +49,31 @@ class ProductDetailsActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        binding.btnCart.setOnClickListener {
+            pushActivity(MyCartActivity::class.java)
+        }
+
+        binding.btnAddToCart.setOnClickListener {
+            FirestoreClass().addProductToCart(
+                product = Product(
+                    title = product.title,
+                    price = product.price,
+                    description = product.description,
+                    stockQuantity = product.stockQuantity,
+                    category = product.category,
+                    image = product.image,
+                    productId = product.image,
+                    quantity = binding.tvQuantity.text.toString().toInt()
+                ),
+                onSuccessListener = {
+                    showToast(getString(R.string.added_to_cart, product.title))
+                },
+                onFailureListener = {
+                    showToast(it.message.toString())
+                }
+            )
+        }
+
         binding.btnDecrement.setOnClickListener {
             if (binding.tvQuantity.text.toString().toInt() > 1) {
                 binding.tvQuantity.text = (binding.tvQuantity.text.toString().toInt() - 1).toString()
@@ -50,7 +81,10 @@ class ProductDetailsActivity : AppCompatActivity() {
         }
 
         binding.btnIncrement.setOnClickListener {
-            binding.tvQuantity.text = (binding.tvQuantity.text.toString().toInt() + 1).toString()
+            if (binding.tvQuantity.text.toString().toInt() < product.stockQuantity) {
+                binding.tvQuantity.text =
+                    (binding.tvQuantity.text.toString().toInt() + 1).toString()
+            }
         }
     }
 
