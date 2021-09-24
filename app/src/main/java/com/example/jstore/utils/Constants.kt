@@ -34,4 +34,6 @@ object Constants {
     const val EMAIL_ADMIN = "emailAdmin"
     const val PASSWORD_ADMIN = "passwordAdmin"
 
+    const val QUANTITY = "quantity"
+
 }

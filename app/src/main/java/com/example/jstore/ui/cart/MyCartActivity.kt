@@ -7,6 +7,7 @@ import com.example.jstore.databinding.ActivityMyCartBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Cart
 import com.example.jstore.models.Product
+import com.example.jstore.utils.Constants.QUANTITY
 import com.example.jstore.utils.formatPrice
 import com.example.jstore.utils.logDebug
 import com.example.jstore.utils.logError
@@ -38,9 +39,26 @@ class MyCartActivity : AppCompatActivity() {
     private fun setupAdapter() {
         adapter = CartAdapter(onAddQuantity = {
             updateTotalPrice()
+            updateMyCart(it)
         }, onSubstractQuantity = {
             updateTotalPrice()
+        }, onRemoved = {
+            FirestoreClass().removeProductFromCart(product = it, onSuccessListener = {
+                showToast(getString(R.string.success_remove_from_cart, it.title))
+            }, onFailureListener = { e ->
+                showToast(e.message.toString())
+            })
         })
+    }
+
+    private fun updateMyCart(quantity: Int) {
+//        val hashMap = HashMap<String, Any>()
+//        hashMap[QUANTITY] = quantity
+//        FirestoreClass().updateMyCart(cart.cartId, hashMap, onSuccessListener = {
+//
+//        }, onFailureListener = {
+//
+//        })
     }
 
     private fun getMyCart() {

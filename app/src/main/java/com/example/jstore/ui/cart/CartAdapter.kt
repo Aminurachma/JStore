@@ -14,8 +14,9 @@ import com.example.jstore.models.Product
 import com.example.jstore.utils.formatPrice
 
 class CartAdapter(
-    private val onAddQuantity: (product: Product) -> Unit,
-    private val onSubstractQuantity: (product: Product) -> Unit
+    private val onAddQuantity: (total: Int) -> Unit,
+    private val onSubstractQuantity: (total: Int) -> Unit,
+    private val onRemoved: (product: Product) -> Unit
 ) : ListAdapter<Product, CartAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -48,7 +49,9 @@ class CartAdapter(
                         product.quantity = tvQuantity.text.toString().toInt() - 1
                         notifyItemChanged(absoluteAdapterPosition)
                         tvQuantity.text = (tvQuantity.text.toString().toInt() - 1).toString()
-                        onSubstractQuantity(product)
+                        onSubstractQuantity(tvQuantity.text.toString().toInt() - 1)
+                    } else {
+                        onRemoved(product)
                     }
                 }
 
@@ -57,7 +60,7 @@ class CartAdapter(
                         product.quantity = tvQuantity.text.toString().toInt() + 1
                         notifyItemChanged(absoluteAdapterPosition)
                         tvQuantity.text = (tvQuantity.text.toString().toInt() + 1).toString()
-                        onAddQuantity(product)
+                        onAddQuantity(tvQuantity.text.toString().toInt() + 1)
                     }
                 }
             }
