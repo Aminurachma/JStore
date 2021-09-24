@@ -114,4 +114,5 @@
     <string name="added_to_cart">%s added to cart</string>
 	<string name="success_remove_from_cart">%s has been removed from cart</string>
     <string name="estimasi">Estimasi</string>
+    <string name="not_enough_stock">Stok tidak cukup</string>
 </resources>

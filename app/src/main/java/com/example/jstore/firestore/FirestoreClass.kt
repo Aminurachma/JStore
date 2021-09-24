@@ -510,25 +510,34 @@ class FirestoreClass {
 
     fun updateMyCart(
         cartId: String,
+        products: MutableList<Product>,
         product: Product,
         onSuccessListener: () -> Unit,
         onFailureListener: (e: Exception) -> Unit
     ) {
-//        removeProductFromCart(product = product, onSuccessListener = {
-//
-//        }, onFailureListener = {
-//
-//        })
-        mFirestore.collection(CARTS)
-            .document(cartId)
-            .update("product[0].quantity", product.quantity)
-            .addOnSuccessListener {
-                onSuccessListener()
+        try {
+            var itemIndex = 0
+            products.forEachIndexed { index, p ->
+                if (p.productId == product.productId) {
+                    itemIndex = index
+                    return@forEachIndexed
+                }
             }
-            .addOnFailureListener {
-                onFailureListener(it)
-                logError("addProductToCart: ${it.message}")
-            }
+            logDebug("checkIndex: $itemIndex")
+            products[itemIndex] = product
+            mFirestore.collection(CARTS)
+                .document(cartId)
+                .update(PRODUCTS, products)
+                .addOnSuccessListener {
+                    onSuccessListener()
+                }
+                .addOnFailureListener {
+                    onFailureListener(it)
+                    logError("updateMyCart: ${it.message}")
+                }
+        } catch (e: Exception) {
+            onFailureListener(e)
+        }
     }
 
     fun removeProductFromCart(
