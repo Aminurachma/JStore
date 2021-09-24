@@ -1,10 +1,10 @@
 package com.example.jstore.ui.metodepembayaran
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityMetodePembayaranBinding
 
-class MetodePembayaranActivity : AppCompatActivity() {
+class MetodePembayaranActivity : BaseActivity() {
 
     private var _binding: ActivityMetodePembayaranBinding? = null
     private val binding get() = _binding!!
@@ -13,5 +13,14 @@ class MetodePembayaranActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMetodePembayaranBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

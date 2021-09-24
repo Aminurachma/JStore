@@ -26,6 +26,16 @@ class RekeningActivity : BaseActivity() {
         setupAdapter()
         setupUI()
         getRekeningList()
+        setupClickListener()
+    }
+
+    private fun setupClickListener() {
+        binding.btnAddRekening.setOnClickListener {
+            startActivity(Intent(this, AddRekeningActivity::class.java))
+        }
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun getRekeningList() {

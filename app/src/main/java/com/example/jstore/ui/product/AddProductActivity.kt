@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
+import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ActivityAddProductBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Product
@@ -17,12 +18,12 @@ import com.example.jstore.utils.imagePicker
 import com.example.jstore.utils.pushActivity
 import com.example.jstore.utils.showToast
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.firestore.SetOptions
 import java.util.*
 
 class AddProductActivity : BaseActivity() {
     private var _binding: ActivityAddProductBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mProductDetails: Product
 
     private var mSelectedProductImageFileUri: Uri? = null
 
@@ -59,10 +60,11 @@ class AddProductActivity : BaseActivity() {
 
     private fun uploadProductImage() {
         progress.show()
-        FirestoreClass().uploadImageProductToFirestore(mSelectedProductImageFileUri!!, onSuccessListener = {
+        FirestoreClass().uploadImageProductToFirestore(mSelectedProductImageFileUri!!,
+            onSuccessListener = {
+              //  Prefs.productImage = mSelectedProductImageFileUri.toString()
             progress.dismiss()
-            binding.ivProductImage.setImageURI(mSelectedProductImageFileUri)
-            firebaseAddProduct()
+                binding.ivProductImage.setImageURI(mSelectedProductImageFileUri!!)
         }, onFailureListener = {
             progress.dismiss()
             showToast(getString(R.string.update_profile_failed, it.message.toString()))
@@ -105,17 +107,17 @@ class AddProductActivity : BaseActivity() {
             description = binding.edtDescription.text.toString(),
             stockQuantity = binding.edtQty.text.toString().toInt(),
             category = binding.edtCategory.text.toString(),
-            image = mProductDetails.image
+            image = mSelectedProductImageFileUri!!.toString()
         )
         FirestoreClass().addProduct(product, onSuccessListener = {
             progress.dismiss()
-            showToast(getString(R.string.update_profile_success))
+            showToast(getString(R.string.add_product_success))
             pushActivity(ProductActivity::class.java)
             finish()
         }, onFailureListener = {
             progress.dismiss()
-            showToast(getString(R.string.update_profile_failed, it.message.toString()))
-        })
+            showToast(getString(R.string.add_product_failed, it.message.toString()))
+        }, setOptions = SetOptions.merge())
     }
 
     override fun onDestroy() {

@@ -27,6 +27,16 @@ class LokasiPengirimanActivity : BaseActivity() {
         setupAdapter()
         setupUI()
         getLokasiPengirimanList()
+        setupClickListener()
+    }
+
+    private fun setupClickListener() {
+        binding.btnAddLokasi.setOnClickListener {
+            startActivity(Intent(this, AddLokasiPengirimanActivity::class.java))
+        }
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun getLokasiPengirimanList() {

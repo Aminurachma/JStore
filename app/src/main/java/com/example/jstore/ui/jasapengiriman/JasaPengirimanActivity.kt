@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityJasaPengirimanBinding
 import com.example.jstore.firestore.FirestoreClass
+import com.example.jstore.ui.lokasipengiriman.AddLokasiPengirimanActivity
 import com.example.jstore.ui.product.ProductDetailsActivity
 import com.example.jstore.ui.rekening.RekeningAdapter
 import com.example.jstore.utils.showToast
@@ -26,7 +27,17 @@ class JasaPengirimanActivity : BaseActivity() {
 
         setupAdapter()
         setupUI()
+        setupClickListener()
         getJasaPengirimanList()
+    }
+
+    private fun setupClickListener() {
+        binding.btnAddJasa.setOnClickListener {
+            startActivity(Intent(this, AddJasaPengirimanActivity::class.java))
+        }
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun getJasaPengirimanList() {

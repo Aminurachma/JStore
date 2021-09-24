@@ -32,6 +32,9 @@ class ProductActivity : BaseActivity() {
         binding.btnAddProduct.setOnClickListener {
             startActivity(Intent(this, AddProductActivity::class.java))
         }
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun setupUI() {

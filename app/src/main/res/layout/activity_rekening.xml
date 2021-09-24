@@ -58,18 +58,17 @@
             android:padding="@dimen/_20sdp"
             android:orientation="vertical">
 
-
-            <!--        <com.google.android.material.button.MaterialButton-->
-            <!--            android:id="@+id/btn_add_product"-->
-            <!--            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="@dimen/_45sdp"-->
-            <!--            android:layout_marginTop="@dimen/_20sdp"-->
-            <!--            android:fontFamily="@font/rubik_medium"-->
-            <!--            android:text="@string/add_product"-->
-            <!--            android:textAllCaps="false"-->
-            <!--            android:textSize="@dimen/_12ssp"-->
-            <!--            app:cornerRadius="@dimen/_8sdp" />-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_rekening"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/add_rekening"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_12ssp"
+                app:cornerRadius="@dimen/_8sdp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_nomor_rekening"

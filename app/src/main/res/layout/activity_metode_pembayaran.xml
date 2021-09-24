@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light"
     tools:context=".ui.metodepembayaran.MetodePembayaranActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,7 +86,7 @@
                             android:maxLines="2"
                             android:textColor="@color/dark"
                             android:textSize="@dimen/_11ssp"
-                            android:text="Metode Pembayaran 1" />
+                            android:text="@string/metode_pembayaran_1" />
 
                         <TextView
                             android:id="@+id/tv_cod"
@@ -99,7 +100,7 @@
                             android:maxLines="2"
                             android:textColor="@color/gray3"
                             android:textSize="@dimen/_10ssp"
-                            android:text="Cash On Delivery" />
+                            android:text="@string/cash_on_delivery" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -135,7 +136,7 @@
                             android:maxLines="2"
                             android:textColor="@color/dark"
                             android:textSize="@dimen/_11ssp"
-                            android:text="Metode Pembayaran 2" />
+                            android:text="@string/metode_pembayaran_2" />
 
                         <TextView
                             android:id="@+id/tv_transfer"
@@ -149,7 +150,7 @@
                             android:maxLines="2"
                             android:textColor="@color/gray3"
                             android:textSize="@dimen/_10ssp"
-                            tools:text="Transfer Antar Bank " />
+                            android:text="@string/transfer_antar_bank" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 

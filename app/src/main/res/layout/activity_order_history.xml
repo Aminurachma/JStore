@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light"
-    tools:context=".ui.lokasipengiriman.LokasiPengirimanActivity">
+    tools:context=".ui.orderhistory.OrderHistoryActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_bold"
-            android:text="@string/lokasi_pengiriman"
+            android:text="@string/order_history"
             android:textColor="@color/dark"
             android:textSize="@dimen/_19ssp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,26 +58,14 @@
             android:padding="@dimen/_20sdp"
             android:orientation="vertical">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_add_lokasi"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:fontFamily="@font/rubik_medium"
-                android:text="@string/add_lokasi"
-                android:textAllCaps="false"
-                android:textSize="@dimen/_12ssp"
-                app:cornerRadius="@dimen/_8sdp" />
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_lokasi_pengiriman"
+                android:id="@+id/rv_order_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:itemCount="5"
-                tools:listitem="@layout/item_lokasi_pengiriman" />
+                tools:listitem="@layout/item_order_history" />
 
         </LinearLayout>
 

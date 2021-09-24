@@ -297,12 +297,7 @@ class FirestoreClass {
             .addOnSuccessListener {
                 it.storage.downloadUrl.addOnSuccessListener { uri ->
                     val imageUrl = uri.toString()
-                    updateProductImageUrl(imageUrl = imageUrl, onSuccessListener = {
-                        onSuccessListener(imageUrl)
-                    }, onFailureListener = { e ->
-                        onFailureListener(e)
-                        Timber.e("kenapaError $e")
-                    })
+                    onSuccessListener(imageUrl)
                 }
             }
             .addOnFailureListener {
@@ -324,13 +319,29 @@ class FirestoreClass {
 
     }
 
-    fun addProduct(product: Product,
+    fun addProduct(product: Product, setOptions: SetOptions,
                    onSuccessListener: () -> Unit,
                    onFailureListener: (e: Exception) -> Unit){
 
         mFirestore.collection(PRODUCTS)
-            .document(product.image)
-            .set(product)
+            .document()
+            .set(product, setOptions)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+
+    }
+
+    fun addRekening(rekening: Rekening,
+                   onSuccessListener: () -> Unit,
+                   onFailureListener: (e: Exception) -> Unit){
+
+        mFirestore.collection(REKENING)
+            .document()
+            .set(rekening)
             .addOnSuccessListener {
                 onSuccessListener()
             }
@@ -360,6 +371,21 @@ class FirestoreClass {
             }
     }
 
+    fun addJasaPengiriman(jasaPengiriman: JasaPengiriman,
+                    onSuccessListener: () -> Unit,
+                    onFailureListener: (e: Exception) -> Unit){
+
+        mFirestore.collection(JASA_PENGIRIMAN)
+            .document()
+            .set(jasaPengiriman)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+
+    }
     fun getJasaPengirimanList(
         onSuccessListener: (jasaPengiriman: List<JasaPengiriman>) -> Unit,
         onFailureListener: (e: Exception) -> Unit
@@ -378,6 +404,22 @@ class FirestoreClass {
                 onFailureListener(e)
                 logError("getRekeningItemsList: ${e.message}")
             }
+    }
+
+    fun addLokasiPengiriman(lokasiPengiriman: LokasiPengiriman,
+                    onSuccessListener: () -> Unit,
+                    onFailureListener: (e: Exception) -> Unit){
+
+        mFirestore.collection(LOKASI_PENGIRIMAN)
+            .document()
+            .set(lokasiPengiriman)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+
     }
 
     fun getLokasiPengirimanList(
