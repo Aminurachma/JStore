@@ -23,7 +23,7 @@ object Constants {
     const val PRODUCT_IMAGE = "product_image"
 
     const val USER_ID = "userId"
-    const val IS_CHECKED_OUT = "isCheckedOut"
+    const val CHECKED_OUT = "checkedOut"
 
     const val EXTRA_PRODUCT_ID = "extra_product_id"
     const val PRODUCT_ID = "product_id"

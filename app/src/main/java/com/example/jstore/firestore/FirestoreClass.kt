@@ -1,12 +1,11 @@
 package com.example.jstore.firestore
 
 import android.net.Uri
-import android.widget.Toast
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.models.*
-import com.example.jstore.utils.Constants
 import com.example.jstore.utils.Constants.ADMIN
 import com.example.jstore.utils.Constants.CARTS
+import com.example.jstore.utils.Constants.CHECKED_OUT
 import com.example.jstore.utils.Constants.EMAIL_ADMIN
 import com.example.jstore.utils.Constants.JASA_PENGIRIMAN
 import com.example.jstore.utils.Constants.LOKASI_PENGIRIMAN
@@ -14,6 +13,7 @@ import com.example.jstore.utils.Constants.PASSWORD_ADMIN
 import com.example.jstore.utils.Constants.PRODUCTS
 import com.example.jstore.utils.Constants.REKENING
 import com.example.jstore.utils.Constants.USERS
+import com.example.jstore.utils.Constants.USER_ID
 import com.example.jstore.utils.logDebug
 import com.example.jstore.utils.logError
 import com.google.firebase.auth.FirebaseAuth
@@ -22,7 +22,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -494,13 +493,17 @@ class FirestoreClass {
         onFailureListener: (e: String) -> Unit
     ) {
         mFirestore.collection(CARTS)
-            .whereEqualTo(Constants.USER_ID, Prefs.userId)
-            .whereEqualTo(Constants.IS_CHECKED_OUT, false)
+            .whereEqualTo(USER_ID, Prefs.userId)
+            .whereEqualTo(CHECKED_OUT, false)
             .addSnapshotListener { value, error ->
                 error?.let {
                     onFailureListener(it.message.toString())
                 }
                 value?.let { document ->
+                    logDebug("userId: ${Prefs.userId}, document: ${document.size()}")
+                    if (document.documents.isEmpty()) {
+                        createActiveCart(onSuccessListener = {}, onFailureListener = {})
+                    }
                     val cart = document.documents.map {
                         it.toObject<Cart>() ?: Cart()
                     }
@@ -515,8 +518,8 @@ class FirestoreClass {
         onSuccessListener: (cart: Cart) -> Unit
     ) {
         mFirestore.collection(CARTS)
-            .whereEqualTo(Constants.USER_ID, Prefs.userId)
-            .whereEqualTo(Constants.IS_CHECKED_OUT, false)
+            .whereEqualTo(USER_ID, Prefs.userId)
+            .whereEqualTo(CHECKED_OUT, false)
             .get()
             .addOnSuccessListener { document ->
                 val cart = document.documents.map {
@@ -600,6 +603,33 @@ class FirestoreClass {
                 onFailureListener(it)
                 logError("removeProductFromCart: ${it.message}")
             }
+    }
+
+    private fun createActiveCart(onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        val cart = Cart(
+            userId = Prefs.userId
+        )
+        mFirestore.collection(CARTS)
+            .add(cart)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val document = it.result
+                    if (document != null) {
+                        val id = document.id
+                        updateCartId(id, onSuccessListener = {}, onFailureListener = {})
+                        onSuccessListener()
+                    }
+                }
+            }
+            .addOnFailureListener { onFailureListener(it) }
+    }
+
+    private fun updateCartId(id: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        mFirestore.collection(CARTS)
+            .document(id)
+            .update("cartId", id)
+            .addOnSuccessListener { onSuccessListener() }
+            .addOnFailureListener { onFailureListener(it) }
     }
 
 }

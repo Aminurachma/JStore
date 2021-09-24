@@ -7,5 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class Cart(
     val cartId: String = "",
     val userId: String = "",
-    val products: List<Product> = emptyList()
+    val products: List<Product> = emptyList(),
+    val checkedOut: Boolean = false
 ) : Parcelable
