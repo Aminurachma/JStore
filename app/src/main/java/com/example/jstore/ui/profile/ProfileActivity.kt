@@ -10,6 +10,7 @@ import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
+import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ActivityProfileBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.User
@@ -151,6 +152,7 @@ class ProfileActivity : BaseActivity() {
     private fun logoutUser() {
         FirebaseAuth.getInstance().signOut()
         startActivity(Intent(this, MainActivity::class.java))
+        Prefs.clear()
         finish()
     }
 

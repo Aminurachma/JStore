@@ -1,14 +1,11 @@
 package com.example.jstore.ui.home.customer
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.jstore.R
 import com.example.jstore.databinding.ActivityHomeCustomerBinding
-import com.google.firebase.auth.FirebaseAuth
 
 class HomeCustomerActivity : AppCompatActivity() {
 

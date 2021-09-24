@@ -111,4 +111,7 @@
     <string name="metode_pembayaran_1">Metode Pembayaran 1</string>
     <string name="cash_on_delivery">Cash On Delivery</string>
     <string name="transfer_antar_bank">Transfer Antar Bank</string>
+    <string name="my_order_history">My Order History</string>
+    <string name="pengiriman">Delivery :</string>
+    <string name="payment">Payment :</string>
 </resources>
