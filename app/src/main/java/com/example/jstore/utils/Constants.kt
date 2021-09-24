@@ -36,4 +36,6 @@ object Constants {
 
     const val QUANTITY = "quantity"
 
+    const val CART_ID = "cartId"
+
 }

@@ -29,12 +29,19 @@ class MyCartActivity : BaseActivity() {
 
         setupAdapter()
         setupUI()
+        setupClickListeners()
         getMyCart()
 
     }
 
     private fun setupUI() {
         binding?.rvCart?.adapter = adapter
+    }
+
+    private fun setupClickListeners() {
+        binding?.btnBack?.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun setupAdapter() {

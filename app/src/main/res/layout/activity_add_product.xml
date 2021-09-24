@@ -147,7 +147,7 @@
                 style="@style/App.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@+id/price_label"
                 app:layout_constraintStart_toStartOf="@+id/price_label"
                 app:layout_constraintTop_toBottomOf="@+id/price_label">
@@ -251,37 +251,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_description" />
 
-            <FrameLayout
-                android:id="@+id/fl_product_image"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_220sdp"
-                android:layout_marginTop="@dimen/_4sdp"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_img_product"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_180sdp"
+                app:cardCornerRadius="@dimen/_8sdp"
+                app:cardBackgroundColor="@color/gray4"
+                android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_label">
 
-                <ImageView
-                    android:id="@+id/iv_product_image"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_product"
                     android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
                     android:layout_height="match_parent"
-                    android:background="@color/gray4"
-                    android:scaleType="fitXY" />
+                    app:srcCompat="@drawable/ic_vector_add_photo"/>
 
-                <ImageView
-                    android:id="@+id/iv_add_update_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:padding="@dimen/_9sdp"
-                    android:src="@drawable/ic_vector_add_photo"
-                    tools:ignore="UnusedAttribute" />
-            </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_add_product"
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:fontFamily="@font/rubik_medium"
@@ -289,8 +282,9 @@
                 android:textAllCaps="false"
                 android:textSize="@dimen/_12ssp"
                 app:cornerRadius="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@+id/fl_product_image" />
-
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_img_product" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

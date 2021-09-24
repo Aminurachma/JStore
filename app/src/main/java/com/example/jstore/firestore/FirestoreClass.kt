@@ -1,16 +1,20 @@
 package com.example.jstore.firestore
 
 import android.net.Uri
+import androidx.core.net.toUri
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.models.*
 import com.example.jstore.utils.Constants.ADMIN
 import com.example.jstore.utils.Constants.CARTS
+import com.example.jstore.utils.Constants.CART_ID
 import com.example.jstore.utils.Constants.CHECKED_OUT
 import com.example.jstore.utils.Constants.EMAIL_ADMIN
+import com.example.jstore.utils.Constants.IMAGE
 import com.example.jstore.utils.Constants.JASA_PENGIRIMAN
 import com.example.jstore.utils.Constants.LOKASI_PENGIRIMAN
 import com.example.jstore.utils.Constants.PASSWORD_ADMIN
 import com.example.jstore.utils.Constants.PRODUCTS
+import com.example.jstore.utils.Constants.PRODUCT_ID
 import com.example.jstore.utils.Constants.REKENING
 import com.example.jstore.utils.Constants.USERS
 import com.example.jstore.utils.Constants.USER_ID
@@ -318,7 +322,7 @@ class FirestoreClass {
             }
     }
 
-    fun uploadImageProductToFirestore(
+    private fun uploadImageProductToFirestore(
         fileUri: Uri,
         onSuccessListener: (imageUrl: String) -> Unit,
         onFailureListener: (e: Exception) -> Unit
@@ -337,36 +341,31 @@ class FirestoreClass {
             }
     }
 
-    fun updateProductImageUrl(
-        imageUrl: String,
-        onSuccessListener: () -> Unit,
-        onFailureListener: (e: Exception) -> Unit
-    ) {
-        val data = HashMap<String, Any>()
-        data["image"] = imageUrl
-
+    private fun updateProductImageUrl(productId: String, imageUrl: String) {
         mFirestore.collection(PRODUCTS)
-            .add(data)
-            .addOnSuccessListener {
-                onSuccessListener()
-            }
-            .addOnFailureListener { e ->
-                onFailureListener(e)
-            }
-
+            .document(productId)
+            .update(IMAGE, imageUrl)
     }
 
     fun addProduct(
-        product: Product, setOptions: SetOptions,
+        product: Product,
         onSuccessListener: () -> Unit,
         onFailureListener: (e: Exception) -> Unit
     ) {
-
         mFirestore.collection(PRODUCTS)
-            .document()
-            .set(product, setOptions)
-            .addOnSuccessListener {
-                onSuccessListener()
+            .add(product)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val document = it.result
+                    if (document != null) {
+                        val id = document.id
+                        updateId(id, PRODUCT_ID, onSuccessListener = {}, onFailureListener = {})
+                        uploadImageProductToFirestore(product.image.toUri(), onSuccessListener = { imageUrl ->
+                            updateProductImageUrl(id, imageUrl)
+                        }, onFailureListener = {})
+                        onSuccessListener()
+                    }
+                }
             }
             .addOnFailureListener { e ->
                 onFailureListener(e)
@@ -616,7 +615,7 @@ class FirestoreClass {
                     val document = it.result
                     if (document != null) {
                         val id = document.id
-                        updateCartId(id, onSuccessListener = {}, onFailureListener = {})
+                        updateId(id, CART_ID, onSuccessListener = {}, onFailureListener = {})
                         onSuccessListener()
                     }
                 }
@@ -624,12 +623,11 @@ class FirestoreClass {
             .addOnFailureListener { onFailureListener(it) }
     }
 
-    private fun updateCartId(id: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+    private fun updateId(id: String, documentName: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
         mFirestore.collection(CARTS)
             .document(id)
-            .update("cartId", id)
+            .update(documentName, id)
             .addOnSuccessListener { onSuccessListener() }
             .addOnFailureListener { onFailureListener(it) }
     }
-
 }

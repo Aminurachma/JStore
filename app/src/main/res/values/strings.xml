@@ -126,4 +126,5 @@
     <string name="paynow">Pay Now</string>
     <string name="transaction_out">Transaction Out</string>
     <string name="detail_of_transaction">Detail of transaction</string>
+	<string name="empty_product_image">Silahkan tambahkan foto produk!</string>
 </resources>
