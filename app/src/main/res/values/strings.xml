@@ -46,6 +46,7 @@
     <string name="add_rekening_success">Rekening add successfully</string>
     <string name="add_jasa_success">Jasa Pengiriman add successfully</string>
     <string name="add_lokasi_success">Lokasi Pengiriman add successfully</string>
+    <string name="add_metode_success">Metode Pembayaran add successfully</string>
     <string name="tunggu_sebentar_ya">Tunggu Sebentar ya</string>
     <string name="invalid_email">Invalid email format!</string>
     <string name="empty_field">Please enter your %s</string>
@@ -53,6 +54,7 @@
     <string name="update_profile_failed">Failed to update your profile! %s</string>
     <string name="add_product_failed">Failed to add your product! %s</string>
     <string name="add_rekening_failed">Gagal menambahkan rekening! %s</string>
+    <string name="add_metode_failed">Gagal menambahkan Metode Pembayaran! %s</string>
     <string name="add_lokasi_failed">Gagal menambahkan lokasi pengiriman! %s</string>
     <string name="add_jasa_failed">Gagal menambahkan jasa pengiriman! %s</string>
     <string name="profile">Profile</string>
@@ -89,6 +91,7 @@
     <string name="add_rekening">Tambah Rekening Baru</string>
     <string name="add_lokasi">Tambah Lokasi Baru</string>
     <string name="add_jasa">Tambah Jasa Pengiriman</string>
+    <string name="add_metode">Tambah Metode Pembayaran</string>
     <string name="nama_rekening_bank">Nama Rekening Bank</string>
     <string name="nama_jasa">Nama Jasa Pengiriman</string>
     <string name="nama_lokasi">Nama Lokasi Pengiriman</string>
@@ -104,7 +107,7 @@
     <string name="transfer_antar_bank">Transfer Antar Bank</string>
     <string name="my_order_history">My Order History</string>
     <string name="pengiriman">Delivery :</string>
-    <string name="payment">Payment :</string>
+    <string name="payment">Payment </string>
     <string name="add_product">Add New Product</string>
     <string name="kategori">Kategori</string>
     <string name="selamat_ndatang">Selamat\nDatang,</string>
@@ -125,4 +128,9 @@
     <string name="paynow">Pay Now</string>
     <string name="transaction_out">Transaction Out</string>
     <string name="detail_of_transaction">Detail of transaction</string>
+    <string name="go_back">Go Back</string>
+    <string name="transaction_details">Transaction Details</string>
+    <string name="sent_money">Sent Money</string>
+    <string name="nama_metode_pembayaran">Nama Metode Pembayaran</string>
+    <string name="jenis_metode_pembayaran">Jenis Metode Pembayaran</string>
 </resources>

@@ -66,4 +66,9 @@ class LokasiPengirimanActivity : BaseActivity() {
             })
         })
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

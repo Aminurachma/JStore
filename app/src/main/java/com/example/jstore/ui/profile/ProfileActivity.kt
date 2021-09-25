@@ -47,7 +47,8 @@ class ProfileActivity : BaseActivity() {
             progress.dismiss()
             mUserDetails = it
             Glide.with(this)
-                .load(it.image ?: R.drawable.user_pisc)
+                .load(it.image)
+                .placeholder(R.drawable.user_pisc)
                 .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                 .into(binding.imgAvatar)
             binding.edtName.setText(it.fullName)

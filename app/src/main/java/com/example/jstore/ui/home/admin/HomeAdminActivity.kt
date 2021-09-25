@@ -13,6 +13,7 @@ import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Admin
 import com.example.jstore.ui.customer.CustomerActivity
 import com.example.jstore.ui.login.customer.MainActivity
+import com.example.jstore.ui.orderhistory.OrderHistoryActivity
 import com.example.jstore.ui.product.ProductActivity
 import com.example.jstore.ui.setting.SettingActivity
 import com.example.jstore.utils.logError
@@ -70,6 +71,9 @@ class HomeAdminActivity : BaseActivity() {
         }
         binding.btnSettings.setOnClickListener {
             startActivity(Intent(this, SettingActivity::class.java))
+        }
+        binding.btnOrders.setOnClickListener {
+            startActivity(Intent(this, OrderHistoryActivity::class.java))
         }
     }
 

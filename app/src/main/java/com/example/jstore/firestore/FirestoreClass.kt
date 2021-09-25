@@ -10,6 +10,7 @@ import com.example.jstore.utils.Constants.CARTS
 import com.example.jstore.utils.Constants.EMAIL_ADMIN
 import com.example.jstore.utils.Constants.JASA_PENGIRIMAN
 import com.example.jstore.utils.Constants.LOKASI_PENGIRIMAN
+import com.example.jstore.utils.Constants.METODE_PEMBAYARAN
 import com.example.jstore.utils.Constants.PASSWORD_ADMIN
 import com.example.jstore.utils.Constants.PRODUCTS
 import com.example.jstore.utils.Constants.REKENING
@@ -448,7 +449,6 @@ class FirestoreClass {
             .addOnFailureListener { e ->
                 onFailureListener(e)
             }
-
     }
 
     fun getLokasiPengirimanList(
@@ -468,6 +468,41 @@ class FirestoreClass {
             .addOnFailureListener { e ->
                 onFailureListener(e)
                 logError("getRekeningItemsList: ${e.message}")
+            }
+    }
+
+    fun addMetodePembayaran(metodePembayaran: MetodePembayaran,
+                            onSuccessListener: () -> Unit,
+                            onFailureListener: (e: Exception) -> Unit){
+
+        mFirestore.collection(METODE_PEMBAYARAN)
+            .document()
+            .set(metodePembayaran)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+
+    fun getMetodePembayaranList(
+        onSuccessListener: (metodePembayaran: List<MetodePembayaran>) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(METODE_PEMBAYARAN)
+            .get()
+            .addOnSuccessListener { document ->
+                logDebug("getMetodePembayaranItemsList: ${document.documents}")
+
+                val metodePembayaranList = document.documents.map {
+                    it.toObject(MetodePembayaran::class.java) ?: MetodePembayaran()
+                }
+                onSuccessListener(metodePembayaranList)
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+                logError("getMetodePembayaranList: ${e.message}")
             }
     }
 

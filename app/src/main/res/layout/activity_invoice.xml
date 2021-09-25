@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light"
+    android:orientation="vertical"
     tools:context=".ui.invoice.InvoiceActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,6 +30,7 @@
             app:srcCompat="@drawable/ic_left_arrow" />
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_bold"
@@ -40,19 +42,201 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/rubik_light"
-            android:text="@string/detail_of_transaction"
-            android:textColor="@color/dark"
-            android:textSize="@dimen/_19ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            android:padding="@dimen/_20sdp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal"
+                tools:src="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/appname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:gravity="center"
+                android:textColor="@color/dark"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/rubik_bold"
+                android:textSize="@dimen/_18sdp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sent_money"
+                android:gravity="center"
+                android:fontFamily="@font/rubik_light"
+                android:textSize="@dimen/_12sdp"/>
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Rp. 130.000,00"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/rubik_medium"
+                android:textSize="@dimen/_24sdp"/>
+
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_details"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Transaction Details"-->
+<!--                android:layout_marginTop="@dimen/_12sdp"-->
+<!--                android:textColor="@color/dark"-->
+<!--                android:fontFamily="@font/rubik_medium"-->
+<!--                android:textSize="@dimen/_12sdp"/>-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="vertical"
+                android:paddingVertical="@dimen/_12sdp">
+
+                <TextView
+                    android:id="@+id/tv_detail_transaction_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:text="@string/transaction_details"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                    android:id="@+id/include"
+                    layout="@layout/divider_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_transaction_label" />
+
+                <TextView
+                    android:id="@+id/tv_fullname_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/rubik_light"
+                    android:text="@string/fullname"
+                    android:textColor="@color/gray3"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_detail_transaction_label"
+                    app:layout_constraintTop_toBottomOf="@+id/include" />
+
+                <TextView
+                    android:id="@+id/tv_fullname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_80sdp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_fullname_label"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_detail_transaction_label"
+                    app:layout_constraintStart_toEndOf="@+id/tv_fullname_label"
+                    app:layout_constraintTop_toTopOf="@+id/tv_fullname_label"
+                    tools:text="Aminurachma" />
+
+                <TextView
+                    android:id="@+id/tv_address_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_light"
+                    android:text="@string/address"
+                    android:textColor="@color/gray3"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_address"
+                    app:layout_constraintStart_toStartOf="@+id/tv_detail_transaction_label"
+                    app:layout_constraintTop_toTopOf="@+id/tv_address" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_fullname"
+                    app:layout_constraintStart_toStartOf="@+id/tv_fullname"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_fullname"
+                    tools:text="Jalan Raya Pondok" />
+
+                <TextView
+                    android:id="@+id/tv_payment_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_light"
+                    android:text="@string/payment"
+                    android:textColor="@color/gray3"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_payment"
+                    app:layout_constraintStart_toStartOf="@+id/tv_detail_transaction_label"
+                    app:layout_constraintTop_toTopOf="@+id/tv_payment" />
+
+                <TextView
+                    android:id="@+id/tv_payment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_address"
+                    app:layout_constraintStart_toStartOf="@+id/tv_address"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_address"
+                    tools:text="Mandiri  - 1829293846726 a/n PT. Halo halo Indonesia" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_goback"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:fontFamily="@font/rubik_medium"
+                android:text="@string/go_back"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_12ssp"
+                app:cornerRadius="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/til_address" />
+
+        </LinearLayout>
+
+
+
+
+    </ScrollView>
+
+
 
 
 </LinearLayout>

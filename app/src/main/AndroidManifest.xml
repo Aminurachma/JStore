@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jstore">
-        <activity android:name=".ui.invoice.InvoiceActivity"></activity>
+        <activity android:name=".ui.metodepembayaran.AddMetodePembayaranActivity"></activity>
+        <activity android:name=".ui.invoice.InvoiceActivity" />
         <activity android:name=".ui.checkout.CheckoutActivity" />
         <activity android:name=".ui.jasapengiriman.AddJasaPengirimanActivity" />
         <activity android:name=".ui.lokasipengiriman.AddLokasiPengirimanActivity" />

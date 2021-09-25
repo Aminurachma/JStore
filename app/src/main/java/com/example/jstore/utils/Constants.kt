@@ -8,6 +8,7 @@ object Constants {
     const val REKENING = "rekening"
     const val JASA_PENGIRIMAN = "jasa_pengiriman"
     const val LOKASI_PENGIRIMAN = "lokasi_pengiriman"
+    const val METODE_PEMBAYARAN= "metode_pembayaran"
     const val CARTS = "carts"
 
     const val IMAGE = "image"

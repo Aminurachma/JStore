@@ -79,7 +79,8 @@ class CustomerDashboardFragment : BaseFragment() {
             mUserDetails = it
             binding.tvWelcomingText.text = getString(R.string.hello_user, it.fullName)
             Glide.with(this)
-                .load(it.image?: R.drawable.user_pisc)
+                .load(it.image)
+                .placeholder(R.drawable.user_pisc)
                 .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                 .into(binding.imgAvatar)
         }, onFailureListener = {
