@@ -61,9 +61,9 @@ class MetodePembayaranActivity : BaseActivity() {
 
     private fun setupAdapter() {
         adapter = MetodePembayaranAdapter(onClickListener = { metodePembayaran ->
-            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
-                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, metodePembayaran)
-            })
+//            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
+//                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, metodePembayaran)
+//            })
         })
     }
     override fun onDestroy() {

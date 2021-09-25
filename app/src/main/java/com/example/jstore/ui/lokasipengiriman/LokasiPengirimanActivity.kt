@@ -61,9 +61,9 @@ class LokasiPengirimanActivity : BaseActivity() {
 
     private fun setupAdapter() {
         adapter = LokasiPengirimanAdapter(onClickListener = { lokasiPengiriman ->
-            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
-                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, lokasiPengiriman)
-            })
+//            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
+//                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, lokasiPengiriman)
+//            })
         })
     }
 

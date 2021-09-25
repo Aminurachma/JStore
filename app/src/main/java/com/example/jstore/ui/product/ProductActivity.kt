@@ -43,9 +43,9 @@ class ProductActivity : BaseActivity() {
 
     private fun setupAdapter() {
         adapter = ProductAdapter(onClickListener = { product ->
-            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
-                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, product)
-            })
+//            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
+//                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, product)
+//            })
         })
     }
 

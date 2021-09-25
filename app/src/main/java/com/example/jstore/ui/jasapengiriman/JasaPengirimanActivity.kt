@@ -62,9 +62,9 @@ class JasaPengirimanActivity : BaseActivity() {
 
     private fun setupAdapter() {
         adapter = JasaPengirimanAdapter(onClickListener = { jasaPengiriman ->
-            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
-                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, jasaPengiriman)
-            })
+//            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
+//                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, jasaPengiriman)
+//            })
         })
     }
 

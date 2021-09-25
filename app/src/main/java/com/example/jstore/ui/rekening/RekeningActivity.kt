@@ -60,9 +60,9 @@ class RekeningActivity : BaseActivity() {
 
     private fun setupAdapter() {
         adapter = RekeningAdapter(onClickListener = { rekening ->
-            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
-                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, rekening)
-            })
+//            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
+//                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, rekening)
+//            })
         })
     }
 
