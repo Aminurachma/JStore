@@ -3,6 +3,7 @@ package com.example.jstore.ui.cart
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.jstore.R
+import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityMyCartBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Cart
@@ -13,10 +14,10 @@ import com.example.jstore.utils.logDebug
 import com.example.jstore.utils.logError
 import com.example.jstore.utils.showToast
 
-class MyCartActivity : AppCompatActivity() {
+class MyCartActivity : BaseActivity() {
 
     private var _binding: ActivityMyCartBinding? = null
-    private val  binding get() = _binding!!
+    private val binding get() = _binding
     private lateinit var adapter: CartAdapter
 
     private lateinit var cart: Cart
@@ -24,24 +25,30 @@ class MyCartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMyCartBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
         setupAdapter()
         setupUI()
+        setupClickListeners()
         getMyCart()
 
     }
 
     private fun setupUI() {
-        binding.rvCart.adapter = adapter
+        binding?.rvCart?.adapter = adapter
+    }
+
+    private fun setupClickListeners() {
+        binding?.btnBack?.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun setupAdapter() {
-        adapter = CartAdapter(onAddQuantity = {
-            updateTotalPrice()
-            updateMyCart(it)
-        }, onSubstractQuantity = {
-            updateTotalPrice()
+        adapter = CartAdapter(onIncrement = {
+            updateMyCart(it.apply { quantity++ })
+        }, onDecrement = {
+            updateMyCart(it.apply { quantity-- })
         }, onRemoved = {
             FirestoreClass().removeProductFromCart(product = it, onSuccessListener = {
                 showToast(getString(R.string.success_remove_from_cart, it.title))
@@ -51,34 +58,27 @@ class MyCartActivity : AppCompatActivity() {
         })
     }
 
-    private fun updateMyCart(quantity: Int) {
-//        val hashMap = HashMap<String, Any>()
-//        hashMap[QUANTITY] = quantity
-//        FirestoreClass().updateMyCart(cart.cartId, hashMap, onSuccessListener = {
-//
-//        }, onFailureListener = {
-//
-//        })
+    private fun updateMyCart(product: Product) {
+        progress.show()
+        FirestoreClass().updateMyCart(cart.cartId, cart.products.toMutableList(), product,
+            onSuccessListener = { progress.dismiss() }, onFailureListener = { progress.dismiss() })
     }
 
     private fun getMyCart() {
         FirestoreClass().subscribeToCart(onSuccessListener = {
             cart = it
             adapter.submitList(it.products)
-            updateTotalPrice()
+            adapter.notifyItemRangeChanged(0, it.products.size)
+            binding?.tvTotal?.text = calculateTotalPrice(it.products).formatPrice()
         }, onFailureListener = {
             showToast(it)
         })
     }
 
-    private fun updateTotalPrice() {
-        binding.tvTotal.text = calculateTotalPrice().formatPrice()
-    }
-
-    private fun calculateTotalPrice(): Int {
+    private fun calculateTotalPrice(products: List<Product>): Int {
         var price = 0
-        adapter.currentList.forEach {
-            price += (it.price.toInt() * it.quantity)
+        products.forEach {
+            price += it.price.toInt() * it.quantity
         }
         return price
     }

@@ -54,24 +54,28 @@ class ProductDetailsActivity : AppCompatActivity() {
         }
 
         binding.btnAddToCart.setOnClickListener {
-            FirestoreClass().addProductToCart(
-                product = Product(
-                    title = product.title,
-                    price = product.price,
-                    description = product.description,
-                    stockQuantity = product.stockQuantity,
-                    category = product.category,
-                    image = product.image,
-                    productId = product.image,
-                    quantity = binding.tvQuantity.text.toString().toInt()
-                ),
-                onSuccessListener = {
-                    showToast(getString(R.string.added_to_cart, product.title))
-                },
-                onFailureListener = {
-                    showToast(it.message.toString())
-                }
-            )
+            if (binding.tvQuantity.text.toString().toInt() <= product.stockQuantity) {
+                FirestoreClass().addProductToCart(
+                    product = Product(
+                        title = product.title,
+                        price = product.price,
+                        description = product.description,
+                        stockQuantity = product.stockQuantity,
+                        category = product.category,
+                        image = product.image,
+                        productId = product.image,
+                        quantity = binding.tvQuantity.text.toString().toInt()
+                    ),
+                    onSuccessListener = {
+                        showToast(getString(R.string.added_to_cart, product.title))
+                    },
+                    onFailureListener = {
+                        showToast(it.message.toString())
+                    }
+                )
+            } else {
+                showToast(getString(R.string.not_enough_stock))
+            }
         }
 
         binding.btnDecrement.setOnClickListener {

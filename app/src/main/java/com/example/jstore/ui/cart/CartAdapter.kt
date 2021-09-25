@@ -7,15 +7,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
+import com.example.jstore.R
 import com.example.jstore.databinding.ItemCartBinding
 import com.example.jstore.databinding.ItemProductBinding
 import com.example.jstore.models.Cart
 import com.example.jstore.models.Product
 import com.example.jstore.utils.formatPrice
+import com.example.jstore.utils.showToast
 
 class CartAdapter(
-    private val onAddQuantity: (total: Int) -> Unit,
-    private val onSubstractQuantity: (total: Int) -> Unit,
+    private val onIncrement: (product: Product) -> Unit,
+    private val onDecrement: (product: Product) -> Unit,
     private val onRemoved: (product: Product) -> Unit
 ) : ListAdapter<Product, CartAdapter.ViewHolder>(DIFF_CALLBACK) {
 
@@ -40,16 +42,15 @@ class CartAdapter(
                 tvProductName.text = product.title
                 tvProductPrice.text = product.price.toInt().formatPrice()
                 tvQuantity.text = product.quantity.toString()
+
                 Glide.with(root.context)
                     .load(product.image)
                     .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                     .into(imgProduct)
+
                 btnDecrement.setOnClickListener {
                     if (tvQuantity.text.toString().toInt() > 1) {
-                        product.quantity = tvQuantity.text.toString().toInt() - 1
-                        notifyItemChanged(absoluteAdapterPosition)
-                        tvQuantity.text = (tvQuantity.text.toString().toInt() - 1).toString()
-                        onSubstractQuantity(tvQuantity.text.toString().toInt() - 1)
+                        onDecrement(product)
                     } else {
                         onRemoved(product)
                     }
@@ -57,10 +58,9 @@ class CartAdapter(
 
                 btnIncrement.setOnClickListener {
                     if (tvQuantity.text.toString().toInt() < product.stockQuantity) {
-                        product.quantity = tvQuantity.text.toString().toInt() + 1
-                        notifyItemChanged(absoluteAdapterPosition)
-                        tvQuantity.text = (tvQuantity.text.toString().toInt() + 1).toString()
-                        onAddQuantity(tvQuantity.text.toString().toInt() + 1)
+                        onIncrement(product)
+                    } else {
+                        root.context.showToast(root.context.getString(R.string.not_enough_stock))
                     }
                 }
             }

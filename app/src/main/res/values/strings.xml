@@ -120,6 +120,7 @@
     <string name="added_to_cart">%s added to cart</string>
     <string name="success_remove_from_cart">%s has been removed from cart</string>
     <string name="estimasi">Estimasi</string>
+    <string name="not_enough_stock">Stok tidak cukup</string>
     <string name="choose_payment_method">Choose Payment Method</string>
     <string name="ongkos_kirim">Ongkos Kirim</string>
     <string name="sub_total">Subtotal</string>
@@ -133,4 +134,5 @@
     <string name="sent_money">Sent Money</string>
     <string name="nama_metode_pembayaran">Nama Metode Pembayaran</string>
     <string name="jenis_metode_pembayaran">Jenis Metode Pembayaran</string>
+	<string name="empty_product_image">Silahkan tambahkan foto produk!</string>
 </resources>

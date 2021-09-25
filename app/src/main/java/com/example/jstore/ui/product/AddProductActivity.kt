@@ -36,7 +36,7 @@ class AddProductActivity : BaseActivity() {
     }
 
     private fun setupClickListener() {
-        binding.ivAddUpdateProduct.setOnClickListener {
+        binding.cardImgProduct.setOnClickListener {
             imagePicker(startForImageResult)
         }
         binding.btnAddProduct.setOnClickListener {
@@ -50,7 +50,8 @@ class AddProductActivity : BaseActivity() {
         when (resultCode) {
             Activity.RESULT_OK -> {
                 mSelectedProductImageFileUri = data?.data
-                uploadProductImage()
+                binding.imgProduct.setImageURI(data?.data)
+//                uploadProductImage()
             }
             ImagePicker.RESULT_ERROR -> {
                 showToast(ImagePicker.getError(data))
@@ -58,18 +59,18 @@ class AddProductActivity : BaseActivity() {
         }
     }
 
-    private fun uploadProductImage() {
-        progress.show()
-        FirestoreClass().uploadImageProductToFirestore(mSelectedProductImageFileUri!!,
-            onSuccessListener = {
-              //  Prefs.productImage = mSelectedProductImageFileUri.toString()
-            progress.dismiss()
-                binding.ivProductImage.setImageURI(mSelectedProductImageFileUri!!)
-        }, onFailureListener = {
-            progress.dismiss()
-            showToast(getString(R.string.update_profile_failed, it.message.toString()))
-        })
-    }
+//    private fun uploadProductImage() {
+//        progress.show()
+//        FirestoreClass().uploadImageProductToFirestore(mSelectedProductImageFileUri!!,
+//            onSuccessListener = {
+//              //  Prefs.productImage = mSelectedProductImageFileUri.toString()
+//            progress.dismiss()
+//                binding.ivProductImage.setImageURI(mSelectedProductImageFileUri!!)
+//        }, onFailureListener = {
+//            progress.dismiss()
+//            showToast(getString(R.string.update_profile_failed, it.message.toString()))
+//        })
+//    }
 
     private fun validateData() {
         binding.apply {
@@ -94,12 +95,13 @@ class AddProductActivity : BaseActivity() {
                     R.string.empty_field, getString(
                         R.string.price_product
                     ))
+                mSelectedProductImageFileUri == null -> showToast(getString(R.string.empty_product_image))
                 else -> firebaseAddProduct()
             }
         }
     }
 
-     fun firebaseAddProduct() {
+     private fun firebaseAddProduct() {
         progress.show()
         val product = Product(
             title = binding.edtName.text.toString(),
@@ -117,7 +119,7 @@ class AddProductActivity : BaseActivity() {
         }, onFailureListener = {
             progress.dismiss()
             showToast(getString(R.string.add_product_failed, it.message.toString()))
-        }, setOptions = SetOptions.merge())
+        })
     }
 
     override fun onDestroy() {

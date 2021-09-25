@@ -104,6 +104,7 @@ class CustomerDashboardFragment : BaseFragment() {
             if (it.isNotEmpty()) {
                 binding.rvProduct.toVisible()
                 adapter.submitList(it)
+                adapter.notifyItemRangeChanged(0, it.size)
             } else {
                 binding.rvProduct.toGone()
             }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
+import com.example.jstore.R
 import com.example.jstore.databinding.ItemProductBinding
 import com.example.jstore.models.Product
 import com.example.jstore.utils.formatPrice
@@ -37,6 +38,7 @@ class ProductAdapter(private val onClickListener: (product: Product) -> Unit,
                 tvProductPrice.text = product.price.toInt().formatPrice()
                 Glide.with(root.context)
                     .load(product.image)
+                    .placeholder(R.drawable.product_placeholder)
                     .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                     .into(imgProduct)
 
