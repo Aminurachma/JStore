@@ -7,6 +7,7 @@ import com.example.jstore.databinding.ActivityMetodePembayaranBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.ui.lokasipengiriman.LokasiPengirimanAdapter
 import com.example.jstore.ui.product.ProductDetailsActivity
+import com.example.jstore.ui.setting.SettingActivity
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
@@ -25,21 +26,21 @@ class MetodePembayaranActivity : BaseActivity() {
 
         setupAdapter()
         setupUI()
-        getLokasiPengirimanList()
+        getMetodePembayaranList()
         setupClickListener()
 
     }
 
     private fun setupClickListener() {
         binding.btnBack.setOnClickListener {
-            onBackPressed()
+            startActivity(Intent(this, SettingActivity::class.java))
         }
 
         binding.btnAddMetodePembayaran.setOnClickListener {
             startActivity(Intent(this,AddMetodePembayaranActivity::class.java))
         }
     }
-    private fun getLokasiPengirimanList() {
+    private fun getMetodePembayaranList() {
         progress.show()
         FirestoreClass().getMetodePembayaranList(onSuccessListener = {
             progress.dismiss()

@@ -7,16 +7,22 @@ import com.example.jstore.models.*
 import com.example.jstore.utils.Constants.ADMIN
 import com.example.jstore.utils.Constants.CARTS
 import com.example.jstore.utils.Constants.CART_ID
+import com.example.jstore.utils.Constants.CATEGORY
+import com.example.jstore.utils.Constants.CATEGORY_ID
 import com.example.jstore.utils.Constants.CHECKED_OUT
 import com.example.jstore.utils.Constants.EMAIL_ADMIN
 import com.example.jstore.utils.Constants.IMAGE
+import com.example.jstore.utils.Constants.JASAPENGIRIMAN_ID
 import com.example.jstore.utils.Constants.JASA_PENGIRIMAN
+import com.example.jstore.utils.Constants.LOKASIPENGIRIMAN_ID
 import com.example.jstore.utils.Constants.LOKASI_PENGIRIMAN
+import com.example.jstore.utils.Constants.METODEPEMBAYARAN_ID
 import com.example.jstore.utils.Constants.METODE_PEMBAYARAN
 import com.example.jstore.utils.Constants.PASSWORD_ADMIN
 import com.example.jstore.utils.Constants.PRODUCTS
 import com.example.jstore.utils.Constants.PRODUCT_ID
 import com.example.jstore.utils.Constants.REKENING
+import com.example.jstore.utils.Constants.REKENING_ID
 import com.example.jstore.utils.Constants.USERS
 import com.example.jstore.utils.Constants.USER_ID
 import com.example.jstore.utils.logDebug
@@ -360,7 +366,7 @@ class FirestoreClass {
                     val document = it.result
                     if (document != null) {
                         val id = document.id
-                        updateId(id, PRODUCT_ID, onSuccessListener = {}, onFailureListener = {})
+                        updateId(PRODUCTS, id, PRODUCT_ID, onSuccessListener = {}, onFailureListener = {})
                         uploadImageProductToFirestore(product.image.toUri(), onSuccessListener = { imageUrl ->
                             updateProductImageUrl(id, imageUrl)
                         }, onFailureListener = {})
@@ -379,12 +385,17 @@ class FirestoreClass {
         onSuccessListener: () -> Unit,
         onFailureListener: (e: Exception) -> Unit
     ) {
-
         mFirestore.collection(REKENING)
-            .document()
-            .set(rekening)
-            .addOnSuccessListener {
-                onSuccessListener()
+            .add(rekening)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val document = it.result
+                    if (document != null) {
+                        val id = document.id
+                        updateId(REKENING, id, REKENING_ID, onSuccessListener = {}, onFailureListener = {})
+                        onSuccessListener()
+                    }
+                }
             }
             .addOnFailureListener { e ->
                 onFailureListener(e)
@@ -417,12 +428,17 @@ class FirestoreClass {
         onSuccessListener: () -> Unit,
         onFailureListener: (e: Exception) -> Unit
     ) {
-
         mFirestore.collection(JASA_PENGIRIMAN)
-            .document()
-            .set(jasaPengiriman)
-            .addOnSuccessListener {
-                onSuccessListener()
+            .add(jasaPengiriman)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val document = it.result
+                    if (document != null) {
+                        val id = document.id
+                        updateId(JASA_PENGIRIMAN, id, JASAPENGIRIMAN_ID, onSuccessListener = {}, onFailureListener = {})
+                        onSuccessListener()
+                    }
+                }
             }
             .addOnFailureListener { e ->
                 onFailureListener(e)
@@ -455,16 +471,22 @@ class FirestoreClass {
         onSuccessListener: () -> Unit,
         onFailureListener: (e: Exception) -> Unit
     ) {
-
         mFirestore.collection(LOKASI_PENGIRIMAN)
-            .document()
-            .set(lokasiPengiriman)
-            .addOnSuccessListener {
-                onSuccessListener()
+            .add(lokasiPengiriman)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val document = it.result
+                    if (document != null) {
+                        val id = document.id
+                        updateId(LOKASI_PENGIRIMAN, id, LOKASIPENGIRIMAN_ID, onSuccessListener = {}, onFailureListener = {})
+                        onSuccessListener()
+                    }
+                }
             }
             .addOnFailureListener { e ->
                 onFailureListener(e)
             }
+
     }
 
     fun getLokasiPengirimanList(
@@ -487,19 +509,27 @@ class FirestoreClass {
             }
     }
 
-    fun addMetodePembayaran(metodePembayaran: MetodePembayaran,
-                            onSuccessListener: () -> Unit,
-                            onFailureListener: (e: Exception) -> Unit){
-
+    fun addMetodePembayaran(
+        metodePembayaran: MetodePembayaran,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
         mFirestore.collection(METODE_PEMBAYARAN)
-            .document()
-            .set(metodePembayaran)
-            .addOnSuccessListener {
-                onSuccessListener()
+            .add(metodePembayaran)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val document = it.result
+                    if (document != null) {
+                        val id = document.id
+                        updateId(METODE_PEMBAYARAN, id, METODEPEMBAYARAN_ID, onSuccessListener = {}, onFailureListener = {})
+                        onSuccessListener()
+                    }
+                }
             }
             .addOnFailureListener { e ->
                 onFailureListener(e)
             }
+
     }
 
     fun getMetodePembayaranList(
@@ -519,6 +549,49 @@ class FirestoreClass {
             .addOnFailureListener { e ->
                 onFailureListener(e)
                 logError("getMetodePembayaranList: ${e.message}")
+            }
+    }
+
+    fun addCategory(
+        category: Category,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(CATEGORY)
+            .add(category)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val document = it.result
+                    if (document != null) {
+                        val id = document.id
+                        updateId(CATEGORY, id, CATEGORY_ID, onSuccessListener = {}, onFailureListener = {})
+                        onSuccessListener()
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+
+    }
+
+    fun getCategoryList(
+        onSuccessListener: (category: List<Category>) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(CATEGORY)
+            .get()
+            .addOnSuccessListener { document ->
+                logDebug("getCategoryItemsList: ${document.documents}")
+
+                val categoryList = document.documents.map {
+                    it.toObject(Category::class.java) ?: Category()
+                }
+                onSuccessListener(categoryList)
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+                logError("getCategoryList: ${e.message}")
             }
     }
 
@@ -650,7 +723,7 @@ class FirestoreClass {
                     val document = it.result
                     if (document != null) {
                         val id = document.id
-                        updateId(id, CART_ID, onSuccessListener = {}, onFailureListener = {})
+                        updateId(CARTS, id, CART_ID, onSuccessListener = {}, onFailureListener = {})
                         onSuccessListener()
                     }
                 }
@@ -658,11 +731,12 @@ class FirestoreClass {
             .addOnFailureListener { onFailureListener(it) }
     }
 
-    private fun updateId(id: String, documentName: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
-        mFirestore.collection(CARTS)
+    private fun updateId(collection: String, id: String, documentName: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        mFirestore.collection(collection)
             .document(id)
             .update(documentName, id)
             .addOnSuccessListener { onSuccessListener() }
             .addOnFailureListener { onFailureListener(it) }
     }
+
 }

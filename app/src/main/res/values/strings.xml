@@ -47,14 +47,19 @@
     <string name="add_jasa_success">Jasa Pengiriman add successfully</string>
     <string name="add_lokasi_success">Lokasi Pengiriman add successfully</string>
     <string name="add_metode_success">Metode Pembayaran add successfully</string>
+    <string name="add_category_success">Category add successfully</string>
     <string name="tunggu_sebentar_ya">Tunggu Sebentar ya</string>
     <string name="invalid_email">Invalid email format!</string>
     <string name="empty_field">Please enter your %s</string>
+    <string name="kurangalaamat">Please enter your address more than 10 characters</string>
+    <string name="kurangnomor">Please enter your phone more than 11 characters </string>
+    <string name="kurangnama">Please enter your name more than 7 characters</string>
     <string name="register_failed">Failed to register! %s</string>
     <string name="update_profile_failed">Failed to update your profile! %s</string>
     <string name="add_product_failed">Failed to add your product! %s</string>
     <string name="add_rekening_failed">Gagal menambahkan rekening! %s</string>
     <string name="add_metode_failed">Gagal menambahkan Metode Pembayaran! %s</string>
+    <string name="add_category_failed">Gagal menambahkan Category! %s</string>
     <string name="add_lokasi_failed">Gagal menambahkan lokasi pengiriman! %s</string>
     <string name="add_jasa_failed">Gagal menambahkan jasa pengiriman! %s</string>
     <string name="profile">Profile</string>
@@ -92,6 +97,7 @@
     <string name="add_lokasi">Tambah Lokasi Baru</string>
     <string name="add_jasa">Tambah Jasa Pengiriman</string>
     <string name="add_metode">Tambah Metode Pembayaran</string>
+    <string name="add_category">Tambah Kategori Produk</string>
     <string name="nama_rekening_bank">Nama Rekening Bank</string>
     <string name="nama_jasa">Nama Jasa Pengiriman</string>
     <string name="nama_lokasi">Nama Lokasi Pengiriman</string>
@@ -109,6 +115,7 @@
     <string name="pengiriman">Delivery :</string>
     <string name="payment">Payment </string>
     <string name="add_product">Add New Product</string>
+    <string name="edit_product">Edit Product</string>
     <string name="kategori">Kategori</string>
     <string name="selamat_ndatang">Selamat\nDatang,</string>
     <string name="penghasilan">Penghasilan</string>
@@ -133,6 +140,7 @@
     <string name="transaction_details">Transaction Details</string>
     <string name="sent_money">Sent Money</string>
     <string name="nama_metode_pembayaran">Nama Metode Pembayaran</string>
+    <string name="add_category_name">Nama Kategori</string>
     <string name="jenis_metode_pembayaran">Jenis Metode Pembayaran</string>
-	<string name="empty_product_image">Silahkan tambahkan foto produk!</string>
+    <string name="empty_product_image">Silahkan tambahkan foto produk!</string>
 </resources>

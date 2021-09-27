@@ -8,6 +8,7 @@ import com.example.jstore.databinding.ActivityLokasiPengirimanBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.ui.jasapengiriman.JasaPengirimanAdapter
 import com.example.jstore.ui.product.ProductDetailsActivity
+import com.example.jstore.ui.setting.SettingActivity
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
@@ -35,7 +36,7 @@ class LokasiPengirimanActivity : BaseActivity() {
             startActivity(Intent(this, AddLokasiPengirimanActivity::class.java))
         }
         binding.btnBack.setOnClickListener {
-            onBackPressed()
+            startActivity(Intent(this, SettingActivity::class.java))
         }
     }
 

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
+import com.example.jstore.R
 import com.example.jstore.databinding.ItemCustomerBinding
 import com.example.jstore.models.User
 
@@ -35,6 +36,7 @@ class CustomerAdapter(customer: User) : ListAdapter<User, CustomerAdapter.ViewHo
                 tvCustomerAddress.text = customer.address
                 Glide.with(root.context)
                     .load(customer.image)
+                    .placeholder(R.drawable.user_pisc)
                     .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                     .into(imgCustomerAvatar)
 
