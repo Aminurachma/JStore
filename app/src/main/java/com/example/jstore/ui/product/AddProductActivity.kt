@@ -1,6 +1,7 @@
 package com.example.jstore.ui.product
 
 import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Patterns
@@ -11,9 +12,12 @@ import com.example.jstore.base.BaseActivity
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ActivityAddProductBinding
 import com.example.jstore.firestore.FirestoreClass
+import com.example.jstore.models.Category
 import com.example.jstore.models.Product
 import com.example.jstore.models.User
+import com.example.jstore.ui.category.CategoryActivity
 import com.example.jstore.ui.home.customer.HomeCustomerActivity
+import com.example.jstore.utils.Constants
 import com.example.jstore.utils.imagePicker
 import com.example.jstore.utils.pushActivity
 import com.example.jstore.utils.showToast
@@ -21,10 +25,12 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.firestore.SetOptions
 import java.util.*
 
+@Suppress("DEPRECATION")
 class AddProductActivity : BaseActivity() {
     private var _binding: ActivityAddProductBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var category: Category
     private var mSelectedProductImageFileUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +39,8 @@ class AddProductActivity : BaseActivity() {
         setContentView(binding.root)
 
         setupClickListener()
+        category = intent.getParcelableExtra(EXTRA_CATEGORY) ?: Category()
+        binding.edtCategory.setText(category.namaCategory)
     }
 
     private fun setupClickListener() {
@@ -41,6 +49,9 @@ class AddProductActivity : BaseActivity() {
         }
         binding.btnAddProduct.setOnClickListener {
             validateData()
+        }
+        binding.edtCategory.setOnClickListener {
+            startActivityForResult(Intent(this, CategoryActivity::class.java), Constants.REQUEST_CATEGORY_CODE)
         }
     }
 
@@ -101,6 +112,7 @@ class AddProductActivity : BaseActivity() {
         }
     }
 
+
      private fun firebaseAddProduct() {
         progress.show()
         val product = Product(
@@ -125,5 +137,9 @@ class AddProductActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+        const val EXTRA_CATEGORY = "extra_category"
     }
 }

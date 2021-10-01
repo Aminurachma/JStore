@@ -68,12 +68,12 @@
 				tools:src="@tools:sample/avatars" />
 
 			<TextView
-				android:id="@+id/name_label"
+				android:id="@+id/firstName_label"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/_20sdp"
 				android:fontFamily="@font/rubik_regular"
-				android:text="@string/fullname"
+				android:text="@string/firstName"
 				android:textColor="@color/dark"
 				android:textSize="@dimen/_12ssp"
 				app:layout_constraintEnd_toEndOf="parent"
@@ -81,17 +81,17 @@
 				app:layout_constraintTop_toBottomOf="@+id/img_avatar" />
 
 			<com.google.android.material.textfield.TextInputLayout
-				android:id="@+id/til_name"
+				android:id="@+id/til_firstName"
 				style="@style/App.TextInputLayout.OutlinedBox"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/_4sdp"
-				app:layout_constraintEnd_toEndOf="@+id/name_label"
-				app:layout_constraintStart_toStartOf="@+id/name_label"
-				app:layout_constraintTop_toBottomOf="@+id/name_label">
+				app:layout_constraintEnd_toEndOf="@+id/firstName_label"
+				app:layout_constraintStart_toStartOf="@+id/firstName_label"
+				app:layout_constraintTop_toBottomOf="@+id/firstName_label">
 
 				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/edt_name"
+					android:id="@+id/edt_firstName"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:fontFamily="@font/rubik_light"
@@ -100,7 +100,44 @@
 					android:textColor="@color/dark"
 					android:textColorHint="@color/gray3"
 					android:textSize="@dimen/_12ssp"
-					tools:text="Aminurachma" />
+					tools:text="Welleeeh" />
+
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<TextView
+				android:id="@+id/lastName_label"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_20sdp"
+				android:fontFamily="@font/rubik_regular"
+				android:text="@string/lastName"
+				android:textColor="@color/dark"
+				android:textSize="@dimen/_12ssp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/til_firstName" />
+
+			<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/til_lastName"
+				style="@style/App.TextInputLayout.OutlinedBox"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_4sdp"
+				app:layout_constraintEnd_toEndOf="@+id/lastName_label"
+				app:layout_constraintStart_toStartOf="@+id/lastName_label"
+				app:layout_constraintTop_toBottomOf="@+id/lastName_label">
+
+				<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/edt_lastName"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/rubik_light"
+					android:hint="@string/enter_your_name_here"
+					android:inputType="textCapWords"
+					android:textColor="@color/dark"
+					android:textColorHint="@color/gray3"
+					android:textSize="@dimen/_12ssp"
+					tools:text="Wkkkekekek" />
 
 			</com.google.android.material.textfield.TextInputLayout>
 
@@ -115,7 +152,7 @@
 				android:textSize="@dimen/_12ssp"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@+id/til_name" />
+				app:layout_constraintTop_toBottomOf="@+id/til_lastName" />
 
 			<com.google.android.material.textfield.TextInputLayout
 				android:id="@+id/til_email"
@@ -123,8 +160,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/_4sdp"
-				app:layout_constraintEnd_toEndOf="@+id/name_label"
-				app:layout_constraintStart_toStartOf="@+id/name_label"
+				app:layout_constraintEnd_toEndOf="@+id/lastName_label"
+				app:layout_constraintStart_toStartOf="@+id/lastName_label"
 				app:layout_constraintTop_toBottomOf="@+id/email_label">
 
 				<com.google.android.material.textfield.TextInputEditText

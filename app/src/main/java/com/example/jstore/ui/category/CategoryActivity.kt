@@ -8,6 +8,7 @@ import com.example.jstore.databinding.ActivityCategoryBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.ui.metodepembayaran.AddMetodePembayaranActivity
 import com.example.jstore.ui.metodepembayaran.MetodePembayaranAdapter
+import com.example.jstore.ui.product.AddProductActivity
 import com.example.jstore.ui.setting.SettingActivity
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
@@ -63,9 +64,9 @@ class CategoryActivity : BaseActivity() {
 
     private fun setupAdapter() {
         adapter = CategoryAdapter(onClickListener = { category ->
-//            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
-//                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, metodePembayaran)
-//            })
+            startActivity(Intent(this, AddProductActivity::class.java).apply {
+                putExtra(AddProductActivity.EXTRA_CATEGORY, category)
+            })
         })
     }
 

@@ -1,9 +1,12 @@
 package com.example.jstore.firestore
 
 import android.net.Uri
+import android.util.Log
 import androidx.core.net.toUri
 import com.example.jstore.data.source.local.Prefs
+import com.example.jstore.data.source.local.Prefs.productId
 import com.example.jstore.models.*
+import com.example.jstore.utils.Constants
 import com.example.jstore.utils.Constants.ADMIN
 import com.example.jstore.utils.Constants.CARTS
 import com.example.jstore.utils.Constants.CART_ID
@@ -50,6 +53,25 @@ class FirestoreClass {
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener {
                 onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+    fun updateProduct(
+        title: String, price: String, description: String, stockQuantity: Int, category: String, imageUrl: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(PRODUCTS)
+            .document(productId)
+            .update("title", title, "price", price,
+            "description", description, "stockQuantity", stockQuantity, "category", category)
+            .addOnSuccessListener {
+            uploadImageProductToFirestore(imageUrl.toUri(), onSuccessListener = { imageUrl ->
+                        updateProductImageUrl(productId, imageUrl)
+                    }, onFailureListener = {})
+                    onSuccessListener()
             }
             .addOnFailureListener { e ->
                 onFailureListener(e)
@@ -157,7 +179,7 @@ class FirestoreClass {
                 val user = document.toObject(User::class.java)
                 if (user != null) {
                     Prefs.userId = user.id
-                    Prefs.userFullName = user.fullName
+                    Prefs.userFullName = user.firstName +" "+ user.lastName
                     onSuccessListener(user)
                 }
 
@@ -180,7 +202,7 @@ class FirestoreClass {
                     val user = documentSnapshot.toObject<User>()
                     if (user != null) {
                         Prefs.userId = user.id
-                        Prefs.userFullName = user.fullName
+                        Prefs.userFullName = user.firstName +" "+ user.lastName
                         onSuccessListener(user)
                     }
                 }
@@ -737,6 +759,19 @@ class FirestoreClass {
             .update(documentName, id)
             .addOnSuccessListener { onSuccessListener() }
             .addOnFailureListener { onFailureListener(it) }
+    }
+
+    fun deleteProduct( productID: String, onSuccessListener: () -> Unit, onFailureListener: (e: Exception) -> Unit) {
+        mFirestore.collection(PRODUCTS)
+            .document(productID)
+            .delete()
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+                logError("removeDelete: ${it.message}")
+            }
     }
 
 }

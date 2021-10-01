@@ -28,7 +28,7 @@ object Constants {
     const val CHECKED_OUT = "checkedOut"
 
     const val EXTRA_PRODUCT_ID = "extra_product_id"
-    const val PRODUCT_ID = "product_id"
+    const val PRODUCT_ID = "productId"
 
     const val EXTRA_PRODUCT_OWNER_ID = "extra_product_owner_id"
     const val DEFAULT_CARD_QUANTITY = "1"
@@ -44,5 +44,8 @@ object Constants {
     const val LOKASIPENGIRIMAN_ID = "lokasiPengirimanId"
     const val METODEPEMBAYARAN_ID = "metodePembayaranId"
     const val CATEGORY_ID = "categoryId"
+
+
+    const val REQUEST_CATEGORY_CODE = 6211
 
 }

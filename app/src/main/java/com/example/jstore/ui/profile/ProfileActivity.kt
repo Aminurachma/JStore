@@ -51,7 +51,8 @@ class ProfileActivity : BaseActivity() {
                 .placeholder(R.drawable.user_pisc)
                 .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                 .into(binding.imgAvatar)
-            binding.edtName.setText(it.fullName)
+            binding.edtFirstName.setText(it.firstName)
+            binding.edtLastName.setText(it.lastName)
             binding.edtEmail.setText(it.email)
             binding.edtAddress.setText(it.address)
             binding.edtPhoneNumber.setText(it.mobile)
@@ -86,7 +87,7 @@ class ProfileActivity : BaseActivity() {
         when (resultCode) {
             Activity.RESULT_OK -> {
                 mSelectedProfileImageFileUri = data?.data
-                uploadProfileImage()
+                        uploadProfileImage()
             }
             ImagePicker.RESULT_ERROR -> {
                 showToast(ImagePicker.getError(data))
@@ -108,9 +109,13 @@ class ProfileActivity : BaseActivity() {
     private fun validateData() {
         binding.apply {
             when {
-                edtName.text.toString().trim().isEmpty() -> tilName.error = getString(
+                edtFirstName.text.toString().trim().isEmpty() -> firstNameLabel.error = getString(
                     R.string.empty_field, getString(
-                        R.string.fullname
+                        R.string.firstName
+                    ))
+                edtLastName.text.toString().trim().isEmpty() -> lastNameLabel.error = getString(
+                    R.string.empty_field, getString(
+                        R.string.lastName
                     ))
                 edtAddress.text.toString().trim().isEmpty() -> tilAddress.error = getString(
                     R.string.empty_field, getString(
@@ -132,7 +137,8 @@ class ProfileActivity : BaseActivity() {
         progress.show()
         val user = User(
             id = mUserDetails.id,
-            fullName = binding.edtName.text.toString(),
+            firstName = binding.edtFirstName.text.toString(),
+            lastName = binding.edtLastName.text.toString(),
             address = binding.edtAddress.text.toString(),
             mobile = binding.edtPhoneNumber.text.toString(),
             email = binding.edtEmail.text.toString(),

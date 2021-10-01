@@ -15,8 +15,12 @@
     <string name="register_here">Register Here</string>
     <string name="create_your_new_account">Create your new account</string>
     <string name="enter_your_name_here">Enter your name here</string>
+    <string name="enter_your_firstName_here">Enter your first name here</string>
+    <string name="enter_your_lastName_here">Enter your last name here</string>
     <string name="username">Username</string>
     <string name="fullname">Fullname</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
     <string name="address">Address</string>
     <string name="enter_your_address_here">Enter your address here</string>
     <string name="register">Register</string>
@@ -42,6 +46,7 @@
     <string name="_1">1</string>
     <string name="register_success">You are registered successfully</string>
     <string name="update_profile_success">Profile updated successfully</string>
+    <string name="update_product_success">Update Product successfully</string>
     <string name="add_product_success">Product add successfully</string>
     <string name="add_rekening_success">Rekening add successfully</string>
     <string name="add_jasa_success">Jasa Pengiriman add successfully</string>
@@ -51,11 +56,12 @@
     <string name="tunggu_sebentar_ya">Tunggu Sebentar ya</string>
     <string name="invalid_email">Invalid email format!</string>
     <string name="empty_field">Please enter your %s</string>
-    <string name="kurangalaamat">Please enter your address more than 10 characters</string>
-    <string name="kurangnomor">Please enter your phone more than 11 characters </string>
+    <string name="kurangalaamat">Please enter your address with the correct address</string>
+    <string name="kurangnomor">Please enter your phone with the correct phone number </string>
     <string name="kurangnama">Please enter your name more than 7 characters</string>
     <string name="register_failed">Failed to register! %s</string>
     <string name="update_profile_failed">Failed to update your profile! %s</string>
+    <string name="update_product_failed">Failed to update your product! %s</string>
     <string name="add_product_failed">Failed to add your product! %s</string>
     <string name="add_rekening_failed">Gagal menambahkan rekening! %s</string>
     <string name="add_metode_failed">Gagal menambahkan Metode Pembayaran! %s</string>
@@ -115,7 +121,7 @@
     <string name="pengiriman">Delivery :</string>
     <string name="payment">Payment </string>
     <string name="add_product">Add New Product</string>
-    <string name="edit_product">Edit Product</string>
+    <string name="edit_product">Update Product</string>
     <string name="kategori">Kategori</string>
     <string name="selamat_ndatang">Selamat\nDatang,</string>
     <string name="penghasilan">Penghasilan</string>
@@ -143,4 +149,10 @@
     <string name="add_category_name">Nama Kategori</string>
     <string name="jenis_metode_pembayaran">Jenis Metode Pembayaran</string>
     <string name="empty_product_image">Silahkan tambahkan foto produk!</string>
+
+    <string name="product_delete_success">Your product is deleted successfully.</string>
+    <string name="delete_dialog_title">Delete</string>
+    <string name="delete_dialog_message">Are you sure you want to delete the product?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

@@ -32,7 +32,7 @@ class CustomerAdapter(customer: User) : ListAdapter<User, CustomerAdapter.ViewHo
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(customer: User) {
             with(itemBinding) {
-                tvCustomerName.text = customer.fullName
+                tvCustomerName.text = customer.firstName +" "+ customer.lastName
                 tvCustomerAddress.text = customer.address
                 Glide.with(root.context)
                     .load(customer.image)

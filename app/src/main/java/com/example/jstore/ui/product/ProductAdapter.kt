@@ -2,18 +2,24 @@ package com.example.jstore.ui.product
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.example.jstore.R
+import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ItemProductBinding
 import com.example.jstore.models.Product
 import com.example.jstore.utils.formatPrice
+import com.example.jstore.utils.toGone
+import com.example.jstore.utils.toVisible
 
-class ProductAdapter(private val onClickListener: (product: Product) -> Unit,
+class ProductAdapter( private val onClickListener: (product: Product) -> Unit,
+                      private val activity : ProductActivity,
 ) : ListAdapter<Product, ProductAdapter.ViewHolder>(DIFF_CALLBACK) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -41,6 +47,15 @@ class ProductAdapter(private val onClickListener: (product: Product) -> Unit,
                     .placeholder(R.drawable.product_placeholder)
                     .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                     .into(imgProduct)
+                if (Prefs.adminId.isNotEmpty()) {
+                    ibDeleteProduct.toVisible()
+                    ibDeleteProduct.setOnClickListener{
+                        activity.deleteProduct(product.productId)
+                    }
+                } else
+                {
+                    ibDeleteProduct.toGone()
+                }
 
                 root.setOnClickListener { onClickListener(product) }
             }
