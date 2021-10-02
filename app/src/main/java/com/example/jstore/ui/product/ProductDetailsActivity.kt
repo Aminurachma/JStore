@@ -35,6 +35,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         product = intent.getParcelableExtra(EXTRA_PRODUCT) ?: Product()
         Glide.with(this)
             .load(product.image)
+            .placeholder(R.drawable.product_placeholder)
             .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
             .into(binding.imgProduct)
         binding.tvProductName.text = product.title
