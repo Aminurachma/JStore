@@ -1,54 +1,56 @@
-package com.example.jstore.ui.lokasipengiriman
+package com.example.jstore.ui.category
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import com.example.jstore.base.BaseActivity
-import com.example.jstore.databinding.ActivityLokasiPengirimanBinding
+import com.example.jstore.databinding.ActivityCategoryBinding
 import com.example.jstore.firestore.FirestoreClass
-import com.example.jstore.ui.jasapengiriman.JasaPengirimanAdapter
-import com.example.jstore.ui.product.ProductDetailsActivity
+import com.example.jstore.ui.metodepembayaran.AddMetodePembayaranActivity
+import com.example.jstore.ui.metodepembayaran.MetodePembayaranAdapter
+import com.example.jstore.ui.product.AddProductActivity
 import com.example.jstore.ui.setting.SettingActivity
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
 
-class LokasiPengirimanActivity : BaseActivity() {
-
-    private var _binding: ActivityLokasiPengirimanBinding? = null
+class CategoryActivity : BaseActivity() {
+    private var _binding: ActivityCategoryBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: LokasiPengirimanAdapter
+    private lateinit var adapter: CategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityLokasiPengirimanBinding.inflate(layoutInflater)
+        _binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupAdapter()
         setupUI()
-        getLokasiPengirimanList()
+        getCategoryList()
         setupClickListener()
+
     }
 
     private fun setupClickListener() {
-        binding.btnAddLokasi.setOnClickListener {
-            startActivity(Intent(this, AddLokasiPengirimanActivity::class.java))
-        }
         binding.btnBack.setOnClickListener {
             startActivity(Intent(this, SettingActivity::class.java))
         }
+
+        binding.btnAddCategory.setOnClickListener {
+            startActivity(Intent(this, AddCategoryActivity::class.java))
+        }
     }
 
-    private fun getLokasiPengirimanList() {
+    private fun getCategoryList() {
         progress.show()
-        FirestoreClass().getLokasiPengirimanList(onSuccessListener = {
+        FirestoreClass().getCategoryList(onSuccessListener = {
             progress.dismiss()
             if (it.isNotEmpty()) {
-                binding.rvLokasiPengiriman.toVisible()
+                binding.rvCategory.toVisible()
                 adapter.submitList(it)
             } else {
-                binding.rvLokasiPengiriman.toGone()
+                binding.rvCategory.toGone()
             }
         }, onFailureListener = {
             progress.dismiss()
@@ -57,14 +59,14 @@ class LokasiPengirimanActivity : BaseActivity() {
     }
 
     private fun setupUI() {
-        binding.rvLokasiPengiriman.adapter = adapter
+        binding.rvCategory.adapter = adapter
     }
 
     private fun setupAdapter() {
-        adapter = LokasiPengirimanAdapter(onClickListener = { lokasiPengiriman ->
-//            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
-//                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, lokasiPengiriman)
-//            })
+        adapter = CategoryAdapter(onClickListener = { category ->
+            startActivity(Intent(this, AddProductActivity::class.java).apply {
+                putExtra(AddProductActivity.EXTRA_CATEGORY, category)
+            })
         })
     }
 
@@ -72,4 +74,5 @@ class LokasiPengirimanActivity : BaseActivity() {
         super.onDestroy()
         _binding = null
     }
+
 }

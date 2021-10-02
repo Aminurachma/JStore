@@ -1,57 +1,67 @@
 package com.example.jstore.ui.product
 
 import android.app.Activity
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Patterns
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
+import com.bumptech.glide.GenericTransitionOptions
+import com.bumptech.glide.Glide
 import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.data.source.local.Prefs
-import com.example.jstore.databinding.ActivityAddProductBinding
+import com.example.jstore.databinding.ActivityEditProductBinding
 import com.example.jstore.firestore.FirestoreClass
-import com.example.jstore.models.Category
 import com.example.jstore.models.Product
 import com.example.jstore.models.User
-import com.example.jstore.ui.category.CategoryActivity
 import com.example.jstore.ui.home.customer.HomeCustomerActivity
-import com.example.jstore.utils.Constants
+import com.example.jstore.utils.formatPrice
 import com.example.jstore.utils.imagePicker
 import com.example.jstore.utils.pushActivity
 import com.example.jstore.utils.showToast
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.firebase.firestore.SetOptions
-import java.util.*
+import timber.log.Timber
 
-@Suppress("DEPRECATION")
-class AddProductActivity : BaseActivity() {
-    private var _binding: ActivityAddProductBinding? = null
+class EditProductActivity : BaseActivity() {
+    private var _binding: ActivityEditProductBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var category: Category
+    private lateinit var product: Product
     private var mSelectedProductImageFileUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityAddProductBinding.inflate(layoutInflater)
+        _binding = ActivityEditProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupClickListener()
-        category = intent.getParcelableExtra(EXTRA_CATEGORY) ?: Category()
-        binding.edtCategory.setText(category.namaCategory)
+        setupUI()
+        setupClickListeners()
     }
 
-    private fun setupClickListener() {
+    private fun setupUI() {
+        product = intent.getParcelableExtra(EXTRA_PRODUCT) ?: Product()
+        Glide.with(this)
+            .load(product.image)
+            .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
+            .into(binding.imgProduct)
+        binding.edtName.setText(product.title)
+        binding.edtCategory.setText(product.category)
+        binding.edtQty.setText(product.stockQuantity.toString())
+        binding.edtDescription.setText(product.description)
+        binding.edtPrice.setText(product.price)
+    }
+
+    private fun setupClickListeners() {
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
         binding.cardImgProduct.setOnClickListener {
             imagePicker(startForImageResult)
         }
-        binding.btnAddProduct.setOnClickListener {
+        binding.btnEditProduct.setOnClickListener {
             validateData()
-        }
-        binding.edtCategory.setOnClickListener {
-            startActivityForResult(Intent(this, CategoryActivity::class.java), Constants.REQUEST_CATEGORY_CODE)
         }
     }
 
@@ -62,26 +72,12 @@ class AddProductActivity : BaseActivity() {
             Activity.RESULT_OK -> {
                 mSelectedProductImageFileUri = data?.data
                 binding.imgProduct.setImageURI(data?.data)
-//                uploadProductImage()
             }
             ImagePicker.RESULT_ERROR -> {
                 showToast(ImagePicker.getError(data))
             }
         }
     }
-
-//    private fun uploadProductImage() {
-//        progress.show()
-//        FirestoreClass().uploadImageProductToFirestore(mSelectedProductImageFileUri!!,
-//            onSuccessListener = {
-//              //  Prefs.productImage = mSelectedProductImageFileUri.toString()
-//            progress.dismiss()
-//                binding.ivProductImage.setImageURI(mSelectedProductImageFileUri!!)
-//        }, onFailureListener = {
-//            progress.dismiss()
-//            showToast(getString(R.string.update_profile_failed, it.message.toString()))
-//        })
-//    }
 
     private fun validateData() {
         binding.apply {
@@ -107,13 +103,12 @@ class AddProductActivity : BaseActivity() {
                         R.string.price_product
                     ))
                 mSelectedProductImageFileUri == null -> showToast(getString(R.string.empty_product_image))
-                else -> firebaseAddProduct()
+                else -> firebaseEditProduct()
             }
         }
     }
 
-
-     private fun firebaseAddProduct() {
+    private fun firebaseEditProduct() {
         progress.show()
         val product = Product(
             title = binding.edtName.text.toString(),
@@ -121,16 +116,18 @@ class AddProductActivity : BaseActivity() {
             description = binding.edtDescription.text.toString(),
             stockQuantity = binding.edtQty.text.toString().toInt(),
             category = binding.edtCategory.text.toString(),
-            image = mSelectedProductImageFileUri!!.toString()
+            image = mSelectedProductImageFileUri!!.toString(),
+            productId = Prefs.productId
         )
-        FirestoreClass().addProduct(product, onSuccessListener = {
+        FirestoreClass().updateProduct(product.title,product.price,product.description,product.stockQuantity,
+            product.category,product.image, onSuccessListener = {
             progress.dismiss()
-            showToast(getString(R.string.add_product_success))
+            showToast(getString(R.string.update_product_success))
             pushActivity(ProductActivity::class.java)
             finish()
         }, onFailureListener = {
             progress.dismiss()
-            showToast(getString(R.string.add_product_failed, it.message.toString()))
+            showToast(getString(R.string.update_product_failed, it.message.toString()))
         })
     }
 
@@ -140,6 +137,6 @@ class AddProductActivity : BaseActivity() {
     }
 
     companion object {
-        const val EXTRA_CATEGORY = "extra_category"
+        const val EXTRA_PRODUCT = "extra_product"
     }
 }

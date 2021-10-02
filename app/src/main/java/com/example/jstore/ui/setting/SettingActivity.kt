@@ -9,6 +9,7 @@ import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ActivitySettingBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Admin
+import com.example.jstore.ui.category.CategoryActivity
 import com.example.jstore.ui.jasapengiriman.JasaPengirimanActivity
 import com.example.jstore.ui.login.customer.MainActivity
 import com.example.jstore.ui.lokasipengiriman.LokasiPengirimanActivity
@@ -52,6 +53,9 @@ class SettingActivity : BaseActivity() {
         }
         binding.btnNomorRekening.setOnClickListener {
             startActivity(Intent(this, RekeningActivity::class.java))
+        }
+        binding.btnCategory.setOnClickListener {
+            startActivity(Intent(this, CategoryActivity::class.java))
         }
         binding.btnLogout.setOnClickListener {
             logoutUser()

@@ -1,17 +1,13 @@
 package com.example.jstore.ui.customer
 
-import android.content.Intent
 import android.os.Bundle
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityCustomerBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.User
-import com.example.jstore.ui.product.ProductDetailsActivity
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
-import com.example.jstore.ui.customer.CustomerAdapter
-import com.example.jstore.ui.product.ProductAdapter
 
 class CustomerActivity : BaseActivity() {
 

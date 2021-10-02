@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light"
-    tools:context=".ui.metodepembayaran.MetodePembayaranActivity">
+    tools:context=".ui.category.AddCategoryActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_bold"
-            android:text="@string/metode_pembayaran"
+            android:text="@string/add_category"
             android:textColor="@color/dark"
             android:textSize="@dimen/_19ssp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,34 +52,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_20sdp"
-            android:orientation="vertical">
+            android:padding="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/name_label"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_regular"
+                android:text="@string/add_category_name"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_name"
+                style="@style/App.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                app:layout_constraintEnd_toEndOf="@+id/name_label"
+                app:layout_constraintStart_toStartOf="@+id/name_label"
+                app:layout_constraintTop_toBottomOf="@+id/name_label">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_light"
+                    android:hint="@string/add_category_name"
+                    android:inputType="textCapWords"
+                    android:textColor="@color/dark"
+                    android:textColorHint="@color/gray3"
+                    android:textSize="@dimen/_12ssp"
+                    tools:text="Makanan" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_add_metode_pembayaran"
+                android:id="@+id/btn_add_category"
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:fontFamily="@font/rubik_medium"
-                android:text="@string/add_metode"
+                android:text="@string/add_category"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_12ssp"
-                app:cornerRadius="@dimen/_8sdp" />
+                app:cornerRadius="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/til_name" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_metode_pembayaran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:itemCount="5"
-                tools:listitem="@layout/item_metode_pembayaran" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 

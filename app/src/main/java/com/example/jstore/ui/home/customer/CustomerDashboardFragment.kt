@@ -16,6 +16,7 @@ import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.User
 import com.example.jstore.ui.cart.MyCartActivity
 import com.example.jstore.ui.login.customer.MainActivity
+import com.example.jstore.ui.product.ProductActivity
 import com.example.jstore.ui.product.ProductAdapter
 import com.example.jstore.ui.product.ProductDetailsActivity
 import com.example.jstore.ui.profile.ProfileActivity
@@ -69,7 +70,7 @@ class CustomerDashboardFragment : BaseFragment() {
             startActivity(Intent(requireContext(), ProductDetailsActivity::class.java).apply {
                 putExtra(ProductDetailsActivity.EXTRA_PRODUCT, product)
             })
-        })
+        }, ProductActivity())
     }
 
     private fun getUserProfile() {
@@ -77,9 +78,10 @@ class CustomerDashboardFragment : BaseFragment() {
         FirestoreClass().subscribeUserProfile(onSuccessListener = {
             progress.dismiss()
             mUserDetails = it
-            binding.tvWelcomingText.text = getString(R.string.hello_user, it.fullName)
+            binding.tvWelcomingText.text = getString(R.string.hello_user, it.firstName +" "+ it.lastName)
             Glide.with(this)
-                .load(it.image?: R.drawable.user_pisc)
+                .load(it.image)
+                .placeholder(R.drawable.user_pisc)
                 .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                 .into(binding.imgAvatar)
         }, onFailureListener = {

@@ -38,16 +38,30 @@ class RegisterActivity : BaseActivity() {
     private fun validateData() {
         binding.apply {
             when {
-                edtName.text.toString().trim().isEmpty() -> tilName.error = getString(
+                edtFirstName.text.toString().trim().isEmpty() -> tilFirstName.error = getString(
                     R.string.empty_field, getString(
                         R.string.fullname
                     ))
+                edtLastName.text.toString().trim().isEmpty() -> tilLastName.error = getString(
+                    R.string.empty_field, getString(
+                        R.string.fullname
+                    ))
+                edtFirstName.text.toString().trim().length<3 -> tilFirstName.error = getString(
+                    R.string.kurangnama
+                    )
+                edtLastName.text.toString().trim().length<5 -> tilLastName.error = getString(
+                    R.string.kurangnama
+                )
                 edtAddress.text.toString().trim().isEmpty() -> tilAddress.error = getString(
                     R.string.empty_field, getString(
                         R.string.address
                     ))
+                edtAddress.text.toString().trim().isEmpty() -> tilAddress.error = getString(
+                    R.string.kurangalaamat)
                 edtPhoneNumber.text.toString().trim().isEmpty() -> tilPhoneNumber.error = getString(
                     R.string.empty_field, getString(R.string.phone_number))
+                edtPhoneNumber.text.toString().trim().length<7 -> tilPhoneNumber.error = getString(
+                    R.string.kurangnomor)
                 !Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString().trim()).matches() -> tilEmail.error = getString(
                     R.string.invalid_email
                 )
@@ -77,7 +91,8 @@ class RegisterActivity : BaseActivity() {
         val firebaseUser = firebaseAuth.currentUser
         val user = User(
             id = firebaseUser?.uid ?: "",
-            fullName = binding.edtName.text.toString().trim(),
+            firstName = binding.edtFirstName.text.toString().trim(),
+            lastName = binding.edtLastName.text.toString().trim(),
             address = binding.edtAddress.text.toString().trim(),
             mobile = binding.edtPhoneNumber.text.toString().trim(),
             email = binding.edtEmail.text.toString().trim()

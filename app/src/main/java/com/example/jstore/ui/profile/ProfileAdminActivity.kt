@@ -46,7 +46,8 @@ class ProfileAdminActivity : BaseActivity() {
             progress.dismiss()
             admin = it
             Glide.with(this)
-                .load(it.imageAdmin ?: R.drawable.user_pisc)
+                .load(it.imageAdmin)
+                .placeholder(R.drawable.user_pisc)
                 .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                 .into(binding.imgAvatar)
             binding.edtName.setText(it.fullNameAdmin)

@@ -21,6 +21,17 @@
 			android:scaleType="centerCrop"
 			tools:srcCompat="@tools:sample/avatars" />
 
+		<ImageButton
+			android:id="@+id/ib_delete_product"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingTop="@dimen/_3sdp"
+			android:layout_gravity="right"
+			android:background="@android:color/transparent"
+			android:foreground="?attr/selectableItemBackgroundBorderless"
+			android:src="@drawable/ic_vector_delete"
+			android:visibility="gone"/>
+
 		<TextView
 			android:id="@+id/tv_product_name"
 			android:layout_width="wrap_content"

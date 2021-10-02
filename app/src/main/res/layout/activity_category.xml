@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light"
-    tools:context=".ui.metodepembayaran.MetodePembayaranActivity">
+    tools:context=".ui.category.CategoryActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_bold"
-            android:text="@string/metode_pembayaran"
+            android:text="@string/category_product"
             android:textColor="@color/dark"
             android:textSize="@dimen/_19ssp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -59,25 +59,25 @@
             android:orientation="vertical">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_add_metode_pembayaran"
+                android:id="@+id/btn_add_category"
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:fontFamily="@font/rubik_medium"
-                android:text="@string/add_metode"
+                android:text="@string/add_category"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_12ssp"
                 app:cornerRadius="@dimen/_8sdp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_metode_pembayaran"
+                android:id="@+id/rv_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:itemCount="5"
-                tools:listitem="@layout/item_metode_pembayaran" />
+                tools:listitem="@layout/item_category" />
 
         </LinearLayout>
 

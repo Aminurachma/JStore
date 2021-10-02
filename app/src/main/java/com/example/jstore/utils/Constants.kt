@@ -8,6 +8,8 @@ object Constants {
     const val REKENING = "rekening"
     const val JASA_PENGIRIMAN = "jasa_pengiriman"
     const val LOKASI_PENGIRIMAN = "lokasi_pengiriman"
+    const val METODE_PEMBAYARAN = "metode_pembayaran"
+    const val CATEGORY = "category"
     const val CARTS = "carts"
 
     const val IMAGE = "image"
@@ -26,7 +28,7 @@ object Constants {
     const val CHECKED_OUT = "checkedOut"
 
     const val EXTRA_PRODUCT_ID = "extra_product_id"
-    const val PRODUCT_ID = "product_id"
+    const val PRODUCT_ID = "productId"
 
     const val EXTRA_PRODUCT_OWNER_ID = "extra_product_owner_id"
     const val DEFAULT_CARD_QUANTITY = "1"
@@ -37,5 +39,13 @@ object Constants {
     const val QUANTITY = "quantity"
 
     const val CART_ID = "cartId"
+    const val REKENING_ID = "rekeningId"
+    const val JASAPENGIRIMAN_ID = "jasaPengirimanId"
+    const val LOKASIPENGIRIMAN_ID = "lokasiPengirimanId"
+    const val METODEPEMBAYARAN_ID = "metodePembayaranId"
+    const val CATEGORY_ID = "categoryId"
+
+
+    const val REQUEST_CATEGORY_CODE = 6211
 
 }

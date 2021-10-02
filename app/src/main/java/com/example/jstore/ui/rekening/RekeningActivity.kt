@@ -7,6 +7,7 @@ import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityRekeningBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.ui.product.ProductDetailsActivity
+import com.example.jstore.ui.setting.SettingActivity
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
@@ -34,7 +35,7 @@ class RekeningActivity : BaseActivity() {
             startActivity(Intent(this, AddRekeningActivity::class.java))
         }
         binding.btnBack.setOnClickListener {
-            onBackPressed()
+            startActivity(Intent(this, SettingActivity::class.java))
         }
     }
 
@@ -60,9 +61,9 @@ class RekeningActivity : BaseActivity() {
 
     private fun setupAdapter() {
         adapter = RekeningAdapter(onClickListener = { rekening ->
-            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
-                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, rekening)
-            })
+//            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
+//                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, rekening)
+//            })
         })
     }
 

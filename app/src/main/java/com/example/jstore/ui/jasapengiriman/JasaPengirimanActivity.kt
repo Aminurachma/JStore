@@ -9,6 +9,7 @@ import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.ui.lokasipengiriman.AddLokasiPengirimanActivity
 import com.example.jstore.ui.product.ProductDetailsActivity
 import com.example.jstore.ui.rekening.RekeningAdapter
+import com.example.jstore.ui.setting.SettingActivity
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
@@ -36,7 +37,7 @@ class JasaPengirimanActivity : BaseActivity() {
             startActivity(Intent(this, AddJasaPengirimanActivity::class.java))
         }
         binding.btnBack.setOnClickListener {
-            onBackPressed()
+            startActivity(Intent(this, SettingActivity::class.java))
         }
     }
 
@@ -62,9 +63,9 @@ class JasaPengirimanActivity : BaseActivity() {
 
     private fun setupAdapter() {
         adapter = JasaPengirimanAdapter(onClickListener = { jasaPengiriman ->
-            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
-                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, jasaPengiriman)
-            })
+//            startActivity(Intent(this, ProductDetailsActivity::class.java).apply {
+//                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, jasaPengiriman)
+//            })
         })
     }
 
