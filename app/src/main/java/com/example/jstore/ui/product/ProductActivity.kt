@@ -53,49 +53,9 @@ class ProductActivity : BaseActivity() {
                 Prefs.productId = product.productId
                 Timber.e("Prefs ${Prefs.productId}")
             })
-        }, this)
+        })
     }
 
-    fun deleteProduct(productID : String){
-//        Toast.makeText(requireActivity(), "You can now delete the product. $productID", Toast.LENGTH_SHORT).show()
-
-        showAlertDialogToDeleteProduct(productID)
-    }
-
-    private fun showAlertDialogToDeleteProduct(productID: String) {
-        val builder = AlertDialog.Builder(this)
-
-        builder.setTitle(getString(R.string.delete_dialog_title))
-        builder.setMessage(getString(R.string.delete_dialog_message))
-        builder.setIcon(android.R.drawable.ic_dialog_alert)
-        builder.setPositiveButton(getString(R.string.yes)){
-                dialogInterface,_->
-
-            progress.show()
-
-            FirestoreClass().deleteProduct(productID, onSuccessListener = {
-                progress.dismiss()
-                showToast(getString(R.string.product_delete_success))
-                startActivity(
-                    Intent(this, ProductActivity::class.java))
-                finish()
-            }, onFailureListener = {
-                progress.dismiss()
-                showToast(getString(R.string.update_product_failed, it.message.toString()))
-            })
-
-            dialogInterface.dismiss()
-        }
-        builder.setNegativeButton(getString(R.string.no)){
-                dialogInterface,_->
-            dialogInterface.dismiss()
-        }
-
-        val alertDialog : AlertDialog = builder.create()
-        alertDialog.setCancelable(false)
-        alertDialog.show()
-
-    }
 
     private fun getProductList() {
         progress.show()

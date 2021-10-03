@@ -17,7 +17,6 @@ import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
 
 class ProductAdapter( private val onClickListener: (product: Product) -> Unit,
-                      private val activity : ProductActivity,
 ) : ListAdapter<Product, ProductAdapter.ViewHolder>(DIFF_CALLBACK) {
 
 
@@ -47,15 +46,6 @@ class ProductAdapter( private val onClickListener: (product: Product) -> Unit,
                     .placeholder(R.drawable.product_placeholder)
                     .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                     .into(imgProduct)
-                if (Prefs.adminId.isNotEmpty()) {
-                    ibDeleteProduct.toVisible()
-                    ibDeleteProduct.setOnClickListener{
-                        activity.deleteProduct(product.productId)
-                    }
-                } else
-                {
-                    ibDeleteProduct.toGone()
-                }
 
                 root.setOnClickListener { onClickListener(product) }
             }

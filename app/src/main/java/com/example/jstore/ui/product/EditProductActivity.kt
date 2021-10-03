@@ -1,6 +1,8 @@
 package com.example.jstore.ui.product
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
@@ -57,12 +59,58 @@ class EditProductActivity : BaseActivity() {
             onBackPressed()
         }
 
+        binding.ibDeleteProduct.setOnClickListener{
+            deleteProduct(product.productId)
+        }
+
         binding.cardImgProduct.setOnClickListener {
             imagePicker(startForImageResult)
         }
         binding.btnEditProduct.setOnClickListener {
             validateData()
         }
+    }
+
+    fun deleteProduct(productID : String){
+//        Toast.makeText(requireActivity(), "You can now delete the product. $productID", Toast.LENGTH_SHORT).show()
+
+        showAlertDialogToDeleteProduct(productID)
+    }
+
+    private fun showAlertDialogToDeleteProduct(productID: String) {
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle(getString(R.string.delete_dialog_title))
+        builder.setMessage(getString(R.string.delete_dialog_message))
+        builder.setIcon(android.R.drawable.ic_dialog_alert)
+        builder.setPositiveButton(getString(R.string.yes)){
+                dialogInterface,_->
+
+            progress.show()
+
+            FirestoreClass().deleteProduct(productID, onSuccessListener = {
+                progress.dismiss()
+                showToast(getString(R.string.product_delete_success))
+                startActivity(
+                    Intent(this, ProductActivity::class.java)
+                )
+                finish()
+            }, onFailureListener = {
+                progress.dismiss()
+                showToast(getString(R.string.update_product_failed, it.message.toString()))
+            })
+
+            dialogInterface.dismiss()
+        }
+        builder.setNegativeButton(getString(R.string.no)){
+                dialogInterface,_->
+            dialogInterface.dismiss()
+        }
+
+        val alertDialog : AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+
     }
 
     private val startForImageResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -121,14 +169,14 @@ class EditProductActivity : BaseActivity() {
         )
         FirestoreClass().updateProduct(product.title,product.price,product.description,product.stockQuantity,
             product.category,product.image, onSuccessListener = {
-            progress.dismiss()
-            showToast(getString(R.string.update_product_success))
-            pushActivity(ProductActivity::class.java)
-            finish()
-        }, onFailureListener = {
-            progress.dismiss()
-            showToast(getString(R.string.update_product_failed, it.message.toString()))
-        })
+                progress.dismiss()
+                showToast(getString(R.string.update_product_success))
+                pushActivity(ProductActivity::class.java)
+                finish()
+            }, onFailureListener = {
+                progress.dismiss()
+                showToast(getString(R.string.update_product_failed, it.message.toString()))
+            })
     }
 
     override fun onDestroy() {
