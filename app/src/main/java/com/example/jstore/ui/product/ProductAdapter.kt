@@ -2,6 +2,8 @@ package com.example.jstore.ui.product
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -17,8 +19,9 @@ import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
 
 class ProductAdapter( private val onClickListener: (product: Product) -> Unit,
-) : ListAdapter<Product, ProductAdapter.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<Product, ProductAdapter.ViewHolder>(DIFF_CALLBACK), Filterable {
 
+    private var productList: List<Product> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -49,6 +52,28 @@ class ProductAdapter( private val onClickListener: (product: Product) -> Unit,
 
                 root.setOnClickListener { onClickListener(product) }
             }
+        }
+    }
+
+    fun setProductList(list: List<Product>) {
+        productList = list
+    }
+
+    override fun getFilter(): Filter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filteredList = mutableListOf<Product>()
+            if (constraint == null || constraint.isEmpty()) {
+                filteredList.addAll(productList)
+            } else {
+                filteredList.addAll(productList.filter { it.title.contains(constraint.toString(), true) })
+            }
+            val results = FilterResults()
+            results.values = filteredList
+            return results
+        }
+
+        override fun publishResults(constraint: CharSequence?, filterResults: FilterResults?) {
+            submitList(filterResults?.values as MutableList<Product>)
         }
     }
 

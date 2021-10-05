@@ -47,14 +47,10 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:paddingTop="@dimen/_3sdp"
             android:src="@drawable/ic_vector_delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.978"
-            app:layout_constraintStart_toStartOf="@id/textView2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.612" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -137,7 +133,10 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/rubik_light"
                     android:hint="@string/masukkan_kategori_produk"
-                    android:inputType="textCapWords"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:longClickable="false"
                     android:textColor="@color/dark"
                     android:textColorHint="@color/gray3"
                     android:textSize="@dimen/_12ssp"
@@ -163,7 +162,7 @@
                 style="@style/App.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_4sdp"
                 app:layout_constraintEnd_toEndOf="@+id/price_label"
                 app:layout_constraintStart_toStartOf="@+id/price_label"
                 app:layout_constraintTop_toBottomOf="@+id/price_label">
@@ -225,6 +224,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_regular"
                 android:text="@string/stock_product"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:textColor="@color/dark"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -283,7 +283,7 @@
                     android:layout_width="match_parent"
                     android:scaleType="centerCrop"
                     android:layout_height="match_parent"
-                    app:srcCompat="@drawable/ic_vector_add_photo"/>
+                    app:srcCompat="@drawable/product_placeholder"/>
 
             </com.google.android.material.card.MaterialCardView>
 

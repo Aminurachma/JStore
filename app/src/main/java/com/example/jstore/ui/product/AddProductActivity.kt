@@ -42,8 +42,6 @@ class AddProductActivity : BaseActivity() {
         setContentView(binding.root)
 
         setupClickListener()
-        category = intent.getParcelableExtra(EXTRA_CATEGORY) ?: Category()
-        binding.edtCategory.setText(category.namaCategory)
     }
 
     private fun setupClickListener() {
@@ -77,9 +75,9 @@ class AddProductActivity : BaseActivity() {
 
     var categoryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val categorys = result.data?.getParcelableExtra(EXTRA_CATEGORY) ?: Category()
-            binding.edtCategory.setText(categorys.namaCategory)
-            category = categorys
+            val category = result.data?.getParcelableExtra(EXTRA_CATEGORY) ?: Category()
+            binding.edtCategory.setText(category.namaCategory)
+            this.category = category
         }
     }
 

@@ -41,8 +41,6 @@ class EditProductActivity : BaseActivity() {
         setupUI()
         setupClickListeners()
 
-        category = intent.getParcelableExtra(AddProductActivity.EXTRA_CATEGORY) ?: Category()
-        binding.edtCategory.setText(category.namaCategory)
     }
 
     private fun setupUI() {
@@ -63,7 +61,7 @@ class EditProductActivity : BaseActivity() {
             onBackPressed()
         }
 
-        binding.ibDeleteProduct.setOnClickListener{
+        binding.ibDeleteProduct.setOnClickListener {
             deleteProduct(product.productId)
         }
 
@@ -74,13 +72,11 @@ class EditProductActivity : BaseActivity() {
             validateData()
         }
         binding.edtCategory.setOnClickListener {
-            startActivityForResult(Intent(this, CategoryActivity::class.java), Constants.REQUEST_CATEGORY_CODE)
+            categoryLauncher.launch(Intent(this, CategoryActivity::class.java))
         }
     }
 
-    fun deleteProduct(productID : String){
-//        Toast.makeText(requireActivity(), "You can now delete the product. $productID", Toast.LENGTH_SHORT).show()
-
+    private fun deleteProduct(productID: String) {
         showAlertDialogToDeleteProduct(productID)
     }
 
@@ -90,17 +86,13 @@ class EditProductActivity : BaseActivity() {
         builder.setTitle(getString(R.string.delete_dialog_title))
         builder.setMessage(getString(R.string.delete_dialog_message))
         builder.setIcon(android.R.drawable.ic_dialog_alert)
-        builder.setPositiveButton(getString(R.string.yes)){
-                dialogInterface,_->
+        builder.setPositiveButton(getString(R.string.yes)) { dialogInterface, _ ->
 
             progress.show()
 
             FirestoreClass().deleteProduct(productID, onSuccessListener = {
                 progress.dismiss()
                 showToast(getString(R.string.product_delete_success))
-                startActivity(
-                    Intent(this, ProductActivity::class.java)
-                )
                 finish()
             }, onFailureListener = {
                 progress.dismiss()
@@ -109,30 +101,30 @@ class EditProductActivity : BaseActivity() {
 
             dialogInterface.dismiss()
         }
-        builder.setNegativeButton(getString(R.string.no)){
-                dialogInterface,_->
+        builder.setNegativeButton(getString(R.string.no)) { dialogInterface, _ ->
             dialogInterface.dismiss()
         }
 
-        val alertDialog : AlertDialog = builder.create()
+        val alertDialog: AlertDialog = builder.create()
         alertDialog.setCancelable(false)
         alertDialog.show()
 
     }
 
-    private val startForImageResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        val resultCode = result.resultCode
-        val data = result.data
-        when (resultCode) {
-            Activity.RESULT_OK -> {
-                mSelectedProductImageFileUri = data?.data
-                binding.imgProduct.setImageURI(data?.data)
-            }
-            ImagePicker.RESULT_ERROR -> {
-                showToast(ImagePicker.getError(data))
+    private val startForImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val resultCode = result.resultCode
+            val data = result.data
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    mSelectedProductImageFileUri = data?.data
+                    binding.imgProduct.setImageURI(data?.data)
+                }
+                ImagePicker.RESULT_ERROR -> {
+                    showToast(ImagePicker.getError(data))
+                }
             }
         }
-    }
 
     private fun validateData() {
         binding.apply {
@@ -140,23 +132,28 @@ class EditProductActivity : BaseActivity() {
                 edtName.text.toString().trim().isEmpty() -> tilName.error = getString(
                     R.string.empty_field, getString(
                         R.string.name_product
-                    ))
+                    )
+                )
                 edtCategory.text.toString().trim().isEmpty() -> tilCategory.error = getString(
                     R.string.empty_field, getString(
                         R.string.category_product
-                    ))
+                    )
+                )
                 edtDescription.text.toString().trim().isEmpty() -> tilDescription.error = getString(
                     R.string.empty_field, getString(
                         R.string.desc_product
-                    ))
+                    )
+                )
                 edtQty.text.toString().trim().isEmpty() -> tilQty.error = getString(
                     R.string.empty_field, getString(
                         R.string.stock_product
-                    ))
+                    )
+                )
                 edtPrice.text.toString().trim().isEmpty() -> tilPrice.error = getString(
                     R.string.empty_field, getString(
                         R.string.price_product
-                    ))
+                    )
+                )
                 mSelectedProductImageFileUri == null -> showToast(getString(R.string.empty_product_image))
                 else -> firebaseEditProduct()
             }
@@ -174,16 +171,30 @@ class EditProductActivity : BaseActivity() {
             image = mSelectedProductImageFileUri!!.toString(),
             productId = Prefs.productId
         )
-        FirestoreClass().updateProduct(product.title,product.price,product.description,product.stockQuantity,
-            product.category,product.image, onSuccessListener = {
+        FirestoreClass().updateProduct(product.title,
+            product.price,
+            product.description,
+            product.stockQuantity,
+            product.category,
+            product.image,
+            onSuccessListener = {
                 progress.dismiss()
                 showToast(getString(R.string.update_product_success))
                 pushActivity(ProductActivity::class.java)
                 finish()
-            }, onFailureListener = {
+            },
+            onFailureListener = {
                 progress.dismiss()
                 showToast(getString(R.string.update_product_failed, it.message.toString()))
             })
+    }
+
+    var categoryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val category = result.data?.getParcelableExtra(AddProductActivity.EXTRA_CATEGORY) ?: Category()
+            binding.edtCategory.setText(category.namaCategory)
+            this.category = category
+        }
     }
 
     override fun onDestroy() {

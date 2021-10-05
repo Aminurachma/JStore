@@ -1,16 +1,12 @@
 package com.example.jstore.ui.product
 
-import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.jstore.R
+import androidx.core.widget.doOnTextChanged
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ActivityProductBinding
 import com.example.jstore.firestore.FirestoreClass
-import com.example.jstore.ui.profile.ProfileAdminActivity
-import com.example.jstore.ui.setting.SettingActivity
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
@@ -44,6 +40,10 @@ class ProductActivity : BaseActivity() {
 
     private fun setupUI() {
         binding.rvProduct.adapter = adapter
+
+        binding.searchView.searchBar.doOnTextChanged { text, _, _, _ ->
+            adapter.filter.filter(text)
+        }
     }
 
     private fun setupAdapter() {
@@ -64,6 +64,7 @@ class ProductActivity : BaseActivity() {
             if (it.isNotEmpty()) {
                 binding.rvProduct.toVisible()
                 adapter.submitList(it)
+                adapter.setProductList(it)
             } else {
                 binding.rvProduct.toGone()
             }
