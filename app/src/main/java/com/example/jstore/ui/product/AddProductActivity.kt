@@ -137,7 +137,6 @@ class AddProductActivity : BaseActivity() {
         FirestoreClass().addProduct(product, onSuccessListener = {
             progress.dismiss()
             showToast(getString(R.string.add_product_success))
-            pushActivity(ProductActivity::class.java)
             finish()
         }, onFailureListener = {
             progress.dismiss()

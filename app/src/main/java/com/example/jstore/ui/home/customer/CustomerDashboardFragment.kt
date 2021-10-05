@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
@@ -53,6 +54,9 @@ class CustomerDashboardFragment : BaseFragment() {
 
     private fun setupUI() {
         binding.rvProduct.adapter = adapter
+        binding.searchView.searchBar.doOnTextChanged { text, _, _, _ ->
+            adapter.filter.filter(text)
+        }
     }
 
     private fun setupClickListeners() {
