@@ -1,5 +1,6 @@
 package com.example.jstore.ui.cart
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.jstore.R
@@ -8,6 +9,7 @@ import com.example.jstore.databinding.ActivityMyCartBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Cart
 import com.example.jstore.models.Product
+import com.example.jstore.ui.checkout.CheckoutActivity
 import com.example.jstore.utils.Constants.QUANTITY
 import com.example.jstore.utils.formatPrice
 import com.example.jstore.utils.logDebug
@@ -41,6 +43,9 @@ class MyCartActivity : BaseActivity() {
     private fun setupClickListeners() {
         binding?.btnBack?.setOnClickListener {
             onBackPressed()
+        }
+        binding?.btnCheckout?.setOnClickListener {
+            startActivity(Intent(this, CheckoutActivity::class.java))
         }
     }
 

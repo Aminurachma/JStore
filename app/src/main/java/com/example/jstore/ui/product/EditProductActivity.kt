@@ -15,20 +15,21 @@ import com.example.jstore.base.BaseActivity
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ActivityEditProductBinding
 import com.example.jstore.firestore.FirestoreClass
+import com.example.jstore.models.Category
 import com.example.jstore.models.Product
 import com.example.jstore.models.User
+import com.example.jstore.ui.category.CategoryActivity
 import com.example.jstore.ui.home.customer.HomeCustomerActivity
-import com.example.jstore.utils.formatPrice
-import com.example.jstore.utils.imagePicker
-import com.example.jstore.utils.pushActivity
-import com.example.jstore.utils.showToast
+import com.example.jstore.utils.*
 import com.github.dhaval2404.imagepicker.ImagePicker
 import timber.log.Timber
 
+@Suppress("DEPRECATION")
 class EditProductActivity : BaseActivity() {
     private var _binding: ActivityEditProductBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var category: Category
     private lateinit var product: Product
     private var mSelectedProductImageFileUri: Uri? = null
 
@@ -39,6 +40,9 @@ class EditProductActivity : BaseActivity() {
 
         setupUI()
         setupClickListeners()
+
+        category = intent.getParcelableExtra(AddProductActivity.EXTRA_CATEGORY) ?: Category()
+        binding.edtCategory.setText(category.namaCategory)
     }
 
     private fun setupUI() {
@@ -68,6 +72,9 @@ class EditProductActivity : BaseActivity() {
         }
         binding.btnEditProduct.setOnClickListener {
             validateData()
+        }
+        binding.edtCategory.setOnClickListener {
+            startActivityForResult(Intent(this, CategoryActivity::class.java), Constants.REQUEST_CATEGORY_CODE)
         }
     }
 

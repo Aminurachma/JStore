@@ -229,6 +229,24 @@ class FirestoreClass {
             }
     }
 
+    fun changePasswordAdmin(
+        passwordAdmin: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(ADMIN)
+            .document(Prefs.adminId)
+            .update(
+                "passwordAdmin", passwordAdmin
+            )
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+
     fun updateProfileAdmin(
         fullnameAdmin: String, emailAdmin: String, mobileAdmin: String,
         onSuccessListener: () -> Unit,

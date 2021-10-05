@@ -62,7 +62,6 @@ class AddRekeningActivity : BaseActivity() {
         FirestoreClass().addRekening(rekening, onSuccessListener = {
             progress.dismiss()
             showToast(getString(R.string.add_rekening_success))
-            pushActivity(RekeningActivity::class.java)
             finish()
         }, onFailureListener = {
             progress.dismiss()

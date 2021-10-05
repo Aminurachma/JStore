@@ -57,7 +57,6 @@ class AddMetodePembayaranActivity : BaseActivity() {
         FirestoreClass().addMetodePembayaran(metodePembayaran, onSuccessListener = {
             progress.dismiss()
             showToast(getString(R.string.add_metode_success))
-            pushActivity(MetodePembayaranActivity::class.java)
             finish()
         }, onFailureListener = {
             progress.dismiss()

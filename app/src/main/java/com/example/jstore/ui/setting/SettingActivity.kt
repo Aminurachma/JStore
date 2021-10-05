@@ -14,6 +14,7 @@ import com.example.jstore.ui.jasapengiriman.JasaPengirimanActivity
 import com.example.jstore.ui.login.customer.MainActivity
 import com.example.jstore.ui.lokasipengiriman.LokasiPengirimanActivity
 import com.example.jstore.ui.metodepembayaran.MetodePembayaranActivity
+import com.example.jstore.ui.profile.ChangePasswordAdminActivity
 import com.example.jstore.ui.profile.ProfileAdminActivity
 import com.example.jstore.ui.rekening.RekeningActivity
 import com.example.jstore.utils.logError
@@ -38,6 +39,9 @@ class SettingActivity : BaseActivity() {
     private fun setupClickListeners() {
         binding.btnBack.setOnClickListener {
             onBackPressed()
+        }
+        binding.btnChangePassword.setOnClickListener {
+            startActivity(Intent(this, ChangePasswordAdminActivity::class.java))
         }
         binding.btnUpdateProfile.setOnClickListener {
             startActivity(Intent(this, ProfileAdminActivity::class.java))

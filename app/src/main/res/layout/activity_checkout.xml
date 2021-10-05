@@ -97,7 +97,10 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/rubik_light"
                         android:hint="@string/enter_your_name_here"
-                        android:inputType="textCapWords"
+                        android:inputType="none"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:focusable="false"
                         android:textColor="@color/dark"
                         android:textColorHint="@color/gray3"
                         android:textSize="@dimen/_12ssp"
@@ -128,7 +131,10 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/rubik_light"
                         android:hint="@string/enter_your_address_here"
-                        android:inputType="textCapWords"
+                        android:inputType="none"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:focusable="false"
                         android:textColor="@color/dark"
                         android:textColorHint="@color/gray3"
                         android:textSize="@dimen/_12ssp"
@@ -159,7 +165,10 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/rubik_light"
                         android:hint="@string/enter_your_phone_number_here"
-                        android:inputType="number"
+                        android:inputType="none"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:focusable="false"
                         android:textColor="@color/dark"
                         android:textColorHint="@color/gray3"
                         android:textSize="@dimen/_12ssp"
@@ -218,6 +227,48 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <LinearLayout
+                    android:id="@+id/linierrekening"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/rekening_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/rubik_regular"
+                        android:text="@string/choose_rekening_method"
+                        android:textColor="@color/dark"
+                        android:textSize="@dimen/_12ssp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_rekening"
+                        style="@style/App.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_rekening"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rubik_light"
+                            android:hint="@string/choose_rekening_method"
+                            android:inputType="none"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:longClickable="false"
+                            android:textColor="@color/dark"
+                            android:textColorHint="@color/gray3"
+                            android:textSize="@dimen/_12ssp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/delivery_label"
                     android:layout_width="wrap_content"
@@ -236,7 +287,7 @@
                     android:layout_marginTop="@dimen/_4sdp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edt_delivery"
+                        android:id="@+id/edt_delivery_service"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/rubik_light"
@@ -273,7 +324,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/rubik_light"
-                        android:hint="@string/choose_delivery_service"
+                        android:hint="@string/choose_delivery_loc"
                         android:inputType="none"
                         android:clickable="false"
                         android:focusable="false"

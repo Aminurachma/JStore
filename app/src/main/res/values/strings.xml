@@ -15,11 +15,17 @@
     <string name="register_here">Register Here</string>
     <string name="create_your_new_account">Create your new account</string>
     <string name="enter_your_name_here">Enter your name here</string>
+    <string name="enter_your_old_pass">Enter your old password here</string>
+    <string name="enter_your_connew_pass">Enter your confirm new password here</string>
+    <string name="enter_your_new_pass">Enter your new password here</string>
     <string name="enter_your_firstName_here">Enter your first name here</string>
     <string name="enter_your_lastName_here">Enter your last name here</string>
     <string name="username">Username</string>
     <string name="fullname">Fullname</string>
     <string name="firstName">First Name</string>
+    <string name="oldPassword">Old Password</string>
+    <string name="newPassword">New Password</string>
+    <string name="confirmnewPassword">Confirm New Password</string>
     <string name="lastName">Last Name</string>
     <string name="address">Address</string>
     <string name="enter_your_address_here">Enter your address here</string>
@@ -46,6 +52,7 @@
     <string name="_1">1</string>
     <string name="register_success">You are registered successfully</string>
     <string name="update_profile_success">Profile updated successfully</string>
+    <string name="update_password_success">Change Password updated successfully</string>
     <string name="update_product_success">Update Product successfully</string>
     <string name="add_product_success">Product add successfully</string>
     <string name="add_rekening_success">Rekening add successfully</string>
@@ -61,6 +68,7 @@
     <string name="kurangnama">Please enter your name more than 7 characters</string>
     <string name="register_failed">Failed to register! %s</string>
     <string name="update_profile_failed">Failed to update your profile! %s</string>
+    <string name="update_pass_failed">Failed to update your password! %s</string>
     <string name="update_product_failed">Failed to update your product! %s</string>
     <string name="add_product_failed">Failed to add your product! %s</string>
     <string name="add_rekening_failed">Gagal menambahkan rekening! %s</string>
@@ -72,6 +80,7 @@
     <string name="logout">Logout</string>
     <string name="update">Update</string>
     <string name="update_profile">Update Profile</string>
+    <string name="change_password">Change Password</string>
     <string name="lokasi_pengiriman">Lokasi Pengiriman</string>
     <string name="jasa_pengiriman">Jasa Pengiriman</string>
     <string name="metode_pembayaran">Metode Pembayaran</string>
@@ -135,6 +144,7 @@
     <string name="estimasi">Estimasi</string>
     <string name="not_enough_stock">Stok tidak cukup</string>
     <string name="choose_payment_method">Choose Payment Method</string>
+    <string name="choose_rekening_method">Choose Bank Account</string>
     <string name="ongkos_kirim">Ongkos Kirim</string>
     <string name="sub_total">Subtotal</string>
     <string name="choose_delivery_service">Choose Delivery Service</string>
@@ -155,4 +165,6 @@
     <string name="delete_dialog_message">Are you sure you want to delete the product?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="confirm_new_password_not_match">Confirm New Password Not Match</string>
+    <string name="old_password_not_match">Old Password Not Match</string>
 </resources>
