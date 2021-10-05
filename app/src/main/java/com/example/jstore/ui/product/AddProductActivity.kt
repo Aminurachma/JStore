@@ -13,10 +13,13 @@ import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ActivityAddProductBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Category
+import com.example.jstore.models.MetodePembayaran
 import com.example.jstore.models.Product
 import com.example.jstore.models.User
 import com.example.jstore.ui.category.CategoryActivity
+import com.example.jstore.ui.checkout.CheckoutActivity
 import com.example.jstore.ui.home.customer.HomeCustomerActivity
+import com.example.jstore.ui.lokasipengiriman.LokasiPengirimanActivity
 import com.example.jstore.utils.Constants
 import com.example.jstore.utils.imagePicker
 import com.example.jstore.utils.pushActivity
@@ -51,7 +54,9 @@ class AddProductActivity : BaseActivity() {
             validateData()
         }
         binding.edtCategory.setOnClickListener {
-            startActivityForResult(Intent(this, CategoryActivity::class.java), Constants.REQUEST_CATEGORY_CODE)
+            categoryLauncher.launch(Intent(this, CategoryActivity::class.java).apply {
+                putExtra(CategoryActivity.EXTRA_TYPE, CategoryActivity.TYPE_CUSTOMER)
+            })
         }
     }
 
@@ -67,6 +72,14 @@ class AddProductActivity : BaseActivity() {
             ImagePicker.RESULT_ERROR -> {
                 showToast(ImagePicker.getError(data))
             }
+        }
+    }
+
+    var categoryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val categorys = result.data?.getParcelableExtra(EXTRA_CATEGORY) ?: Category()
+            binding.edtCategory.setText(categorys.namaCategory)
+            category = categorys
         }
     }
 

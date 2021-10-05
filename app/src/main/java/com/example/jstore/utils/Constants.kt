@@ -47,5 +47,9 @@ object Constants {
 
 
     const val REQUEST_CATEGORY_CODE = 6211
+    const val REQUEST_REKENING_CODE = 6232
+    const val REQUEST_LOKASI_CODE = 6290
+    const val REQUEST_ALAMAT_CODE = 6241
+    const val REQUEST_JASA_CODE = 6231
 
 }

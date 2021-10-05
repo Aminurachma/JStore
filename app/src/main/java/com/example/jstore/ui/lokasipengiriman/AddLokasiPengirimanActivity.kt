@@ -54,7 +54,6 @@ class AddLokasiPengirimanActivity : BaseActivity() {
         FirestoreClass().addLokasiPengiriman(lokasiPengiriman, onSuccessListener = {
             progress.dismiss()
             showToast(getString(R.string.add_lokasi_success))
-            pushActivity(LokasiPengirimanActivity::class.java)
             finish()
         }, onFailureListener = {
             progress.dismiss()

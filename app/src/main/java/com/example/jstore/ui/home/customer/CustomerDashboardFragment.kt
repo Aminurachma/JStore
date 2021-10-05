@@ -70,7 +70,7 @@ class CustomerDashboardFragment : BaseFragment() {
             startActivity(Intent(requireContext(), ProductDetailsActivity::class.java).apply {
                 putExtra(ProductDetailsActivity.EXTRA_PRODUCT, product)
             })
-        }, ProductActivity())
+        })
     }
 
     private fun getUserProfile() {

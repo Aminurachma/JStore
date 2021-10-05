@@ -68,7 +68,6 @@ class AddJasaPengirimanActivity : BaseActivity() {
         FirestoreClass().addJasaPengiriman(jasaPengiriman, onSuccessListener = {
             progress.dismiss()
             showToast(getString(R.string.add_jasa_success))
-            pushActivity(JasaPengirimanActivity::class.java)
             finish()
         }, onFailureListener = {
             progress.dismiss()
