@@ -6,8 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.example.jstore.R
@@ -17,12 +15,11 @@ import com.example.jstore.databinding.ActivityEditProductBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Category
 import com.example.jstore.models.Product
-import com.example.jstore.models.User
 import com.example.jstore.ui.category.CategoryActivity
-import com.example.jstore.ui.home.customer.HomeCustomerActivity
-import com.example.jstore.utils.*
+import com.example.jstore.utils.imagePicker
+import com.example.jstore.utils.pushActivity
+import com.example.jstore.utils.showToast
 import com.github.dhaval2404.imagepicker.ImagePicker
-import timber.log.Timber
 
 @Suppress("DEPRECATION")
 class EditProductActivity : BaseActivity() {
@@ -68,9 +65,11 @@ class EditProductActivity : BaseActivity() {
         binding.cardImgProduct.setOnClickListener {
             imagePicker(startForImageResult)
         }
+
         binding.btnEditProduct.setOnClickListener {
             validateData()
         }
+
         binding.edtCategory.setOnClickListener {
             categoryLauncher.launch(Intent(this, CategoryActivity::class.java))
         }
