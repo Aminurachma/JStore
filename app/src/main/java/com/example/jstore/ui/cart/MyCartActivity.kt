@@ -46,9 +46,11 @@ class MyCartActivity : BaseActivity() {
             onBackPressed()
         }
         binding?.btnCheckout?.setOnClickListener {
-            val intent = Intent(this, CheckoutActivity::class.java)
-            intent.putExtra("totalPrice", totalPrice)
-            startActivity(intent)
+            if (cart.products.isNotEmpty()) {
+                startActivity(Intent(this, CheckoutActivity::class.java).apply {
+                    putExtra("totalPrice", totalPrice)
+                })
+            }
         }
     }
 

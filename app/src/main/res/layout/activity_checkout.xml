@@ -335,7 +335,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-
             </LinearLayout>
 
             <LinearLayout
@@ -353,79 +352,77 @@
                         android:id="@+id/tv_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/rubik_medium"
                         android:text="@string/total"
                         android:textColor="@color/dark"
-                        android:textSize="@dimen/_18ssp"/>
+                        android:textSize="@dimen/_12ssp"/>
 
                     <TextView
                         android:id="@+id/edt_total"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/rubik_medium"
                         tools:text="Rp. 150.000,-"
-
-                        android:layout_marginStart="@dimen/_80sdp"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_18sdp"/>
+                        android:textSize="@dimen/_16sdp"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_ongkir"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/rubik_medium"
                         android:text="@string/ongkos_kirim"
                         android:textColor="@color/dark"
-                        android:textSize="@dimen/_18ssp"/>
+                        android:textSize="@dimen/_12ssp"/>
 
                     <TextView
                         android:id="@+id/edt_ongkir"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/rubik_medium"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
                         tools:text="Rp. 15.000,-"
-                        android:layout_marginStart="@dimen/_12sdp"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_18ssp"/>
+                        android:textSize="@dimen/_16ssp"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_subtotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/rubik_medium"
                         android:text="@string/sub_total"
                         android:textColor="@color/dark"
-                        android:textSize="@dimen/_20ssp"/>
+                        android:textSize="@dimen/_12ssp"/>
 
                     <TextView
                         android:id="@+id/edt_subtotal"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
                         android:fontFamily="@font/rubik_medium"
                         tools:text="Rp. 165.000,-"
-                        android:layout_marginStart="@dimen/_40sdp"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_18ssp"/>
+                        android:textSize="@dimen/_16ssp"/>
 
                 </LinearLayout>
 
