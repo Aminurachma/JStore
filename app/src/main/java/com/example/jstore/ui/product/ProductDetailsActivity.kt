@@ -64,7 +64,7 @@ class ProductDetailsActivity : AppCompatActivity() {
                         stockQuantity = product.stockQuantity,
                         category = product.category,
                         image = product.image,
-                        productId = product.image,
+                        productId = product.productId,
                         quantity = binding.tvQuantity.text.toString().toInt()
                     ),
                     onSuccessListener = {

@@ -23,6 +23,7 @@ class MyCartActivity : BaseActivity() {
     private lateinit var adapter: CartAdapter
 
     private lateinit var cart: Cart
+    private var totalPrice: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,9 @@ class MyCartActivity : BaseActivity() {
             onBackPressed()
         }
         binding?.btnCheckout?.setOnClickListener {
-            startActivity(Intent(this, CheckoutActivity::class.java))
+            val intent = Intent(this, CheckoutActivity::class.java)
+            intent.putExtra("totalPrice", totalPrice)
+            startActivity(intent)
         }
     }
 
@@ -75,6 +78,7 @@ class MyCartActivity : BaseActivity() {
             adapter.submitList(it.products)
             adapter.notifyItemRangeChanged(0, it.products.size)
             binding?.tvTotal?.text = calculateTotalPrice(it.products).formatPrice()
+            totalPrice = calculateTotalPrice(it.products)
         }, onFailureListener = {
             showToast(it)
         })

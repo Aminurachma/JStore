@@ -21,7 +21,10 @@ import com.example.jstore.utils.Constants.LOKASIPENGIRIMAN_ID
 import com.example.jstore.utils.Constants.LOKASI_PENGIRIMAN
 import com.example.jstore.utils.Constants.METODEPEMBAYARAN_ID
 import com.example.jstore.utils.Constants.METODE_PEMBAYARAN
+import com.example.jstore.utils.Constants.ORDERS
+import com.example.jstore.utils.Constants.ORDER_ID
 import com.example.jstore.utils.Constants.PASSWORD_ADMIN
+import com.example.jstore.utils.Constants.PAYMENT_STATUS
 import com.example.jstore.utils.Constants.PRODUCTS
 import com.example.jstore.utils.Constants.PRODUCT_ID
 import com.example.jstore.utils.Constants.REKENING
@@ -789,6 +792,47 @@ class FirestoreClass {
             .addOnFailureListener {
                 onFailureListener(it)
                 logError("removeDelete: ${it.message}")
+            }
+    }
+
+    fun placeOrder(orderDetails: Order,
+                   onSuccessListener: () -> Unit,
+                   onFailureListener: (e: Exception) -> Unit) {
+        mFirestore.collection(ORDERS)
+            .add(orderDetails)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val document = it.result
+                    if (document != null) {
+                        val id = document.id
+                        updateId(ORDERS, id, ORDER_ID, onSuccessListener = {}, onFailureListener = {})
+                        onSuccessListener()
+                    }
+                }
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+            }
+    }
+
+    fun subscribeLastCheckout(
+        onSuccessListener: (order: Order) -> Unit,
+        onFailureListener: (e: String) -> Unit
+    ) {
+        mFirestore.collection(ORDERS)
+            .whereEqualTo(USER_ID, Prefs.userId)
+            .addSnapshotListener { value, error ->
+                error?.let { e ->
+                    onFailureListener(e.message.toString())
+                }
+                value?.let { document ->
+                    val order = document.documents.map {
+                        it.toObject<Order>() ?: Order()
+                    }
+                    if (order.isNotEmpty()) {
+                        onSuccessListener(order.first())
+                    }
+                }
             }
     }
 

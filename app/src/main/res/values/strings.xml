@@ -28,6 +28,8 @@
     <string name="confirmnewPassword">Confirm New Password</string>
     <string name="lastName">Last Name</string>
     <string name="address">Address</string>
+    <string name="alamat_pengiriman">Alamat Pengiriman</string>
+    <string name="produk_yang_dibeli">Produk yang di beli :</string>
     <string name="enter_your_address_here">Enter your address here</string>
     <string name="register">Register</string>
     <string name="phone_number">Phone Number</string>
@@ -55,6 +57,7 @@
     <string name="update_password_success">Change Password updated successfully</string>
     <string name="update_product_success">Update Product successfully</string>
     <string name="add_product_success">Product add successfully</string>
+    <string name="checkout_success">Checkout successfully</string>
     <string name="add_rekening_success">Rekening add successfully</string>
     <string name="add_jasa_success">Jasa Pengiriman add successfully</string>
     <string name="add_lokasi_success">Lokasi Pengiriman add successfully</string>
@@ -71,6 +74,7 @@
     <string name="update_pass_failed">Failed to update your password! %s</string>
     <string name="update_product_failed">Failed to update your product! %s</string>
     <string name="add_product_failed">Failed to add your product! %s</string>
+    <string name="checkout_failed">Failed to checkout your product! %s</string>
     <string name="add_rekening_failed">Gagal menambahkan rekening! %s</string>
     <string name="add_metode_failed">Gagal menambahkan Metode Pembayaran! %s</string>
     <string name="add_category_failed">Gagal menambahkan Category! %s</string>
@@ -128,6 +132,7 @@
     <string name="transfer_antar_bank">Transfer Antar Bank</string>
     <string name="my_order_history">My Order History</string>
     <string name="pengiriman">Delivery :</string>
+    <string name="info_pengiriman">Informasi Pengiriman :</string>
     <string name="payment">Payment </string>
     <string name="add_product">Add New Product</string>
     <string name="edit_product">Update Product</string>
@@ -152,6 +157,7 @@
     <string name="paynow">Pay Now</string>
     <string name="transaction_out">Transaction Out</string>
     <string name="detail_of_transaction">Detail of transaction</string>
+    <string name="detail_of_yourOrder">Detail of your Order</string>
     <string name="go_back">Go Back</string>
     <string name="transaction_details">Transaction Details</string>
     <string name="sent_money">Sent Money</string>
@@ -167,5 +173,6 @@
     <string name="no">No</string>
     <string name="confirm_new_password_not_match">Confirm New Password Not Match</string>
     <string name="old_password_not_match">Old Password Not Match</string>
-	<string name="pilih_kategori_produk">Pilih kategori produk</string>
+    <string name="pilih_kategori_produk">Pilih kategori produk</string>
+    <string name="status_pesanan">Status Pesanan</string>
 </resources>

@@ -438,7 +438,7 @@
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_32sdp"
                 android:fontFamily="@font/rubik_medium"
-                android:text="@string/paynow"
+                android:text="@string/checkout"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_12ssp"
                 app:cornerRadius="@dimen/_8sdp"/>

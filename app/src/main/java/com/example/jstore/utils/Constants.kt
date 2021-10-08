@@ -11,6 +11,7 @@ object Constants {
     const val METODE_PEMBAYARAN = "metode_pembayaran"
     const val CATEGORY = "category"
     const val CARTS = "carts"
+    const val ORDERS = "orders"
 
     const val IMAGE = "image"
 
@@ -26,6 +27,7 @@ object Constants {
 
     const val USER_ID = "userId"
     const val CHECKED_OUT = "checkedOut"
+    const val PAYMENT_STATUS = "statusPembayaran"
 
     const val EXTRA_PRODUCT_ID = "extra_product_id"
     const val PRODUCT_ID = "productId"
@@ -40,6 +42,7 @@ object Constants {
 
     const val CART_ID = "cartId"
     const val REKENING_ID = "rekeningId"
+    const val ORDER_ID = "orderId"
     const val JASAPENGIRIMAN_ID = "jasaPengirimanId"
     const val LOKASIPENGIRIMAN_ID = "lokasiPengirimanId"
     const val METODEPEMBAYARAN_ID = "metodePembayaranId"

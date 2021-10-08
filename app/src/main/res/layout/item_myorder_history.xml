@@ -11,55 +11,117 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
+        android:orientation="vertical"
+        android:background="@color/gray5"
         android:padding="@dimen/_10sdp">
 
         <TextView
-            android:id="@+id/tv_customer_id"
+            android:id="@+id/tv_order_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:ellipsize="end"
             android:fontFamily="@font/rubik_medium"
             android:maxLines="2"
             android:textColor="@color/dark"
             android:textSize="@dimen/_11ssp"
-            tools:text="Order#123499"
-            android:layout_gravity="top|center_horizontal"/>
+            tools:text="Order#123499"/>
+
+        <TextView
+            android:id="@+id/tv_customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:ellipsize="end"
+            android:fontFamily="@font/rubik_medium"
+            android:maxLines="2"
+            android:textColor="@color/gray3"
+            android:textSize="@dimen/_11ssp"
+            tools:text="Aminurachmaaaa"/>
+
+        <TextView
+            android:id="@+id/btn_all_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:fontFamily="@font/rubik_medium"
+            android:maxLines="2"
+            android:textColor="@color/gray3"
+            android:textSize="@dimen/_11ssp"
+            android:text="Tampilkan Produk yang dibeli"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_keterangan"
+                android:id="@+id/tv_total_order_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:ellipsize="end"
-                android:fontFamily="@font/rubik_light"
+                android:fontFamily="@font/rubik_medium"
                 android:maxLines="2"
-                android:textColor="@color/gray1"
+                android:textColor="@color/dark"
                 android:textSize="@dimen/_11ssp"
-                tools:text="Dikirim" />
+                tools:text="Total Pesanan" />
 
             <TextView
                 android:id="@+id/tv_total_order"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:layout_marginBottom="@dimen/_8sdp"
                 android:ellipsize="end"
+                android:gravity="end"
                 android:fontFamily="@font/rubik_regular"
                 android:maxLines="2"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_10ssp"
                 tools:text="Rp. 120.000.000 " />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_status_order_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/rubik_medium"
+                android:maxLines="2"
+                android:textColor="@color/gray3"
+                android:textSize="@dimen/_11ssp"
+                android:text="@string/status_pesanan"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_to_cart"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_90sdp"
+                android:layout_weight="2"
+                android:fontFamily="@font/rubik_bold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                tools:text="Dikirim"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                app:cornerRadius="@dimen/_6sdp"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </LinearLayout>
