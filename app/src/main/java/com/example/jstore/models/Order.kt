@@ -20,6 +20,7 @@ data class Order (
     val totalAmount : String = "",
     val statusPembayaran: Boolean = false,
     val statusPesanan: String = "",
+    val nomorResi: String = "",
     val orderDateTime : Long = 0L,
     var orderId : String = ""
     ) : Parcelable

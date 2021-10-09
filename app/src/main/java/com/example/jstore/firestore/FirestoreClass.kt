@@ -69,12 +69,12 @@ class FirestoreClass {
         mFirestore.collection(PRODUCTS)
             .document(productId)
             .update("title", title, "price", price,
-            "description", description, "stockQuantity", stockQuantity, "category", category)
+                "description", description, "stockQuantity", stockQuantity, "category", category)
             .addOnSuccessListener {
-            uploadImageProductToFirestore(imageUrl.toUri(), onSuccessListener = { imageUrl ->
-                        updateProductImageUrl(productId, imageUrl)
-                    }, onFailureListener = {})
-                    onSuccessListener()
+                uploadImageProductToFirestore(imageUrl.toUri(), onSuccessListener = { imageUrl ->
+                    updateProductImageUrl(productId, imageUrl)
+                }, onFailureListener = {})
+                onSuccessListener()
             }
             .addOnFailureListener { e ->
                 onFailureListener(e)
@@ -706,6 +706,23 @@ class FirestoreClass {
         }
     }
 
+    fun updateCheckoutMyCart(
+        cartId: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(CARTS)
+            .document(cartId)
+            .update(CHECKED_OUT, true)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+                logError("updateCheckoutMyCart: ${it.message}")
+            }
+    }
+
     fun updateMyCart(
         cartId: String,
         products: MutableList<Product>,
@@ -796,7 +813,7 @@ class FirestoreClass {
     }
 
     fun placeOrder(orderDetails: Order,
-                   onSuccessListener: () -> Unit,
+                   onSuccessListener: (orderId: String) -> Unit,
                    onFailureListener: (e: Exception) -> Unit) {
         mFirestore.collection(ORDERS)
             .add(orderDetails)
@@ -806,7 +823,7 @@ class FirestoreClass {
                     if (document != null) {
                         val id = document.id
                         updateId(ORDERS, id, ORDER_ID, onSuccessListener = {}, onFailureListener = {})
-                        onSuccessListener()
+                        onSuccessListener(id)
                     }
                 }
             }
@@ -816,23 +833,38 @@ class FirestoreClass {
     }
 
     fun subscribeLastCheckout(
+        orderId: String,
         onSuccessListener: (order: Order) -> Unit,
         onFailureListener: (e: String) -> Unit
     ) {
         mFirestore.collection(ORDERS)
-            .whereEqualTo(USER_ID, Prefs.userId)
-            .addSnapshotListener { value, error ->
-                error?.let { e ->
-                    onFailureListener(e.message.toString())
+            .document(orderId)
+            .get()
+            .addOnSuccessListener { document ->
+                val order = document.toObject(Order::class.java)
+                if (order != null) {
+                    onSuccessListener(order)
                 }
-                value?.let { document ->
-                    val order = document.documents.map {
-                        it.toObject<Order>() ?: Order()
-                    }
-                    if (order.isNotEmpty()) {
-                        onSuccessListener(order.first())
-                    }
-                }
+
+            }.addOnFailureListener {
+                onFailureListener(it.message.toString())
+            }
+    }
+
+    fun updatePaymentStatus(
+        orderId: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(ORDERS)
+            .document(orderId)
+            .update("statusPembayaran", true)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+                logError("updatePaymentStatus: ${it.message}")
             }
     }
 

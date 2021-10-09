@@ -36,7 +36,6 @@ class CheckoutActivity : BaseActivity() {
     private var atasNamaRekening: String = ""
     private var nomorRekening: String = ""
 
-
     private lateinit var cart: Cart
 
     private lateinit var metodePembayaran: MetodePembayaran
@@ -101,11 +100,11 @@ class CheckoutActivity : BaseActivity() {
             })
 
         }
-        binding.edtDeliveryLocation.setOnClickListener {
-            deliveryAddressLauncher.launch(Intent(this, LokasiPengirimanActivity::class.java).apply {
-                putExtra(LokasiPengirimanActivity.EXTRA_TYPE, LokasiPengirimanActivity.TYPE_CUSTOMER)
-            })
-        }
+//        binding.edtDeliveryLocation.setOnClickListener {
+//            deliveryAddressLauncher.launch(Intent(this, LokasiPengirimanActivity::class.java).apply {
+//                putExtra(LokasiPengirimanActivity.EXTRA_TYPE, LokasiPengirimanActivity.TYPE_CUSTOMER)
+//            })
+//        }
 
         binding.edtDeliveryService.setOnClickListener {
             deliveryServiceLauncher.launch(Intent(this, JasaPengirimanActivity::class.java).apply {
@@ -127,12 +126,12 @@ class CheckoutActivity : BaseActivity() {
     private fun validateData() {
         binding.apply {
             when {
-                edtDeliveryLocation.text.toString().trim().isEmpty() -> tilDeliveryLocation.error =
-                    getString(
-                        R.string.empty_field, getString(
-                            R.string.choose_delivery_loc
-                        )
-                    )
+//                edtDeliveryLocation.text.toString().trim().isEmpty() -> tilDeliveryLocation.error =
+//                    getString(
+//                        R.string.empty_field, getString(
+//                            R.string.choose_delivery_loc
+//                        )
+//                    )
                 edtDeliveryService.text.toString().trim().isEmpty() -> tilDelivery.error = getString(
                     R.string.empty_field, getString(
                         R.string.choose_delivery_service
@@ -160,22 +159,31 @@ class CheckoutActivity : BaseActivity() {
             namaRekening = binding.edtRekening.text.toString(),
             atasNamaRekening = atasNamaRekening,
             nomorRekening = nomorRekening,
-            alamatPengiriman = binding.edtDeliveryLocation.text.toString(),
             subTotalAmount = subTotal.toString(),
             shippingCharge = ongkir.toString(),
             totalAmount = totalPrice.toString(),
             statusPesanan = "Dikemas",
             orderDateTime = System.currentTimeMillis()
         )
-        FirestoreClass().placeOrder(order, onSuccessListener = {
+        FirestoreClass().placeOrder(order, onSuccessListener = { orderId ->
             progress.dismiss()
             showToast(getString(R.string.checkout_success))
-            startActivity(Intent(this, InvoiceActivity::class.java))
+            val intent = Intent(this, InvoiceActivity::class.java)
+            intent.putExtra("orderId", orderId)
+            startActivity(intent)
+
             finish()
         }, onFailureListener = {
             progress.dismiss()
             showToast(getString(R.string.checkout_failed, it.message.toString()))
         })
+        updateMyCart()
+    }
+
+    private fun updateMyCart() {
+        progress.show()
+        FirestoreClass().updateCheckoutMyCart(cart.cartId,
+            onSuccessListener = { progress.dismiss() }, onFailureListener = { progress.dismiss() })
     }
 
 
@@ -196,13 +204,13 @@ class CheckoutActivity : BaseActivity() {
         checkPaymentMethod()
     }
 
-    var deliveryAddressLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val deliveryAddress = result.data?.getParcelableExtra(EXTRA_LOKASI) ?: LokasiPengiriman()
-            binding.edtDeliveryLocation.setText(deliveryAddress.alamat)
-            lokasiPengiriman = deliveryAddress
-        }
-    }
+//    var deliveryAddressLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//        if (result.resultCode == Activity.RESULT_OK) {
+//            val deliveryAddress = result.data?.getParcelableExtra(EXTRA_LOKASI) ?: LokasiPengiriman()
+//            binding.edtDeliveryLocation.setText(deliveryAddress.alamat)
+//            lokasiPengiriman = deliveryAddress
+//        }
+//    }
 
     var deliveryServiceLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
