@@ -1,6 +1,5 @@
 package com.example.jstore.ui.orderhistory
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityOrderHistoryBinding

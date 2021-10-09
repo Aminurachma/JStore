@@ -1,293 +1,281 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/light"
-    tools:context=".ui.home.customer.myorderhistory.MyOrderHistoryDetailsActivity">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/light"
+	android:orientation="vertical"
+	tools:context=".ui.home.customer.myorderhistory.MyOrderHistoryDetailsActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:paddingHorizontal="@dimen/_6sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="?attr/actionBarSize"
+		android:paddingHorizontal="@dimen/_6sdp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btn_back"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:background="@drawable/oval"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:padding="@dimen/_4sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_left_arrow" />
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/btn_back"
+			android:layout_width="@dimen/_24sdp"
+			android:layout_height="@dimen/_24sdp"
+			android:background="@drawable/oval"
+			android:foreground="?attr/selectableItemBackgroundBorderless"
+			android:padding="@dimen/_4sdp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:srcCompat="@drawable/ic_left_arrow" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/rubik_bold"
-            android:text="@string/detail_of_yourOrder"
-            android:textColor="@color/dark"
-            android:textSize="@dimen/_19ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:fontFamily="@font/rubik_bold"
+			android:text="@string/detail_of_yourOrder"
+			android:textColor="@color/dark"
+			android:textSize="@dimen/_19ssp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:padding="@dimen/_10sdp">
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fillViewport="true"
+		android:scrollbars="none">
 
-        <!--        <androidx.recyclerview.widget.RecyclerView-->
-        <!--            android:id="@+id/rv_myorder_history"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/_8sdp"-->
-        <!--            android:overScrollMode="never"-->
-        <!--            tools:itemCount="9"-->
-        <!--            tools:listitem="@layout/item_myorder_history_details" />-->
+		<!--        <androidx.recyclerview.widget.RecyclerView-->
+		<!--            android:id="@+id/rv_myorder_history"-->
+		<!--            android:layout_width="match_parent"-->
+		<!--            android:layout_height="wrap_content"-->
+		<!--            android:layout_marginTop="@dimen/_8sdp"-->
+		<!--            android:overScrollMode="never"-->
+		<!--            tools:itemCount="9"-->
+		<!--            tools:listitem="@layout/item_myorder_history_details" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:padding="@dimen/_20sdp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:orientation="vertical">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/rubik_regular"
-                    android:text="@string/info_pengiriman"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_18ssp" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/_10sdp"
+					android:fontFamily="@font/rubik_regular"
+					android:text="@string/info_pengiriman"
+					android:textColor="@color/colorPrimaryDark"
+					android:textSize="@dimen/_18ssp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/order_id_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/rubik_regular"
-                            android:text="@string/order_id"
-                            android:textColor="@color/dark"
-                            android:textSize="@dimen/_12ssp"/>
+						<TextView
+							android:id="@+id/order_id_label"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="@dimen/_10sdp"
+							android:fontFamily="@font/rubik_regular"
+							android:text="@string/order_id"
+							android:textColor="@color/dark"
+							android:textSize="@dimen/_12ssp" />
 
-                        <TextView
-                            android:id="@+id/tv_order_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/rubik_bold"
-                            tools:text="Order1223241"
-                            android:gravity="end"
-                            android:textColor="@color/dark"
-                            android:textSize="@dimen/_12ssp"/>
+						<TextView
+							android:id="@+id/tv_order_id"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="@dimen/_10sdp"
+							android:fontFamily="@font/rubik_bold"
+							android:gravity="end"
+							android:textColor="@color/dark"
+							android:textSize="@dimen/_12ssp"
+							tools:text="Order1223241" />
 
-                    </LinearLayout>
+					</LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/jasa_pengiriman_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/rubik_regular"
-                            android:text="@string/jasa_pengiriman"
-                            android:textColor="@color/dark"
-                            android:textSize="@dimen/_12ssp"/>
+						<TextView
+							android:id="@+id/jasa_pengiriman_label"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="@dimen/_10sdp"
+							android:fontFamily="@font/rubik_regular"
+							android:text="@string/jasa_pengiriman"
+							android:textColor="@color/dark"
+							android:textSize="@dimen/_12ssp" />
 
-                        <TextView
-                            android:id="@+id/tv_jasa_pengiriman"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/rubik_bold"
-                            tools:text="Si Cepat"
-                            android:gravity="end"
-                            android:textColor="@color/dark"
-                            android:textSize="@dimen/_12ssp"/>
+						<TextView
+							android:id="@+id/tv_jasa_pengiriman"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="@dimen/_10sdp"
+							android:fontFamily="@font/rubik_bold"
+							android:gravity="end"
+							android:textColor="@color/dark"
+							android:textSize="@dimen/_12ssp"
+							tools:text="Si Cepat" />
 
-                    </LinearLayout>
+					</LinearLayout>
 
-                </LinearLayout>
+				</LinearLayout>
 
-            </LinearLayout>
+			</LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:orientation="vertical">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_20sdp"
+				android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/rubik_regular"
-                    android:text="@string/alamat_pengiriman"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_18ssp" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/rubik_regular"
+					android:text="@string/alamat_pengiriman"
+					android:textColor="@color/colorPrimaryDark"
+					android:textSize="@dimen/_18ssp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_customer_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/rubik_regular"
-                        tools:text="aminurachma"
-                        android:textColor="@color/dark"
-                        android:textSize="@dimen/_12ssp"/>
+					<TextView
+						android:id="@+id/tv_customer_name"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/_10sdp"
+						android:fontFamily="@font/rubik_regular"
+						android:textColor="@color/dark"
+						android:textSize="@dimen/_12ssp"
+						tools:text="aminurachma" />
 
-                    <TextView
-                        android:id="@+id/tv_customer_mobile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/rubik_regular"
-                        tools:text="08392748392"
-                        android:gravity="end"
-                        android:textColor="@color/dark"
-                        android:textSize="@dimen/_12ssp"/>
+					<TextView
+						android:id="@+id/tv_customer_mobile"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/_10sdp"
+						android:fontFamily="@font/rubik_regular"
+						android:gravity="end"
+						android:textColor="@color/dark"
+						android:textSize="@dimen/_12ssp"
+						tools:text="08392748392" />
 
-                    <TextView
-                        android:id="@+id/tv_customer_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/rubik_regular"
-                        tools:text="Jalan mencari jaskjfoo"
-                        android:gravity="end"
-                        android:textColor="@color/dark"
-                        android:textSize="@dimen/_12ssp"/>
+					<TextView
+						android:id="@+id/tv_customer_address"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/_10sdp"
+						android:fontFamily="@font/rubik_regular"
+						android:gravity="end"
+						android:textColor="@color/dark"
+						android:textSize="@dimen/_12ssp"
+						tools:text="Jalan mencari jaskjfoo" />
 
-                </LinearLayout>
+				</LinearLayout>
 
-            </LinearLayout>
+			</LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:orientation="vertical">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_20sdp"
+				android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/rubik_regular"
-                    android:text="@string/produk_yang_dibeli"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_18ssp" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/rubik_regular"
+					android:text="@string/produk_yang_dibeli"
+					android:textColor="@color/colorPrimaryDark"
+					android:textSize="@dimen/_18ssp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_cart"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clipToPadding="false"
-                        tools:itemCount="2"
-                        tools:listitem="@layout/item_myorder_history_details" />
+					<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/rv_cart"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:clipToPadding="false"
+						tools:itemCount="2"
+						tools:listitem="@layout/item_myorder_history_details" />
 
-                </LinearLayout>
+				</LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_10sdp"
-                    android:orientation="vertical">
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/_20sdp"
+					android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/rubik_regular"
-                        android:text="@string/metode_pembayaran"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/_18ssp" />
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/rubik_regular"
+						android:text="@string/metode_pembayaran"
+						android:textColor="@color/colorPrimaryDark"
+						android:textSize="@dimen/_18ssp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp">
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tv_payment_method"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/rubik_regular"
-                            tools:text="aminurachma"
-                            android:textColor="@color/dark"
-                            android:textSize="@dimen/_12ssp"/>
+						<TextView
+							android:id="@+id/tv_payment_method"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="@dimen/_10sdp"
+							android:fontFamily="@font/rubik_regular"
+							android:textColor="@color/dark"
+							android:textSize="@dimen/_12ssp"
+							tools:text="aminurachma" />
 
-                    </LinearLayout>
+					</LinearLayout>
 
-                </LinearLayout>
+				</LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_status"
-                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_45sdp"
-                    android:layout_marginTop="@dimen/_32sdp"
-                    android:fontFamily="@font/rubik_medium"
-                    tools:text="@string/status_pesanan"
-                    android:textAllCaps="false"
-                    android:textSize="@dimen/_12ssp"
-                    app:cornerRadius="@dimen/_8sdp"/>
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/btn_status"
+					style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/_45sdp"
+					android:layout_marginTop="@dimen/_32sdp"
+					android:fontFamily="@font/rubik_medium"
+					android:textAllCaps="false"
+					android:textSize="@dimen/_12ssp"
+					app:cornerRadius="@dimen/_8sdp"
+					tools:text="@string/status_pesanan" />
 
-            </LinearLayout>
+			</LinearLayout>
 
+		</LinearLayout>
 
-        </LinearLayout>
-
-    </ScrollView>
+	</androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

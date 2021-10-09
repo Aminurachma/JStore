@@ -836,4 +836,22 @@ class FirestoreClass {
             }
     }
 
+    fun subscribeUserOrderHistory(
+        onSuccessListener: (orders: List<Order>) -> Unit,
+        onFailureListener: (e: String) -> Unit
+    ) {
+        mFirestore.collection(ORDERS)
+            .whereEqualTo(USER_ID, Prefs.userId)
+            .addSnapshotListener { value, error ->
+                error?.let { e ->
+                    onFailureListener(e.message.toString())
+                }
+                value?.let { document ->
+                    onSuccessListener(document.documents.map {
+                        it.toObject<Order>() ?: Order()
+                    })
+                }
+            }
+    }
+
 }
