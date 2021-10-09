@@ -181,4 +181,5 @@
 	<string name="terima_pesanan">Terima pesanan</string>
 	<string name="total_products_count">%d produk</string>
 	<string name="belum_ada_pesanan">Belum ada pesanan!</string>
+	<string name="status_pengiriman">Status Pengiriman</string>
 </resources>

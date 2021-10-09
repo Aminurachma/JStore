@@ -1,4 +1,4 @@
-package com.example.jstore.ui.home.customer
+package com.example.jstore.ui.home.customer.myorderhistory
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.example.jstore.R
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.databinding.ItemMyorderHistoryBinding
+import com.example.jstore.databinding.ItemMyorderHistoryDetailsBinding
 import com.example.jstore.databinding.ItemProductBinding
 import com.example.jstore.models.Order
 import com.example.jstore.models.Product
@@ -22,12 +23,11 @@ import com.example.jstore.utils.formatPrice
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
 
-class MyOrderHistoryAdapter(private val onClickListener: (order: Order) -> Unit,
-) : ListAdapter<Order, MyOrderHistoryAdapter.ViewHolder>(DIFF_CALLBACK) {
+class DetailMyOrderHistoryAdapter : ListAdapter<Product, DetailMyOrderHistoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemMyorderHistoryBinding.inflate(
+            ItemMyorderHistoryDetailsBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -39,37 +39,30 @@ class MyOrderHistoryAdapter(private val onClickListener: (order: Order) -> Unit,
         return holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(private val itemBinding: ItemMyorderHistoryBinding) :
+    inner class ViewHolder(private val itemBinding: ItemMyorderHistoryDetailsBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(order: Order) {
+        fun bind(product: Product) {
             with(itemBinding) {
-                tvOrderId.text = "Order#${order.orderId}"
-                tvStatus.text = order.statusPesanan
-                tvProductName.text = order.products.first().title
-                tvProductPrice.text = order.products.first().price.toInt().formatPrice()
-                tvQuantity.text = "${order.products.first().quantity} pcs"
-                tvTotalProduct.text = root.context.getString(R.string.total_products_count, order.products.size)
-                tvTotalPesanan.text = "Total Pesanan: ${order.subTotalAmount.toInt().formatPrice()}"
-                btnAcceptPackage.isVisible = order.statusPesanan == "Dikirim"
+                tvProductName.text = product.title
+                tvProductPrice.text = product.price.toInt().formatPrice()
+                tvQuantity.text = "${product.quantity} pcs"
                 Glide.with(root.context)
-                    .load(order.products.first().image)
+                    .load(product.image)
                     .placeholder(R.drawable.product_placeholder)
                     .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                     .into(imgProduct)
-
-                root.setOnClickListener { onClickListener(order) }
             }
         }
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Order>() {
-            override fun areItemsTheSame(oldItem: Order, newItem: Order): Boolean {
-                return oldItem.orderId == newItem.orderId
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Product>() {
+            override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+                return oldItem.productId == newItem.productId
             }
 
-            override fun areContentsTheSame(oldItem: Order, newItem: Order): Boolean {
+            override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
                 return oldItem == newItem
             }
         }

@@ -1,5 +1,6 @@
 package com.example.jstore.ui.home.customer
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import com.example.jstore.base.BaseFragment
 import com.example.jstore.databinding.FragmentOrderHistoryBinding
 import com.example.jstore.firestore.FirestoreClass
+import com.example.jstore.ui.home.customer.myorderhistory.MyOrderHistoryDetailsActivity
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
@@ -15,15 +17,15 @@ import timber.log.Timber
 class OrderHistoryFragment : BaseFragment() {
 
     private var _binding: FragmentOrderHistoryBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private lateinit var adapter: MyOrderHistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentOrderHistoryBinding.inflate(layoutInflater)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,7 +38,7 @@ class OrderHistoryFragment : BaseFragment() {
     }
 
     private fun setupUI() {
-        binding.rvMyOrderHistory.adapter = adapter
+        binding?.rvMyOrderHistory?.adapter = adapter
     }
 
     private fun getMyOrderList() {
@@ -45,12 +47,12 @@ class OrderHistoryFragment : BaseFragment() {
             onSuccessListener = {
                 progress.dismiss()
                 if (it.isNotEmpty()) {
-                    binding.noData.toGone()
-                    binding.rvMyOrderHistory.toVisible()
+                    binding?.noData?.toGone()
+                    binding?.rvMyOrderHistory?.toVisible()
                     adapter.submitList(it)
                 } else {
-                    binding.rvMyOrderHistory.toGone()
-                    binding.noData.toVisible()
+                    binding?.rvMyOrderHistory?.toGone()
+                    binding?.noData?.toVisible()
                 }
             },
             onFailureListener = {
@@ -61,7 +63,11 @@ class OrderHistoryFragment : BaseFragment() {
     }
 
     private fun setupAdapter() {
-        adapter = MyOrderHistoryAdapter {  }
+        adapter = MyOrderHistoryAdapter {
+            startActivity(Intent(requireContext(), MyOrderHistoryDetailsActivity::class.java).apply {
+                putExtra(MyOrderHistoryDetailsActivity.EXTRA_ORDER, it)
+            })
+        }
     }
 
     override fun onDestroy() {

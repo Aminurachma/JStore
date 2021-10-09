@@ -72,11 +72,10 @@
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/_10sdp"
-					android:fontFamily="@font/rubik_regular"
+					android:fontFamily="@font/rubik_medium"
 					android:text="@string/info_pengiriman"
-					android:textColor="@color/colorPrimaryDark"
-					android:textSize="@dimen/_18ssp" />
+					android:textColor="@color/colorPrimary"
+					android:textSize="@dimen/_14ssp" />
 
 				<LinearLayout
 					android:layout_width="match_parent"
@@ -86,13 +85,13 @@
 					<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/_10sdp"
 						android:orientation="horizontal">
 
 						<TextView
 							android:id="@+id/order_id_label"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_marginTop="@dimen/_10sdp"
 							android:fontFamily="@font/rubik_regular"
 							android:text="@string/order_id"
 							android:textColor="@color/dark"
@@ -102,8 +101,8 @@
 							android:id="@+id/tv_order_id"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:layout_marginTop="@dimen/_10sdp"
-							android:fontFamily="@font/rubik_bold"
+							android:layout_marginStart="@dimen/_8sdp"
+							android:fontFamily="@font/rubik_medium"
 							android:gravity="end"
 							android:textColor="@color/dark"
 							android:textSize="@dimen/_12ssp"
@@ -114,13 +113,13 @@
 					<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/_10sdp"
 						android:orientation="horizontal">
 
 						<TextView
 							android:id="@+id/jasa_pengiriman_label"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_marginTop="@dimen/_10sdp"
 							android:fontFamily="@font/rubik_regular"
 							android:text="@string/jasa_pengiriman"
 							android:textColor="@color/dark"
@@ -130,12 +129,40 @@
 							android:id="@+id/tv_jasa_pengiriman"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:layout_marginTop="@dimen/_10sdp"
-							android:fontFamily="@font/rubik_bold"
+							android:layout_marginStart="@dimen/_8sdp"
+							android:fontFamily="@font/rubik_medium"
 							android:gravity="end"
 							android:textColor="@color/dark"
 							android:textSize="@dimen/_12ssp"
 							tools:text="Si Cepat" />
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/_10sdp"
+						android:orientation="horizontal">
+
+						<TextView
+							android:id="@+id/deliver_status_label"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:fontFamily="@font/rubik_regular"
+							android:text="@string/status_pengiriman"
+							android:textColor="@color/dark"
+							android:textSize="@dimen/_12ssp" />
+
+						<TextView
+							android:id="@+id/tv_delivery_status"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/_8sdp"
+							android:fontFamily="@font/rubik_medium"
+							android:gravity="end"
+							android:textColor="@color/colorPrimary"
+							android:textSize="@dimen/_12ssp"
+							tools:text="Dikemas" />
 
 					</LinearLayout>
 
@@ -152,21 +179,21 @@
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:fontFamily="@font/rubik_regular"
+					android:fontFamily="@font/rubik_medium"
 					android:text="@string/alamat_pengiriman"
-					android:textColor="@color/colorPrimaryDark"
-					android:textSize="@dimen/_18ssp" />
+					android:textColor="@color/colorPrimary"
+					android:textSize="@dimen/_14ssp" />
 
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/_10sdp"
 					android:orientation="vertical">
 
 					<TextView
 						android:id="@+id/tv_customer_name"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="@dimen/_10sdp"
 						android:fontFamily="@font/rubik_regular"
 						android:textColor="@color/dark"
 						android:textSize="@dimen/_12ssp"
@@ -176,18 +203,19 @@
 						android:id="@+id/tv_customer_mobile"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="@dimen/_10sdp"
+						android:layout_marginTop="@dimen/_6sdp"
 						android:fontFamily="@font/rubik_regular"
 						android:gravity="end"
 						android:textColor="@color/dark"
 						android:textSize="@dimen/_12ssp"
+						android:visibility="gone"
 						tools:text="08392748392" />
 
 					<TextView
 						android:id="@+id/tv_customer_address"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="@dimen/_10sdp"
+						android:layout_marginTop="@dimen/_6sdp"
 						android:fontFamily="@font/rubik_regular"
 						android:gravity="end"
 						android:textColor="@color/dark"
@@ -207,25 +235,19 @@
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:fontFamily="@font/rubik_regular"
+					android:fontFamily="@font/rubik_medium"
 					android:text="@string/produk_yang_dibeli"
-					android:textColor="@color/colorPrimaryDark"
-					android:textSize="@dimen/_18ssp" />
+					android:textColor="@color/colorPrimary"
+					android:textSize="@dimen/_14ssp" />
 
-				<LinearLayout
+				<androidx.recyclerview.widget.RecyclerView
+					android:id="@+id/rv_product"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:orientation="vertical">
-
-					<androidx.recyclerview.widget.RecyclerView
-						android:id="@+id/rv_cart"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:clipToPadding="false"
-						tools:itemCount="2"
-						tools:listitem="@layout/item_myorder_history_details" />
-
-				</LinearLayout>
+					android:clipToPadding="false"
+					app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+					tools:itemCount="2"
+					tools:listitem="@layout/item_myorder_history_details" />
 
 				<LinearLayout
 					android:layout_width="match_parent"
@@ -236,41 +258,54 @@
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:fontFamily="@font/rubik_regular"
+						android:fontFamily="@font/rubik_medium"
 						android:text="@string/metode_pembayaran"
-						android:textColor="@color/colorPrimaryDark"
-						android:textSize="@dimen/_18ssp" />
+						android:textColor="@color/colorPrimary"
+						android:textSize="@dimen/_14ssp" />
 
 					<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:orientation="vertical">
+						android:layout_marginTop="@dimen/_10sdp"
+						android:orientation="horizontal">
 
 						<TextView
 							android:id="@+id/tv_payment_method"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_marginTop="@dimen/_10sdp"
 							android:fontFamily="@font/rubik_regular"
 							android:textColor="@color/dark"
 							android:textSize="@dimen/_12ssp"
-							tools:text="aminurachma" />
+							tools:text="BNI Syariah" />
+
+						<TextView
+							android:id="@+id/tv_payment_status"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/_8sdp"
+							android:layout_weight="1"
+							android:fontFamily="@font/rubik_medium"
+							android:gravity="end"
+							android:textColor="@color/colorPrimary"
+							android:textSize="@dimen/_12ssp"
+							tools:text="Belum dibayar" />
 
 					</LinearLayout>
 
 				</LinearLayout>
 
 				<com.google.android.material.button.MaterialButton
-					android:id="@+id/btn_status"
+					android:id="@+id/btn_accept_package"
 					style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
 					android:layout_width="match_parent"
 					android:layout_height="@dimen/_45sdp"
-					android:layout_marginTop="@dimen/_32sdp"
+					android:layout_marginTop="@dimen/_20sdp"
+					android:enabled="false"
 					android:fontFamily="@font/rubik_medium"
+					android:text="@string/terima_pesanan"
 					android:textAllCaps="false"
 					android:textSize="@dimen/_12ssp"
-					app:cornerRadius="@dimen/_8sdp"
-					tools:text="@string/status_pesanan" />
+					app:cornerRadius="@dimen/_8sdp" />
 
 			</LinearLayout>
 
