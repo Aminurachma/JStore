@@ -58,6 +58,7 @@
     <string name="update_product_success">Update Product successfully</string>
     <string name="add_product_success">Product add successfully</string>
     <string name="checkout_success">Checkout successfully</string>
+    <string name="payment_success">Payment successfully</string>
     <string name="add_rekening_success">Rekening add successfully</string>
     <string name="add_jasa_success">Jasa Pengiriman add successfully</string>
     <string name="add_lokasi_success">Lokasi Pengiriman add successfully</string>
