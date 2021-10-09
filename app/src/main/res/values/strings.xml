@@ -179,4 +179,6 @@
 	<string name="tampilkan_produk_yang_dibeli">Tampilkan Produk yang dibeli</string>
 	<string name="tampilkan_produk_lagi">Tampilkan produk lagi</string>
 	<string name="terima_pesanan">Terima pesanan</string>
+	<string name="total_products_count">%d produk</string>
+	<string name="belum_ada_pesanan">Belum ada pesanan!</string>
 </resources>
