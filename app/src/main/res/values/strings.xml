@@ -177,4 +177,6 @@
     <string name="pilih_kategori_produk">Pilih kategori produk</string>
     <string name="status_pesanan">Status Pesanan</string>
 	<string name="tampilkan_produk_yang_dibeli">Tampilkan Produk yang dibeli</string>
+	<string name="tampilkan_produk_lagi">Tampilkan produk lagi</string>
+	<string name="terima_pesanan">Terima pesanan</string>
 </resources>
