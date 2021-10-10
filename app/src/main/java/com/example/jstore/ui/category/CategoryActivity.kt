@@ -39,7 +39,7 @@ class CategoryActivity : BaseActivity() {
 
     private fun setupClickListener() {
         binding.btnBack.setOnClickListener {
-            startActivity(Intent(this, SettingActivity::class.java))
+            onBackPressed()
         }
 
         binding.btnAddCategory.setOnClickListener {

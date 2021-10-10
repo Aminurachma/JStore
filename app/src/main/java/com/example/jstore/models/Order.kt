@@ -1,6 +1,8 @@
 package com.example.jstore.models
 
 import android.os.Parcelable
+import com.example.jstore.utils.Constants
+import com.example.jstore.utils.Constants.BELUM_DIBAYAR
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -18,9 +20,12 @@ data class Order (
     val subTotalAmount : String = "",
     val shippingCharge : String = "",
     val totalAmount : String = "",
-    val statusPembayaran: Boolean = false,
-    val statusPesanan: String = "",
+    val statusPembayaran: String = BELUM_DIBAYAR,
+    val statusPesanan :String = BELUM_DIBAYAR,
     val nomorResi: String = "",
+    val resiImage: String = "",
+    val mobile: String = "",
+    val imageBuktiBayar: String = "",
     val orderDateTime : Long = 0L,
     var orderId : String = ""
     ) : Parcelable

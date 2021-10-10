@@ -45,6 +45,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_order_history"
         android:layout_width="0dp"
+		android:layout_margin="@dimen/_16sdp"
         android:layout_height="0dp"
         android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

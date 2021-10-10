@@ -59,6 +59,8 @@
     <string name="add_product_success">Product add successfully</string>
     <string name="checkout_success">Checkout successfully</string>
     <string name="payment_success">Payment successfully</string>
+    <string name="update_resi_success">Update Resi successfully</string>
+    <string name="updatepayment_success">Update Payment Status successfully</string>
     <string name="add_rekening_success">Rekening add successfully</string>
     <string name="add_jasa_success">Jasa Pengiriman add successfully</string>
     <string name="add_lokasi_success">Lokasi Pengiriman add successfully</string>
@@ -158,6 +160,7 @@
     <string name="paynow">Pay Now</string>
     <string name="transaction_out">Transaction Out</string>
     <string name="detail_of_transaction">Detail of transaction</string>
+    <string name="detail_order">History Order Details</string>
     <string name="detail_of_yourOrder">Detail of your Order</string>
     <string name="go_back">Go Back</string>
     <string name="transaction_details">Transaction Details</string>
@@ -175,8 +178,18 @@
     <string name="confirm_new_password_not_match">Confirm New Password Not Match</string>
     <string name="old_password_not_match">Old Password Not Match</string>
     <string name="pilih_kategori_produk">Pilih kategori produk</string>
+    <string name="status_pembayaran">Status Pembayaran</string>
     <string name="status_pesanan">Status Pesanan</string>
-	<string name="tampilkan_produk_yang_dibeli">Tampilkan Produk yang dibeli</string>
-	<string name="tampilkan_produk_lagi">Tampilkan produk lagi</string>
-	<string name="terima_pesanan">Terima pesanan</string>
+    <string name="edit_status">Konfirmasi Pembayaran</string>
+    <string name="kirim_pesanan">Kirim Pesanan</string>
+    <string name="pesanan_selesai">Pesanan telah selesai</string>
+    <string name="sedang_dikirim">Sedang Dikirim</string>
+    <string name="tampilkan_produk_yang_dibeli">Tampilkan Produk yang dibeli</string>
+    <string name="tampilkan_produk_lagi">Tampilkan produk lagi</string>
+    <string name="terima_pesanan">Terima pesanan</string>
+    <string name="lihat_rincian_pesanan">Lihat Rincian Pemesanan</string>
+    <string name="upload_bukti_bayar">Upload Proof of Payment</string>
+    <string name="upload_resi">Upload Resi</string>
+    <string name="no_resi">Nomor Resi</string>
+    <string name="bukti_bayar">Bukti Pembayaran</string>
 </resources>

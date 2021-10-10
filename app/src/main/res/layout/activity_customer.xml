@@ -58,9 +58,9 @@
             android:padding="@dimen/_20sdp"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/search_view"
-                layout="@layout/search_layout" />
+<!--            <include-->
+<!--                android:id="@+id/search_view"-->
+<!--                layout="@layout/search_layout" />-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_customer"

@@ -4,24 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isGone
-import com.bumptech.glide.GenericTransitionOptions
-import com.bumptech.glide.Glide
 import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityCheckoutBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.*
-import com.example.jstore.ui.cart.CartAdapter
-import com.example.jstore.ui.category.CategoryActivity
 import com.example.jstore.ui.invoice.InvoiceActivity
 import com.example.jstore.ui.jasapengiriman.JasaPengirimanActivity
-import com.example.jstore.ui.lokasipengiriman.LokasiPengirimanActivity
 import com.example.jstore.ui.metodepembayaran.MetodePembayaranActivity
-import com.example.jstore.ui.product.AddProductActivity
 import com.example.jstore.ui.rekening.RekeningActivity
 import com.example.jstore.utils.*
+import com.example.jstore.utils.Constants.BELUM_DIBAYAR
 
 @Suppress("DEPRECATION")
 class CheckoutActivity : BaseActivity() {
@@ -40,7 +33,7 @@ class CheckoutActivity : BaseActivity() {
 
     private lateinit var metodePembayaran: MetodePembayaran
     private lateinit var rekening: Rekening
-    private lateinit var lokasiPengiriman: LokasiPengiriman
+//    private lateinit var lokasiPengiriman: LokasiPengiriman
     private lateinit var jasaPengiriman: JasaPengiriman
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,8 +43,8 @@ class CheckoutActivity : BaseActivity() {
 
         getUserProfile()
         setupClickListener()
-        calculateTotal()
         getMyCart()
+        calculateTotal()
 
     }
 
@@ -126,12 +119,6 @@ class CheckoutActivity : BaseActivity() {
     private fun validateData() {
         binding.apply {
             when {
-//                edtDeliveryLocation.text.toString().trim().isEmpty() -> tilDeliveryLocation.error =
-//                    getString(
-//                        R.string.empty_field, getString(
-//                            R.string.choose_delivery_loc
-//                        )
-//                    )
                 edtDeliveryService.text.toString().trim().isEmpty() -> tilDelivery.error = getString(
                     R.string.empty_field, getString(
                         R.string.choose_delivery_service
@@ -162,10 +149,12 @@ class CheckoutActivity : BaseActivity() {
             subTotalAmount = subTotal.toString(),
             shippingCharge = ongkir.toString(),
             totalAmount = totalPrice.toString(),
-            statusPesanan = "Dikemas",
+            statusPembayaran = BELUM_DIBAYAR,
+            statusPesanan = BELUM_DIBAYAR,
+            mobile = binding.edtMobile.text.toString(),
             orderDateTime = System.currentTimeMillis()
         )
-        FirestoreClass().placeOrder(order, onSuccessListener = { orderId ->
+        FirestoreClass().placeOrder(cart.cartId,order, onSuccessListener = { orderId ->
             progress.dismiss()
             showToast(getString(R.string.checkout_success))
             val intent = Intent(this, InvoiceActivity::class.java)
@@ -177,14 +166,13 @@ class CheckoutActivity : BaseActivity() {
             progress.dismiss()
             showToast(getString(R.string.checkout_failed, it.message.toString()))
         })
-        updateMyCart()
     }
 
-    private fun updateMyCart() {
-        progress.show()
-        FirestoreClass().updateCheckoutMyCart(cart.cartId,
-            onSuccessListener = { progress.dismiss() }, onFailureListener = { progress.dismiss() })
-    }
+//    private fun updateMyCart() {
+//        progress.show()
+//        FirestoreClass().updateCheckoutMyCart(cart.cartId,
+//            onSuccessListener = { progress.dismiss() }, onFailureListener = { progress.dismiss() })
+//    }
 
 
     private fun checkPaymentMethod() {

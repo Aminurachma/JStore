@@ -53,7 +53,6 @@ class AddCategoryActivity : BaseActivity() {
         FirestoreClass().addCategory(category, onSuccessListener = {
             progress.dismiss()
             showToast(getString(R.string.add_category_success))
-            pushActivity(CategoryActivity::class.java)
             finish()
         }, onFailureListener = {
             progress.dismiss()

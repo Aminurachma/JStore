@@ -13,7 +13,15 @@ object Constants {
     const val CARTS = "carts"
     const val ORDERS = "orders"
 
+    const val BELUM_DIBAYAR = "Belum dibayar"
+    const val MENUNGGU_KONFIRMASI_ADMIN = "Menunggu Konfirmasi Admin"
+    const val SUDAH_DIBAYAR = "Sudah dibayar"
+
+
+
     const val IMAGE = "image"
+    const val IMAGE_BUKTIBAYAR = "imageBuktiBayar"
+    const val IMAGE_RESI = "resiImage"
 
     const val MYSHOP_PREFERENCE  = "MyJStorePrefs"
     const val LOGGED_IN_USERNAMEADMIN  ="logged_in_usernameAdmin"
@@ -28,6 +36,12 @@ object Constants {
     const val USER_ID = "userId"
     const val CHECKED_OUT = "checkedOut"
     const val PAYMENT_STATUS = "statusPembayaran"
+    const val PESANAN_STATUS = "statusPesanan"
+
+    const val DIKEMAS = "Dikemas"
+    const val DIKIRIM = "Dikirim"
+    const val DITERIMA = "Diterima"
+
 
     const val EXTRA_PRODUCT_ID = "extra_product_id"
     const val PRODUCT_ID = "productId"

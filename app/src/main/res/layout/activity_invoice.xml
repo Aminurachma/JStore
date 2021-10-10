@@ -205,6 +205,33 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/img_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_regular"
+                android:text="@string/upload_bukti_bayar"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/_12ssp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_img_product"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_180sdp"
+                app:cardCornerRadius="@dimen/_8sdp"
+                app:cardBackgroundColor="@color/gray4"
+                android:layout_marginTop="@dimen/_8sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_bukti_bayar"
+                    android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/product_placeholder"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_bayar"
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton"

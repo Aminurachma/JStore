@@ -13,22 +13,29 @@ import com.example.jstore.utils.Constants.CART_ID
 import com.example.jstore.utils.Constants.CATEGORY
 import com.example.jstore.utils.Constants.CATEGORY_ID
 import com.example.jstore.utils.Constants.CHECKED_OUT
+import com.example.jstore.utils.Constants.DIKEMAS
+import com.example.jstore.utils.Constants.DIKIRIM
 import com.example.jstore.utils.Constants.EMAIL_ADMIN
 import com.example.jstore.utils.Constants.IMAGE
+import com.example.jstore.utils.Constants.IMAGE_BUKTIBAYAR
+import com.example.jstore.utils.Constants.IMAGE_RESI
 import com.example.jstore.utils.Constants.JASAPENGIRIMAN_ID
 import com.example.jstore.utils.Constants.JASA_PENGIRIMAN
 import com.example.jstore.utils.Constants.LOKASIPENGIRIMAN_ID
 import com.example.jstore.utils.Constants.LOKASI_PENGIRIMAN
+import com.example.jstore.utils.Constants.MENUNGGU_KONFIRMASI_ADMIN
 import com.example.jstore.utils.Constants.METODEPEMBAYARAN_ID
 import com.example.jstore.utils.Constants.METODE_PEMBAYARAN
 import com.example.jstore.utils.Constants.ORDERS
 import com.example.jstore.utils.Constants.ORDER_ID
 import com.example.jstore.utils.Constants.PASSWORD_ADMIN
 import com.example.jstore.utils.Constants.PAYMENT_STATUS
+import com.example.jstore.utils.Constants.PESANAN_STATUS
 import com.example.jstore.utils.Constants.PRODUCTS
 import com.example.jstore.utils.Constants.PRODUCT_ID
 import com.example.jstore.utils.Constants.REKENING
 import com.example.jstore.utils.Constants.REKENING_ID
+import com.example.jstore.utils.Constants.SUDAH_DIBAYAR
 import com.example.jstore.utils.Constants.USERS
 import com.example.jstore.utils.Constants.USER_ID
 import com.example.jstore.utils.logDebug
@@ -687,7 +694,7 @@ class FirestoreClass {
         getMyCart { cart ->
             if (cart.products.any { it.productId == product.productId }) {
                 updateMyCart(cartId = cart.cartId,
-                    products = cart.products.toMutableList(),
+                products = cart.products.toMutableList(),
                     product = product,
                     onSuccessListener = { onSuccessListener() },
                     onFailureListener = { onFailureListener(it) })
@@ -812,7 +819,7 @@ class FirestoreClass {
             }
     }
 
-    fun placeOrder(orderDetails: Order,
+    fun placeOrder(cartId: String, orderDetails: Order,
                    onSuccessListener: (orderId: String) -> Unit,
                    onFailureListener: (e: Exception) -> Unit) {
         mFirestore.collection(ORDERS)
@@ -823,6 +830,7 @@ class FirestoreClass {
                     if (document != null) {
                         val id = document.id
                         updateId(ORDERS, id, ORDER_ID, onSuccessListener = {}, onFailureListener = {})
+                        updateCheckoutMyCart(cartId = cartId, onSuccessListener = {}, onFailureListener = {})
                         onSuccessListener(id)
                     }
                 }
@@ -852,20 +860,47 @@ class FirestoreClass {
     }
 
     fun updatePaymentStatus(
-        orderId: String,
+        orderId: String, imageUrl: String,
         onSuccessListener: () -> Unit,
         onFailureListener: (e: Exception) -> Unit
     ) {
         mFirestore.collection(ORDERS)
             .document(orderId)
-            .update("statusPembayaran", true)
+            .update(PAYMENT_STATUS, MENUNGGU_KONFIRMASI_ADMIN)
             .addOnSuccessListener {
+                uploadImageBuktiPembayaranToFirestore(imageUrl.toUri(), onSuccessListener = { imageUrl ->
+                    updateImageBukti(orderId, imageUrl)
+                }, onFailureListener = {})
                 onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+
+    private fun uploadImageBuktiPembayaranToFirestore(
+        fileUri: Uri,
+        onSuccessListener: (imageUrl: String) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        val fileName = UUID.randomUUID().toString() + ".jpg"
+        val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
+        refStorage.putFile(fileUri)
+            .addOnSuccessListener {
+                it.storage.downloadUrl.addOnSuccessListener { uri ->
+                    val imageUrl = uri.toString()
+                    onSuccessListener(imageUrl)
+                }
             }
             .addOnFailureListener {
                 onFailureListener(it)
-                logError("updatePaymentStatus: ${it.message}")
             }
+    }
+
+    private fun updateImageBukti(orderId: String, imageUrl: String) {
+        mFirestore.collection(ORDERS)
+            .document(orderId)
+            .update(IMAGE_BUKTIBAYAR, imageUrl)
     }
 
     fun subscribeUserOrderHistory(
@@ -884,6 +919,134 @@ class FirestoreClass {
                     })
                 }
             }
+    }
+
+    fun getOrderHistoryList(
+        onSuccessListener: (order: List<Order>) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(ORDERS)
+            .addSnapshotListener { value, error ->
+                value?.let { document ->
+                    logDebug("getDashboardItemsList: ${document.documents}")
+                    val orderHistoryList = document.documents.map {
+                        it.toObject(Order::class.java) ?: Order()
+                    }
+                    onSuccessListener(orderHistoryList)
+                }
+
+                error?.let {
+                    logError("getDashboardItemsList: ${it.message}")
+                    onFailureListener(Exception(it))
+                }
+            }
+    }
+
+    fun subscribeToOrder(
+        onSuccessListener: (order:Order) -> Unit,
+        onFailureListener: (e: String) -> Unit
+    ) {
+        mFirestore.collection(ORDERS)
+            .whereEqualTo(ORDER_ID, Prefs.orderId)
+            .addSnapshotListener { value, error ->
+                error?.let {
+                    onFailureListener(it.message.toString())
+                }
+                value?.let { document ->
+                    logDebug("document: ${document.size()}")
+                    if (document.documents.isEmpty()) {
+                        createActiveCart(onSuccessListener = {}, onFailureListener = {})
+                    }
+                    val order = document.documents.map {
+                        it.toObject<Order>() ?: Order()
+                    }
+                    if (order.isNotEmpty()) {
+                        onSuccessListener(Order())
+                    }
+                }
+            }
+    }
+
+
+    fun getOrderHistoryProductList(
+        onSuccessListener: (order: List<Product>) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(ORDERS)
+            .addSnapshotListener { value, error ->
+                value?.let { document ->
+                    logDebug("getDashboardItemsList: ${document.documents}")
+                    val orderHistoryProductList = document.documents.map {
+                        it.toObject(Product::class.java) ?: Product()
+                    }
+                    onSuccessListener(orderHistoryProductList)
+                }
+
+                error?.let {
+                    logError("getDashboardItemsList: ${it.message}")
+                    onFailureListener(Exception(it))
+                }
+            }
+    }
+
+    fun updatePaymentStatusAdmin(
+        orderId: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(ORDERS)
+            .document(orderId)
+            .update(PAYMENT_STATUS, SUDAH_DIBAYAR, PESANAN_STATUS, DIKEMAS)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+
+    fun updateResi(
+        orderId: String, imageUrl: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(ORDERS)
+            .document(orderId)
+            .update(PESANAN_STATUS, DIKIRIM)
+            .addOnSuccessListener {
+                uploadImageResiToFirestore(imageUrl.toUri(), onSuccessListener = { imageUrl ->
+                    updateResiImage(orderId, imageUrl)
+                }, onFailureListener = {})
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+
+    private fun uploadImageResiToFirestore(
+        fileUri: Uri,
+        onSuccessListener: (imageUrl: String) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        val fileName = UUID.randomUUID().toString() + ".jpg"
+        val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
+        refStorage.putFile(fileUri)
+            .addOnSuccessListener {
+                it.storage.downloadUrl.addOnSuccessListener { uri ->
+                    val imageUrl = uri.toString()
+                    onSuccessListener(imageUrl)
+                }
+            }
+            .addOnFailureListener {
+                onFailureListener(it)
+            }
+    }
+
+    private fun updateResiImage(orderId: String, imageUrl: String) {
+        mFirestore.collection(ORDERS)
+            .document(orderId)
+            .update(IMAGE_RESI, imageUrl)
     }
 
 }

@@ -49,9 +49,9 @@ class SettingActivity : BaseActivity() {
         binding.btnJasaPengiriman.setOnClickListener {
             startActivity(Intent(this, JasaPengirimanActivity::class.java))
         }
-        binding.btnLokasiPengiriman.setOnClickListener {
-            startActivity(Intent(this, LokasiPengirimanActivity::class.java))
-        }
+//        binding.btnLokasiPengiriman.setOnClickListener {
+//            startActivity(Intent(this, LokasiPengirimanActivity::class.java))
+//        }
         binding.btnMetodePembayaran.setOnClickListener {
             startActivity(Intent(this, MetodePembayaranActivity::class.java))
         }

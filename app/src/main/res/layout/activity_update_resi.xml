@@ -84,8 +84,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/rubik_light"
-                    android:hint="@string/enter_your_name_here"
-                    android:inputType="textCapWords"
+                    android:inputType="none"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:focusable="false"
                     android:textColor="@color/dark"
                     android:textColorHint="@color/gray3"
                     android:textSize="@dimen/_12ssp"
@@ -121,7 +123,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/rubik_light"
-                    android:inputType="textEmailAddress"
+                    android:inputType="none"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:focusable="false"
                     android:textColor="@color/dark"
                     android:textColorHint="@color/gray3"
                     android:textSize="@dimen/_12ssp" />
@@ -129,12 +134,12 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/keterangan_label"
+                android:id="@+id/nomor_resi_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:fontFamily="@font/rubik_regular"
-                android:text="@string/keterangan"
+                android:text="@string/no_resi"
                 android:textColor="@color/dark"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -142,17 +147,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/til_name" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_keterangan"
+                android:id="@+id/til_resi"
                 style="@style/App.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_4sdp"
-                app:layout_constraintEnd_toEndOf="@+id/keterangan_label"
-                app:layout_constraintStart_toStartOf="@+id/keterangan_label"
-                app:layout_constraintTop_toBottomOf="@+id/keterangan_label">
+                app:layout_constraintEnd_toEndOf="@+id/nomor_resi_label"
+                app:layout_constraintStart_toStartOf="@+id/nomor_resi_label"
+                app:layout_constraintTop_toBottomOf="@+id/nomor_resi_label">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_keterangan"
+                    android:id="@+id/edt_nomor_resi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/rubik_light"
@@ -174,7 +179,7 @@
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/til_keterangan" />
+                app:layout_constraintTop_toBottomOf="@+id/til_resi" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_total"
@@ -191,9 +196,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/rubik_light"
-                    android:inputType="textMultiLine"
+                    android:inputType="none"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:focusable="false"
                     android:gravity="top"
-                    android:minHeight="@dimen/_60sdp"
                     android:textColor="@color/dark"
                     android:textColorHint="@color/gray3"
                     android:textSize="@dimen/_12ssp" />
@@ -206,7 +213,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_regular"
-                android:text="@string/img_product"
+                android:text="@string/upload_resi"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:textColor="@color/dark"
                 android:textSize="@dimen/_12ssp"
@@ -224,16 +231,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/img_label">
 
                 <ImageView
-                    android:id="@+id/iv_product_image"
+                    android:id="@+id/iv_resi_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/gray4"
                     android:scaleType="fitXY" />
 
                 <ImageView
-                    android:id="@+id/iv_add_update_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/iv_add_update_resi"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:padding="@dimen/_9sdp"
@@ -242,13 +249,13 @@
             </FrameLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_update_profile"
+                android:id="@+id/btn_update_resi"
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_32sdp"
                 android:fontFamily="@font/rubik_medium"
-                android:text="@string/update"
+                android:text="@string/update_resi"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_12ssp"
                 app:cornerRadius="@dimen/_8sdp"
