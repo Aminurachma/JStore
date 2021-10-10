@@ -84,10 +84,10 @@
                 app:layout_constraintEnd_toEndOf="@+id/tv_product_name"
                 app:layout_constraintStart_toStartOf="@+id/tv_product_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_product_name"
-                tools:text="x1" />
+                tools:text="4 pcs" />
 
             <TextView
-                android:id="@+id/tv_prouduct_price"
+                android:id="@+id/tv_product_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_2sdp"
@@ -139,6 +139,7 @@
             android:id="@+id/order_summary_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -150,10 +151,11 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_light"
                 android:textColor="@color/gray3"
-                android:textSize="@dimen/_10ssp"
+                android:textSize="@dimen/_11ssp"
                 tools:text="3 produk" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_total_pesanan"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:gravity="end"
@@ -177,6 +179,7 @@
             app:layout_constraintTop_toBottomOf="@id/order_summary_layout"/>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_accept_package"
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -184,6 +187,7 @@
             android:fontFamily="@font/rubik_medium"
             android:text="@string/terima_pesanan"
             app:cornerRadius="@dimen/_4sdp"
+            android:visibility="gone"
             android:enabled="false"
             android:textAllCaps="false"
             android:textSize="@dimen/_11ssp"

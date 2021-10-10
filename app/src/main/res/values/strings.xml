@@ -192,4 +192,7 @@
     <string name="upload_resi">Upload Resi</string>
     <string name="no_resi">Nomor Resi</string>
     <string name="bukti_bayar">Bukti Pembayaran</string>
+	<string name="total_products_count">%d produk</string>
+	<string name="belum_ada_pesanan">Belum ada pesanan!</string>
+	<string name="status_pengiriman">Status Pengiriman</string>
 </resources>

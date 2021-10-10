@@ -4,8 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/gray5"
-	android:focusableInTouchMode="true">
+	android:background="@color/gray5">
 
 	<TextView
 		android:id="@+id/tv_title"
@@ -26,12 +25,27 @@
 		android:id="@+id/rv_my_order_history"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 		android:layout_marginTop="@dimen/_4sdp"
-		android:overScrollMode="never"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/tv_title"
-		tools:itemCount="9"
+		tools:itemCount="2"
 		tools:listitem="@layout/item_myorder_history" />
+
+	<androidx.appcompat.widget.AppCompatTextView
+		android:id="@+id/no_data"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/belum_ada_pesanan"
+		android:textColor="@color/gray4"
+		android:visibility="gone"
+		android:fontFamily="@font/rubik_regular"
+		android:textStyle="italic"
+		android:textSize="@dimen/_12ssp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
