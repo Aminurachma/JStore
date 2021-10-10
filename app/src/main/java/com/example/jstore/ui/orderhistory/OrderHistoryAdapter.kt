@@ -48,7 +48,7 @@ class OrderHistoryAdapter(private val onClickListener: (order:Order) -> Unit,
 
                 }.toString()
                 tvTotalProduct.text = order.products.count().toString()+ " produk"
-                tvOrderId.text = order.orderId
+                tvOrderId.text = "Order:#${order.orderId}"
                 tvTotalPayment.text= "Total Pembayaran "+ order.totalAmount.toInt().formatPrice()
 
                 root.setOnClickListener { onClickListener(order) }

@@ -9,6 +9,7 @@ import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityOrderHistoryDetailsBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Order
+import com.example.jstore.ui.home.admin.HomeAdminActivity
 import com.example.jstore.ui.home.customer.HomeCustomerActivity
 import com.example.jstore.ui.invoice.InvoiceActivity
 import com.example.jstore.utils.Constants.BELUM_DIBAYAR
@@ -25,6 +26,7 @@ class OrderHistoryDetailsActivity : BaseActivity() {
     private val binding get() = _binding!!
     private lateinit var order: Order
     private lateinit var adapter: OrderHistoryDetailsAdapter
+    private var orderId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,10 +96,9 @@ class OrderHistoryDetailsActivity : BaseActivity() {
 
     private fun firebaseUpdatePayment() {
         progress.show()
-        FirestoreClass().updatePaymentStatusAdmin(orderId = binding.tvOrderId.text.toString(),
+        FirestoreClass().updatePaymentStatusAdmin(orderId = orderId,
             onSuccessListener = { progress.dismiss()
                 showToast(getString(R.string.updatepayment_success))
-                startActivity(Intent(this, HomeCustomerActivity::class.java))
                 finish()
             }
             , onFailureListener = { progress.dismiss() })
@@ -110,7 +111,8 @@ class OrderHistoryDetailsActivity : BaseActivity() {
             .placeholder(R.drawable.product_placeholder)
             .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
             .into(binding.imgBuktiBayar)
-        binding.tvOrderId.text = order.orderId
+        binding.tvOrderId.text = "Order:#${order.orderId}"
+        orderId = order.orderId
         binding.tvCustomerAddress.text = order.address
         binding.tvCustomerName.text = order.firstName
         binding.tvCustomerMobile.text = order.mobile

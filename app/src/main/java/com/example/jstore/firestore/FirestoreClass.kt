@@ -15,6 +15,7 @@ import com.example.jstore.utils.Constants.CATEGORY_ID
 import com.example.jstore.utils.Constants.CHECKED_OUT
 import com.example.jstore.utils.Constants.DIKEMAS
 import com.example.jstore.utils.Constants.DIKIRIM
+import com.example.jstore.utils.Constants.DITERIMA
 import com.example.jstore.utils.Constants.EMAIL_ADMIN
 import com.example.jstore.utils.Constants.IMAGE
 import com.example.jstore.utils.Constants.IMAGE_BUKTIBAYAR
@@ -997,6 +998,22 @@ class FirestoreClass {
         mFirestore.collection(ORDERS)
             .document(orderId)
             .update(PAYMENT_STATUS, SUDAH_DIBAYAR, PESANAN_STATUS, DIKEMAS)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+
+    fun updatePaymentStatusUser(
+        orderId: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(ORDERS)
+            .document(orderId)
+            .update(PESANAN_STATUS, DITERIMA)
             .addOnSuccessListener {
                 onSuccessListener()
             }

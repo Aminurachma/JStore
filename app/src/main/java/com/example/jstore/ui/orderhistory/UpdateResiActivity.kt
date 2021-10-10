@@ -40,7 +40,7 @@ class UpdateResiActivity : BaseActivity() {
         FirestoreClass().subscribeLastCheckout(orderId, onSuccessListener = {
             progress.dismiss()
             order = it
-            binding.edtOrderId.setText(it.orderId)
+            binding.edtOrderId.setText("Order:#${it.orderId}")
             binding.edtname.setText(it.firstName)
             binding.edtTotal.setText(it.subTotalAmount.toInt().formatPrice())
         }, onFailureListener = {
