@@ -104,6 +104,12 @@ class ProfileAdminActivity : BaseActivity() {
     private fun validateData() {
         binding.apply {
             when {
+                edtName.text.toString().trim().length<2 -> tilName.error = getString(
+                    R.string.kurangnama
+                )
+                edtPhoneNumber.text.toString().trim().length<11 -> tilPhoneNumber.error = getString(
+                    R.string.kurangnomor
+                )
                 edtName.text.toString().trim().isEmpty() -> tilName.error = getString(
                     R.string.empty_field, getString(
                         R.string.fullname

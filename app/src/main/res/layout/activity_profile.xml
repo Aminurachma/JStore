@@ -85,6 +85,7 @@
 				style="@style/App.TextInputLayout.OutlinedBox"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				app:errorEnabled="false"
 				android:layout_marginTop="@dimen/_4sdp"
 				app:layout_constraintEnd_toEndOf="@+id/firstName_label"
 				app:layout_constraintStart_toStartOf="@+id/firstName_label"

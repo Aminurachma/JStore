@@ -2,22 +2,29 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
+	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	android:layout_marginVertical="@dimen/_4sdp"
-	android:background="@color/white"
-	app:cardElevation="0dp">
+	android:layout_margin="@dimen/_6sdp"
+	app:cardElevation="@dimen/_3sdp">
 
-	<TextView
-		android:id="@+id/tv_category"
-		android:layout_width="wrap_content"
+
+	<LinearLayout
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_margin="@dimen/_12sdp"
-		android:ellipsize="end"
-		android:fontFamily="@font/rubik_medium"
-		android:maxLines="2"
-		android:textColor="@color/dark"
-		android:textSize="@dimen/_12ssp"
-		tools:text="Makanan" />
+		android:orientation="horizontal"
+		android:background="@color/colorPrimaryDark">
+
+		<TextView
+			android:id="@+id/tv_category"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/_12sdp"
+			android:ellipsize="end"
+			android:fontFamily="@font/rubik_medium"
+			android:maxLines="2"
+			android:textColor="@color/white"
+			android:textSize="@dimen/_11ssp"
+			tools:text="Makanan" />
+	</LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

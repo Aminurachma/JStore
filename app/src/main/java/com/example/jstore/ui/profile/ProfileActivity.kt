@@ -117,10 +117,20 @@ class ProfileActivity : BaseActivity() {
                     R.string.empty_field, getString(
                         R.string.lastName
                     ))
+                edtFirstName.text.toString().trim().length<2 -> tilFirstName.error = getString(
+                    R.string.kurangnama
+                )
+                edtLastName.text.toString().trim().length<2 -> tilLastName.error = getString(
+                    R.string.kurangnama
+                )
+                edtAddress.text.toString().trim().length<10 -> tilAddress.error = getString(
+                    R.string.kurangalaamat)
                 edtAddress.text.toString().trim().isEmpty() -> tilAddress.error = getString(
                     R.string.empty_field, getString(
                         R.string.address
                     ))
+                edtPhoneNumber.text.toString().trim().length<11 -> tilPhoneNumber.error = getString(
+                    R.string.kurangnomor)
                 edtPhoneNumber.text.toString().trim().isEmpty() -> tilPhoneNumber.error = getString(
                     R.string.empty_field, getString(
                         R.string.phone_number
@@ -128,12 +138,18 @@ class ProfileActivity : BaseActivity() {
                 !Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString().trim()).matches() -> tilEmail.error = getString(
                     R.string.invalid_email
                 )
-                else -> firebaseUpdateProfile()
+                else ->
+                    firebaseUpdateProfile()
             }
         }
     }
 
     private fun firebaseUpdateProfile() {
+        binding.tilFirstName.isErrorEnabled = false
+        binding.tilLastName.isErrorEnabled = false
+        binding.tilAddress.isErrorEnabled = false
+        binding.tilEmail.isErrorEnabled = false
+        binding.tilPhoneNumber.isErrorEnabled = false
         progress.show()
         val user = User(
             id = mUserDetails.id,

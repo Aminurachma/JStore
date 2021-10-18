@@ -16,6 +16,7 @@ import com.example.jstore.databinding.FragmentCustomerDashboardBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.User
 import com.example.jstore.ui.cart.MyCartActivity
+import com.example.jstore.ui.category.CategoryAdapter
 import com.example.jstore.ui.login.customer.MainActivity
 import com.example.jstore.ui.product.ProductActivity
 import com.example.jstore.ui.product.ProductAdapter
@@ -29,6 +30,7 @@ class CustomerDashboardFragment : BaseFragment() {
     private var _binding: FragmentCustomerDashboardBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: ProductAdapter
+    private lateinit var adapterCategory: CategoryAdapter
     private lateinit var mUserDetails: User
 
     override fun onCreateView(
@@ -48,17 +50,34 @@ class CustomerDashboardFragment : BaseFragment() {
         setupClickListeners()
         getUserProfile()
         getProductList()
+        getCategoryList()
         subscribeCart()
 
     }
 
     private fun setupUI() {
         binding.rvProduct.adapter = adapter
+        binding.rvCategory.adapter = adapterCategory
         binding.searchView.searchBar.doOnTextChanged { text, _, _, _ ->
             adapter.filter.filter(text)
         }
     }
 
+    private fun getCategoryList() {
+        progress.show()
+        FirestoreClass().getCategoryList(onSuccessListener = {
+            progress.dismiss()
+            if (it.isNotEmpty()) {
+                binding.rvCategory.toVisible()
+                adapterCategory.submitList(it)
+            } else {
+                binding.rvCategory.toGone()
+            }
+        }, onFailureListener = {
+            progress.dismiss()
+            showToast(it.message.toString())
+        })
+    }
     private fun setupClickListeners() {
         binding.imgAvatar.setOnClickListener{
             pushActivity(ProfileActivity::class.java)
@@ -74,6 +93,22 @@ class CustomerDashboardFragment : BaseFragment() {
             startActivity(Intent(requireContext(), ProductDetailsActivity::class.java).apply {
                 putExtra(ProductDetailsActivity.EXTRA_PRODUCT, product)
             })
+        })
+        adapterCategory = CategoryAdapter(onClickListener = { category ->
+            subscribeProduct(category.namaCategory)
+        })
+    }
+
+
+    private fun subscribeProduct(namaCategory: String) {
+        progress.show()
+        FirestoreClass().subscribeProduct(namaCategory, onSuccessListener = {
+            progress.dismiss()
+            binding.rvProduct.toVisible()
+            adapter.submitList(it)
+        }, onFailureListener = {
+            progress.dismiss()
+            logError("subscribeProduct: $it")
         })
     }
 

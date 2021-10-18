@@ -49,18 +49,18 @@ class RegisterActivity : BaseActivity() {
                 edtFirstName.text.toString().trim().length<3 -> tilFirstName.error = getString(
                     R.string.kurangnama
                     )
-                edtLastName.text.toString().trim().length<5 -> tilLastName.error = getString(
+                edtLastName.text.toString().trim().length<3 -> tilLastName.error = getString(
                     R.string.kurangnama
                 )
                 edtAddress.text.toString().trim().isEmpty() -> tilAddress.error = getString(
                     R.string.empty_field, getString(
                         R.string.address
                     ))
-                edtAddress.text.toString().trim().isEmpty() -> tilAddress.error = getString(
+                edtAddress.text.toString().trim().length<10 -> tilAddress.error = getString(
                     R.string.kurangalaamat)
                 edtPhoneNumber.text.toString().trim().isEmpty() -> tilPhoneNumber.error = getString(
                     R.string.empty_field, getString(R.string.phone_number))
-                edtPhoneNumber.text.toString().trim().length<7 -> tilPhoneNumber.error = getString(
+                edtPhoneNumber.text.toString().trim().length<11 -> tilPhoneNumber.error = getString(
                     R.string.kurangnomor)
                 !Patterns.EMAIL_ADDRESS.matcher(edtEmail.text.toString().trim()).matches() -> tilEmail.error = getString(
                     R.string.invalid_email

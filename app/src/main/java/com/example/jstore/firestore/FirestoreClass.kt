@@ -12,6 +12,7 @@ import com.example.jstore.utils.Constants.CARTS
 import com.example.jstore.utils.Constants.CART_ID
 import com.example.jstore.utils.Constants.CATEGORY
 import com.example.jstore.utils.Constants.CATEGORY_ID
+import com.example.jstore.utils.Constants.CATEGORY_NAME
 import com.example.jstore.utils.Constants.CHECKED_OUT
 import com.example.jstore.utils.Constants.DIKEMAS
 import com.example.jstore.utils.Constants.DIKIRIM
@@ -904,12 +905,13 @@ class FirestoreClass {
             .update(IMAGE_BUKTIBAYAR, imageUrl)
     }
 
-    fun subscribeUserOrderHistory(
+    fun subscribeUserOrderHistory(status: String,
         onSuccessListener: (orders: List<Order>) -> Unit,
         onFailureListener: (e: String) -> Unit
     ) {
         mFirestore.collection(ORDERS)
             .whereEqualTo(USER_ID, Prefs.userId)
+            .whereEqualTo(PESANAN_STATUS, status)
             .addSnapshotListener { value, error ->
                 error?.let { e ->
                     onFailureListener(e.message.toString())
@@ -1064,6 +1066,27 @@ class FirestoreClass {
         mFirestore.collection(ORDERS)
             .document(orderId)
             .update(IMAGE_RESI, imageUrl)
+    }
+
+    fun subscribeProduct(
+        namaCategory: String,
+        onSuccessListener: (product: List<Product>) -> Unit,
+        onFailureListener: (e: String) -> Unit
+    ) {
+        mFirestore.collection(PRODUCTS)
+            .whereEqualTo(CATEGORY_NAME, namaCategory)
+            .addSnapshotListener { value, error ->
+                error?.let {
+                    onFailureListener(it.message.toString())
+                }
+                value?.let { document ->
+                    logDebug("document: ${document.size()}")
+                    val product = document.documents.map {
+                        it.toObject<Product>() ?: Product()
+                    }
+                    onSuccessListener(product)
+                }
+            }
     }
 
 }

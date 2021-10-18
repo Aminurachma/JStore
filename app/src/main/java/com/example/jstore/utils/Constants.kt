@@ -61,6 +61,7 @@ object Constants {
     const val LOKASIPENGIRIMAN_ID = "lokasiPengirimanId"
     const val METODEPEMBAYARAN_ID = "metodePembayaranId"
     const val CATEGORY_ID = "categoryId"
+    const val CATEGORY_NAME = "category"
 
 
     const val REQUEST_CATEGORY_CODE = 6211

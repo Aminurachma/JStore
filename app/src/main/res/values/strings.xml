@@ -71,7 +71,7 @@
     <string name="empty_field">Please enter your %s</string>
     <string name="kurangalaamat">Please enter your address with the correct address</string>
     <string name="kurangnomor">Please enter your phone with the correct phone number </string>
-    <string name="kurangnama">Please enter your name more than 7 characters</string>
+    <string name="kurangnama">Please enter your name more than 2 characters</string>
     <string name="register_failed">Failed to register! %s</string>
     <string name="update_profile_failed">Failed to update your profile! %s</string>
     <string name="update_pass_failed">Failed to update your password! %s</string>
@@ -192,7 +192,12 @@
     <string name="upload_resi">Upload Resi</string>
     <string name="no_resi">Nomor Resi</string>
     <string name="bukti_bayar">Bukti Pembayaran</string>
-	<string name="total_products_count">%d produk</string>
-	<string name="belum_ada_pesanan">Belum ada pesanan!</string>
-	<string name="status_pengiriman">Status Pengiriman</string>
+    <string name="total_products_count">%d produk</string>
+    <string name="belum_ada_pesanan">Belum ada pesanan!</string>
+    <string name="belum_dibayar">Belum dibayar</string>
+    <string name="dikirim">Dikirim</string>
+    <string name="dikemas">Dikemas</string>
+    <string name="diterima">Diterima</string>
+    <string name="status_pengiriman">Status Pengiriman</string>
+    <string name="select_category">Select Category</string>
 </resources>
