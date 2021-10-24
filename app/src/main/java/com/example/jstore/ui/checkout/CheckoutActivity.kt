@@ -1,9 +1,11 @@
 package com.example.jstore.ui.checkout
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityCheckoutBinding
@@ -16,10 +18,12 @@ import com.example.jstore.ui.rekening.RekeningActivity
 import com.example.jstore.utils.*
 import com.example.jstore.utils.Constants.BELUM_DIBAYAR
 
-@Suppress("DEPRECATION")
 class CheckoutActivity : BaseActivity() {
+
     private var _binding: ActivityCheckoutBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
+    private val viewModel: CheckoutViewModel by viewModels()
+
     private lateinit var mUserDetails: User
 
     private var subTotal: Int = 0
@@ -39,7 +43,7 @@ class CheckoutActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityCheckoutBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
         getUserProfile()
         setupClickListener()
@@ -59,24 +63,25 @@ class CheckoutActivity : BaseActivity() {
     private fun calculateSubTotal() {
 
         subTotal += totalPrice + ongkir
-        binding.edtSubtotal.text = subTotal.formatPrice()
+        binding?.edtSubtotal?.text = subTotal.formatPrice()
     }
 
     private fun calculateTotal() {
         totalPrice = intent.getIntExtra("totalPrice",0)
-        binding.edtTotal.text = totalPrice.formatPrice()
+        binding?.edtTotal?.text = totalPrice.formatPrice()
 
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun getUserProfile() {
         progress.show()
         FirestoreClass().subscribeUserProfile(onSuccessListener = {
             progress.dismiss()
             mUserDetails = it
-            binding.edtName.setText(it.firstName +" "+it.lastName)
-            binding.edtAddress.setText(it.address)
-            binding.edtMobile.setText(it.mobile)
+            binding?.edtName?.setText("${it.firstName} ${it.lastName}")
+            binding?.edtAddress?.setText(it.address)
+            binding?.edtMobile?.setText(it.mobile)
         }, onFailureListener = {
             progress.dismiss()
             logError("getUserDetails: $it")
@@ -84,10 +89,10 @@ class CheckoutActivity : BaseActivity() {
     }
 
     private fun setupClickListener() {
-        binding.btnBack.setOnClickListener {
+        binding?.btnBack?.setOnClickListener {
             onBackPressed()
         }
-        binding.edtPayment.setOnClickListener {
+        binding?.edtPayment?.setOnClickListener {
             paymentMethodLauncher.launch(Intent(this, MetodePembayaranActivity::class.java).apply {
                 putExtra(MetodePembayaranActivity.EXTRA_TYPE, MetodePembayaranActivity.TYPE_CUSTOMER)
             })
@@ -99,25 +104,25 @@ class CheckoutActivity : BaseActivity() {
 //            })
 //        }
 
-        binding.edtDeliveryService.setOnClickListener {
+        binding?.edtDeliveryService?.setOnClickListener {
             deliveryServiceLauncher.launch(Intent(this, JasaPengirimanActivity::class.java).apply {
                 putExtra(JasaPengirimanActivity.EXTRA_TYPE, JasaPengirimanActivity.TYPE_CUSTOMER)
             })
         }
-        binding.edtRekening.setOnClickListener {
+        binding?.edtRekening?.setOnClickListener {
             bankAccountLauncher.launch(Intent(this, RekeningActivity::class.java).apply {
                 putExtra(RekeningActivity.EXTRA_TYPE, RekeningActivity.TYPE_CUSTOMER)
             })
         }
 
-        binding.btnCheckout.setOnClickListener {
+        binding?.btnCheckout?.setOnClickListener {
             validateData()
         }
 
     }
 
     private fun validateData() {
-        binding.apply {
+        binding?.apply {
             when {
                 edtDeliveryService.text.toString().trim().isEmpty() -> tilDelivery.error = getString(
                     R.string.empty_field, getString(
@@ -141,9 +146,9 @@ class CheckoutActivity : BaseActivity() {
             firstName = mUserDetails.firstName,
             products = cart.products.toMutableList(),
             address = mUserDetails.address,
-            jasaPengiriman = binding.edtDeliveryService.text.toString(),
-            metodePembayaran = binding.edtPayment.text.toString(),
-            namaRekening = binding.edtRekening.text.toString(),
+            jasaPengiriman = binding?.edtDeliveryService?.text.toString(),
+            metodePembayaran = binding?.edtPayment?.text.toString(),
+            namaRekening = binding?.edtRekening?.text.toString(),
             atasNamaRekening = atasNamaRekening,
             nomorRekening = nomorRekening,
             subTotalAmount = subTotal.toString(),
@@ -151,7 +156,7 @@ class CheckoutActivity : BaseActivity() {
             totalAmount = totalPrice.toString(),
             statusPembayaran = BELUM_DIBAYAR,
             statusPesanan = BELUM_DIBAYAR,
-            mobile = binding.edtMobile.text.toString(),
+            mobile = binding?.edtMobile?.text.toString(),
             orderDateTime = System.currentTimeMillis()
         )
         FirestoreClass().placeOrder(cart.cartId,order, onSuccessListener = { orderId ->
@@ -176,17 +181,17 @@ class CheckoutActivity : BaseActivity() {
 
 
     private fun checkPaymentMethod() {
-        if(!binding.edtPayment.text.toString().equals("Transfer")){
-            binding.linierrekening.toGone()
+        if(binding?.edtPayment?.text.toString() != "Transfer"){
+            binding?.linierrekening?.toGone()
         }else{
-            binding.linierrekening.toVisible()
+            binding?.linierrekening?.toVisible()
         }
     }
 
-    var paymentMethodLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var paymentMethodLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val paymentMethod = result.data?.getParcelableExtra(EXTRA_METODE_PEMBAYARAN) ?: MetodePembayaran()
-            binding.edtPayment.setText(paymentMethod.jenisMetode)
+            binding?.edtPayment?.setText(paymentMethod.jenisMetode)
             metodePembayaran = paymentMethod
         }
         checkPaymentMethod()
@@ -200,21 +205,21 @@ class CheckoutActivity : BaseActivity() {
 //        }
 //    }
 
-    var deliveryServiceLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var deliveryServiceLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val deliveryService = result.data?.getParcelableExtra(EXTRA_JASA) ?: JasaPengiriman()
-            binding.edtDeliveryService.setText(deliveryService.namaJasa)
-            binding.edtOngkir.setText(deliveryService.harga.toInt().formatPrice())
+            binding?.edtDeliveryService?.setText(deliveryService.namaJasa)
+            binding?.edtOngkir?.text = deliveryService.harga.toInt().formatPrice()
             ongkir  = deliveryService.harga.toInt()
             jasaPengiriman = deliveryService
             calculateSubTotal()
         }
     }
 
-    var bankAccountLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private var bankAccountLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val bankAccount = result.data?.getParcelableExtra(EXTRA_REKENING) ?: Rekening()
-            binding.edtRekening.setText(bankAccount.namaBank)
+            binding?.edtRekening?.setText(bankAccount.namaBank)
             atasNamaRekening = bankAccount.atasNama
             nomorRekening = bankAccount.nomorRekening
             rekening = bankAccount

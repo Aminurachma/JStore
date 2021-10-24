@@ -1,6 +1,7 @@
 package com.example.jstore.di.module
 
 import com.example.jstore.BuildConfig
+import com.example.jstore.data.source.RajaOngkirRepository
 import com.example.jstore.data.source.remote.RemoteDataSource
 import com.example.jstore.data.source.remote.RemoteRepository
 import com.example.jstore.data.source.remote.api.ApiService
@@ -42,8 +43,10 @@ class ApplicationModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory
-                .create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build()).asLenient())
+            .addConverterFactory(
+                MoshiConverterFactory
+                    .create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build()).asLenient()
+            )
             .baseUrl(BuildConfig.RAJA_ONGKIR_BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
@@ -55,12 +58,21 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideRemoteDataSource(apiService: ApiService): RemoteDataSource = RemoteRepository(apiService)
+    fun provideRemoteDataSource(apiService: ApiService): RemoteDataSource =
+        RemoteRepository(apiService)
 
     @Provides
     @Singleton
     fun provideIODispatcher(): CoroutineDispatcher {
         return Dispatchers.IO
     }
+
+    @Provides
+    @Singleton
+    fun provideRajaOngkirDataSource(
+        remoteDataSource: RemoteDataSource,
+        coroutineDispatcher: CoroutineDispatcher
+    ) = RajaOngkirRepository(remoteDataSource, coroutineDispatcher)
+
 
 }
