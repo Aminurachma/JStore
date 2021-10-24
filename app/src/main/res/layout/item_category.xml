@@ -4,27 +4,21 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	android:layout_margin="@dimen/_6sdp"
-	app:cardElevation="@dimen/_3sdp">
+	android:layout_margin="@dimen/_4sdp"
+	app:cardBackgroundColor="@color/colorPrimary"
+	app:cardCornerRadius="@dimen/_6sdp"
+	app:cardElevation="0dp">
 
-
-	<LinearLayout
+	<TextView
+		android:id="@+id/tv_category"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:background="@color/colorPrimaryDark">
-
-		<TextView
-			android:id="@+id/tv_category"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_margin="@dimen/_12sdp"
-			android:ellipsize="end"
-			android:fontFamily="@font/rubik_medium"
-			android:maxLines="2"
-			android:textColor="@color/white"
-			android:textSize="@dimen/_11ssp"
-			tools:text="Makanan" />
-	</LinearLayout>
+		android:layout_height="match_parent"
+		android:layout_margin="@dimen/_12sdp"
+		android:ellipsize="end"
+		android:fontFamily="@font/rubik_medium"
+		android:maxLines="1"
+		android:textColor="@color/white"
+		android:textSize="@dimen/_11ssp"
+		tools:text="Makanan" />
 
 </com.google.android.material.card.MaterialCardView>

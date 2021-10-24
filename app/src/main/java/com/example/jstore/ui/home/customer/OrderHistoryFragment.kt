@@ -20,6 +20,8 @@ import com.example.jstore.utils.Constants
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import timber.log.Timber
 
 class OrderHistoryFragment : BaseFragment() {
@@ -47,20 +49,17 @@ class OrderHistoryFragment : BaseFragment() {
     }
 
     private fun setUpTabs() {
-        val adapter = fragmentManager?.let { ViewPagerAdapter(it) }
-        adapter?.addFragment(BelumDibayarFragment(), Constants.BELUM_DIBAYAR)
-        adapter?.addFragment(DikemasFragment(), Constants.DIKEMAS)
-        adapter?.addFragment(DikirimFragment(), Constants.DIKIRIM)
-        adapter?.addFragment(DiterimaFragment(), Constants.DITERIMA)
-        binding?.viewPager?.adapter = adapter
-        binding?.tabs?.setupWithViewPager(binding?.viewPager)
-
-        binding?.tabs?.getTabAt(0)!!.setText(getString(R.string.belum_dibayar))
-        binding?.tabs?.getTabAt(1)!!.setText(getString(R.string.dikemas))
-        binding?.tabs?.getTabAt(2)!!.setText(getString(R.string.dikirim))
-        binding?.tabs?.getTabAt(3)!!.setText(getString(R.string.diterima))
-
-
+        binding?.apply {
+            viewPager.adapter = ViewPagerAdapter(this@OrderHistoryFragment)
+            TabLayoutMediator(tabs, viewPager) { tab, position ->
+                when(position) {
+                    0 -> tab.text = getString(R.string.belum_dibayar)
+                    1 -> tab.text = getString(R.string.dikemas)
+                    2 -> tab.text = getString(R.string.dikirim)
+                    3 -> tab.text = getString(R.string.diterima)
+                }
+            }.attach()
+        }
     }
 
 //    private fun setupUI() {

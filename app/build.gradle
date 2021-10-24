@@ -25,6 +25,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "default"
+    productFlavors {
+        development {
+            buildConfigField "String", 'RAJA_ONGKIR_BASE_URL', RAJA_ONGKIR_BASE_URL
+        }
+        production {
+            buildConfigField "String", 'RAJA_ONGKIR_BASE_URL', RAJA_ONGKIR_BASE_URL
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
