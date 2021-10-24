@@ -26,12 +26,35 @@
 
 		<com.google.android.material.tabs.TabLayout
 			android:id="@+id/tabs"
+			app:tabTextAppearance="@style/TabTextAppearance"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:background="@color/colorPrimary"
 			app:tabIndicatorColor="@color/white"
 			app:tabInlineLabel="true"
-			app:tabTextColor="@color/white" />
+			app:tabTextColor="@color/white" >
+
+			<com.google.android.material.tabs.TabItem
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/belum_dibayar" />
+
+			<com.google.android.material.tabs.TabItem
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/dikemas" />
+
+			<com.google.android.material.tabs.TabItem
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/dikirim" />
+
+			<com.google.android.material.tabs.TabItem
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/diterima" />
+
+		</com.google.android.material.tabs.TabLayout>
 
 	</com.google.android.material.appbar.AppBarLayout>
 

@@ -1,34 +1,19 @@
 package com.example.jstore.ui.home.customer
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import com.example.jstore.R
 import com.example.jstore.base.BaseFragment
 import com.example.jstore.databinding.FragmentOrderHistoryBinding
-import com.example.jstore.firestore.FirestoreClass
-import com.example.jstore.ui.home.customer.myorderhistory.MyOrderHistoryDetailsActivity
 import com.example.jstore.ui.home.customer.myorderhistory.adapter.ViewPagerAdapter
-import com.example.jstore.ui.home.customer.myorderhistory.fragment.BelumDibayarFragment
-import com.example.jstore.ui.home.customer.myorderhistory.fragment.DikemasFragment
-import com.example.jstore.ui.home.customer.myorderhistory.fragment.DikirimFragment
-import com.example.jstore.ui.home.customer.myorderhistory.fragment.DiterimaFragment
-import com.example.jstore.utils.Constants
-import com.example.jstore.utils.showToast
-import com.example.jstore.utils.toGone
-import com.example.jstore.utils.toVisible
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import timber.log.Timber
 
 class OrderHistoryFragment : BaseFragment() {
 
     private var _binding: FragmentOrderHistoryBinding? = null
     private val binding get() = _binding
-//    private lateinit var adapter: ViewPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
