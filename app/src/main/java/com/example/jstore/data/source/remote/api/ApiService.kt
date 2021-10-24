@@ -1,20 +1,27 @@
 package com.example.jstore.data.source.remote.api
 
+import com.example.jstore.data.source.remote.response.GetCityResponse
+import com.example.jstore.data.source.remote.response.GetCostResponse
 import com.example.jstore.data.source.remote.response.GetProvinceResponse
 import com.skydoves.sandwich.ApiResponse
-import retrofit2.http.GET
+import retrofit2.http.*
 
 interface ApiService {
 
     @GET("province")
-    suspend fun getProvince(): ApiResponse<GetProvinceResponse>
+    suspend fun getProvinces(): ApiResponse<GetProvinceResponse>
 
-//    @FormUrlEncoded
-//    @POST("users/login")
-//    suspend fun login(
-//        @Field("username") username: String,
-//        @Field("password") password: String
-//    ): ApiResponse<LoginResponse>
-//
+    @GET("city")
+    suspend fun getCities(@Query("province") provinceId: String): ApiResponse<GetCityResponse>
+
+    @FormUrlEncoded
+    @POST("cost")
+    suspend fun getCost(
+        @Field("origin") origin: String,
+        @Field("destination") destination: String,
+        @Field("weight") weight: Int = 1000,
+        @Field("courier") courier: String
+    ): ApiResponse<GetCostResponse>
+
 
 }
