@@ -71,5 +71,6 @@ object Constants {
     const val REQUEST_JASA_CODE = 6231
 
     const val KEY = "key"
+    const val DEFAULT_ERROR_MESSAGE = "Terjadi kesalahan!"
 
 }

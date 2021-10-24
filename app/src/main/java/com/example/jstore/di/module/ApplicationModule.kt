@@ -2,6 +2,7 @@ package com.example.jstore.di.module
 
 import com.example.jstore.BuildConfig
 import com.example.jstore.data.source.remote.RemoteDataSource
+import com.example.jstore.data.source.remote.RemoteRepository
 import com.example.jstore.data.source.remote.api.ApiService
 import com.example.jstore.data.source.remote.api.AuthInterceptor
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
@@ -54,7 +55,7 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideRemoteDataSource(apiService: ApiService): RemoteDataSource = RemoteDataSource(apiService)
+    fun provideRemoteDataSource(apiService: ApiService): RemoteDataSource = RemoteRepository(apiService)
 
     @Provides
     @Singleton

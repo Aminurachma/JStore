@@ -19,7 +19,7 @@ interface ApiService {
     suspend fun getCost(
         @Field("origin") origin: String,
         @Field("destination") destination: String,
-        @Field("weight") weight: Int = 1000,
+        @Field("weight") weight: Int,
         @Field("courier") courier: String
     ): ApiResponse<GetCostResponse>
 
