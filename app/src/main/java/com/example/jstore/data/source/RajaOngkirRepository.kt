@@ -1,6 +1,6 @@
 package com.example.jstore.data.source
 
-import com.example.jstore.data.source.remote.RemoteDataSource
+import com.example.jstore.data.source.remote.RemoteRepository
 import com.example.jstore.data.source.remote.response.GetCityResponse
 import com.example.jstore.data.source.remote.response.GetCostResponse
 import com.example.jstore.data.source.remote.response.GetProvinceResponse
@@ -16,12 +16,12 @@ import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 class RajaOngkirRepository @Inject constructor(
-    private val remoteDataSource: RemoteDataSource,
+    private val remoteRepository: RemoteRepository,
     private val ioDispatcher: CoroutineDispatcher
 ) : RajaOngkirDataSource {
 
     override fun getProvinces(): Flow<Resource<GetProvinceResponse>> = flow {
-        remoteDataSource.getProvinces().let {
+        remoteRepository.getProvinces().let {
             it.suspendOnSuccess {
                 emit(Resource.success(data))
             }.suspendOnError {
@@ -33,7 +33,7 @@ class RajaOngkirRepository @Inject constructor(
     }.onStart { emit(Resource.loading(null)) }.flowOn(ioDispatcher)
 
     override fun getCities(provinceId: String): Flow<Resource<GetCityResponse>> = flow {
-        remoteDataSource.getCities(provinceId).let {
+        remoteRepository.getCities(provinceId).let {
             it.suspendOnSuccess {
                 emit(Resource.success(data))
             }.suspendOnError {
@@ -50,7 +50,7 @@ class RajaOngkirRepository @Inject constructor(
         weight: Int,
         courier: String
     ): Flow<Resource<GetCostResponse>> = flow {
-        remoteDataSource.getCost(origin, destination, weight, courier).let {
+        remoteRepository.getCost(origin, destination, weight, courier).let {
             it.suspendOnSuccess {
                 emit(Resource.success(data))
             }.suspendOnError {

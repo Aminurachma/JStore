@@ -99,11 +99,11 @@ data class GetCostResponse(
                 @Json(name = "description")
                 val description: String? = null,
                 @Json(name = "cost")
-                val cost: List<Cost> = emptyList()
+                val cost: List<CostService> = emptyList()
             ) : Parcelable {
                 @JsonClass(generateAdapter = true)
                 @Parcelize
-                data class Cost(
+                data class CostService(
                     @Json(name = "value")
                     val value: Int? = null,
                     @Json(name = "etd")

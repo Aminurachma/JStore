@@ -2,7 +2,6 @@ package com.example.jstore.di.module
 
 import com.example.jstore.BuildConfig
 import com.example.jstore.data.source.RajaOngkirRepository
-import com.example.jstore.data.source.remote.RemoteDataSource
 import com.example.jstore.data.source.remote.RemoteRepository
 import com.example.jstore.data.source.remote.api.ApiService
 import com.example.jstore.data.source.remote.api.AuthInterceptor
@@ -58,21 +57,13 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideRemoteDataSource(apiService: ApiService): RemoteDataSource =
-        RemoteRepository(apiService)
+    fun provideRemoteRepository(apiService: ApiService) = RemoteRepository(apiService)
 
     @Provides
     @Singleton
     fun provideIODispatcher(): CoroutineDispatcher {
         return Dispatchers.IO
     }
-
-    @Provides
-    @Singleton
-    fun provideRajaOngkirDataSource(
-        remoteDataSource: RemoteDataSource,
-        coroutineDispatcher: CoroutineDispatcher
-    ) = RajaOngkirRepository(remoteDataSource, coroutineDispatcher)
 
 
 }

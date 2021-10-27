@@ -7,17 +7,17 @@ import com.example.jstore.data.source.remote.response.GetProvinceResponse
 import com.skydoves.sandwich.ApiResponse
 import javax.inject.Inject
 
-class RemoteRepository @Inject constructor(private val apiService: ApiService): RemoteDataSource {
+class RemoteRepository @Inject constructor(private val apiService: ApiService) {
 
-    override suspend fun getProvinces(): ApiResponse<GetProvinceResponse> {
+    suspend fun getProvinces(): ApiResponse<GetProvinceResponse> {
         return apiService.getProvinces()
     }
 
-    override suspend fun getCities(provinceId: String): ApiResponse<GetCityResponse> {
+    suspend fun getCities(provinceId: String): ApiResponse<GetCityResponse> {
         return apiService.getCities(provinceId)
     }
 
-    override suspend fun getCost(
+    suspend fun getCost(
         origin: String,
         destination: String,
         weight: Int,
