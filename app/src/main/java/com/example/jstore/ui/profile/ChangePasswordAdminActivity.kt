@@ -117,4 +117,9 @@ class ChangePasswordAdminActivity : BaseActivity() {
             showToast(getString(R.string.update_pass_failed, it.message.toString()))
         })
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

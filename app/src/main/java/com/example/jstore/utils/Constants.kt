@@ -19,6 +19,7 @@ object Constants {
 
 
 
+
     const val IMAGE = "image"
     const val IMAGE_BUKTIBAYAR = "imageBuktiBayar"
     const val IMAGE_RESI = "resiImage"

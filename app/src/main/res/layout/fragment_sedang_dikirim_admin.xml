@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light"
+    tools:context=".ui.orderhistory.fragment.SedangDikirimAdminFragment">
+
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:text="@string/sedang_dikirim"-->
+<!--        android:textColor="@color/gray4"-->
+<!--        android:fontFamily="@font/rubik_regular"-->
+<!--        android:textStyle="italic"-->
+<!--        android:textSize="@dimen/_22ssp"/>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_order_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_order_history" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/belum_ada_pesanan"
+            android:textColor="@color/gray4"
+            android:visibility="gone"
+            android:fontFamily="@font/rubik_regular"
+            android:textStyle="italic"
+            android:textSize="@dimen/_12ssp"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

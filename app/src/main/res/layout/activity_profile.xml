@@ -97,7 +97,7 @@
 					android:layout_height="wrap_content"
 					android:fontFamily="@font/rubik_light"
 					android:hint="@string/enter_your_name_here"
-					android:inputType="textCapWords"
+					android:inputType="textPersonName"
 					android:textColor="@color/dark"
 					android:textColorHint="@color/gray3"
 					android:textSize="@dimen/_12ssp"
@@ -134,7 +134,7 @@
 					android:layout_height="wrap_content"
 					android:fontFamily="@font/rubik_light"
 					android:hint="@string/enter_your_name_here"
-					android:inputType="textCapWords"
+					android:inputType="textPersonName"
 					android:textColor="@color/dark"
 					android:textColorHint="@color/gray3"
 					android:textSize="@dimen/_12ssp"
@@ -253,17 +253,30 @@
 			</com.google.android.material.textfield.TextInputLayout>
 
 			<com.google.android.material.button.MaterialButton
-				android:id="@+id/btn_update_profile"
+				android:id="@+id/btn_change_password"
 				style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/_45sdp"
 				android:layout_marginTop="@dimen/_32sdp"
 				android:fontFamily="@font/rubik_medium"
-				android:text="@string/update"
+				android:text="@string/change_password"
 				android:textAllCaps="false"
 				android:textSize="@dimen/_12ssp"
 				app:cornerRadius="@dimen/_8sdp"
 				app:layout_constraintTop_toBottomOf="@+id/til_address" />
+
+			<com.google.android.material.button.MaterialButton
+				android:id="@+id/btn_update_profile"
+				style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/_45sdp"
+				android:layout_marginTop="@dimen/_10sdp"
+				android:fontFamily="@font/rubik_medium"
+				android:text="@string/update"
+				android:textAllCaps="false"
+				android:textSize="@dimen/_12ssp"
+				app:cornerRadius="@dimen/_8sdp"
+				app:layout_constraintTop_toBottomOf="@+id/btn_change_password" />
 
 			<com.google.android.material.button.MaterialButton
 				android:id="@+id/btn_logout"

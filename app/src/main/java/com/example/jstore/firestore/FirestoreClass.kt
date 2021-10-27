@@ -1,12 +1,10 @@
 package com.example.jstore.firestore
 
 import android.net.Uri
-import android.util.Log
 import androidx.core.net.toUri
 import com.example.jstore.data.source.local.Prefs
 import com.example.jstore.data.source.local.Prefs.productId
 import com.example.jstore.models.*
-import com.example.jstore.utils.Constants
 import com.example.jstore.utils.Constants.ADMIN
 import com.example.jstore.utils.Constants.CARTS
 import com.example.jstore.utils.Constants.CART_ID
@@ -42,6 +40,7 @@ import com.example.jstore.utils.Constants.USERS
 import com.example.jstore.utils.Constants.USER_ID
 import com.example.jstore.utils.logDebug
 import com.example.jstore.utils.logError
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -49,7 +48,6 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
-import kotlin.collections.HashMap
 
 class FirestoreClass {
 
@@ -219,6 +217,23 @@ class FirestoreClass {
                     }
                 }
             }
+    }
+
+    fun changePassword(email: String,
+        password: String,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if(currentUser != null && email != null){
+            val credential = EmailAuthProvider.getCredential(email, password)
+            currentUser?.reauthenticate(credential)?.addOnSuccessListener {
+                onSuccessListener()
+            }
+                .addOnFailureListener { e ->
+                    onFailureListener(e)
+                }
+        }
     }
 
     fun getAdminDetails(
@@ -925,10 +940,12 @@ class FirestoreClass {
     }
 
     fun getOrderHistoryList(
+        status: String,
         onSuccessListener: (order: List<Order>) -> Unit,
         onFailureListener: (e: Exception) -> Unit
     ) {
         mFirestore.collection(ORDERS)
+            .whereEqualTo(PESANAN_STATUS, status)
             .addSnapshotListener { value, error ->
                 value?.let { document ->
                     logDebug("getDashboardItemsList: ${document.documents}")
@@ -944,6 +961,30 @@ class FirestoreClass {
                 }
             }
     }
+
+    fun getOrderHistoryListPayment(
+        status: String,
+        onSuccessListener: (order: List<Order>) -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(ORDERS)
+            .whereEqualTo(PAYMENT_STATUS, status)
+            .addSnapshotListener { value, error ->
+                value?.let { document ->
+                    logDebug("getDashboardItemsList: ${document.documents}")
+                    val orderHistoryList = document.documents.map {
+                        it.toObject(Order::class.java) ?: Order()
+                    }
+                    onSuccessListener(orderHistoryList)
+                }
+
+                error?.let {
+                    logError("getDashboardItemsList: ${it.message}")
+                    onFailureListener(Exception(it))
+                }
+            }
+    }
+
 
     fun subscribeToOrder(
         onSuccessListener: (order:Order) -> Unit,

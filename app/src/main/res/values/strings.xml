@@ -195,8 +195,10 @@
     <string name="total_products_count">%d produk</string>
     <string name="belum_ada_pesanan">Belum ada pesanan!</string>
     <string name="belum_dibayar">Belum dibayar</string>
+    <string name="menunggu_kofirmasi">Menunggu Konfirmasi</string>
     <string name="dikirim">Dikirim</string>
     <string name="dikemas">Dikemas</string>
+    <string name="perlu_dikirim">Perlu Dikirim</string>
     <string name="diterima">Diterima</string>
     <string name="status_pengiriman">Status Pengiriman</string>
     <string name="select_category">Select Category</string>

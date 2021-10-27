@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jstore">
-        <activity android:name=".ui.orderhistory.OrderHistoryDetailsActivity"></activity>
+        <activity android:name=".ui.profile.ChangePasswordActivity"></activity>
+        <activity android:name=".ui.orderhistory.OrderHistoryDetailsActivity" />
         <activity android:name=".ui.home.customer.myorderhistory.MyOrderHistoryDetailsActivity" />
         <activity android:name=".ui.profile.ChangePasswordAdminActivity" />
         <activity android:name=".ui.category.AddCategoryActivity" />

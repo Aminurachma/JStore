@@ -72,6 +72,10 @@ class ProfileActivity : BaseActivity() {
             onBackPressed()
         }
 
+        binding.btnChangePassword.setOnClickListener {
+            startActivity(Intent(this, ChangePasswordActivity::class.java))
+            finish()
+        }
         binding.btnUpdateProfile.setOnClickListener {
             validateData()
         }

@@ -42,16 +42,16 @@ class RegisterActivity : BaseActivity() {
                     R.string.empty_field, getString(
                         R.string.fullname
                     ))
-                edtLastName.text.toString().trim().isEmpty() -> tilLastName.error = getString(
-                    R.string.empty_field, getString(
-                        R.string.fullname
-                    ))
+//                edtLastName.text.toString().trim().isEmpty() -> tilLastName.error = getString(
+//                    R.string.empty_field, getString(
+//                        R.string.fullname
+//                    ))
                 edtFirstName.text.toString().trim().length<3 -> tilFirstName.error = getString(
                     R.string.kurangnama
                     )
-                edtLastName.text.toString().trim().length<3 -> tilLastName.error = getString(
-                    R.string.kurangnama
-                )
+//                edtLastName.text.toString().trim().length<3 -> tilLastName.error = getString(
+//                    R.string.kurangnama
+//                )
                 edtAddress.text.toString().trim().isEmpty() -> tilAddress.error = getString(
                     R.string.empty_field, getString(
                         R.string.address

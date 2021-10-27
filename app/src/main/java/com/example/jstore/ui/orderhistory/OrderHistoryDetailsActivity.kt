@@ -26,7 +26,7 @@ class OrderHistoryDetailsActivity : BaseActivity() {
     private val binding get() = _binding!!
     private lateinit var order: Order
     private lateinit var adapter: OrderHistoryDetailsAdapter
-    private var orderId: String = ""
+    private var orderIdSelected: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,13 +90,13 @@ class OrderHistoryDetailsActivity : BaseActivity() {
 
     private fun firebaseUpdateResi() {
         val intent = Intent(this, UpdateResiActivity::class.java)
-        intent.putExtra("orderId", binding.tvOrderId.text.toString())
+        intent.putExtra("orderId", orderIdSelected)
         startActivity(intent)
     }
 
     private fun firebaseUpdatePayment() {
         progress.show()
-        FirestoreClass().updatePaymentStatusAdmin(orderId = orderId,
+        FirestoreClass().updatePaymentStatusAdmin(orderId = orderIdSelected,
             onSuccessListener = { progress.dismiss()
                 showToast(getString(R.string.updatepayment_success))
                 finish()
@@ -111,8 +111,8 @@ class OrderHistoryDetailsActivity : BaseActivity() {
             .placeholder(R.drawable.product_placeholder)
             .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
             .into(binding.imgBuktiBayar)
+        orderIdSelected = order.orderId
         binding.tvOrderId.text = "Order:#${order.orderId}"
-        orderId = order.orderId
         binding.tvCustomerAddress.text = order.address
         binding.tvCustomerName.text = order.firstName
         binding.tvCustomerMobile.text = order.mobile
