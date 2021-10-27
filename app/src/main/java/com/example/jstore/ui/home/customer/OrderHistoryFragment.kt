@@ -1,32 +1,19 @@
 package com.example.jstore.ui.home.customer
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import com.example.jstore.R
 import com.example.jstore.base.BaseFragment
 import com.example.jstore.databinding.FragmentOrderHistoryBinding
-import com.example.jstore.firestore.FirestoreClass
-import com.example.jstore.ui.home.customer.myorderhistory.MyOrderHistoryDetailsActivity
 import com.example.jstore.ui.home.customer.myorderhistory.adapter.ViewPagerAdapter
-import com.example.jstore.ui.home.customer.myorderhistory.fragment.BelumDibayarFragment
-import com.example.jstore.ui.home.customer.myorderhistory.fragment.DikemasFragment
-import com.example.jstore.ui.home.customer.myorderhistory.fragment.DikirimFragment
-import com.example.jstore.ui.home.customer.myorderhistory.fragment.DiterimaFragment
-import com.example.jstore.utils.Constants
-import com.example.jstore.utils.showToast
-import com.example.jstore.utils.toGone
-import com.example.jstore.utils.toVisible
-import timber.log.Timber
+import com.google.android.material.tabs.TabLayoutMediator
 
 class OrderHistoryFragment : BaseFragment() {
 
     private var _binding: FragmentOrderHistoryBinding? = null
     private val binding get() = _binding
-//    private lateinit var adapter: ViewPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,20 +34,17 @@ class OrderHistoryFragment : BaseFragment() {
     }
 
     private fun setUpTabs() {
-        val adapter = fragmentManager?.let { ViewPagerAdapter(it) }
-        adapter?.addFragment(BelumDibayarFragment(), Constants.BELUM_DIBAYAR)
-        adapter?.addFragment(DikemasFragment(), Constants.DIKEMAS)
-        adapter?.addFragment(DikirimFragment(), Constants.DIKIRIM)
-        adapter?.addFragment(DiterimaFragment(), Constants.DITERIMA)
-        binding?.viewPager?.adapter = adapter
-        binding?.tabs?.setupWithViewPager(binding?.viewPager)
-
-        binding?.tabs?.getTabAt(0)!!.setText(getString(R.string.belum_dibayar))
-        binding?.tabs?.getTabAt(1)!!.setText(getString(R.string.dikemas))
-        binding?.tabs?.getTabAt(2)!!.setText(getString(R.string.dikirim))
-        binding?.tabs?.getTabAt(3)!!.setText(getString(R.string.diterima))
-
-
+        binding?.apply {
+            viewPager.adapter = ViewPagerAdapter(this@OrderHistoryFragment)
+            TabLayoutMediator(tabs, viewPager) { tab, position ->
+                when(position) {
+                    0 -> tab.text = getString(R.string.belum_dibayar)
+                    1 -> tab.text = getString(R.string.dikemas)
+                    2 -> tab.text = getString(R.string.dikirim)
+                    3 -> tab.text = getString(R.string.diterima)
+                }
+            }.attach()
+        }
     }
 
 //    private fun setupUI() {
