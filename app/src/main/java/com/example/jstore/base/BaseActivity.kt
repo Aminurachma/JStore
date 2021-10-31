@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.jstore.utils.AppProgressDialog
+import dagger.hilt.android.AndroidEntryPoint
 
-open class BaseActivity : AppCompatActivity() {
+@AndroidEntryPoint
+abstract class BaseActivity : AppCompatActivity() {
 
     lateinit var progress : AppProgressDialog
 

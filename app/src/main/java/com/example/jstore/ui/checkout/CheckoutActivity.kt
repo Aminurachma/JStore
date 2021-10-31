@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
+import com.example.jstore.data.source.remote.response.GetProvinceResponse
 import com.example.jstore.databinding.ActivityCheckoutBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.*
@@ -39,6 +40,9 @@ class CheckoutActivity : BaseActivity() {
     private lateinit var rekening: Rekening
 //    private lateinit var lokasiPengiriman: LokasiPengiriman
     private lateinit var jasaPengiriman: JasaPengiriman
+
+    private var provinceId: String? = null
+    private var cityId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,6 +121,10 @@ class CheckoutActivity : BaseActivity() {
 
         binding?.btnCheckout?.setOnClickListener {
             validateData()
+        }
+
+        binding?.edtProvince?.setOnClickListener {
+            provinceLauncher.launch(Intent(this, SelectProvinceActivity::class.java))
         }
 
     }
@@ -226,6 +234,15 @@ class CheckoutActivity : BaseActivity() {
         }
     }
 
+    private var provinceLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val province = data?.getParcelableExtra<GetProvinceResponse.RajaOngkir.Result>(EXTRA_PROVINCE)
+            provinceId = province?.provinceId
+            binding?.edtProvince?.setText(province?.province ?: "")
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -237,5 +254,9 @@ class CheckoutActivity : BaseActivity() {
         const val EXTRA_REKENING = "extra_rekening"
         const val EXTRA_LOKASI = "extra_lokasi"
         const val EXTRA_JASA = "extra_jasa"
+
+        const val EXTRA_PROVINCE = "extra_province"
+        const val EXTRA_CITY = "extra_city"
+        const val EXTRA_ONGKIR = "extra_ongkir"
     }
 }
