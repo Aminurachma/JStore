@@ -10,10 +10,14 @@ import com.example.jstore.databinding.ActivityMyOrderHistoryDetailsBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Order
 import com.example.jstore.ui.home.customer.HomeCustomerActivity
+import com.example.jstore.ui.invoice.InvoiceActivity
 import com.example.jstore.utils.Constants
+import com.example.jstore.utils.Constants.BELUM_DIBAYAR
 import com.example.jstore.utils.Constants.DIKIRIM
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
+import com.example.jstore.utils.toVisible
+import timber.log.Timber
 
 class MyOrderHistoryDetailsActivity : BaseActivity() {
 
@@ -38,6 +42,7 @@ class MyOrderHistoryDetailsActivity : BaseActivity() {
         binding.btnBack.setOnClickListener {
             onBackPressed()
         }
+
     }
 
 
@@ -62,6 +67,17 @@ class MyOrderHistoryDetailsActivity : BaseActivity() {
             tvCustomerMobile.text = order.mobile
             tvPaymentMethod.text = order.metodePembayaran
             tvPaymentStatus.text = order.statusPembayaran
+            if (tvPaymentStatus.text == BELUM_DIBAYAR) {
+                btnPaymentPackage.toVisible()
+                btnPaymentPackage.isEnabled
+                Timber.e(" orderid "+ orderId)
+                btnPaymentPackage.setOnClickListener {
+                    val intent = Intent(this@MyOrderHistoryDetailsActivity, InvoiceActivity::class.java)
+                    intent.putExtra("orderId", orderId)
+                    startActivity(intent)
+                    finish()
+                }
+            }
             btnAcceptPackage.isEnabled = order.statusPesanan == DIKIRIM
 
             binding.btnAcceptPackage.setOnClickListener {
@@ -75,12 +91,12 @@ class MyOrderHistoryDetailsActivity : BaseActivity() {
     private fun firebaseUpdateStatusTerimaPesanan() {
         progress.show()
         FirestoreClass().updatePaymentStatusUser(orderId = orderId,
-            onSuccessListener = { progress.dismiss()
+            onSuccessListener = {
+                progress.dismiss()
                 showToast(getString(R.string.updatepayment_success))
                 startActivity(Intent(this, HomeCustomerActivity::class.java))
                 finish()
-            }
-            , onFailureListener = { progress.dismiss() })
+            }, onFailureListener = { progress.dismiss() })
     }
 
     override fun onDestroy() {

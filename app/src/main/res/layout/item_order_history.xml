@@ -177,9 +177,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/order_summary_layout"/>
 
-        <com.google.android.material.button.MaterialButton
+        <TextView
             android:id="@+id/btn"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"

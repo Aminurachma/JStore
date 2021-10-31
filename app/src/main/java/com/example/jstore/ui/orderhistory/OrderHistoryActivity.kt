@@ -4,12 +4,14 @@ import android.os.Bundle
 import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityOrderHistoryBinding
+import com.example.jstore.ui.home.customer.myorderhistory.adapter.ViewPagerAdapter
 import com.example.jstore.ui.orderhistory.adapter.ViewPagerAdminAdapter
 import com.example.jstore.ui.orderhistory.fragment.MenungguKonfirmasiAdminFragment
 import com.example.jstore.ui.orderhistory.fragment.PerluDikirimAdminFragment
 import com.example.jstore.ui.orderhistory.fragment.SedangDikirimAdminFragment
 import com.example.jstore.ui.orderhistory.fragment.SelesaiAdminFragment
 import com.example.jstore.utils.Constants
+import com.google.android.material.tabs.TabLayoutMediator
 
 class OrderHistoryActivity : BaseActivity() {
     private var _binding: ActivityOrderHistoryBinding? = null
@@ -28,23 +30,21 @@ class OrderHistoryActivity : BaseActivity() {
 //        setupClickListeners()
 
 
-
     }
 
     private fun setUpTabs() {
-
-        val adapter = ViewPagerAdminAdapter(supportFragmentManager)
-        adapter.addFragment(MenungguKonfirmasiAdminFragment(), Constants.MENUNGGU_KONFIRMASI_ADMIN)
-        adapter.addFragment(PerluDikirimAdminFragment(), Constants.DIKEMAS)
-        adapter.addFragment(SedangDikirimAdminFragment(), Constants.DIKIRIM)
-        adapter.addFragment(SelesaiAdminFragment(), Constants.DITERIMA)
-        binding.viewPager.adapter = adapter
-        binding.tabs.setupWithViewPager(binding.viewPager)
-
-        binding.tabs.getTabAt(0)!!.text = getString(R.string.menunggu_kofirmasi)
-        binding.tabs.getTabAt(1)!!.text = getString(R.string.perlu_dikirim)
-        binding.tabs.getTabAt(2)!!.text = getString(R.string.sedang_dikirim)
-        binding.tabs.getTabAt(3)!!.text = getString(R.string.pesanan_selesai)
+        binding.apply {
+            viewPager.adapter =
+                ViewPagerAdminAdapter(this@OrderHistoryActivity)
+            TabLayoutMediator(tabs, viewPager) { tab, position ->
+                when (position) {
+                    0 -> tab.text = getString(R.string.menunggu_kofirmasi)
+                    1 -> tab.text = getString(R.string.perlu_dikirim)
+                    2 -> tab.text = getString(R.string.sedang_dikirim)
+                    3 -> tab.text = getString(R.string.pesanan_selesai)
+                }
+            }.attach()
+        }
     }
 //
 //    private fun setupClickListeners() {

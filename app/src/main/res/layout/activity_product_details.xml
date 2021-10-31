@@ -200,6 +200,7 @@
 							android:layout_marginTop="@dimen/_12sdp"
 							android:textColor="@color/dark"
 							app:layout_constraintEnd_toEndOf="@+id/tv_detail_product_label"
+							app:layout_constraintHorizontal_bias="0.0"
 							app:layout_constraintStart_toStartOf="@+id/tv_detail_product_label"
 							app:layout_constraintTop_toBottomOf="@+id/include2"
 							tools:text="@tools:sample/lorem/random" />
@@ -255,7 +256,7 @@
 					android:layout_height="match_parent"
 					android:background="@color/colorPrimary" />
 
-				<TextView
+				<EditText
 					android:id="@+id/tv_quantity"
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
@@ -263,6 +264,7 @@
 					android:background="@color/white"
 					android:fontFamily="@font/rubik_medium"
 					android:gravity="center"
+					android:inputType="number"
 					android:text="@string/_1"
 					android:textColor="@color/dark"
 					android:textSize="@dimen/_11ssp" />
