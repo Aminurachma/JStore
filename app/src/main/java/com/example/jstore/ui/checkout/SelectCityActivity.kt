@@ -3,60 +3,64 @@ package com.example.jstore.ui.checkout
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
-import com.example.jstore.databinding.ActivitySelectProvinceBinding
-import com.example.jstore.ui.checkout.CheckoutActivity.Companion.EXTRA_PROVINCE
-import com.example.jstore.ui.checkout.adapter.ProvinceAdapter
+import com.example.jstore.databinding.ActivitySelectCityBinding
+import com.example.jstore.ui.checkout.adapter.CityAdapter
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible
 import com.example.jstore.vo.Status
 
-class SelectProvinceActivity : BaseActivity() {
+class SelectCityActivity : BaseActivity() {
 
-    private var _binding: ActivitySelectProvinceBinding? = null
+    private var _binding: ActivitySelectCityBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: ProvinceAdapter
+    private lateinit var adapter: CityAdapter
     private val viewModel: CheckoutViewModel by viewModels()
+
+    private lateinit var provinceId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivitySelectProvinceBinding.inflate(layoutInflater)
+        _binding = ActivitySelectCityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupAdapter()
         setupUI()
-        getAllProvinces()
+        setOnClickListeners()
+        getAllCities()
 
     }
 
     private fun setupAdapter() {
-        adapter = ProvinceAdapter {
-            setResult(RESULT_OK, Intent().putExtra(EXTRA_PROVINCE, it))
+        adapter = CityAdapter {
+            setResult(RESULT_OK, Intent().putExtra(CheckoutActivity.EXTRA_CITY, it))
             finish()
         }
     }
 
     private fun setupUI() {
+        provinceId = intent.getStringExtra(EXTRA_PROVINCE_ID) ?: ""
+        binding.rvCity.adapter = adapter
+    }
+
+    private fun setOnClickListeners() {
         binding.btnBack.setOnClickListener {
             onBackPressed()
         }
-
-        binding.rvProvince.adapter = adapter
     }
 
-    private fun getAllProvinces() {
-        viewModel.getProvince().observe(this) {
+    private fun getAllCities() {
+        viewModel.getCities(provinceId).observe(this) {
             when(it.status) {
                 Status.SUCCESS -> {
                     progress.dismiss()
-                    if (it.data?.rajaongkir?.results?.isNotEmpty() == true) {
+                    if (it.data?.rajaOngkir?.results?.isNotEmpty() == true) {
                         binding.noData.toGone()
-                        binding.rvProvince.toVisible()
-                        adapter.submitList(it.data.rajaongkir.results)
+                        binding.rvCity.toVisible()
+                        adapter.submitList(it.data.rajaOngkir.results)
                     } else {
-                        binding.rvProvince.toGone()
+                        binding.rvCity.toGone()
                         binding.noData.toVisible()
                     }
                 }
@@ -74,6 +78,10 @@ class SelectProvinceActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+        const val EXTRA_PROVINCE_ID = "extra_province_id"
     }
 
 }

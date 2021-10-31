@@ -38,6 +38,7 @@
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/activity_product_details.xml" value="0.14666666666666667" />
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/activity_profile.xml" value="0.13333333333333333" />
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/activity_register.xml" value="0.13333333333333333" />
+        <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/activity_select_city.xml" value="0.12421875" />
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/activity_select_province.xml" value="0.134765625" />
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/activity_setting.xml" value="0.14666666666666667" />
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/activity_splashscreen.xml" value="0.14666666666666667" />
@@ -49,6 +50,7 @@
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/fragment_perlu_dikirim_admin.xml" value="0.1125" />
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/item_cart.xml" value="0.16666666666666666" />
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/item_category.xml" value="0.134765625" />
+        <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/item_city.xml" value="0.134765625" />
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/item_customer.xml" value="0.134765625" />
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/item_jasa_pengiriman.xml" value="0.134765625" />
         <entry key="..\:/AndroidStudioProjects/JStore/app/src/main/res/layout/item_lokasi_pengiriman.xml" value="0.134765625" />

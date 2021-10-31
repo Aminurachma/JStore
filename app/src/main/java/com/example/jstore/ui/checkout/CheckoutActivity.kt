@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
+import com.example.jstore.data.source.remote.response.GetCityResponse
 import com.example.jstore.data.source.remote.response.GetProvinceResponse
 import com.example.jstore.databinding.ActivityCheckoutBinding
 import com.example.jstore.firestore.FirestoreClass
@@ -127,6 +128,12 @@ class CheckoutActivity : BaseActivity() {
             provinceLauncher.launch(Intent(this, SelectProvinceActivity::class.java))
         }
 
+        binding?.edtCity?.setOnClickListener {
+            cityLauncher.launch(Intent(this, SelectCityActivity::class.java).apply {
+                putExtra(SelectCityActivity.EXTRA_PROVINCE_ID, provinceId)
+            })
+        }
+
     }
 
     private fun validateData() {
@@ -142,6 +149,8 @@ class CheckoutActivity : BaseActivity() {
                         R.string.payment
                     )
                 )
+                provinceId.isNullOrEmpty() -> tilProvince.error = getString(R.string.select_x_first, getString(R.string.province))
+                cityId.isNullOrEmpty() -> tilCity.error = getString(R.string.select_x_first, getString(R.string.province))
                 else -> firebaseCheckout()
             }
         }
@@ -242,6 +251,16 @@ class CheckoutActivity : BaseActivity() {
             binding?.edtProvince?.setText(province?.province ?: "")
         }
     }
+
+    private var cityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val city = data?.getParcelableExtra<GetCityResponse.RajaOngkir.Result>(EXTRA_CITY)
+            cityId = city?.cityId
+            binding?.edtCity?.setText(city?.cityName ?: "")
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

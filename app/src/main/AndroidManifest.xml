@@ -13,6 +13,9 @@
 		android:supportsRtl="true"
 		android:theme="@style/Theme.Jstore">
 		<activity
+			android:name=".ui.checkout.SelectCityActivity"
+			android:exported="false" />
+		<activity
 			android:name=".ui.checkout.SelectProvinceActivity"
 			android:exported="false" />
 		<activity android:name=".ui.profile.ChangePasswordActivity" />
