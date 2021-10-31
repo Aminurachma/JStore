@@ -117,14 +117,7 @@ class ProfileActivity : BaseActivity() {
                     R.string.empty_field, getString(
                         R.string.firstName
                     ))
-                edtLastName.text.toString().trim().isEmpty() -> lastNameLabel.error = getString(
-                    R.string.empty_field, getString(
-                        R.string.lastName
-                    ))
                 edtFirstName.text.toString().trim().length<2 -> tilFirstName.error = getString(
-                    R.string.kurangnama
-                )
-                edtLastName.text.toString().trim().length<2 -> tilLastName.error = getString(
                     R.string.kurangnama
                 )
                 edtAddress.text.toString().trim().length<10 -> tilAddress.error = getString(

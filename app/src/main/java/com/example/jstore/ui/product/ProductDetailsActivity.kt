@@ -81,14 +81,13 @@ class ProductDetailsActivity : AppCompatActivity() {
 
         binding.btnDecrement.setOnClickListener {
             if (binding.tvQuantity.text.toString().toInt() > 1) {
-                binding.tvQuantity.text = (binding.tvQuantity.text.toString().toInt() - 1).toString()
+                binding.tvQuantity.setText((binding.tvQuantity.text.toString().toInt() - 1).toString())
             }
         }
 
         binding.btnIncrement.setOnClickListener {
             if (binding.tvQuantity.text.toString().toInt() < product.stockQuantity) {
-                binding.tvQuantity.text =
-                    (binding.tvQuantity.text.toString().toInt() + 1).toString()
+                binding.tvQuantity.setText((binding.tvQuantity.text.toString().toInt() + 1).toString())
             }
         }
     }

@@ -1,8 +1,6 @@
 package com.example.jstore.ui.home.customer.myorderhistory.adapter
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.jstore.ui.home.customer.myorderhistory.fragment.BelumDibayarFragment
 import com.example.jstore.ui.home.customer.myorderhistory.fragment.DikemasFragment
@@ -16,7 +14,7 @@ class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         return when (position) {
             0 -> BelumDibayarFragment()
             1 -> DikemasFragment()
-            2 -> DikemasFragment()
+            2 -> DikirimFragment()
             3 -> DiterimaFragment()
             else -> BelumDibayarFragment()
         }

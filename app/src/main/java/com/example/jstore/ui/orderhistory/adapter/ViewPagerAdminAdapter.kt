@@ -1,30 +1,30 @@
 package com.example.jstore.ui.orderhistory.adapter
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.jstore.ui.orderhistory.fragment.MenungguKonfirmasiAdminFragment
+import com.example.jstore.ui.orderhistory.fragment.PerluDikirimAdminFragment
+import com.example.jstore.ui.orderhistory.fragment.SedangDikirimAdminFragment
+import com.example.jstore.ui.orderhistory.fragment.SelesaiAdminFragment
 
-@Suppress("DEPRECATION")
-class ViewPagerAdminAdapter(supportFragmentManager: FragmentManager):
-    FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class ViewPagerAdminAdapter(activity: AppCompatActivity) :
+    FragmentStateAdapter(activity) {
+    override fun getItemCount(): Int = 4
 
-    private val mFragmentList = ArrayList<Fragment>()
-    private val mFragmentTitleList = ArrayList<String>()
-
-    override fun getCount(): Int {
-        return mFragmentTitleList.size
+    override fun createFragment(position: Int): Fragment {
+        return when (position) {
+            0 -> MenungguKonfirmasiAdminFragment()
+            1 -> PerluDikirimAdminFragment()
+            2 -> SedangDikirimAdminFragment()
+            3 -> SelesaiAdminFragment()
+            else -> MenungguKonfirmasiAdminFragment()
+        }
     }
 
-    override fun getItem(position: Int): Fragment {
-        return mFragmentList[position]
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return mFragmentTitleList[position]
-    }
-
-    fun addFragment(fragment: Fragment, title: String){
-        mFragmentList.add(fragment)
-        mFragmentTitleList.add(title)
-    }
 }
+
+
+
