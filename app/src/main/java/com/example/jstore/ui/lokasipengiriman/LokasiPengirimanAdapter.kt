@@ -56,7 +56,7 @@ class LokasiPengirimanAdapter(private val onClickListener: (lokasiPengiriman: Lo
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<LokasiPengiriman>() {
             override fun areItemsTheSame(oldItem: LokasiPengiriman, newItem: LokasiPengiriman): Boolean {
-                return oldItem.lokasiId == newItem.lokasiId
+                return oldItem.lokasiPengirimanId == newItem.lokasiPengirimanId
             }
 
             override fun areContentsTheSame(oldItem: LokasiPengiriman, newItem: LokasiPengiriman): Boolean {
