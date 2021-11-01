@@ -110,8 +110,9 @@ class CheckoutActivity : BaseActivity() {
 //        }
 
         binding?.edtDeliveryService?.setOnClickListener {
-            deliveryServiceLauncher.launch(Intent(this, JasaPengirimanActivity::class.java).apply {
-                putExtra(JasaPengirimanActivity.EXTRA_TYPE, JasaPengirimanActivity.TYPE_CUSTOMER)
+            deliveryServiceLauncher.launch(Intent(this, SelectCourierActivity::class.java).apply {
+                putExtra(SelectCourierActivity.EXTRA_ORIGIN, cityId)
+                putExtra(SelectCourierActivity.EXTRA_DESTINATION, "32")
             })
         }
         binding?.edtRekening?.setOnClickListener {
@@ -249,6 +250,8 @@ class CheckoutActivity : BaseActivity() {
             val province = data?.getParcelableExtra<GetProvinceResponse.RajaOngkir.Result>(EXTRA_PROVINCE)
             provinceId = province?.provinceId
             binding?.edtProvince?.setText(province?.province ?: "")
+            cityId = null
+            binding?.edtCity?.setText("")
         }
     }
 

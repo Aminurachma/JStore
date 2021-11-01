@@ -105,7 +105,7 @@ data class GetCostResponse(
                 @Parcelize
                 data class CostService(
                     @Json(name = "value")
-                    val value: Int? = null,
+                    val value: Long? = null,
                     @Json(name = "etd")
                     val etd: String? = null,
                     @Json(name = "note")
