@@ -19,6 +19,7 @@ import com.example.jstore.ui.metodepembayaran.MetodePembayaranActivity
 import com.example.jstore.ui.rekening.RekeningActivity
 import com.example.jstore.utils.*
 import com.example.jstore.utils.Constants.BELUM_DIBAYAR
+import timber.log.Timber
 
 class CheckoutActivity : BaseActivity() {
 
@@ -45,17 +46,30 @@ class CheckoutActivity : BaseActivity() {
 
     private var provinceId: String? = null
     private var cityId: String? = null
+    private var origin: String = "256" // default Malang
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityCheckoutBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
+        getAdminProfile()
         getUserProfile()
         setupClickListener()
         getMyCart()
         calculateTotal()
 
+    }
+
+    private fun getAdminProfile() {
+        progress.show()
+        FirestoreClass().subscribeAdminProfile(onSuccessListener = {
+            progress.dismiss()
+            origin = it.cityId
+        }, onFailureListener = {
+            progress.dismiss()
+            logError("getAdminDetails: $it")
+        })
     }
 
     private fun getMyCart() {
@@ -121,7 +135,7 @@ class CheckoutActivity : BaseActivity() {
                         SelectCourierActivity::class.java
                     ).apply {
                         putExtra(SelectCourierActivity.EXTRA_ORIGIN, cityId)
-                        putExtra(SelectCourierActivity.EXTRA_DESTINATION, "32")
+                        putExtra(SelectCourierActivity.EXTRA_DESTINATION, origin)
                     })
             }
         }
