@@ -31,7 +31,7 @@
 			android:layout_height="wrap_content"
 			android:fontFamily="@font/rubik_regular"
 			android:textColor="@color/gray3"
-			android:layout_marginTop="@dimen/_2sdp"
+			android:layout_marginTop="@dimen/_4sdp"
 			android:textSize="@dimen/_10ssp"
 			tools:text="6 HARI" />
 

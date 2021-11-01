@@ -9,6 +9,7 @@ import com.example.jstore.data.source.remote.response.GetProvinceResponse
 import com.example.jstore.databinding.ItemCourierBinding
 import com.example.jstore.databinding.ItemProvinceBinding
 import com.example.jstore.models.Ongkir
+import com.example.jstore.utils.formatPrice
 
 class CourierAdapter(private val onClickListener: (Ongkir) -> Unit) : ListAdapter<Ongkir, CourierAdapter.ViewHolder>(DIFF_CALLBACK) {
 
@@ -31,6 +32,13 @@ class CourierAdapter(private val onClickListener: (Ongkir) -> Unit) : ListAdapte
         fun bind(courier: Ongkir) {
             with(itemBinding) {
                 tvCourierNameType.text = "${courier.name} - ${courier.service}"
+                val estimation = if (courier.etd?.contains("hari", true) == true) {
+                    "Estimasi: ${courier.etd.lowercase()}"
+                } else {
+                    "Estimasi: ${courier.etd} hari"
+                }
+                tvTimeEstimated.text = estimation
+                tvCost.text = courier.cost.formatPrice()
                 root.setOnClickListener { onClickListener(courier) }
             }
         }

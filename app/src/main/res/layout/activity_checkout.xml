@@ -212,7 +212,7 @@
                     android:id="@+id/mobile_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/rubik_regular"
                     android:text="@string/phone_number"
                     android:textColor="@color/dark"

@@ -39,7 +39,8 @@ class CheckoutActivity : BaseActivity() {
 
     private lateinit var metodePembayaran: MetodePembayaran
     private lateinit var rekening: Rekening
-//    private lateinit var lokasiPengiriman: LokasiPengiriman
+
+    //    private lateinit var lokasiPengiriman: LokasiPengiriman
     private lateinit var jasaPengiriman: JasaPengiriman
 
     private var provinceId: String? = null
@@ -72,7 +73,7 @@ class CheckoutActivity : BaseActivity() {
     }
 
     private fun calculateTotal() {
-        totalPrice = intent.getIntExtra("totalPrice",0)
+        totalPrice = intent.getIntExtra("totalPrice", 0)
         binding?.edtTotal?.text = totalPrice.formatPrice()
 
     }
@@ -99,7 +100,10 @@ class CheckoutActivity : BaseActivity() {
         }
         binding?.edtPayment?.setOnClickListener {
             paymentMethodLauncher.launch(Intent(this, MetodePembayaranActivity::class.java).apply {
-                putExtra(MetodePembayaranActivity.EXTRA_TYPE, MetodePembayaranActivity.TYPE_CUSTOMER)
+                putExtra(
+                    MetodePembayaranActivity.EXTRA_TYPE,
+                    MetodePembayaranActivity.TYPE_CUSTOMER
+                )
             })
 
         }
@@ -110,10 +114,16 @@ class CheckoutActivity : BaseActivity() {
 //        }
 
         binding?.edtDeliveryService?.setOnClickListener {
-            deliveryServiceLauncher.launch(Intent(this, SelectCourierActivity::class.java).apply {
-                putExtra(SelectCourierActivity.EXTRA_ORIGIN, cityId)
-                putExtra(SelectCourierActivity.EXTRA_DESTINATION, "32")
-            })
+            if (!cityId.isNullOrEmpty()) {
+                deliveryServiceLauncher.launch(
+                    Intent(
+                        this,
+                        SelectCourierActivity::class.java
+                    ).apply {
+                        putExtra(SelectCourierActivity.EXTRA_ORIGIN, cityId)
+                        putExtra(SelectCourierActivity.EXTRA_DESTINATION, "32")
+                    })
+            }
         }
         binding?.edtRekening?.setOnClickListener {
             bankAccountLauncher.launch(Intent(this, RekeningActivity::class.java).apply {
@@ -140,18 +150,18 @@ class CheckoutActivity : BaseActivity() {
     private fun validateData() {
         binding?.apply {
             when {
-                edtDeliveryService.text.toString().trim().isEmpty() -> tilDelivery.error = getString(
-                    R.string.empty_field, getString(
-                        R.string.choose_delivery_service
+                provinceId.isNullOrEmpty() -> tilProvince.error =
+                    getString(R.string.select_x_first, getString(R.string.province))
+                cityId.isNullOrEmpty() -> tilCity.error =
+                    getString(R.string.select_x_first, getString(R.string.province))
+                edtPayment.text.toString().trim().isEmpty() -> tilPayment.error =
+                    getString(R.string.empty_field, getString(R.string.payment))
+                edtDeliveryService.text.toString().trim().isEmpty() -> tilDelivery.error =
+                    getString(
+                        R.string.empty_field, getString(
+                            R.string.choose_delivery_service
+                        )
                     )
-                )
-                edtPayment.text.toString().trim().isEmpty() -> tilPayment.error = getString(
-                    R.string.empty_field, getString(
-                        R.string.payment
-                    )
-                )
-                provinceId.isNullOrEmpty() -> tilProvince.error = getString(R.string.select_x_first, getString(R.string.province))
-                cityId.isNullOrEmpty() -> tilCity.error = getString(R.string.select_x_first, getString(R.string.province))
                 else -> firebaseCheckout()
             }
         }
@@ -177,7 +187,7 @@ class CheckoutActivity : BaseActivity() {
             mobile = binding?.edtMobile?.text.toString(),
             orderDateTime = System.currentTimeMillis()
         )
-        FirestoreClass().placeOrder(cart.cartId,order, onSuccessListener = { orderId ->
+        FirestoreClass().placeOrder(cart.cartId, order, onSuccessListener = { orderId ->
             progress.dismiss()
             showToast(getString(R.string.checkout_success))
             val intent = Intent(this, InvoiceActivity::class.java)
@@ -199,21 +209,23 @@ class CheckoutActivity : BaseActivity() {
 
 
     private fun checkPaymentMethod() {
-        if(binding?.edtPayment?.text.toString() != "Transfer"){
+        if (binding?.edtPayment?.text.toString() != "Transfer") {
             binding?.linierrekening?.toGone()
-        }else{
+        } else {
             binding?.linierrekening?.toVisible()
         }
     }
 
-    private var paymentMethodLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val paymentMethod = result.data?.getParcelableExtra(EXTRA_METODE_PEMBAYARAN) ?: MetodePembayaran()
-            binding?.edtPayment?.setText(paymentMethod.jenisMetode)
-            metodePembayaran = paymentMethod
+    private var paymentMethodLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val paymentMethod =
+                    result.data?.getParcelableExtra(EXTRA_METODE_PEMBAYARAN) ?: MetodePembayaran()
+                binding?.edtPayment?.setText(paymentMethod.jenisMetode)
+                metodePembayaran = paymentMethod
+            }
+            checkPaymentMethod()
         }
-        checkPaymentMethod()
-    }
 
 //    var deliveryAddressLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 //        if (result.resultCode == Activity.RESULT_OK) {
@@ -223,46 +235,54 @@ class CheckoutActivity : BaseActivity() {
 //        }
 //    }
 
-    private var deliveryServiceLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val deliveryService = result.data?.getParcelableExtra(EXTRA_JASA) ?: JasaPengiriman()
-            binding?.edtDeliveryService?.setText(deliveryService.namaJasa)
-            binding?.edtOngkir?.text = deliveryService.harga.toInt().formatPrice()
-            ongkir  = deliveryService.harga.toInt()
-            jasaPengiriman = deliveryService
-            calculateSubTotal()
+    private var deliveryServiceLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val courier = result.data?.getParcelableExtra(EXTRA_ONGKIR) ?: Ongkir()
+                binding?.edtDeliveryService?.setText("${courier.name} - ${courier.service}")
+                binding?.edtOngkir?.text = courier.cost.formatPrice()
+                ongkir = courier.cost.toInt()
+                calculateSubTotal()
+            }
         }
-    }
 
-    private var bankAccountLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val bankAccount = result.data?.getParcelableExtra(EXTRA_REKENING) ?: Rekening()
-            binding?.edtRekening?.setText(bankAccount.namaBank)
-            atasNamaRekening = bankAccount.atasNama
-            nomorRekening = bankAccount.nomorRekening
-            rekening = bankAccount
+    private var bankAccountLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val bankAccount = result.data?.getParcelableExtra(EXTRA_REKENING) ?: Rekening()
+                binding?.edtRekening?.setText(bankAccount.namaBank)
+                atasNamaRekening = bankAccount.atasNama
+                nomorRekening = bankAccount.nomorRekening
+                rekening = bankAccount
+            }
         }
-    }
 
-    private var provinceLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            val province = data?.getParcelableExtra<GetProvinceResponse.RajaOngkir.Result>(EXTRA_PROVINCE)
-            provinceId = province?.provinceId
-            binding?.edtProvince?.setText(province?.province ?: "")
-            cityId = null
-            binding?.edtCity?.setText("")
+    private var provinceLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                val province =
+                    data?.getParcelableExtra<GetProvinceResponse.RajaOngkir.Result>(EXTRA_PROVINCE)
+                provinceId = province?.provinceId
+                binding?.edtProvince?.setText(province?.province ?: "")
+                cityId = null
+                binding?.edtCity?.setText("")
+            }
         }
-    }
 
-    private var cityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            val city = data?.getParcelableExtra<GetCityResponse.RajaOngkir.Result>(EXTRA_CITY)
-            cityId = city?.cityId
-            binding?.edtCity?.setText(city?.cityName ?: "")
+    private var cityLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                val city = data?.getParcelableExtra<GetCityResponse.RajaOngkir.Result>(EXTRA_CITY)
+                cityId = city?.cityId
+                binding?.edtCity?.setText(city?.cityName ?: "")
+                binding?.edtDeliveryService?.setText("")
+                binding?.edtOngkir?.text = ""
+                ongkir = 0
+                calculateSubTotal()
+            }
         }
-    }
 
 
     override fun onDestroy() {

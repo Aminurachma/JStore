@@ -107,6 +107,11 @@ fun Int.formatPrice(): String {
     return "Rp. ${formatter.format(this)}"
 }
 
+fun Long.formatPrice(): String {
+    val formatter = DecimalFormat("#,###")
+    return "Rp. ${formatter.format(this)}"
+}
+
 fun Activity.imagePicker(launcher: ActivityResultLauncher<Intent>) {
     ImagePicker.with(this)
         .crop()

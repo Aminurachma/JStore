@@ -1,5 +1,6 @@
 package com.example.jstore.ui.checkout
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.jstore.base.BaseActivity
@@ -35,7 +36,8 @@ class SelectCourierActivity : BaseActivity() {
 
     private fun setupAdapter() {
         adapter = CourierAdapter {
-
+            setResult(RESULT_OK, Intent().putExtra(CheckoutActivity.EXTRA_ONGKIR, it))
+            finish()
         }
     }
 
@@ -50,7 +52,7 @@ class SelectCourierActivity : BaseActivity() {
                     showToast(it.message.toString())
                 }
                 Status.SUCCESS -> {
-                    progress.dismiss()
+                    if (courier == "tiki") progress.dismiss()
                     val data = it.data?.rajaOngkir?.results?.firstOrNull()
                     courierList.addAll(data?.costs?.map { detail ->
                         Ongkir(
