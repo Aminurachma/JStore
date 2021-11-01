@@ -163,7 +163,7 @@ class ProfileAdminActivity : BaseActivity() {
         val  addressAdmin = binding.edtAddress.text.toString()
         val  provinceAdmin = binding.edtProvince.text.toString()
         val  cityAdmin = binding.edtCity.text.toString()
-        FirestoreClass().updateProfileAdmin(fullNameAdmin,emailAdmin, mobileAdmin,addressAdmin, provinceAdmin,cityAdmin, onSuccessListener = {
+        FirestoreClass().updateProfileAdmin(fullNameAdmin,emailAdmin, mobileAdmin,addressAdmin, provinceAdmin,cityAdmin, provinceId!!,cityId!!, onSuccessListener = {
             progress.dismiss()
             showToast(getString(R.string.update_profile_success))
             startActivity(

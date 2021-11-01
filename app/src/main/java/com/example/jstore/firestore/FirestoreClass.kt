@@ -276,7 +276,7 @@ class FirestoreClass {
 
     fun updateProfileAdmin(
         fullnameAdmin: String, emailAdmin: String, mobileAdmin: String,
-        addressAdmin: String, provinceAdmin: String, cityAdmin: String,
+        addressAdmin: String, provinceAdmin: String, cityAdmin: String, provinceId: String, cityId: String,
         onSuccessListener: () -> Unit,
         onFailureListener: (e: Exception) -> Unit
     ) {
@@ -288,7 +288,9 @@ class FirestoreClass {
                 "mobileAdmin", mobileAdmin,
                 "addressAdmin", addressAdmin,
                 "provinceAdmin", provinceAdmin,
-                "cityAdmin", cityAdmin
+                "cityAdmin", cityAdmin,
+                "provinceId", provinceId,
+                "cityId", cityId
             )
             .addOnSuccessListener {
                 onSuccessListener()
