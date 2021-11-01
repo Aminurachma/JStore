@@ -7,4 +7,8 @@ import kotlinx.parcelize.Parcelize
 data class LokasiPengiriman(
     val namaLokasi: String = "",
     val alamat: String = "",
-    var lokasiId: String = ""): Parcelable
+    val province: String = "",
+    val city: String = "",
+    val provinceId: String = "",
+    val cityId: String = "",
+    var lokasiPengirimanId: String = ""): Parcelable

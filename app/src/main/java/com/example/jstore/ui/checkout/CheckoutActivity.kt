@@ -15,6 +15,7 @@ import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.*
 import com.example.jstore.ui.invoice.InvoiceActivity
 import com.example.jstore.ui.jasapengiriman.JasaPengirimanActivity
+import com.example.jstore.ui.lokasipengiriman.LokasiPengirimanActivity
 import com.example.jstore.ui.metodepembayaran.MetodePembayaranActivity
 import com.example.jstore.ui.rekening.RekeningActivity
 import com.example.jstore.utils.*
@@ -40,20 +41,20 @@ class CheckoutActivity : BaseActivity() {
 
     private lateinit var metodePembayaran: MetodePembayaran
     private lateinit var rekening: Rekening
+    private lateinit var lokasiPengiriman: LokasiPengiriman
 
-    //    private lateinit var lokasiPengiriman: LokasiPengiriman
     private lateinit var jasaPengiriman: JasaPengiriman
 
     private var provinceId: String? = null
     private var cityId: String? = null
-    private var origin: String = "256" // default Malang
+    private var origin: String = "" // default Malang
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityCheckoutBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        getAdminProfile()
+//        getAdminProfile()
         getUserProfile()
         setupClickListener()
         getMyCart()
@@ -61,16 +62,16 @@ class CheckoutActivity : BaseActivity() {
 
     }
 
-    private fun getAdminProfile() {
-        progress.show()
-        FirestoreClass().subscribeAdminProfile(onSuccessListener = {
-            progress.dismiss()
-            origin = it.cityId
-        }, onFailureListener = {
-            progress.dismiss()
-            logError("getAdminDetails: $it")
-        })
-    }
+//    private fun getAdminProfile() {
+//        progress.show()
+//        FirestoreClass().subscribeAdminProfile(onSuccessListener = {
+//            progress.dismiss()
+//            origin = it.cityId
+//        }, onFailureListener = {
+//            progress.dismiss()
+//            logError("getAdminDetails: $it")
+//        })
+//    }
 
     private fun getMyCart() {
         FirestoreClass().subscribeToCart(onSuccessListener = {
@@ -121,11 +122,11 @@ class CheckoutActivity : BaseActivity() {
             })
 
         }
-//        binding.edtDeliveryLocation.setOnClickListener {
-//            deliveryAddressLauncher.launch(Intent(this, LokasiPengirimanActivity::class.java).apply {
-//                putExtra(LokasiPengirimanActivity.EXTRA_TYPE, LokasiPengirimanActivity.TYPE_CUSTOMER)
-//            })
-//        }
+        binding?.edtDeliveryLocation?.setOnClickListener {
+            deliveryAddressLauncher.launch(Intent(this, LokasiPengirimanActivity::class.java).apply {
+                putExtra(LokasiPengirimanActivity.EXTRA_TYPE, LokasiPengirimanActivity.TYPE_CUSTOMER)
+            })
+        }
 
         binding?.edtDeliveryService?.setOnClickListener {
             if (!cityId.isNullOrEmpty()) {
@@ -195,6 +196,7 @@ class CheckoutActivity : BaseActivity() {
             nomorRekening = nomorRekening,
             subTotalAmount = subTotal.toString(),
             shippingCharge = ongkir.toString(),
+            alamatPengiriman = binding?.edtDeliveryLocation?.text.toString(),
             totalAmount = totalPrice.toString(),
             statusPembayaran = BELUM_DIBAYAR,
             statusPesanan = BELUM_DIBAYAR,
@@ -241,13 +243,14 @@ class CheckoutActivity : BaseActivity() {
             checkPaymentMethod()
         }
 
-//    var deliveryAddressLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-//        if (result.resultCode == Activity.RESULT_OK) {
-//            val deliveryAddress = result.data?.getParcelableExtra(EXTRA_LOKASI) ?: LokasiPengiriman()
-//            binding.edtDeliveryLocation.setText(deliveryAddress.alamat)
-//            lokasiPengiriman = deliveryAddress
-//        }
-//    }
+    var deliveryAddressLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val deliveryAddress = result.data?.getParcelableExtra(EXTRA_LOKASI) ?: LokasiPengiriman()
+            binding?.edtDeliveryLocation?.setText(deliveryAddress.namaLokasi)
+            lokasiPengiriman = deliveryAddress
+            origin = deliveryAddress.cityId
+        }
+    }
 
     private var deliveryServiceLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

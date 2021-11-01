@@ -41,6 +41,8 @@ class LokasiPengirimanAdapter(private val onClickListener: (lokasiPengiriman: Lo
             with(itemBinding) {
                 tvLokasiPengiriman.text = lokasiPengiriman.namaLokasi
                 tvAlamatPengiriman.text = lokasiPengiriman.alamat
+                tvProvinsiPengiriman.text = lokasiPengiriman.province
+                tvCityPengiriman.text = lokasiPengiriman.city
 //                Glide.with(root.context)
 //                    .load(rekening.image)
 //                    .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
