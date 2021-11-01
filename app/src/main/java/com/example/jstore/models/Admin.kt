@@ -11,5 +11,8 @@ data class Admin(
     val emailAdmin: String = "",
     val imageAdmin: String = "",
     val genderAdmin: String = "",
-    val passwordAdmin: String = ""
+    val passwordAdmin: String = "",
+    val addressAdmin: String = "",
+    val provinceAdmin: String = "",
+    val cityAdmin: String = ""
 ) : Parcelable

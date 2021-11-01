@@ -177,6 +177,122 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/address_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/rubik_regular"
+                android:text="@string/address"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_phone_number" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_address"
+                style="@style/App.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                app:layout_constraintEnd_toEndOf="@+id/address_label"
+                app:layout_constraintStart_toStartOf="@+id/address_label"
+                app:layout_constraintTop_toBottomOf="@+id/address_label">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_light"
+                    android:hint="@string/enter_your_address_here"
+                    android:inputType="text"
+                    android:textColor="@color/dark"
+                    android:textColorHint="@color/gray3"
+                    android:textSize="@dimen/_12ssp"
+                    tools:text="Jl.Bahahahahahahaha" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/province_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/rubik_regular"
+                android:text="@string/province"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_address"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_province"
+                style="@style/App.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                app:layout_constraintEnd_toEndOf="@+id/province_label"
+                app:layout_constraintStart_toStartOf="@+id/province_label"
+                app:layout_constraintTop_toBottomOf="@+id/province_label">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_province"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_light"
+                    android:hint="@string/choose_province"
+                    android:inputType="none"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:focusable="false"
+                    android:textColor="@color/dark"
+                    android:textColorHint="@color/gray3"
+                    android:textSize="@dimen/_12ssp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/city_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/rubik_regular"
+                android:text="@string/city"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_province"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_city"
+                style="@style/App.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                app:layout_constraintEnd_toEndOf="@+id/city_label"
+                app:layout_constraintStart_toStartOf="@+id/city_label"
+                app:layout_constraintTop_toBottomOf="@+id/city_label">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_light"
+                    android:hint="@string/choose_city"
+                    android:inputType="none"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:focusable="false"
+                    android:textColor="@color/dark"
+                    android:textColorHint="@color/gray3"
+                    android:textSize="@dimen/_12ssp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_update_profile"
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
@@ -188,7 +304,7 @@
                 android:textAllCaps="false"
                 android:textSize="@dimen/_12ssp"
                 app:cornerRadius="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@+id/til_phone_number" />
+                app:layout_constraintTop_toBottomOf="@+id/til_city" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

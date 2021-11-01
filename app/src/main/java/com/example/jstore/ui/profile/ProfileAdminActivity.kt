@@ -11,9 +11,14 @@ import com.bumptech.glide.Glide
 import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.data.source.local.Prefs
+import com.example.jstore.data.source.remote.response.GetCityResponse
+import com.example.jstore.data.source.remote.response.GetProvinceResponse
 import com.example.jstore.databinding.ActivityProfileAdminBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Admin
+import com.example.jstore.ui.checkout.CheckoutActivity
+import com.example.jstore.ui.checkout.SelectCityActivity
+import com.example.jstore.ui.checkout.SelectProvinceActivity
 import com.example.jstore.ui.home.customer.HomeCustomerActivity
 import com.example.jstore.ui.login.customer.MainActivity
 import com.example.jstore.ui.setting.SettingActivity
@@ -30,6 +35,9 @@ class ProfileAdminActivity : BaseActivity() {
     private val binding get() = _binding!!
     private lateinit var admin: Admin
     private var mSelectedProfileImageFileUri: Uri? = null
+
+    private var provinceId: String? = null
+    private var cityId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +61,9 @@ class ProfileAdminActivity : BaseActivity() {
             binding.edtName.setText(it.fullNameAdmin)
             binding.edtEmail.setText(it.emailAdmin)
             binding.edtPhoneNumber.setText(it.mobileAdmin)
+            binding.edtAddress.setText(it.addressAdmin)
+            binding.edtProvince.setText(it.provinceAdmin)
+            binding.edtCity.setText(it.cityAdmin)
         }, onFailureListener = {
             progress.dismiss()
             logoutUser()
@@ -72,6 +83,17 @@ class ProfileAdminActivity : BaseActivity() {
 
         binding.imgAvatar.setOnClickListener{
             imagePicker(startForImageResult)
+        }
+
+
+        binding?.edtProvince?.setOnClickListener {
+            provinceLauncher.launch(Intent(this, SelectProvinceActivity::class.java))
+        }
+
+        binding?.edtCity?.setOnClickListener {
+            cityLauncher.launch(Intent(this, SelectCityActivity::class.java).apply {
+                putExtra(SelectCityActivity.EXTRA_PROVINCE_ID, provinceId)
+            })
         }
     }
 
@@ -138,8 +160,10 @@ class ProfileAdminActivity : BaseActivity() {
         val  fullNameAdmin = binding.edtName.text.toString()
         val  emailAdmin = binding.edtEmail.text.toString()
         val  mobileAdmin = binding.edtPhoneNumber.text.toString()
-        val imageAdmin = admin.imageAdmin
-        FirestoreClass().updateProfileAdmin(fullNameAdmin,emailAdmin, mobileAdmin, onSuccessListener = {
+        val  addressAdmin = binding.edtAddress.text.toString()
+        val  provinceAdmin = binding.edtProvince.text.toString()
+        val  cityAdmin = binding.edtCity.text.toString()
+        FirestoreClass().updateProfileAdmin(fullNameAdmin,emailAdmin, mobileAdmin,addressAdmin, provinceAdmin,cityAdmin, onSuccessListener = {
             progress.dismiss()
             showToast(getString(R.string.update_profile_success))
             startActivity(
@@ -159,9 +183,40 @@ class ProfileAdminActivity : BaseActivity() {
         finish()
     }
 
+    private var provinceLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                val province =
+                    data?.getParcelableExtra<GetProvinceResponse.RajaOngkir.Result>(CheckoutActivity.EXTRA_PROVINCE)
+                provinceId = province?.provinceId
+                binding?.edtProvince?.setText(province?.province ?: "")
+                cityId = null
+                binding?.edtCity?.setText("")
+            }
+        }
+
+    private var cityLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                val city = data?.getParcelableExtra<GetCityResponse.RajaOngkir.Result>(
+                    CheckoutActivity.EXTRA_CITY
+                )
+                cityId = city?.cityId
+                binding?.edtCity?.setText(city?.cityName ?: "")
+            }
+        }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+        const val EXTRA_PROVINCE = "extra_province"
+        const val EXTRA_CITY = "extra_city"
+        const val EXTRA_ONGKIR = "extra_ongkir"
     }
 
 }
