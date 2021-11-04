@@ -91,7 +91,7 @@ class CustomerDashboardFragment : BaseFragment() {
     private fun setupAdapter() {
         adapter = ProductAdapter(onClickListener = { product ->
             startActivity(Intent(requireContext(), ProductDetailsActivity::class.java).apply {
-                putExtra(ProductDetailsActivity.EXTRA_PRODUCT, product)
+                putExtra(ProductDetailsActivity.EXTRA_PRODUCT_ID, product.productId)
             })
         })
         adapterCategory = CategoryAdapter(onClickListener = { category ->

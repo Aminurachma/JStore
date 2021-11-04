@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.example.jstore.R
+import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityProductDetailsBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.models.Product
@@ -14,11 +15,12 @@ import com.example.jstore.utils.logDebug
 import com.example.jstore.utils.pushActivity
 import com.example.jstore.utils.showToast
 
-class ProductDetailsActivity : AppCompatActivity() {
+class ProductDetailsActivity : BaseActivity() {
 
     private var _binding: ActivityProductDetailsBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var productId: String
     private lateinit var product: Product
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,17 +34,29 @@ class ProductDetailsActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        product = intent.getParcelableExtra(EXTRA_PRODUCT) ?: Product()
-        Glide.with(this)
-            .load(product.image)
-            .placeholder(R.drawable.product_placeholder)
-            .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
-            .into(binding.imgProduct)
-        binding.tvProductName.text = product.title
-        binding.tvProductPrice.text = product.price.toInt().formatPrice()
-        binding.tvStock.text = product.stockQuantity.toString()
-        binding.tvCategory.text = product.category
-        binding.tvDetailProduct.text = product.description
+        productId = intent.getStringExtra(EXTRA_PRODUCT_ID) ?: ""
+        showDetailProduct(productId)
+    }
+
+    private fun showDetailProduct(productId: String) {
+        progress.show()
+        FirestoreClass().subscribeDetailProduct(productId, onSuccessListener = {
+            progress.dismiss()
+            product = it
+            Glide.with(this)
+                .load(product.image)
+                .placeholder(R.drawable.product_placeholder)
+                .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
+                .into(binding.imgProduct)
+            binding.tvProductName.text = product.title
+            binding.tvProductPrice.text = product.price.toInt().formatPrice()
+            binding.tvStock.text = product.stockQuantity.toString()
+            binding.tvCategory.text = product.category
+            binding.tvDetailProduct.text = product.description
+        }, onFailureListener = {
+            progress.dismiss()
+            showToast(it)
+        })
     }
 
     private fun setupClickListeners() {
@@ -98,7 +112,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_PRODUCT = "extra_product"
+        const val EXTRA_PRODUCT_ID = "extra_product_id"
     }
 
 }

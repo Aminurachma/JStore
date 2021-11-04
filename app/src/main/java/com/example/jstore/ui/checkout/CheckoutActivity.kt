@@ -123,9 +123,16 @@ class CheckoutActivity : BaseActivity() {
 
         }
         binding?.edtDeliveryLocation?.setOnClickListener {
-            deliveryAddressLauncher.launch(Intent(this, LokasiPengirimanActivity::class.java).apply {
-                putExtra(LokasiPengirimanActivity.EXTRA_TYPE, LokasiPengirimanActivity.TYPE_CUSTOMER)
-            })
+            deliveryAddressLauncher.launch(
+                Intent(
+                    this,
+                    LokasiPengirimanActivity::class.java
+                ).apply {
+                    putExtra(
+                        LokasiPengirimanActivity.EXTRA_TYPE,
+                        LokasiPengirimanActivity.TYPE_CUSTOMER
+                    )
+                })
         }
 
         binding?.edtDeliveryService?.setOnClickListener {
@@ -206,11 +213,21 @@ class CheckoutActivity : BaseActivity() {
         FirestoreClass().placeOrder(cart.cartId, order, onSuccessListener = { orderId ->
             progress.dismiss()
             showToast(getString(R.string.checkout_success))
-            val intent = Intent(this, InvoiceActivity::class.java)
-            intent.putExtra("orderId", orderId)
-            startActivity(intent)
-
-            finish()
+            cart.products.forEach { product ->
+                FirestoreClass().updateProductStock(
+                    productId = product.productId,
+                    stock = product.stockQuantity - product.quantity,
+                    onSuccessListener = {
+                        startActivity(Intent(this, InvoiceActivity::class.java).apply {
+                            putExtra("orderId", orderId)
+                        })
+                        finish()
+                    },
+                    onFailureListener = {
+                        showToast(it.message.toString())
+                    }
+                )
+            }
         }, onFailureListener = {
             progress.dismiss()
             showToast(getString(R.string.checkout_failed, it.message.toString()))
@@ -243,14 +260,16 @@ class CheckoutActivity : BaseActivity() {
             checkPaymentMethod()
         }
 
-    var deliveryAddressLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val deliveryAddress = result.data?.getParcelableExtra(EXTRA_LOKASI) ?: LokasiPengiriman()
-            binding?.edtDeliveryLocation?.setText(deliveryAddress.namaLokasi)
-            lokasiPengiriman = deliveryAddress
-            origin = deliveryAddress.cityId
+    var deliveryAddressLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val deliveryAddress =
+                    result.data?.getParcelableExtra(EXTRA_LOKASI) ?: LokasiPengiriman()
+                binding?.edtDeliveryLocation?.setText(deliveryAddress.namaLokasi)
+                lokasiPengiriman = deliveryAddress
+                origin = deliveryAddress.cityId
+            }
         }
-    }
 
     private var deliveryServiceLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

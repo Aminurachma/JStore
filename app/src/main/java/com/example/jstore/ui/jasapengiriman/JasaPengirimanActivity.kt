@@ -2,17 +2,11 @@ package com.example.jstore.ui.jasapengiriman
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityJasaPengirimanBinding
 import com.example.jstore.firestore.FirestoreClass
 import com.example.jstore.ui.checkout.CheckoutActivity
-import com.example.jstore.ui.lokasipengiriman.AddLokasiPengirimanActivity
-import com.example.jstore.ui.metodepembayaran.MetodePembayaranActivity
-import com.example.jstore.ui.product.ProductDetailsActivity
-import com.example.jstore.ui.rekening.RekeningAdapter
-import com.example.jstore.ui.setting.SettingActivity
 import com.example.jstore.utils.showToast
 import com.example.jstore.utils.toGone
 import com.example.jstore.utils.toVisible

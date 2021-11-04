@@ -1136,4 +1136,41 @@ class FirestoreClass {
             }
     }
 
+    fun updateProductStock(
+        productId: String,
+        stock: Int,
+        onSuccessListener: () -> Unit,
+        onFailureListener: (e: Exception) -> Unit
+    ) {
+        mFirestore.collection(PRODUCTS)
+            .document(productId)
+            .update("stockQuantity", stock)
+            .addOnSuccessListener {
+                onSuccessListener()
+            }
+            .addOnFailureListener { e ->
+                onFailureListener(e)
+            }
+    }
+
+    fun subscribeDetailProduct(
+        productId: String,
+        onSuccessListener: (product: Product) -> Unit,
+        onFailureListener: (e: String) -> Unit
+    ) {
+        mFirestore.collection(PRODUCTS)
+            .document(productId)
+            .addSnapshotListener { value, error ->
+                error?.let { e ->
+                    onFailureListener(e.message.toString())
+                }
+                value?.let { documentSnapshot ->
+                    val product = documentSnapshot.toObject<Product>()
+                    if (product != null) {
+                        onSuccessListener(product)
+                    }
+                }
+            }
+    }
+
 }
