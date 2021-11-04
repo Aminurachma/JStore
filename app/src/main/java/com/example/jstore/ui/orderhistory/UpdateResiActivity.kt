@@ -78,7 +78,7 @@ class UpdateResiActivity : BaseActivity() {
 
     private fun firebaseUpdateResi() {
         progress.show()
-        FirestoreClass().updateResi(orderId = orderId, imageResi!!.toString(),
+        FirestoreClass().updateResi(orderId = orderId,binding.edtNomorResi.text.toString(), imageResi!!.toString(),
             onSuccessListener = { progress.dismiss()
                 showToast(getString(R.string.update_resi_success))
                 startActivity(Intent(this, OrderHistoryActivity::class.java))

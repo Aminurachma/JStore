@@ -46,9 +46,9 @@ class SettingActivity : BaseActivity() {
         binding.btnUpdateProfile.setOnClickListener {
             startActivity(Intent(this, ProfileAdminActivity::class.java))
         }
-        binding.btnJasaPengiriman.setOnClickListener {
-            startActivity(Intent(this, JasaPengirimanActivity::class.java))
-        }
+//        binding.btnJasaPengiriman.setOnClickListener {
+//            startActivity(Intent(this, JasaPengirimanActivity::class.java))
+//        }
         binding.btnLokasiPengiriman.setOnClickListener {
             startActivity(Intent(this, LokasiPengirimanActivity::class.java))
         }

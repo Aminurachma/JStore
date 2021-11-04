@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.GenericTransitionOptions
+import com.bumptech.glide.Glide
 import com.example.jstore.R
 import com.example.jstore.base.BaseActivity
 import com.example.jstore.databinding.ActivityMyOrderHistoryDetailsBinding
@@ -79,6 +81,14 @@ class MyOrderHistoryDetailsActivity : BaseActivity() {
                 }
             }
             btnAcceptPackage.isEnabled = order.statusPesanan == DIKIRIM
+            if (order.statusPesanan == DIKIRIM){
+                resi.toVisible()
+                tvNoResi.text = "Nomor Resi :" + order.nomorResi
+                Glide.with(root.context)
+                    .load(order.resiImage)
+                    .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
+                    .into(imgResi)
+            }
 
             binding.btnAcceptPackage.setOnClickListener {
                 firebaseUpdateStatusTerimaPesanan()

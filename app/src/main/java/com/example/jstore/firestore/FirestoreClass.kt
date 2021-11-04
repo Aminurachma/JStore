@@ -1072,13 +1072,13 @@ class FirestoreClass {
     }
 
     fun updateResi(
-        orderId: String, imageUrl: String,
+        orderId: String,noResi:String, imageUrl: String,
         onSuccessListener: () -> Unit,
         onFailureListener: (e: Exception) -> Unit
     ) {
         mFirestore.collection(ORDERS)
             .document(orderId)
-            .update(PESANAN_STATUS, DIKIRIM)
+            .update(PESANAN_STATUS, DIKIRIM, "nomorResi",noResi)
             .addOnSuccessListener {
                 uploadImageResiToFirestore(imageUrl.toUri(), onSuccessListener = { imageUrl ->
                     updateResiImage(orderId, imageUrl)
