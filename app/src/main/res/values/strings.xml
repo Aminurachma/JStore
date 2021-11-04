@@ -156,7 +156,7 @@
 	<string name="ongkos_kirim">Ongkos Kirim</string>
 	<string name="sub_total">Subtotal</string>
 	<string name="choose_delivery_service">Choose Delivery Service</string>
-	<string name="choose_delivery_loc">Choose Delivery Location</string>
+	<string name="choose_delivery_loc">Choose Store Location</string>
 	<string name="paynow">Pay Now</string>
 	<string name="transaction_out">Transaction Out</string>
 	<string name="detail_of_transaction">Detail of transaction</string>

@@ -38,8 +38,6 @@ class OrderHistoryDetailsActivity : BaseActivity() {
 //        getOrderHistoryProductList()
         setupClickListeners()
 
-        // ini apa? kok disini? itu buat ganti text di buttonnya yang..
-        // tapi kan bukan disini, harusnya setelah dapet data order nya
     }
 
     private fun setupAdapter() {
